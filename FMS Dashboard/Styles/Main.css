@@ -1,0 +1,57 @@
+﻿:root {
+    --mainColor: #081F21;
+    --secondaryColor: #2BAAB1;
+    --textColor: #FFFFFF;
+    --hoverColor: #535353;
+    --hoverText: #FFFFFF;
+}
+
+.body-content {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.nav-item {
+    font-size: 17px;
+}
+
+.nav-link, .navbar-text {
+    color: var(--secondaryColor) !important;
+    font-weight: 600;
+}
+.nav-link:hover {
+    text-decoration: underline;
+    background-color: rgba(128, 128, 128, .05);
+}
+
+.nav-item.active {
+    background-color: rgba(128, 128, 128, .2);
+}
+
+.black-banner{
+    background-color: black;
+    height: 50px;
+    color: white;
+    font-size: 20px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.footer-container {
+    width: 80vw;
+    margin:auto;
+}

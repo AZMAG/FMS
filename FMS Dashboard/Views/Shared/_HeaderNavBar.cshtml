@@ -1,0 +1,21 @@
+﻿@using FMS_Dashboard.Helpers
+<nav class="navbar navbar-expand-lg navbar-light body-content">
+    <a class="navbar-brand" href="#">
+        <img src="~/Images/Logo.png" width="204" height="70" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="nav navbar-nav mr-auto">
+            <li class="@Html.IsSelected(actions: "Index", controllers: "Home") nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+            <li class="@Html.IsSelected(actions: "Corridors", controllers: "Home") nav-item">@Html.ActionLink("Corridors", "Corridors", "Home", null, new { @class = "nav-link" })</li>
+            <li class="@Html.IsSelected(actions: "QueryBuilder", controllers: "Home") nav-item">@Html.ActionLink("QueryBuilder", "QueryBuilder", "Home", null, new { @class = "nav-link" })</li>
+            <li class="@Html.IsSelected(actions: "Admin", controllers: "Home") nav-item">@Html.ActionLink("Admin", "Admin", "Home", null, new { @class = "nav-link" })</li>
+        </ul>
+        <hr />
+        <span class="navbar-text">
+            Hello, @User.Identity.Name!
+        </span>
+    </div>
+</nav>
