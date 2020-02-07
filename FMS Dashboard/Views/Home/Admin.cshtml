@@ -1,11 +1,13 @@
 ﻿@{
     ViewBag.Title = "Admin";
 }
+
+<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.1.114/styles/kendo.common-bootstrap.min.css">
+<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2020.1.114/styles/kendo.bootstrap.min.css">
+
+<script src="https://kendo.cdn.telerik.com/2020.1.114/js/kendo.all.min.js"></script>
+<script src="~/Scripts/admin.js"></script>
 <div class="black-banner">@ViewBag.Title</div>
 <div class="container">
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
-
-    <p>Admin Page</p>
+     <div id="userGrid"></div>
 </div>
-

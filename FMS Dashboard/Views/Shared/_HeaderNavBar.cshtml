@@ -9,8 +9,8 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="nav navbar-nav mr-auto">
             <li class="@Html.IsSelected(actions: "Index", controllers: "Home") nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-            <li class="@Html.IsSelected(actions: "Corridors", controllers: "Home") nav-item">@Html.ActionLink("Corridors", "Corridors", "Home", null, new { @class = "nav-link" })</li>
-            <li class="@Html.IsSelected(actions: "QueryBuilder", controllers: "Home") nav-item">@Html.ActionLink("QueryBuilder", "QueryBuilder", "Home", null, new { @class = "nav-link" })</li>
+            @*<li class="@Html.IsSelected(actions: "Corridors", controllers: "Home") nav-item">@Html.ActionLink("Corridors", "Corridors", "Home", null, new { @class = "nav-link" })</li>*@
+            <li class="@Html.IsSelected(actions: "QueryBuilder", controllers: "Home") nav-item">@Html.ActionLink("Query Builder", "QueryBuilder", "Home", null, new { @class = "nav-link" })</li>
             <li class="@Html.IsSelected(actions: "Admin", controllers: "Home") nav-item">@Html.ActionLink("Admin", "Admin", "Home", null, new { @class = "nav-link" })</li>
         </ul>
         <hr />

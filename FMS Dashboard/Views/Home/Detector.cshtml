@@ -1,0 +1,86 @@
+﻿@{
+ViewBag.Title = "Detector";
+var det_num = ViewBag.det_num;
+}
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-bootstrap.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.bootstrap.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jszip.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
+
+<script src="~/Scripts/detectors.js"></script>
+
+<div class="black-banner">Detector Number: @det_num</div>
+<div id="detector-container">
+
+    <div id="leftPanel">
+        <form>
+        </form>
+        <table id="errorTable" class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Error Type</th>
+                    <th>Total</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Speed > 85 mph in any lane</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Speed < 5 mph and> 0 in any lane</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Speedn+1 < (0.45 × speedn) and speedn+1> 0</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Volume > 3,000 vph per lane </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Density > 220 vehicles per mile per lane</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Occupancy > 80% in any lane</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Speed, volume, or occupancy = 0 where the sum of all is > 0</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>All lanes = 0</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Any individual lane = 0 continuously for 20-minutes or more.</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="chartsContainer">
+        <div class="chart-wrap" style="position: relative;">
+            <div id="speedChart"></div>
+            <div class="chart-loading"></div>
+        </div>
+        <div class="chart-wrap" style="position: relative;">
+            <div id="throughputChart"></div>
+            <div class="chart-loading"></div>
+        </div>
+    </div>
+</div>
