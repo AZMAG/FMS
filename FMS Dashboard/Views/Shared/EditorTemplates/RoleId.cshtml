@@ -1,0 +1,10 @@
+@model int
+
+@(
+Html.Kendo().DropDownListFor(m => m)
+            .Name("roleId")
+            .DataValueField("id")
+            .DataTextField("name")
+            .BindTo((System.Collections.IEnumerable)ViewData["roles"])
+
+)

@@ -42,6 +42,10 @@ namespace FMS_Dashboard
             using (var context = new Entities())
             {
                 var currentUser = context.ApplicationUsers.Where(x => x.domainName == name.Replace("AZMAG\\", "")).FirstOrDefault();
+                if (currentUser == null)
+                {
+                    return "Unknown";
+                }
                 var currentRole = currentUser.ApplicationRole.name;
                 return currentRole;
             }

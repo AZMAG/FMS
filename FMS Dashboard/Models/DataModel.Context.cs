@@ -28,7 +28,6 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<AllDetectors2018> AllDetectors2018 { get; set; }
         public virtual DbSet<AllTheData> AllTheDatas { get; set; }
         public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
-        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public virtual DbSet<category> categories { get; set; }
         public virtual DbSet<category_staging> category_staging { get; set; }
         public virtual DbSet<Detector> Detectors { get; set; }
@@ -42,5 +41,6 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<DetectorLane> DetectorLanes { get; set; }
         public virtual DbSet<vw_AvgHourlySpeed2018> vw_AvgHourlySpeed2018 { get; set; }
         public virtual DbSet<vw_AvgHourlyThroughput2018> vw_AvgHourlyThroughput2018 { get; set; }
+        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

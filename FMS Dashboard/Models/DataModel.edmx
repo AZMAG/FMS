@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Jacobs_PlayPenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Jacobs_PlayPenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AllDetectors2018">
           <Key>
             <PropertyRef Name="id" />
@@ -46,9 +46,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="domainName" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="RoleId" Type="int" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Jacobs_PlayPen.dbo.AvgHourlySpeed2018' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -114,25 +114,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.AvgHourlyThroughput2018' does n
           <Property Name="detector_direction" Type="varchar" MaxLength="2" />
           <Property Name="detector_milepost" Type="decimal" Precision="9" Scale="3" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.differenceErrors_final' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="differenceErrors_final">
-          <Property Name="detector_number" Type="smallint" />
-          <Property Name="collected" Type="date" />
-          <Property Name="min_since" Type="smallint" />
-          <Property Name="lane1" Type="int" />
-          <Property Name="lane2" Type="int" />
-          <Property Name="lane3" Type="int" />
-          <Property Name="lane4" Type="int" />
-          <Property Name="lane5" Type="int" />
-          <Property Name="lane6" Type="int" />
-          <Property Name="lane7" Type="int" />
-          <Property Name="lane8" Type="int" />
-          <Property Name="lane9" Type="int" />
-          <Property Name="lane10" Type="int" />
-          <Property Name="HOV" Type="int" />
-          <Property Name="HOV2" Type="int" />
-        </EntityType>-->
         <EntityType Name="Errors2018">
           <Key>
             <PropertyRef Name="id" />
@@ -147,23 +128,6 @@ warning 6013: The table/view 'Jacobs_PlayPen.dbo.differenceErrors_final' does no
           <Property Name="difference_error" Type="bit" />
           <Property Name="zeros_error" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.existingLanes' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="existingLanes">
-          <Property Name="detector_number" Type="smallint" />
-          <Property Name="lane1" Type="int" />
-          <Property Name="lane2" Type="int" />
-          <Property Name="lane3" Type="int" />
-          <Property Name="lane4" Type="int" />
-          <Property Name="lane5" Type="int" />
-          <Property Name="lane6" Type="int" />
-          <Property Name="lane7" Type="int" />
-          <Property Name="lane8" Type="int" />
-          <Property Name="lane9" Type="int" />
-          <Property Name="lane10" Type="int" />
-          <Property Name="HOV" Type="int" />
-          <Property Name="HOV2" Type="int" />
-        </EntityType>-->
         <EntityType Name="LaneErrors2018">
           <Key>
             <PropertyRef Name="id" />
@@ -185,40 +149,6 @@ warning 6013: The table/view 'Jacobs_PlayPen.dbo.existingLanes' does not have a 
           <Property Name="HOV" Type="int" />
           <Property Name="HOV2" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.LaneErrorTranslation' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="LaneErrorTranslation">
-          <Property Name="speed_error" Type="bit" />
-          <Property Name="volume_error" Type="bit" />
-          <Property Name="occupancy_error" Type="bit" />
-          <Property Name="difference_error" Type="bit" />
-          <Property Name="zeros_error" Type="bit" />
-          <Property Name="encoded" Type="smallint" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.Lanes2018' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Lanes2018">
-          <Property Name="lanes" Type="varchar" MaxLength="32" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.occupancyErrors_final' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="occupancyErrors_final">
-          <Property Name="detector_number" Type="smallint" />
-          <Property Name="collected" Type="date" />
-          <Property Name="min_since" Type="smallint" />
-          <Property Name="lane1" Type="int" />
-          <Property Name="lane2" Type="int" />
-          <Property Name="lane3" Type="int" />
-          <Property Name="lane4" Type="int" />
-          <Property Name="lane5" Type="int" />
-          <Property Name="lane6" Type="int" />
-          <Property Name="lane7" Type="int" />
-          <Property Name="lane8" Type="int" />
-          <Property Name="lane9" Type="int" />
-          <Property Name="lane10" Type="int" />
-          <Property Name="HOV" Type="int" />
-          <Property Name="HOV2" Type="int" />
-        </EntityType>-->
         <EntityType Name="RawData2017">
           <Key>
             <PropertyRef Name="id" />
@@ -242,25 +172,6 @@ warning 6013: The table/view 'Jacobs_PlayPen.dbo.occupancyErrors_final' does not
           <Property Name="item_name" Type="varchar" MaxLength="255" />
           <Property Name="item_count" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.speedErrors_final' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="speedErrors_final">
-          <Property Name="detector_number" Type="smallint" />
-          <Property Name="collected" Type="date" />
-          <Property Name="min_since" Type="smallint" />
-          <Property Name="lane1" Type="int" />
-          <Property Name="lane2" Type="int" />
-          <Property Name="lane3" Type="int" />
-          <Property Name="lane4" Type="int" />
-          <Property Name="lane5" Type="int" />
-          <Property Name="lane6" Type="int" />
-          <Property Name="lane7" Type="int" />
-          <Property Name="lane8" Type="int" />
-          <Property Name="lane9" Type="int" />
-          <Property Name="lane10" Type="int" />
-          <Property Name="HOV" Type="int" />
-          <Property Name="HOV2" Type="int" />
-        </EntityType>-->
         <EntityType Name="updatedProcess_test1">
           <Key>
             <PropertyRef Name="id" />
@@ -276,44 +187,6 @@ warning 6013: The table/view 'Jacobs_PlayPen.dbo.speedErrors_final' does not hav
           <Property Name="volume" Type="smallint" />
           <Property Name="vhp" Type="smallint" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.volumeErrors_final' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="volumeErrors_final">
-          <Property Name="detector_number" Type="smallint" />
-          <Property Name="collected" Type="date" />
-          <Property Name="min_since" Type="smallint" />
-          <Property Name="lane1" Type="int" />
-          <Property Name="lane2" Type="int" />
-          <Property Name="lane3" Type="int" />
-          <Property Name="lane4" Type="int" />
-          <Property Name="lane5" Type="int" />
-          <Property Name="lane6" Type="int" />
-          <Property Name="lane7" Type="int" />
-          <Property Name="lane8" Type="int" />
-          <Property Name="lane9" Type="int" />
-          <Property Name="lane10" Type="int" />
-          <Property Name="HOV" Type="int" />
-          <Property Name="HOV2" Type="int" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.zerosErrors_final' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="zerosErrors_final">
-          <Property Name="detector_number" Type="smallint" />
-          <Property Name="collected" Type="date" />
-          <Property Name="min_since" Type="smallint" />
-          <Property Name="lane1" Type="int" />
-          <Property Name="lane2" Type="int" />
-          <Property Name="lane3" Type="int" />
-          <Property Name="lane4" Type="int" />
-          <Property Name="lane5" Type="int" />
-          <Property Name="lane6" Type="int" />
-          <Property Name="lane7" Type="int" />
-          <Property Name="lane8" Type="int" />
-          <Property Name="lane9" Type="int" />
-          <Property Name="lane10" Type="int" />
-          <Property Name="HOV" Type="int" />
-          <Property Name="HOV2" Type="int" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Jacobs_PlayPen.dbo.DetectorLanes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DetectorLanes">
@@ -350,7 +223,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_AvgHourlyThroughput2018' doe
           <Property Name="lane_type" Type="varchar" MaxLength="9" />
         </EntityType>
         <Association Name="FK_ApplicationUser_ApplicationRole">
-          <End Role="ApplicationRole" Type="Self.ApplicationRole" Multiplicity="0..1" />
+          <End Role="ApplicationRole" Type="Self.ApplicationRole" Multiplicity="1" />
           <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ApplicationRole">
@@ -423,8 +296,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_AvgHourlyThroughput2018' doe
             <End Role="ApplicationUser" EntitySet="ApplicationUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Jacobs_PlayPenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -464,16 +336,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_AvgHourlyThroughput2018' doe
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ApplicationUsers" Relationship="Self.FK_ApplicationUser_ApplicationRole" FromRole="ApplicationRole" ToRole="ApplicationUser" />
-        </EntityType>
-        <EntityType Name="ApplicationUser">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="domainName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RoleId" Type="Int32" />
-          <NavigationProperty Name="ApplicationRole" Relationship="Self.FK_ApplicationUser_ApplicationRole" FromRole="ApplicationUser" ToRole="ApplicationRole" />
+          <NavigationProperty Name="ApplicationUsers" Relationship="Jacobs_PlayPenModel.FK_ApplicationUser_ApplicationRole" FromRole="ApplicationRole" ToRole="ApplicationUser" />
         </EntityType>
         <EntityType Name="category">
           <Key>
@@ -637,23 +500,10 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_AvgHourlyThroughput2018' doe
           <Property Name="hour_in_day" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_ApplicationUser_ApplicationRole">
-          <End Role="ApplicationRole" Type="Self.ApplicationRole" Multiplicity="0..1" />
-          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicationRole">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ApplicationUser">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AllDetectors2018" EntityType="Self.AllDetectors2018" />
           <EntitySet Name="AllTheDatas" EntityType="Self.AllTheData" />
           <EntitySet Name="ApplicationRoles" EntityType="Self.ApplicationRole" />
-          <EntitySet Name="ApplicationUsers" EntityType="Self.ApplicationUser" />
           <EntitySet Name="categories" EntityType="Self.category" />
           <EntitySet Name="category_staging" EntityType="Self.category_staging" />
           <EntitySet Name="Detectors" EntityType="Self.Detector" />
@@ -667,11 +517,33 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_AvgHourlyThroughput2018' doe
           <EntitySet Name="DetectorLanes" EntityType="Self.DetectorLane" />
           <EntitySet Name="vw_AvgHourlySpeed2018" EntityType="Self.vw_AvgHourlySpeed2018" />
           <EntitySet Name="vw_AvgHourlyThroughput2018" EntityType="Self.vw_AvgHourlyThroughput2018" />
-          <AssociationSet Name="FK_ApplicationUser_ApplicationRole" Association="Self.FK_ApplicationUser_ApplicationRole">
+          <EntitySet Name="ApplicationUsers" EntityType="Jacobs_PlayPenModel.ApplicationUser" />
+          <AssociationSet Name="FK_ApplicationUser_ApplicationRole" Association="Jacobs_PlayPenModel.FK_ApplicationUser_ApplicationRole">
             <End Role="ApplicationRole" EntitySet="ApplicationRoles" />
             <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ApplicationUser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="domainName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApplicationRole" Relationship="Jacobs_PlayPenModel.FK_ApplicationUser_ApplicationRole" FromRole="ApplicationUser" ToRole="ApplicationRole" />
+        </EntityType>
+        <Association Name="FK_ApplicationUser_ApplicationRole">
+          <End Type="Jacobs_PlayPenModel.ApplicationRole" Role="ApplicationRole" Multiplicity="1" />
+          <End Type="Jacobs_PlayPenModel.ApplicationUser" Role="ApplicationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationRole">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ApplicationUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -715,15 +587,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_AvgHourlyThroughput2018' doe
               <MappingFragment StoreEntitySet="ApplicationRole">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ApplicationUsers">
-            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.ApplicationUser">
-              <MappingFragment StoreEntitySet="ApplicationUser">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="domainName" ColumnName="domainName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -899,6 +762,15 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_AvgHourlyThroughput2018' doe
                 <ScalarProperty Name="avg_throughput" ColumnName="avg_throughput" />
                 <ScalarProperty Name="hour_in_day" ColumnName="hour_in_day" />
                 <ScalarProperty Name="lane_type" ColumnName="lane_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationUsers">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.ApplicationUser">
+              <MappingFragment StoreEntitySet="ApplicationUser">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="domainName" ColumnName="domainName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

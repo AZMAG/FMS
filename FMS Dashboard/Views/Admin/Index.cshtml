@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+
+<script src="~/Scripts/admin.js"></script>
+<div class="black-banner">@ViewBag.Title</div>
+<div class="container">
+    @(
+        Html.Kendo().Grid<FMS_Dashboard.Controllers.AdminController.UserViewModel>()
+        .Name("userGrid")
+        .HtmlAttributes(new { style = "height:400px;" })
+        //.Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.name).ClientTemplate("#=name # (#=domainName #)").Title("User");
+            columns.Bound(c => c.roleId).Title("Role").ClientTemplate("#=roleName #").EditorTemplateName("RoleId");
+            columns.Command(c => { c.Edit(); c.Destroy(); }).Width(250);
+        }
+        )
+        .ToolBar(toolBar => toolBar.Template("<a onclick=\"addUser()\" class=\"k-button k-button-icontext\"><span class=\"k-icon k-i-add\"></span>Add New User</a>"))
+        .Sortable()
+        .Scrollable(s => s.Height("auto"))
+        .DataSource(ds => ds
+            .Ajax()
+            .Model(m => m.Id(x => x.domainName))
+            .Read( read => read.Action("GetUsers", "Admin"))
+            .Update( u => u.Action("UpdateUser", "Admin"))
+            .Destroy( d => d.Action("DeleteUser", "Admin"))
+       .Model(model =>
+       {
+           model.Field(f => f.name).Editable(false);
+           model.Field(f => f.domainName).Editable(false);
+       })
+       )
+
+    )
+</div>
+<div id="NewUserModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="AddUserForm">
+                    <h6>User</h6>
+                    @(Html.Kendo().ComboBox()
+                        .Name("domainName")
+                        .Filter("contains")
+                        .Placeholder("Select MAG User...")
+                        .DataTextField("fullName")
+                        .DataValueField("id")
+                        .DataSource(x =>
+                        {
+                            x.Read(read =>
+                            {
+                                read.Action("GetADUsers", "Admin");
+                            })
+                            .ServerFiltering(false);
+
+                        })
+                        .Suggest(true)
+                        .Events(x =>
+                            {
+                                x.Change("cBoxChanged");
+                            }
+                        )
+                        .HtmlAttributes(new { style = "width:100%;", required = true })
+                    )
+                    <span class="k-invalid-msg" data-for="domainName"></span>
+                    <br />
+                    <br />
+                    <h6>Role</h6>
+                    @(Html.Kendo().DropDownList()
+                        .Name("roleId")
+                        .DataTextField("name")
+                        .DataValueField("id")
+                        .DataSource(x =>
+                        {
+                            x.Read(read =>
+                            {
+                                read.Action("GetJSONRoles", "Admin");
+                            })
+                            .ServerFiltering(false);
+
+                        })
+                        .HtmlAttributes(new { style = "width:100%;" })
+
+                    )
+                    <hr />
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

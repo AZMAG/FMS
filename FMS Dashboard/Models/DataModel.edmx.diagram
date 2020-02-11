@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.AllDetectors2018" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.AllTheData" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.ApplicationRole" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Jacobs_PlayPenModel.ApplicationUser" Width="1.5" PointX="5" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.category" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.category_staging" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.Detector" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
@@ -22,7 +21,8 @@
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.DetectorLane" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_AvgHourlySpeed2018" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_AvgHourlyThroughput2018" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
-        <AssociationConnector Association="Jacobs_PlayPenModel.FK_ApplicationUser_ApplicationRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.ApplicationUser" Width="1.5" PointX="5" PointY="0.875" />
+        <AssociationConnector Association="Jacobs_PlayPenModel.FK_ApplicationUser_ApplicationRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

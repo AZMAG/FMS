@@ -16,7 +16,7 @@ namespace FMS_Dashboard.Models
     {
         public int id { get; set; }
         public string domainName { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public int RoleId { get; set; }
     
         public virtual ApplicationRole ApplicationRole { get; set; }
     }

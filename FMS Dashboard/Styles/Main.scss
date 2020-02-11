@@ -7,7 +7,7 @@
 }
 
 * {
-    font-family: "Avenir Next W00", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    //font-family: "Avenir Next W00", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
 #viewDiv {
@@ -33,7 +33,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    // max-width: 280px;
 }
 
 .nav-item {
@@ -55,6 +55,11 @@ textarea {
     background-color: rgba(128, 128, 128, .2);
 }
 
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
 .black-banner {
     background-color: black;
     height: 60px;
@@ -62,6 +67,7 @@ textarea {
     font-size: 21px;
     align-items: center;
     padding-left: 10%;
+    padding-right: 10%;
     display: flex;
 }
 
@@ -141,6 +147,10 @@ textarea {
     }
 }
 
+.modal-backdrop {
+    opacity: .5;
+}
+
 .k-loading-image {
-    background-image: url(../Images/loading.gif) !important;
+    //background-image: url(../Images/loading.gif) !important;
 }

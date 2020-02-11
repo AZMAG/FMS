@@ -13,11 +13,6 @@ namespace FMS_Dashboard.Controllers
             return View();
         }
 
-        public ActionResult Admin()
-        {
-            return View();
-        }
-
         public ActionResult Corridors()
         {
             return View();
