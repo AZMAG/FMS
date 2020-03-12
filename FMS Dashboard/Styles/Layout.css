@@ -6,6 +6,31 @@
   --hoverText: #FFFFFF;
 }
 
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.redAsterisk {
+  color: red;
+  margin-left: 4px;
+}
+
+.successMessage {
+  font-size: 20px;
+  font-weight: bold;
+  top: 0px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  display: none;
+}
+
 #viewDiv {
   padding: 0;
   margin: 0;
@@ -25,7 +50,6 @@
   white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
 .nav-item {
   font-size: 17px;
 }
@@ -43,15 +67,6 @@
 
 .nav-item.active {
   background-color: rgba(128, 128, 128, 0.2);
-}
-
-.flex-center {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .black-banner {
@@ -108,56 +123,9 @@
   text-decoration: underline;
 }
 
-.detectorDescription {
-  margin-bottom: 5px;
-}
-
-.detectorNumber {
-  margin-bottom: 0 !important;
-}
-
 .validityTable {
   font-size: 12px;
   margin-bottom: 0;
-}
-
-#detector-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-#detector-container #leftPanel {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-#detector-container #leftPanel #errorTable {
-  font-size: small;
-}
-
-#detector-container #chartsContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 2;
-      -ms-flex: 2;
-          flex: 2;
-  border: 2px solid black;
-}
-
-#detector-container #chartsContainer div.chart-wrap {
-  border: 1px solid black;
-  border-radius: 1px;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  margin: 10px;
-  padding-left: 2px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  margin-left: auto;
 }
 
 .modal-backdrop {

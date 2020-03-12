@@ -1,11 +1,9 @@
 ﻿(async () => {
     const { map, view } = await addMap({
         target: "viewDiv",
-        detectorLayer: {
-            renderer: "validity"
-        },
-        legend: true,
-        yearSelector: true,
+        legend: false,
+        corridorLayer: true,
+        yearSelector: false,
         popup: true,
         label: false
     });

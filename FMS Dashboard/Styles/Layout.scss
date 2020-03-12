@@ -1,15 +1,6 @@
-﻿:root {
-    --mainColor: #081F21;
-    --secondaryColor: #2BAAB1;
-    --textColor: #FFFFFF;
-    --hoverColor: #535353;
-    --hoverText: #FFFFFF;
-}
+﻿//Main Layout styles
 
-
-* {
-    //font-family: "Avenir Next W00", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-}
+@import '_Shared.scss';
 
 #viewDiv {
     padding: 0;
@@ -30,13 +21,6 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    // max-width: 280px;
-}
-
 .nav-item {
     font-size: 17px;
 }
@@ -54,11 +38,6 @@ textarea {
 
 .nav-item.active {
     background-color: rgba(128, 128, 128, .2);
-}
-
-.flex-center {
-    display: flex;
-    align-items: center;
 }
 
 .black-banner {
@@ -105,55 +84,13 @@ textarea {
     text-decoration: underline;
 }
 
-.detectorDescription {
-    margin-bottom: 5px;
-}
-
-.detectorNumber {
-    margin-bottom: 0 !important;
-}
-
 .validityTable {
     font-size: 12px;
     margin-bottom: 0;
 }
 
-#detector-container {
-    display: flex;
-
-    #leftPanel {
-        flex: 1;
-
-        #errorTable {
-            font-size: small;
-        }
-    }
-
-    #chartsContainer {
-        display: flex;
-        flex: 2;
-        border: 2px solid black;
-
-        div.chart-wrap {
-            border: 1px solid black;
-            border-radius: 1px;
-            flex: 1;
-            margin: 10px;
-            padding-left: 2px;
-            padding-right: 10px;
-            padding-bottom: 10px;
-            margin-left: auto;
-        }
-
-    }
-}
-
 .modal-backdrop {
     opacity: .5;
-}
-
-.k-loading-image {
-    //background-image: url(../Images/loading.gif) !important;
 }
 
 #leftPanel {

@@ -12,17 +12,10 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class category_staging
+    public partial class Corridor
     {
-        public int category_id { get; set; }
-        public string category_name { get; set; }
-        public Nullable<decimal> amount { get; set; }
-        public Nullable<int> a { get; set; }
-        public Nullable<int> b { get; set; }
-        public Nullable<int> c { get; set; }
-        public Nullable<int> d { get; set; }
-        public Nullable<int> e { get; set; }
-        public Nullable<int> f { get; set; }
-        public Nullable<int> g { get; set; }
+        public int id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -186,6 +186,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CorridorsController.cs" />
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -194,10 +195,7 @@
     </Compile>
     <Compile Include="Helpers\CustomAuthorize.cs" />
     <Compile Include="Helpers\LabelExtensions.cs" />
-    <Compile Include="Models\AllDetectors2018.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AllTheData.cs">
+    <Compile Include="Models\AnnualAvgByLane.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicationRole.cs">
@@ -206,16 +204,10 @@
     <Compile Include="Models\ApplicationUser.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AvgHourlySpeed2018.cs">
+    <Compile Include="Models\Corridor.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AvgHourlyThroughput2018.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\category.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\category_staging.cs">
+    <Compile Include="Models\CorridorDetector.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel.Context.cs">
@@ -239,25 +231,67 @@
     <Compile Include="Models\DetectorLane.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Errors2015.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Errors2016.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Errors2017.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Errors2018.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LaneErrors2015.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LaneErrors2016.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LaneErrors2017.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LaneErrors2018.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RawData2015.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RawData2016.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RawData2017.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RowCompare.cs">
+    <Compile Include="Models\RawData2018.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\updatedProcess_test1.cs">
+    <Compile Include="Models\Validity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\vw_AvgHourlySpeed2018.cs">
+    <Compile Include="Models\vw_AvgHourlySpeed.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\vw_AvgHourlyThroughput2018.cs">
+    <Compile Include="Models\vw_AvgHourlyThroughput.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_DetectorMiscData.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_Errors.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_ExistingLanes.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_LaneErrors.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_RawData.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_Validity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -277,11 +311,17 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\addCorridor.js" />
     <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\config.js" />
+    <Content Include="Scripts\corridors.js" />
     <Content Include="Scripts\detectors.js" />
     <Content Include="Scripts\kendo.modernizr.custom.js" />
     <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\map.js" />
+    <Content Include="Styles\AddCorridor.css" />
+    <Content Include="Styles\Detector.css" />
+    <Content Include="Styles\Layout.css" />
     <Content Include="Styles\Main.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -330,6 +370,12 @@
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RoleId.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Styles\_Shared.scss" />
+    <Content Include="Styles\Detector.scss" />
+    <Content Include="Styles\Layout.scss" />
+    <Content Include="Views\Corridors\Index.cshtml" />
+    <Content Include="Views\Corridors\Add.cshtml" />
+    <Content Include="Styles\AddCorridor.scss" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

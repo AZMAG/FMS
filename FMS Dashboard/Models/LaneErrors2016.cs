@@ -12,17 +12,23 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class updatedProcess_test1
+    public partial class LaneErrors2016
     {
         public int id { get; set; }
         public Nullable<short> detector_number { get; set; }
         public Nullable<System.DateTime> collected { get; set; }
         public Nullable<short> min_since { get; set; }
-        public string lane { get; set; }
-        public Nullable<short> speed { get; set; }
-        public Nullable<short> samples { get; set; }
-        public Nullable<short> occupancy { get; set; }
-        public Nullable<short> volume { get; set; }
-        public Nullable<short> vhp { get; set; }
+        public Nullable<short> lane1 { get; set; }
+        public Nullable<short> lane2 { get; set; }
+        public Nullable<short> lane3 { get; set; }
+        public Nullable<short> lane4 { get; set; }
+        public Nullable<short> lane5 { get; set; }
+        public Nullable<short> lane6 { get; set; }
+        public Nullable<short> lane7 { get; set; }
+        public Nullable<short> lane8 { get; set; }
+        public Nullable<short> lane9 { get; set; }
+        public Nullable<short> lane10 { get; set; }
+        public Nullable<short> HOV { get; set; }
+        public Nullable<short> HOV2 { get; set; }
     }
 }

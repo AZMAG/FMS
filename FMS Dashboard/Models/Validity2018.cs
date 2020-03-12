@@ -12,17 +12,13 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class category
+    public partial class Validity2018
     {
-        public int category_id { get; set; }
-        public string category_name { get; set; }
-        public Nullable<decimal> amount { get; set; }
-        public Nullable<int> a { get; set; }
-        public Nullable<int> b { get; set; }
-        public Nullable<int> c { get; set; }
-        public Nullable<int> d { get; set; }
-        public Nullable<int> e { get; set; }
-        public Nullable<int> f { get; set; }
-        public Nullable<int> g { get; set; }
+        public long id { get; set; }
+        public Nullable<short> detector_number { get; set; }
+        public Nullable<int> error { get; set; }
+        public Nullable<int> valid { get; set; }
+        public Nullable<decimal> total { get; set; }
+        public Nullable<decimal> pct { get; set; }
     }
 }

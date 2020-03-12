@@ -8,5 +8,6 @@
         spatialReference: {
             wkid: 102100
         }
-    }
+    },
+    years: [2015, 2016, 2017, 2018]
 }

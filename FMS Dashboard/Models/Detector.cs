@@ -14,10 +14,17 @@ namespace FMS_Dashboard.Models
     
     public partial class Detector
     {
-        public short detector_id { get; set; }
-        public string detector_location { get; set; }
-        public string detector_route { get; set; }
-        public string detector_direction { get; set; }
-        public Nullable<decimal> detector_milepost { get; set; }
+        public int ID { get; set; }
+        public int det_num { get; set; }
+        public string Location { get; set; }
+        public string Route { get; set; }
+        public string Direction { get; set; }
+        public Nullable<double> Milepost { get; set; }
+        public Nullable<bool> GPS { get; set; }
+        public string Type { get; set; }
+        public Nullable<double> Length_ft { get; set; }
+        public Nullable<double> y { get; set; }
+        public Nullable<double> x { get; set; }
+        public string Segment { get; set; }
     }
 }

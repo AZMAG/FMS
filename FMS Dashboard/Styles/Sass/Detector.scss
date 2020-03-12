@@ -1,0 +1,61 @@
+﻿#detector-container {
+    display: flex;
+    margin-left: 1%;
+    margin-right: 1%;
+
+    #leftPanel {
+        flex: 1;
+
+        #errorTable {
+            font-size: small;
+        }
+    }
+
+    #chartsContainer {
+        display: flex;
+        flex: 2.5;
+
+        div.chart-wrap {
+            border: 1px solid black;
+            border-radius: 2px;
+            flex: 1;
+            margin: 10px;
+            margin-left: auto;
+        }
+
+    }
+}
+
+.k-grid {
+
+    td,
+    th {
+        padding: 8px;
+    }
+}
+
+.detectorDescription {
+    margin-bottom: 5px;
+}
+
+.detectorNumber {
+    margin-bottom: 0 !important;
+}
+
+.loadingDiv {
+    display: flex;
+    color: black;
+    height: 15vh;
+    z-index: 100;
+
+    div {
+        margin: auto;
+    }
+}
+
+#miscForm {
+    &.loading {
+        margin-top: -15vh;
+        opacity: .5;
+    }
+}

@@ -12,7 +12,7 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AllTheData
+    public partial class RawData2016
     {
         public int id { get; set; }
         public Nullable<short> detector_number { get; set; }
@@ -23,6 +23,6 @@ namespace FMS_Dashboard.Models
         public Nullable<short> samples { get; set; }
         public Nullable<short> occupancy { get; set; }
         public Nullable<short> volume { get; set; }
-        public Nullable<short> vhp { get; set; }
+        public Nullable<short> vph { get; set; }
     }
 }

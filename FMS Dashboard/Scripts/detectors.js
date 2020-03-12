@@ -1,12 +1,6 @@
 ﻿const urlParams = new URLSearchParams(window.location.search);
 const det_num = urlParams.get('det_num');
 
-async function getData(det_num) {
-    let throughput = await get_AvgHourlyThroughputByDetNum(det_num);
-    let speed = await get_AvgHourlySpeedByDetNum(det_num);
-    return { throughput, speed }
-}
-
 function sortTimeData(data, timeField) {
     timeField = timeField || "hour_in_day";
     return data.sort((a, b) => {
@@ -17,8 +11,7 @@ function sortTimeData(data, timeField) {
 }
 
 async function getSortedChartData(url, sortField) {
-    const res = await fetch(url);
-    const data = await res.json();
+    const data = await getJsonByUrl(url);
     return sortTimeData(data, sortField || "hour_in_day");
 }
 
@@ -28,6 +21,10 @@ async function get_AvgHourlySpeedByDetNum(det_num) {
 
 async function get_AvgHourlyThroughputByDetNum(det_num) {
     return getSortedChartData(`Detector/AvgHourlyThroughput?det_num=${det_num}`, "hour_in_day");
+}
+
+async function get_GetAnnualAvgByLane(det_num) {
+    return getSortedChartData(`Detector/GetAnnualAvgByLane?det_num=${det_num}`, "lane");
 }
 
 function getMinutesSinceMidnight(strDate) {
@@ -170,9 +167,68 @@ async function setupAvgThroughputChart() {
     }
 }
 
+async function setupAnnualAvgByLaneChart() {
+    try {
+        const data = await get_GetAnnualAvgByLane(det_num);
+        console.log(data);
+        // const speedChart = createLineChart("throughputChart", "Annual Hourly Average Throughput - weekdays", "Average Volume Per Lane", `#: dataItem.avg_throughput # vehicles <br>#: dataItem.hour_in_day #`);
+
+        // const speedChartOptions = speedChart.options;
+        // const dateLabels = getTimeLabels(data, "hour_in_day", true);
+        // speedChartOptions.categoryAxis.categories = dateLabels;
+        // speedChartOptions.series = getMultipleSeriesByField(data, "lane_type", "avg_throughput");
+        // speedChart.redraw();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getJsonByUrl(url) {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+}
+
+async function setupMiscData() {
+    const data = await getJsonByUrl(`Detector/GetMiscDetectorData?det_num=${det_num}`);
+    $("input[data-field]").each((i, el) => {
+        let $input = $(el);
+        let fld = $input.data("field");
+        $input.val(data[fld]);
+    })
+    $("#miscForm").removeClass("loading");
+    $("#miscLoading").hide();
+}
+
+async function setupErrorsTable() {
+    const data = await getJsonByUrl(`Detector/GetErrorData?det_num=${det_num}`);
+    let $errorTable = $("#errorTable");
+
+    $errorTable.kendoGrid({
+        dataSource: data,
+        scrollable: false,
+        columns: [{
+            field: "label",
+            title: "Error Type"
+        }, {
+            field: "value",
+            template: '#=kendo.format("{0:n0}", value)#',
+            title: "Total"
+        }, {
+            field: "pct",
+            template: '#=kendo.format("{0:p}", pct)#',
+            title: "Percentage"
+        }]
+    });
+
+}
+
 
 $(function() {
+    setupMiscData();
     setupAvgSpeedChart();
+    setupErrorsTable();
     setupAvgThroughputChart();
+    // setupAnnualAvgByLaneChart();
     kendo.ui.progress($(".chart-loading"), true);
 });

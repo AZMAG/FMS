@@ -12,12 +12,17 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AvgHourlyThroughput2018
+    public partial class RawData2018
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public Nullable<short> detector_number { get; set; }
-        public Nullable<int> avg_throughput { get; set; }
-        public string hour_in_day { get; set; }
-        public string lane_type { get; set; }
+        public Nullable<System.DateTime> collected { get; set; }
+        public Nullable<short> min_since { get; set; }
+        public string lane { get; set; }
+        public Nullable<short> speed { get; set; }
+        public Nullable<short> samples { get; set; }
+        public Nullable<short> occupancy { get; set; }
+        public Nullable<short> volume { get; set; }
+        public Nullable<short> vph { get; set; }
     }
 }

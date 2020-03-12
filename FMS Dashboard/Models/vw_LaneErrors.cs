@@ -12,8 +12,9 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LaneErrors2018
+    public partial class vw_LaneErrors
     {
+        public int year { get; set; }
         public int id { get; set; }
         public Nullable<short> detector_number { get; set; }
         public Nullable<System.DateTime> collected { get; set; }

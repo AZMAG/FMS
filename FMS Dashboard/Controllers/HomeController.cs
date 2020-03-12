@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMS_Dashboard.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,15 @@ namespace FMS_Dashboard.Controllers
         public ActionResult QueryBuilder()
         {
             return View();
+        }
+
+        public JsonResult GetValidityData()
+        {
+            using (var context = new Entities())
+            {
+                var data = context.Validities.ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

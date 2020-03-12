@@ -1,0 +1,46 @@
+﻿#addCorridor-container {
+    display: flex;
+    height: 70vh;
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+
+    form {
+        flex: 1;
+
+        .nodata {
+            padding: 10px;
+        }
+    }
+
+    #detCnt {
+        margin-left: 3px;
+    }
+
+    #viewDiv {
+        flex: 2;
+        margin-left: 2%;
+    }
+
+    #detectorsGrid {
+        font-size: 12px;
+        margin-bottom: 15px;
+
+        .k-grid-Remove {
+            font-size: 11.5px;
+        }
+
+        &.valid {
+            border: 1px solid green;
+        }
+
+        &.invalid {
+            border: 1px solid red;
+        }
+    }
+
+    #gridInvalid {
+        display: none;
+        margin-bottom: 10px;
+    }
+}

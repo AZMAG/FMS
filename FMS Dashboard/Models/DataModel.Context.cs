@@ -25,22 +25,33 @@ namespace FMS_Dashboard.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AllDetectors2018> AllDetectors2018 { get; set; }
-        public virtual DbSet<AllTheData> AllTheDatas { get; set; }
+        public virtual DbSet<AnnualAvgByLane> AnnualAvgByLanes { get; set; }
         public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
-        public virtual DbSet<category> categories { get; set; }
-        public virtual DbSet<category_staging> category_staging { get; set; }
-        public virtual DbSet<Detector> Detectors { get; set; }
-        public virtual DbSet<Errors2018> Errors2018 { get; set; }
-        public virtual DbSet<LaneErrors2018> LaneErrors2018 { get; set; }
-        public virtual DbSet<RawData2017> RawData2017 { get; set; }
-        public virtual DbSet<RowCompare> RowCompares { get; set; }
-        public virtual DbSet<updatedProcess_test1> updatedProcess_test1 { get; set; }
-        public virtual DbSet<AvgHourlySpeed2018> AvgHourlySpeed2018 { get; set; }
-        public virtual DbSet<AvgHourlyThroughput2018> AvgHourlyThroughput2018 { get; set; }
-        public virtual DbSet<DetectorLane> DetectorLanes { get; set; }
-        public virtual DbSet<vw_AvgHourlySpeed2018> vw_AvgHourlySpeed2018 { get; set; }
-        public virtual DbSet<vw_AvgHourlyThroughput2018> vw_AvgHourlyThroughput2018 { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public virtual DbSet<CorridorDetector> CorridorDetectors { get; set; }
+        public virtual DbSet<Corridor> Corridors { get; set; }
+        public virtual DbSet<Errors2015> Errors2015 { get; set; }
+        public virtual DbSet<Errors2016> Errors2016 { get; set; }
+        public virtual DbSet<Errors2017> Errors2017 { get; set; }
+        public virtual DbSet<Errors2018> Errors2018 { get; set; }
+        public virtual DbSet<LaneErrors2015> LaneErrors2015 { get; set; }
+        public virtual DbSet<LaneErrors2016> LaneErrors2016 { get; set; }
+        public virtual DbSet<LaneErrors2017> LaneErrors2017 { get; set; }
+        public virtual DbSet<LaneErrors2018> LaneErrors2018 { get; set; }
+        public virtual DbSet<RawData2015> RawData2015 { get; set; }
+        public virtual DbSet<RawData2016> RawData2016 { get; set; }
+        public virtual DbSet<RawData2017> RawData2017 { get; set; }
+        public virtual DbSet<RawData2018> RawData2018 { get; set; }
+        public virtual DbSet<Validity> Validities { get; set; }
+        public virtual DbSet<DetectorLane> DetectorLanes { get; set; }
+        public virtual DbSet<vw_AvgHourlySpeed> vw_AvgHourlySpeed { get; set; }
+        public virtual DbSet<vw_AvgHourlyThroughput> vw_AvgHourlyThroughput { get; set; }
+        public virtual DbSet<vw_DetectorMiscData> vw_DetectorMiscData { get; set; }
+        public virtual DbSet<vw_Errors> vw_Errors { get; set; }
+        public virtual DbSet<vw_ExistingLanes> vw_ExistingLanes { get; set; }
+        public virtual DbSet<vw_LaneErrors> vw_LaneErrors { get; set; }
+        public virtual DbSet<vw_RawData> vw_RawData { get; set; }
+        public virtual DbSet<vw_Validity> vw_Validity { get; set; }
+        public virtual DbSet<Detector> Detectors { get; set; }
     }
 }
