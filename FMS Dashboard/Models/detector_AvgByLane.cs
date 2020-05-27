@@ -12,11 +12,14 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DetectorLane
+    public partial class detector_AvgByLane
     {
-        public int id { get; set; }
+        public Nullable<long> id { get; set; }
         public Nullable<short> detector_number { get; set; }
-        public Nullable<System.DateTime> collected { get; set; }
         public string lane { get; set; }
+        public int year { get; set; }
+        public Nullable<int> avg_speed { get; set; }
+        public Nullable<int> avg_volume { get; set; }
+        public Nullable<int> avg_ADT { get; set; }
     }
 }

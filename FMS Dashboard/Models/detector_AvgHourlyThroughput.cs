@@ -12,14 +12,13 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_Validity
+    public partial class detector_AvgHourlyThroughput
     {
         public long id { get; set; }
         public Nullable<short> detector_number { get; set; }
+        public Nullable<int> avg_throughput { get; set; }
+        public string hour_in_day { get; set; }
+        public string lane_type { get; set; }
         public int year { get; set; }
-        public Nullable<int> error { get; set; }
-        public Nullable<int> valid { get; set; }
-        public Nullable<decimal> total { get; set; }
-        public Nullable<decimal> pct { get; set; }
     }
 }

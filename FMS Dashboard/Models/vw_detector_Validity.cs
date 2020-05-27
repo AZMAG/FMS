@@ -12,12 +12,14 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_DetectorMiscData
+    public partial class vw_detector_Validity
     {
-        public int Id { get; set; }
+        public long id { get; set; }
         public Nullable<short> detector_number { get; set; }
-        public Nullable<int> num_days { get; set; }
-        public Nullable<int> gp_lane_cnt { get; set; }
-        public Nullable<int> hov_lane_cnt { get; set; }
+        public int year { get; set; }
+        public Nullable<int> error { get; set; }
+        public Nullable<int> valid { get; set; }
+        public Nullable<decimal> total { get; set; }
+        public Nullable<decimal> pct { get; set; }
     }
 }

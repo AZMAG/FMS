@@ -10,9 +10,9 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="nav navbar-nav mr-auto">
             <li class="@Html.IsSelected(actions: "Index", controllers: "Home") nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-            @*<li class="@Html.IsSelected(actions: "Corridors", controllers: "Home") nav-item">@Html.ActionLink("Corridors", "Corridors", "Home", null, new { @class = "nav-link" })</li>*@
-            <li class="@Html.IsSelected(actions: "QueryBuilder", controllers: "Home") nav-item">
-                @Html.ActionLink("Query Builder", "QueryBuilder", "Home", null, new { @class = "nav-link" })
+            <li class="@Html.IsSelected(actions: "Index", controllers: "Corridors") nav-item">@Html.ActionLink("Corridors", "Index", "Corridors", null, new { @class = "nav-link" })</li>
+            <li class="@Html.IsSelected(actions: "Index", controllers: "QueryBuilder") nav-item">
+                @Html.ActionLink("Query Builder", "Index", "QueryBuilder", null, new { @class = "nav-link" })
             </li>
             @if (HttpContext.Current.User.IsInRole("Admin"))
             {

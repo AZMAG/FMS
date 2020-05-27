@@ -11,12 +11,7 @@
     <span>Detector Number: @det_num</span>
     <div>
         <span style="margin-right:15px;">Year:</span>
-        @(Html.Kendo().DropDownList()
-            .Name("year")
-            .BindTo(new List<string>() { "2018" })
-            .Value("1")
-            .HtmlAttributes(new { style = "width: 150px" })
-        )
+        <span id="yearSelector"></span>
     </div>
 </div>
 <div id="detector-container">

@@ -26,9 +26,9 @@ namespace FMS_Dashboard.Controllers
 
         public JsonResult GetValidityData()
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.Validities.ToList();
+                var data = context.detector_Validity.ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }

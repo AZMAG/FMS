@@ -17,5 +17,6 @@ namespace FMS_Dashboard.Models
         public int id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Nullable<int> Year { get; set; }
     }
 }

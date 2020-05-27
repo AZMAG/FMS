@@ -60,7 +60,7 @@ namespace FMS_Dashboard.Controllers
 
         private List<UserViewModel> GetAppUsers()
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 var userRoleList = new List<UserViewModel>();
                 var users = context.ApplicationUsers.Include("ApplicationRole").ToList();
@@ -81,7 +81,7 @@ namespace FMS_Dashboard.Controllers
 
         public List<ApplicationRole> GetRoles()
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 context.Configuration.ProxyCreationEnabled = false;
                 var roles = context.ApplicationRoles.ToList();
@@ -159,7 +159,7 @@ namespace FMS_Dashboard.Controllers
 
         public ActionResult GetUsers([DataSourceRequest]DataSourceRequest request)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 var users = GetAppUsers();
                 return Json(users.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
@@ -174,7 +174,7 @@ namespace FMS_Dashboard.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DeleteUser([DataSourceRequest]DataSourceRequest request, UserViewModel ur)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 var user = context.ApplicationUsers.Include("ApplicationRole").Where(x => x.domainName == ur.domainName).FirstOrDefault();
                 var entry = context.Entry(user);
@@ -191,7 +191,7 @@ namespace FMS_Dashboard.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdateUser([DataSourceRequest]DataSourceRequest request, UserViewModel ur)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 context.Configuration.ProxyCreationEnabled = false;
                 var user = context.ApplicationUsers.Include("ApplicationRole").Where(x => x.domainName == ur.domainName).FirstOrDefault();
@@ -214,7 +214,7 @@ namespace FMS_Dashboard.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateUser([DataSourceRequest]DataSourceRequest request, UserViewModel ur)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 var user = new ApplicationUser();
                 user.RoleId = ur.roleId;

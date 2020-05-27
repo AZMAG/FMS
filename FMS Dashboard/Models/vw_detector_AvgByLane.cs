@@ -12,17 +12,14 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RawData2018
+    public partial class vw_detector_AvgByLane
     {
-        public int id { get; set; }
+        public Nullable<long> id { get; set; }
         public Nullable<short> detector_number { get; set; }
-        public Nullable<System.DateTime> collected { get; set; }
-        public Nullable<short> min_since { get; set; }
         public string lane { get; set; }
-        public Nullable<short> speed { get; set; }
-        public Nullable<short> samples { get; set; }
-        public Nullable<short> occupancy { get; set; }
-        public Nullable<short> volume { get; set; }
-        public Nullable<short> vph { get; set; }
+        public int year { get; set; }
+        public Nullable<int> avg_speed { get; set; }
+        public Nullable<int> avg_volume { get; set; }
+        public Nullable<int> avg_ADT { get; set; }
     }
 }

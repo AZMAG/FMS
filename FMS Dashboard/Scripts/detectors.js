@@ -1,6 +1,4 @@
-﻿const urlParams = new URLSearchParams(window.location.search);
-const det_num = urlParams.get('det_num');
-
+﻿
 function sortTimeData(data, timeField) {
     timeField = timeField || "hour_in_day";
     return data.sort((a, b) => {
@@ -15,16 +13,16 @@ async function getSortedChartData(url, sortField) {
     return sortTimeData(data, sortField || "hour_in_day");
 }
 
-async function get_AvgHourlySpeedByDetNum(det_num) {
-    return getSortedChartData(`Detector/AvgHourlySpeed?det_num=${det_num}`, "hour_in_day");
+async function get_AvgHourlySpeedByDetNum(det_num, year) {
+    return getSortedChartData(`Detector/AvgHourlySpeed?det_num=${det_num}&year=${year}`, "hour_in_day");
 }
 
-async function get_AvgHourlyThroughputByDetNum(det_num) {
-    return getSortedChartData(`Detector/AvgHourlyThroughput?det_num=${det_num}`, "hour_in_day");
+async function get_AvgHourlyThroughputByDetNum(det_num, year) {
+    return getSortedChartData(`Detector/AvgHourlyThroughput?det_num=${det_num}&year=${year}`, "hour_in_day");
 }
 
-async function get_GetAnnualAvgByLane(det_num) {
-    return getSortedChartData(`Detector/GetAnnualAvgByLane?det_num=${det_num}`, "lane");
+async function get_GetAnnualAvgByLane(det_num, year) {
+    return getSortedChartData(`Detector/GetAnnualAvgByLane?det_num=${det_num}&year=${year}`, "lane");
 }
 
 function getMinutesSinceMidnight(strDate) {
@@ -139,10 +137,10 @@ function createLineChart(id, title, valueName, ttTemplate) {
 }
 
 
-async function setupAvgSpeedChart() {
+async function setupAvgSpeedChart(det_num, year) {
     try {
         const speedChart = createLineChart("speedChart", "Annual Hourly Average Speeds - weekdays", "Average Speed (mph)", `#: dataItem.avg_speed # mph <br>#: dataItem.hour_in_day #`);
-        const data = await get_AvgHourlySpeedByDetNum(det_num);
+        const data = await get_AvgHourlySpeedByDetNum(det_num, year);
         const speedChartOptions = speedChart.options;
         const dateLabels = getTimeLabels(data, "hour_in_day", true);
         speedChartOptions.categoryAxis.categories = dateLabels;
@@ -153,10 +151,10 @@ async function setupAvgSpeedChart() {
     }
 }
 
-async function setupAvgThroughputChart() {
+async function setupAvgThroughputChart(det_num, year) {
     try {
         const speedChart = createLineChart("throughputChart", "Annual Hourly Average Throughput - weekdays", "Average Volume Per Lane", `#: dataItem.avg_throughput # vehicles <br>#: dataItem.hour_in_day #`);
-        const data = await get_AvgHourlyThroughputByDetNum(det_num);
+        const data = await get_AvgHourlyThroughputByDetNum(det_num, year);
         const speedChartOptions = speedChart.options;
         const dateLabels = getTimeLabels(data, "hour_in_day", true);
         speedChartOptions.categoryAxis.categories = dateLabels;
@@ -167,9 +165,9 @@ async function setupAvgThroughputChart() {
     }
 }
 
-async function setupAnnualAvgByLaneChart() {
+async function setupAnnualAvgByLaneChart(det_num, year) {
     try {
-        const data = await get_GetAnnualAvgByLane(det_num);
+        const data = await get_GetAnnualAvgByLane(det_num, year);
         console.log(data);
         // const speedChart = createLineChart("throughputChart", "Annual Hourly Average Throughput - weekdays", "Average Volume Per Lane", `#: dataItem.avg_throughput # vehicles <br>#: dataItem.hour_in_day #`);
 
@@ -189,8 +187,8 @@ async function getJsonByUrl(url) {
     return data;
 }
 
-async function setupMiscData() {
-    const data = await getJsonByUrl(`Detector/GetMiscDetectorData?det_num=${det_num}`);
+async function setupMiscData(det_num, year) {
+    const data = await getJsonByUrl(`Detector/GetMiscDetectorData?det_num=${det_num}&year=${year}`);
     $("input[data-field]").each((i, el) => {
         let $input = $(el);
         let fld = $input.data("field");
@@ -200,8 +198,8 @@ async function setupMiscData() {
     $("#miscLoading").hide();
 }
 
-async function setupErrorsTable() {
-    const data = await getJsonByUrl(`Detector/GetErrorData?det_num=${det_num}`);
+async function setupErrorsTable(det_num, year) {
+    const data = await getJsonByUrl(`Detector/GetErrorData?det_num=${det_num}&year=${year}`);
     let $errorTable = $("#errorTable");
 
     $errorTable.kendoGrid({
@@ -223,12 +221,33 @@ async function setupErrorsTable() {
 
 }
 
-
-$(function() {
-    setupMiscData();
-    setupAvgSpeedChart();
-    setupErrorsTable();
-    setupAvgThroughputChart();
+function setupPage(detNum, year){
+    kendo.ui.progress($(".chart-loading"), true);
+    setupMiscData(detNum, year);
+    setupAvgSpeedChart(detNum, year);
+    setupErrorsTable(detNum, year);
+    setupAvgThroughputChart(detNum, year);
     // setupAnnualAvgByLaneChart();
     kendo.ui.progress($(".chart-loading"), true);
+}
+  
+ 
+$(function() { 
+    const urlParams = new URLSearchParams(window.location.search);
+    const det_num = urlParams.get('det_num');
+
+    setupPage(det_num, 2018);
+
+    config.years.sort((a, b) => b - a);
+
+    $("#yearSelector").kendoDropDownList({
+        dataSource: config.years,
+        index: 0, 
+        change: (val) => {
+            $("#miscForm").addClass("loading");
+            $("#miscLoading").show();
+            const year = $("#yearSelector").val();            
+            setupPage(det_num, year);
+        }
+    });
 });

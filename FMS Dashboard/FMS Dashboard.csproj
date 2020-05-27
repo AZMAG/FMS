@@ -190,14 +190,12 @@
     <Compile Include="Controllers\DetectorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QueryBuilderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomAuthorize.cs" />
     <Compile Include="Helpers\LabelExtensions.cs" />
-    <Compile Include="Models\AnnualAvgByLane.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ApplicationRole.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -228,55 +226,34 @@
     <Compile Include="Models\Detector.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetectorLane.cs">
+    <Compile Include="Models\detector_AvgByLane.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Errors2015.cs">
+    <Compile Include="Models\detector_AvgHourlySpeed.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Errors2016.cs">
+    <Compile Include="Models\detector_AvgHourlyThroughput.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Errors2017.cs">
+    <Compile Include="Models\detector_MiscData.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Errors2018.cs">
+    <Compile Include="Models\detector_Validity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaneErrors2015.cs">
+    <Compile Include="Models\vw_detector_AvgByLane.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaneErrors2016.cs">
+    <Compile Include="Models\vw_detector_AvgHourlySpeed.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaneErrors2017.cs">
+    <Compile Include="Models\vw_detector_AvgHourlyThroughput.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaneErrors2018.cs">
+    <Compile Include="Models\vw_detector_MiscData.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RawData2015.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RawData2016.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RawData2017.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RawData2018.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Validity.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_AvgHourlySpeed.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_AvgHourlyThroughput.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_DetectorMiscData.cs">
+    <Compile Include="Models\vw_detector_Validity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vw_Errors.cs">
@@ -289,9 +266,6 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vw_RawData.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_Validity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -319,10 +293,12 @@
     <Content Include="Scripts\kendo.modernizr.custom.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\map.js" />
+    <Content Include="Scripts\queryBuilder.js" />
     <Content Include="Styles\AddCorridor.css" />
     <Content Include="Styles\Detector.css" />
     <Content Include="Styles\Layout.css" />
     <Content Include="Styles\Main.css" />
+    <Content Include="Styles\QueryBuilder.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -334,8 +310,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Corridors.cshtml" />
-    <Content Include="Views\Home\QueryBuilder.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
@@ -376,6 +350,10 @@
     <Content Include="Views\Corridors\Index.cshtml" />
     <Content Include="Views\Corridors\Add.cshtml" />
     <Content Include="Styles\AddCorridor.scss" />
+    <Content Include="Styles\Corridor.scss" />
+    <Content Include="Views\QueryBuilder\Index.cshtml" />
+    <Content Include="Styles\QueryBuilder.scss" />
+    <Content Include="Views\QueryBuilder\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

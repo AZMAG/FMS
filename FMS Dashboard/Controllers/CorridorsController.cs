@@ -22,7 +22,7 @@ namespace FMS_Dashboard.Controllers
 
         public ActionResult AddNew(AddCorridorVM vm)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 var corridor = new Corridor();
                 corridor.Description = vm.corridorDescription;
@@ -54,7 +54,7 @@ namespace FMS_Dashboard.Controllers
 
         public ActionResult GetCorridors()
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 var corridors = context.Corridors.ToList();
 

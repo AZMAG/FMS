@@ -1,10 +1,14 @@
 ﻿@{
     ViewBag.Title = "Corridors";
 }
-<script src="https://js.arcgis.com/4.13/"></script>
+<script src="https://js.arcgis.com/4.15/"></script>
 <script src="~/Scripts/map.js"></script>
 <script src="~/Scripts/corridors.js"></script>
+<link href="~/Styles/Corridor.css" rel="stylesheet" />
 <div class="black-banner">@ViewBag.Title</div>
 <div class="container">
+    @Html.ActionLink("Add New Corridor", "Add", "Corridors", null, new { @class = "AddCorridorBtn btn btn-primary" })
+    <br />
+    <br />
     <div id="viewDiv"></div>
 </div>

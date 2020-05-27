@@ -15,47 +15,47 @@ namespace FMS_Dashboard.Controllers
             return View("../Home/Detector");
         }
 
-        public JsonResult GetMiscDetectorData(int det_num)
+        public JsonResult GetMiscDetectorData(int det_num, int year)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.vw_DetectorMiscData.Where(x => x.detector_number == det_num).FirstOrDefault();
+                var data = context.detector_MiscData.Where(x => x.detector_number == det_num && x.year == year).FirstOrDefault();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult GetAnnualAvgByLane()
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.AnnualAvgByLanes.ToList();
+                var data = context.detector_AvgByLane.ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult GetValidity()
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.Validities.ToList();
+                var data = context.detector_Validity.ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult GetDetectors()
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
                 var data = context.Detectors.ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult GetErrorData(int det_num)
+        public JsonResult GetErrorData(int det_num, int year)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.Errors2018.Where(x => x.detector_number == det_num)
+                var data = context.vw_Errors.Where(x => x.detector_number == det_num && x.year == year)
                     .GroupBy(x => x.detector_number)
                     .Select(y => new 
                     {
@@ -66,7 +66,7 @@ namespace FMS_Dashboard.Controllers
                         difference_error = y.Sum(x => x.difference_error == true ? 1 : 0)
                     }).FirstOrDefault();
 
-                var totalRows = context.RawData2018.Where(x => x.detector_number == det_num).Count();
+                var totalRows = context.vw_RawData.Where(x => x.detector_number == det_num && x.year == year).Count();
 
                 var list = new List<dynamic>();
                 var speed = new {
@@ -113,29 +113,29 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-        public JsonResult AvgHourlySpeed(int det_num)
+        public JsonResult AvgHourlySpeed(int det_num, int year)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.vw_AvgHourlySpeed.Where(x => x.detector_number == det_num).ToList();
+                var data = context.detector_AvgHourlySpeed.Where(x => x.detector_number == det_num && x.year == year).ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult AvgHourlyThroughput(int det_num)
+        public JsonResult AvgHourlyThroughput(int det_num, int year)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.vw_AvgHourlyThroughput.Where(x => x.detector_number == det_num).ToList();
+                var data = context.detector_AvgHourlyThroughput.Where(x => x.detector_number == det_num && x.year == year).ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult GetErrors(int det_num)
+        public JsonResult GetErrors(int det_num, int year)
         {
-            using (var context = new Entities())
+            using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.LaneErrors2018.Where(x => x.detector_number == det_num).ToList();
+                var data = context.vw_LaneErrors.Where(x => x.detector_number == det_num && x.year == year).ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }

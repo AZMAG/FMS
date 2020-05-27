@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Query Builder";
+}
+<script src="https://js.arcgis.com/4.15/"></script>
+<script src="~/Scripts/map.js"></script>
+<script src="~/Scripts/queryBuilder.js"></script>
+<link href="~/Styles/QueryBuilder.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@("@")fortawesome/fontawesome-free@5.6.3/css/all.min.css" />
+
+<div class="black-banner">@ViewBag.Title <div style="margin-left: 30%;"><button class="btn btn-md btn-primary">Detectors</button><button class="btn btn-md btn-secondary">Corridors</button></div></div>
+<div class="container" style="display:flex;">
+    <br />
+    <br />
+    <div id="leftPanel" style="flex:1;">
+        <form id="qbForm" action="/QueryBuilder/Result" novalidate method="get">
+            <div class="k-form-field-wrap" style="text-align:center;">
+                <label>Detector: </label>
+                <select value="0" style="width: 60%;" id="det_num" name="det_num" required validationMessage="Please select a detector"></select>
+                <span class="k-invalid-msg" data-for="det_num"></span>
+            </div>
+            <br />
+            <div class="form-row analysisOptions k-form-field-wrap">
+                <div class="col-sm-6">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="AHAS" name="AHAS">
+                        <label class="custom-control-label" for="AHAS">Annual Hourly Average Speeds (Weekday)</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="AHATPL" name="AHATPL">
+                        <label class="custom-control-label" for="AHATPL">Annual Hourly Average Throughput Per Lane (Weekday)</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="AHAOP" name="AHAOP">
+                        <label class="custom-control-label" for="AHAOP">Annual Hourly Average Occupancy Percent (Weekday)</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="AAL" name="AAL">
+                        <label class="custom-control-label" for="AAL">Annual Average by Lane</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="DDPQCCD" name="DDPQCCD">
+                        <label class="custom-control-label" for="DDPQCCD">Distribution of Data Passing Quality Control Criteria by Date</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="DDPQCCW" name="DDPQCCW">
+                        <label class="custom-control-label" for="DDPQCCW">Distribution of Data Passing Quality Control Criteria by Weekday</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="AQCFHD" name="AQCFHD">
+                        <label class="custom-control-label" for="AQCFHD">Annual Quality Control Flags by Hour of Day (Weekday)</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="FVD" name="FVD">
+                        <label class="custom-control-label" for="FVD">Flow vs. Density <i data-toggle="tooltip" title="All Data Rows & 5-min Weekday Average" class="fas fa-info-circle"></i></label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="SVD" name="SVD">
+                        <label class="custom-control-label" for="SVD">Speed vs. Density <i data-toggle="tooltip" title="All Data Rows & 5-min Weekday Average" class="fas fa-info-circle"></i></label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="true" id="SVF" name="SVF">
+                        <label class="custom-control-label" for="SVF">Speed vs. Flow <i data-toggle="tooltip" title="All Data Rows & 5-min Weekday Average" class="fas fa-info-circle"></i></label>
+                    </div>
+                </div>
+                <span style="display:none;" class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" id="atLeastOneAnalysis" role="alert"><span class="k-icon k-i-warning"></span> At least one analysis option must be chosen</span>
+            </div>
+            <div>
+                <h6>Time Period 1:</h6>
+                <label for="name">Year: </label>
+                <input type="text" name="year1" value="" />
+
+                <span> Or </span>
+                <br />
+
+                <label for="start">Start Date: </label>
+                <input type="date" name="start1" value="" />
+
+                <label for="name">End Date: </label>
+                <input type="date" name="end1" value="" />
+                <br />
+                <br />
+
+                <h6>Time Period 2:</h6>
+
+                <label for="name">Year: </label>
+                <input type="text" name="year2" value="" />
+
+                <span> Or </span>
+                <br />
+
+                <label for="start">Start Date: </label>
+                <input type="date" name="start2" value="" />
+
+                <label for="name">End Date: </label>
+                <input type="date" name="end2" value="" />
+                <br />
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </div>
+        </form>
+    </div>
+    <div id="viewDiv" style="flex:1;"></div>
+</div>
