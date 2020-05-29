@@ -101,9 +101,33 @@ async function _setupMap(params) {
   }
   if (options.corridorLayer) {
     const { fl, fl2 } = await getCorridorsLayer(params);
+    if (options.corridorLayer.visible === false) {
+      fl.visible = false;
+    }
     map.add(fl);
     if (options.corridorLayer.showDetectors) {
       map.add(fl2);
+    }
+
+    let corridorHighlight;
+    async function highlightCorridor(id) {
+      if (corridorHighlight) {
+        await corridorHighlight.remove();
+      }
+      const layerView = await view.whenLayerView(fl);
+      const { features } = await fl.queryFeatures({
+        where: `id = ${id}`,
+      });
+
+      if (features.length > 0) {
+        corridorHighlight = layerView.highlight(features);
+        view.goTo(features);
+      }
+    }
+    rtnObj.highlightCorridor = highlightCorridor;
+
+    if (options.corridorLayer.highlightCorridor) {
+      highlightCorridor(options.corridorLayer.highlightCorridor);
     }
 
     view.popup.autoOpenEnabled = false;
@@ -111,10 +135,10 @@ async function _setupMap(params) {
     function openPopup(mapPoint, features) {
       let name = features[0].attributes["Name"];
       let description = getSegmentByName(name);
-
-      view.popup.open({
-        title: "Corridors",
-        content: `
+      if (options.corridorLayer.popup) {
+        view.popup.open({
+          title: "Corridors",
+          content: `
                 <p><b>Name:</b> ${name}</p>
                 <p><b>Description:</b> ${description}</p>
                 <table class="table validityTable table-sm">
@@ -141,8 +165,9 @@ async function _setupMap(params) {
                     </tbody>
                 </table>
                 `,
-        location: mapPoint,
-      });
+          location: mapPoint,
+        });
+      }
     }
 
     const layerView = await view.whenLayerView(fl);
@@ -160,23 +185,24 @@ async function _setupMap(params) {
         });
 
         openPopup(e.mapPoint, features);
-        console.log(graphic, features);
 
         if (highLight) {
           highLight.remove();
         }
 
-        highLight = layerView.highlight(features);
-        currEvent = e.eventId;
+        if (options.corridorLayer.popup) {
+          highLight = layerView.highlight(features);
+          currEvent = e.eventId;
 
-        //This code
-        watchUtils.whenTrueOnce(view.popup, "visible", (visible) => {
-          watchUtils.whenFalseOnce(view.popup, "visible", (visible) => {
-            if (!visible && highLight && currEvent === e.eventId) {
-              highLight.remove();
-            }
+          //This code
+          watchUtils.whenTrueOnce(view.popup, "visible", (visible) => {
+            watchUtils.whenFalseOnce(view.popup, "visible", (visible) => {
+              if (!visible && highLight && currEvent === e.eventId) {
+                highLight.remove();
+              }
+            });
           });
-        });
+        }
       }
     });
   }
@@ -243,8 +269,6 @@ async function getCorridorsLayer(params) {
   let { corridorLayer } = options;
 
   let data = await getJsonByUrl(`/Corridors/GetCorridors`);
-
-  console.log(data);
 
   function getAvg(grades) {
     const total = grades.reduce((acc, c) => acc + c, 0);
@@ -313,8 +337,6 @@ async function getCorridorsLayer(params) {
     });
   });
 
-  console.log(segments);
-
   const fl = new FeatureLayer({
     id: "corridors",
     title: "Corridor Name",
@@ -335,6 +357,10 @@ async function getCorridorsLayer(params) {
       {
         name: "Description",
         type: "string",
+      },
+      {
+        name: "Year",
+        type: "integer",
       },
     ],
     objectIdField: "ID",

@@ -20,6 +20,7 @@ namespace FMS_Dashboard.Controllers
         public bool SVD { get; set; }
         public bool SVF { get; set; }
         public int det_num { get; set; }
+        public int corridor_id { get; set; }
         public DateTime? end1 { get; set; }
         public DateTime? end2 { get; set; }
         public DateTime? start1 { get; set; }
@@ -27,7 +28,6 @@ namespace FMS_Dashboard.Controllers
         public int? year1 { get; set; }
         public int? year2 { get; set; }
     }
-
 
     public class QueryBuilderController : Controller
     {

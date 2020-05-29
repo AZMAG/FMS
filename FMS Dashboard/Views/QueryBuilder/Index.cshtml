@@ -7,19 +7,29 @@
 <link href="~/Styles/QueryBuilder.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@("@")fortawesome/fontawesome-free@5.6.3/css/all.min.css" />
 
-<div class="black-banner">@ViewBag.Title <div style="margin-left: 30%;"><button class="btn btn-md btn-primary">Detectors</button><button class="btn btn-md btn-secondary">Corridors</button></div></div>
-<div class="container" style="display:flex;">
+<div class="black-banner">
+    @ViewBag.Title
+    <div class="btnTypeContainer">
+        <button data-val="detector" class="btn btn-md btn-primary btnType">Detectors</button>
+        <button data-val="corridor" class="btn btn-md btn-secondary btnType">Corridors</button>
+    </div>
+</div>
+<div class="container">
     <br />
-    <br />
-    <div id="leftPanel" style="flex:1;">
+    <div id="leftPanel">
         <form id="qbForm" action="/QueryBuilder/Result" novalidate method="get">
-            <div class="k-form-field-wrap" style="text-align:center;">
-                <label>Detector: </label>
-                <select value="0" style="width: 60%;" id="det_num" name="det_num" required validationMessage="Please select a detector"></select>
+            <div class="form-row detectorContainer dropDownContainer">
+                <h6 class="col-sm-3">Detector: </h6>
+                <select value="0" class="col-sm-9" id="det_num" name="det_num" validationMessage="Please select a detector"></select>
                 <span class="k-invalid-msg" data-for="det_num"></span>
             </div>
-            <br />
-            <div class="form-row analysisOptions k-form-field-wrap">
+            <div class="form-row corridorContainer dropDownContainer">
+                <h6 class="col-sm-3">Corridor: </h6>
+                <select value="0" class="col-sm-9" id="corridor_id" name="corridor_id" validationMessage="Please select a corridor"></select>
+                <span class="k-invalid-msg" data-for="corridor_id"></span>
+            </div>
+            <h6>Included Analysis:</h6>
+            <div class="form-row analysisOptions borderArea k-form-field-wrap">
                 <div class="col-sm-6">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" value="true" id="AHAS" name="AHAS">
@@ -74,38 +84,49 @@
                 </div>
                 <span style="display:none;" class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" id="atLeastOneAnalysis" role="alert"><span class="k-icon k-i-warning"></span> At least one analysis option must be chosen</span>
             </div>
-            <div>
-                <h6>Time Period 1:</h6>
-                <label for="name">Year: </label>
-                <input type="text" name="year1" value="" />
-
-                <span> Or </span>
-                <br />
-
-                <label for="start">Start Date: </label>
-                <input type="date" name="start1" value="" />
-
-                <label for="name">End Date: </label>
-                <input type="date" name="end1" value="" />
-                <br />
-                <br />
-
-                <h6>Time Period 2:</h6>
-
-                <label for="name">Year: </label>
-                <input type="text" name="year2" value="" />
-
-                <span> Or </span>
-                <br />
-
-                <label for="start">Start Date: </label>
-                <input type="date" name="start2" value="" />
-
-                <label for="name">End Date: </label>
-                <input type="date" name="end2" value="" />
-                <br />
-                <button type="submit" class="btn btn-primary">Calculate</button>
+            <h6>Time Period 1:</h6>
+            <div class="borderArea">
+                <div class="form-row">
+                    <div class="timeGroup form-row col-md-4">
+                        <label class="col-sm-4" for="name">Year:</label>
+                        <input class="form-control form-control-sm col-sm-8" type="number" name="year1" value="" />
+                    </div>
+                    <div class="timeGroup timeGroupOr col-md-2">OR</div>
+                    <div class="timeGroup col-md-6">
+                        <div class="startDate form-row">
+                            <label class="col-sm-4" for="start">Start Date:</label>
+                            <input class="form-control form-control-sm col-sm-7" type="date" name="start1" value="">
+                        </div>
+                        <div class="form-row">
+                            <label class="col-sm-4" for="name">End Date:</label>
+                            <input class="form-control form-control-sm col-sm-7" type="date" name="end1" value="" />
+                        </div>
+                    </div>
+                </div>
+                <span style="display:none;" class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" id="date1Error" role="alert"></span>
             </div>
+            <h6>Time Period 2:</h6>
+            <div class="borderArea">
+                <div class="form-row">
+                    <div class="timeGroup form-row col-md-4">
+                        <label class="col-sm-4" for="name">Year:</label>
+                        <input class="form-control form-control-sm col-sm-8" type="number" name="year2" value="" />
+                    </div>
+                    <div class="timeGroup timeGroupOr col-md-2">OR</div>
+                    <div class="timeGroup col-md-6">
+                        <div class="startDate form-row">
+                            <label class="col-sm-4" for="start">Start Date:</label>
+                            <input class="form-control form-control-sm col-sm-7" type="date" name="start2" value="">
+                        </div>
+                        <div class="form-row">
+                            <label class="col-sm-4" for="name">End Date:</label>
+                            <input class="form-control form-control-sm col-sm-7" type="date" name="end2" value="" />
+                        </div>
+                    </div>
+                </div>
+                <span style="display:none;" class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" id="date2Error" role="alert"></span>
+            </div>
+            <button type="submit" class="submitBtn btn btn-primary btn-sm">Calculate</button>
         </form>
     </div>
     <div id="viewDiv" style="flex:1;"></div>

@@ -66,6 +66,7 @@ namespace FMS_Dashboard.Controllers
                     corridorVM.id = corridor.id;
                     corridorVM.Description = corridor.Description;
                     corridorVM.Name = corridor.Name;
+                    corridorVM.Year = corridor.Year;
 
                     var corridorDetectors = context.CorridorDetectors.Where(x => x.corridorId == corridor.id).Select(x => x.detectorId).ToList();
 
