@@ -1,0 +1,1111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Jacobs_PlayPenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationUser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="domainName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CorridorDetector">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="corridorId" Type="int" Nullable="false" />
+          <Property Name="detectorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Corridors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_AvgAnnualVolumeByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detector_AvgAnnualVolumeByLane">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="lane" Type="varchar" MaxLength="128" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="avg_annual_daily_traffic" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_AvgByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detector_AvgByLane">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="lane" Type="varchar" MaxLength="128" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="avg_speed" Type="int" />
+          <Property Name="avg_volume" Type="int" />
+          <Property Name="avg_ADT" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_AvgHourlySpeed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detector_AvgHourlySpeed">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="avg_speed" Type="int" />
+          <Property Name="hour_in_day" Type="varchar" MaxLength="12" />
+          <Property Name="lane_type" Type="varchar" MaxLength="9" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_AvgHourlyThroughput' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detector_AvgHourlyThroughput">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="avg_throughput" Type="int" />
+          <Property Name="hour_in_day" Type="varchar" MaxLength="12" />
+          <Property Name="lane_type" Type="varchar" MaxLength="9" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_MiscData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detector_MiscData">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="num_days" Type="int" />
+          <Property Name="gp_lane_cnt" Type="int" />
+          <Property Name="hov_lane_cnt" Type="int" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_Validity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detector_Validity">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="error" Type="int" />
+          <Property Name="valid" Type="int" />
+          <Property Name="total" Type="numeric" Precision="13" Scale="1" />
+          <Property Name="pct" Type="numeric" Precision="28" Scale="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.Detectors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Detectors">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="det_num" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="det_num" Type="int" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
+          <Property Name="Route" Type="nvarchar" MaxLength="255" />
+          <Property Name="Direction" Type="nvarchar" MaxLength="255" />
+          <Property Name="Milepost" Type="float" />
+          <Property Name="GPS" Type="bit" />
+          <Property Name="Type" Type="nvarchar" MaxLength="255" />
+          <Property Name="Length_ft" Type="float" />
+          <Property Name="y" Type="float" />
+          <Property Name="x" Type="float" />
+          <Property Name="Segment" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_detector_AvgByLane">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="lane" Type="varchar" MaxLength="128" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="avg_speed" Type="int" />
+          <Property Name="avg_volume" Type="int" />
+          <Property Name="avg_ADT" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgHourlySpeed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_detector_AvgHourlySpeed">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="avg_speed" Type="int" />
+          <Property Name="hour_in_day" Type="varchar" MaxLength="12" />
+          <Property Name="lane_type" Type="varchar" MaxLength="9" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgHourlyThroughput' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_detector_AvgHourlyThroughput">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="avg_throughput" Type="int" />
+          <Property Name="hour_in_day" Type="varchar" MaxLength="12" />
+          <Property Name="lane_type" Type="varchar" MaxLength="9" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_MiscData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_detector_MiscData">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="num_days" Type="int" />
+          <Property Name="gp_lane_cnt" Type="int" />
+          <Property Name="hov_lane_cnt" Type="int" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_Validity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_detector_Validity">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="error" Type="int" />
+          <Property Name="valid" Type="int" />
+          <Property Name="total" Type="numeric" Precision="13" Scale="1" />
+          <Property Name="pct" Type="numeric" Precision="28" Scale="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_Errors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Errors">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="detector_number" Type="int" />
+          <Property Name="collected" Type="date" />
+          <Property Name="min_since" Type="smallint" />
+          <Property Name="speed_error" Type="bit" />
+          <Property Name="volume_error" Type="bit" />
+          <Property Name="occupancy_error" Type="bit" />
+          <Property Name="difference_error" Type="bit" />
+          <Property Name="zeros_error" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_ExistingLanes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_ExistingLanes">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="lane1" Type="int" />
+          <Property Name="lane2" Type="int" />
+          <Property Name="lane3" Type="int" />
+          <Property Name="lane4" Type="int" />
+          <Property Name="lane5" Type="int" />
+          <Property Name="lane6" Type="int" />
+          <Property Name="lane7" Type="int" />
+          <Property Name="lane8" Type="int" />
+          <Property Name="lane9" Type="int" />
+          <Property Name="lane10" Type="int" />
+          <Property Name="HOV" Type="int" />
+          <Property Name="HOV2" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_LaneErrors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_LaneErrors">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="collected" Type="date" />
+          <Property Name="min_since" Type="smallint" />
+          <Property Name="lane1" Type="smallint" />
+          <Property Name="lane2" Type="smallint" />
+          <Property Name="lane3" Type="smallint" />
+          <Property Name="lane4" Type="smallint" />
+          <Property Name="lane5" Type="smallint" />
+          <Property Name="lane6" Type="smallint" />
+          <Property Name="lane7" Type="smallint" />
+          <Property Name="lane8" Type="smallint" />
+          <Property Name="lane9" Type="smallint" />
+          <Property Name="lane10" Type="smallint" />
+          <Property Name="HOV" Type="smallint" />
+          <Property Name="HOV2" Type="smallint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_RawData">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="collected" Type="date" />
+          <Property Name="min_since" Type="smallint" />
+          <Property Name="lane" Type="varchar" MaxLength="128" />
+          <Property Name="speed" Type="smallint" />
+          <Property Name="samples" Type="smallint" />
+          <Property Name="occupancy" Type="smallint" />
+          <Property Name="volume" Type="smallint" />
+          <Property Name="vph" Type="smallint" />
+        </EntityType>
+        <Association Name="FK_ApplicationUser_ApplicationRole">
+          <End Role="ApplicationRole" Type="Self.ApplicationRole" Multiplicity="1" />
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationRole">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ApplicationUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fnTotalRowsByDetector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="det_num" Type="int" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Jacobs_PlayPenModelStoreContainer">
+          <EntitySet Name="ApplicationRole" EntityType="Self.ApplicationRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationUser" EntityType="Self.ApplicationUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CorridorDetector" EntityType="Self.CorridorDetector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Corridors" EntityType="Self.Corridors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detector_AvgAnnualVolumeByLane" EntityType="Self.detector_AvgAnnualVolumeByLane" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [detector_AvgAnnualVolumeByLane].[detector_number] AS [detector_number], 
+    [detector_AvgAnnualVolumeByLane].[lane] AS [lane], 
+    [detector_AvgAnnualVolumeByLane].[year] AS [year], 
+    [detector_AvgAnnualVolumeByLane].[avg_annual_daily_traffic] AS [avg_annual_daily_traffic]
+    FROM [dbo].[detector_AvgAnnualVolumeByLane] AS [detector_AvgAnnualVolumeByLane]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="detector_AvgByLane" EntityType="Self.detector_AvgByLane" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [detector_AvgByLane].[id] AS [id], 
+    [detector_AvgByLane].[detector_number] AS [detector_number], 
+    [detector_AvgByLane].[lane] AS [lane], 
+    [detector_AvgByLane].[year] AS [year], 
+    [detector_AvgByLane].[avg_speed] AS [avg_speed], 
+    [detector_AvgByLane].[avg_volume] AS [avg_volume], 
+    [detector_AvgByLane].[avg_ADT] AS [avg_ADT]
+    FROM [dbo].[detector_AvgByLane] AS [detector_AvgByLane]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="detector_AvgHourlySpeed" EntityType="Self.detector_AvgHourlySpeed" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [detector_AvgHourlySpeed].[id] AS [id], 
+    [detector_AvgHourlySpeed].[detector_number] AS [detector_number], 
+    [detector_AvgHourlySpeed].[avg_speed] AS [avg_speed], 
+    [detector_AvgHourlySpeed].[hour_in_day] AS [hour_in_day], 
+    [detector_AvgHourlySpeed].[lane_type] AS [lane_type], 
+    [detector_AvgHourlySpeed].[year] AS [year]
+    FROM [dbo].[detector_AvgHourlySpeed] AS [detector_AvgHourlySpeed]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="detector_AvgHourlyThroughput" EntityType="Self.detector_AvgHourlyThroughput" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [detector_AvgHourlyThroughput].[id] AS [id], 
+    [detector_AvgHourlyThroughput].[detector_number] AS [detector_number], 
+    [detector_AvgHourlyThroughput].[avg_throughput] AS [avg_throughput], 
+    [detector_AvgHourlyThroughput].[hour_in_day] AS [hour_in_day], 
+    [detector_AvgHourlyThroughput].[lane_type] AS [lane_type], 
+    [detector_AvgHourlyThroughput].[year] AS [year]
+    FROM [dbo].[detector_AvgHourlyThroughput] AS [detector_AvgHourlyThroughput]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="detector_MiscData" EntityType="Self.detector_MiscData" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [detector_MiscData].[Id] AS [Id], 
+    [detector_MiscData].[detector_number] AS [detector_number], 
+    [detector_MiscData].[num_days] AS [num_days], 
+    [detector_MiscData].[gp_lane_cnt] AS [gp_lane_cnt], 
+    [detector_MiscData].[hov_lane_cnt] AS [hov_lane_cnt], 
+    [detector_MiscData].[year] AS [year]
+    FROM [dbo].[detector_MiscData] AS [detector_MiscData]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="detector_Validity" EntityType="Self.detector_Validity" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [detector_Validity].[id] AS [id], 
+    [detector_Validity].[detector_number] AS [detector_number], 
+    [detector_Validity].[year] AS [year], 
+    [detector_Validity].[error] AS [error], 
+    [detector_Validity].[valid] AS [valid], 
+    [detector_Validity].[total] AS [total], 
+    [detector_Validity].[pct] AS [pct]
+    FROM [dbo].[detector_Validity] AS [detector_Validity]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Detectors" EntityType="Self.Detectors" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Detectors].[ID] AS [ID], 
+    [Detectors].[det_num] AS [det_num], 
+    [Detectors].[Location] AS [Location], 
+    [Detectors].[Route] AS [Route], 
+    [Detectors].[Direction] AS [Direction], 
+    [Detectors].[Milepost] AS [Milepost], 
+    [Detectors].[GPS] AS [GPS], 
+    [Detectors].[Type] AS [Type], 
+    [Detectors].[Length_ft] AS [Length_ft], 
+    [Detectors].[y] AS [y], 
+    [Detectors].[x] AS [x], 
+    [Detectors].[Segment] AS [Segment]
+    FROM [dbo].[Detectors] AS [Detectors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_detector_AvgByLane" EntityType="Self.vw_detector_AvgByLane" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_detector_AvgByLane].[id] AS [id], 
+    [vw_detector_AvgByLane].[detector_number] AS [detector_number], 
+    [vw_detector_AvgByLane].[lane] AS [lane], 
+    [vw_detector_AvgByLane].[year] AS [year], 
+    [vw_detector_AvgByLane].[avg_speed] AS [avg_speed], 
+    [vw_detector_AvgByLane].[avg_volume] AS [avg_volume], 
+    [vw_detector_AvgByLane].[avg_ADT] AS [avg_ADT]
+    FROM [dbo].[vw_detector_AvgByLane] AS [vw_detector_AvgByLane]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_detector_AvgHourlySpeed" EntityType="Self.vw_detector_AvgHourlySpeed" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_detector_AvgHourlySpeed].[id] AS [id], 
+    [vw_detector_AvgHourlySpeed].[detector_number] AS [detector_number], 
+    [vw_detector_AvgHourlySpeed].[avg_speed] AS [avg_speed], 
+    [vw_detector_AvgHourlySpeed].[hour_in_day] AS [hour_in_day], 
+    [vw_detector_AvgHourlySpeed].[lane_type] AS [lane_type], 
+    [vw_detector_AvgHourlySpeed].[year] AS [year]
+    FROM [dbo].[vw_detector_AvgHourlySpeed] AS [vw_detector_AvgHourlySpeed]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_detector_AvgHourlyThroughput" EntityType="Self.vw_detector_AvgHourlyThroughput" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_detector_AvgHourlyThroughput].[id] AS [id], 
+    [vw_detector_AvgHourlyThroughput].[detector_number] AS [detector_number], 
+    [vw_detector_AvgHourlyThroughput].[avg_throughput] AS [avg_throughput], 
+    [vw_detector_AvgHourlyThroughput].[hour_in_day] AS [hour_in_day], 
+    [vw_detector_AvgHourlyThroughput].[lane_type] AS [lane_type], 
+    [vw_detector_AvgHourlyThroughput].[year] AS [year]
+    FROM [dbo].[vw_detector_AvgHourlyThroughput] AS [vw_detector_AvgHourlyThroughput]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_detector_MiscData" EntityType="Self.vw_detector_MiscData" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_detector_MiscData].[Id] AS [Id], 
+    [vw_detector_MiscData].[detector_number] AS [detector_number], 
+    [vw_detector_MiscData].[num_days] AS [num_days], 
+    [vw_detector_MiscData].[gp_lane_cnt] AS [gp_lane_cnt], 
+    [vw_detector_MiscData].[hov_lane_cnt] AS [hov_lane_cnt], 
+    [vw_detector_MiscData].[year] AS [year]
+    FROM [dbo].[vw_detector_MiscData] AS [vw_detector_MiscData]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_detector_Validity" EntityType="Self.vw_detector_Validity" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_detector_Validity].[id] AS [id], 
+    [vw_detector_Validity].[detector_number] AS [detector_number], 
+    [vw_detector_Validity].[year] AS [year], 
+    [vw_detector_Validity].[error] AS [error], 
+    [vw_detector_Validity].[valid] AS [valid], 
+    [vw_detector_Validity].[total] AS [total], 
+    [vw_detector_Validity].[pct] AS [pct]
+    FROM [dbo].[vw_detector_Validity] AS [vw_detector_Validity]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Errors" EntityType="Self.vw_Errors" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Errors].[year] AS [year], 
+    [vw_Errors].[id] AS [id], 
+    [vw_Errors].[detector_number] AS [detector_number], 
+    [vw_Errors].[collected] AS [collected], 
+    [vw_Errors].[min_since] AS [min_since], 
+    [vw_Errors].[speed_error] AS [speed_error], 
+    [vw_Errors].[volume_error] AS [volume_error], 
+    [vw_Errors].[occupancy_error] AS [occupancy_error], 
+    [vw_Errors].[difference_error] AS [difference_error], 
+    [vw_Errors].[zeros_error] AS [zeros_error]
+    FROM [dbo].[vw_Errors] AS [vw_Errors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_ExistingLanes" EntityType="Self.vw_ExistingLanes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_ExistingLanes].[year] AS [year], 
+    [vw_ExistingLanes].[detector_number] AS [detector_number], 
+    [vw_ExistingLanes].[lane1] AS [lane1], 
+    [vw_ExistingLanes].[lane2] AS [lane2], 
+    [vw_ExistingLanes].[lane3] AS [lane3], 
+    [vw_ExistingLanes].[lane4] AS [lane4], 
+    [vw_ExistingLanes].[lane5] AS [lane5], 
+    [vw_ExistingLanes].[lane6] AS [lane6], 
+    [vw_ExistingLanes].[lane7] AS [lane7], 
+    [vw_ExistingLanes].[lane8] AS [lane8], 
+    [vw_ExistingLanes].[lane9] AS [lane9], 
+    [vw_ExistingLanes].[lane10] AS [lane10], 
+    [vw_ExistingLanes].[HOV] AS [HOV], 
+    [vw_ExistingLanes].[HOV2] AS [HOV2]
+    FROM [dbo].[vw_ExistingLanes] AS [vw_ExistingLanes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_LaneErrors" EntityType="Self.vw_LaneErrors" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_LaneErrors].[year] AS [year], 
+    [vw_LaneErrors].[id] AS [id], 
+    [vw_LaneErrors].[detector_number] AS [detector_number], 
+    [vw_LaneErrors].[collected] AS [collected], 
+    [vw_LaneErrors].[min_since] AS [min_since], 
+    [vw_LaneErrors].[lane1] AS [lane1], 
+    [vw_LaneErrors].[lane2] AS [lane2], 
+    [vw_LaneErrors].[lane3] AS [lane3], 
+    [vw_LaneErrors].[lane4] AS [lane4], 
+    [vw_LaneErrors].[lane5] AS [lane5], 
+    [vw_LaneErrors].[lane6] AS [lane6], 
+    [vw_LaneErrors].[lane7] AS [lane7], 
+    [vw_LaneErrors].[lane8] AS [lane8], 
+    [vw_LaneErrors].[lane9] AS [lane9], 
+    [vw_LaneErrors].[lane10] AS [lane10], 
+    [vw_LaneErrors].[HOV] AS [HOV], 
+    [vw_LaneErrors].[HOV2] AS [HOV2]
+    FROM [dbo].[vw_LaneErrors] AS [vw_LaneErrors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_RawData" EntityType="Self.vw_RawData" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_RawData].[year] AS [year], 
+    [vw_RawData].[id] AS [id], 
+    [vw_RawData].[detector_number] AS [detector_number], 
+    [vw_RawData].[collected] AS [collected], 
+    [vw_RawData].[min_since] AS [min_since], 
+    [vw_RawData].[lane] AS [lane], 
+    [vw_RawData].[speed] AS [speed], 
+    [vw_RawData].[samples] AS [samples], 
+    [vw_RawData].[occupancy] AS [occupancy], 
+    [vw_RawData].[volume] AS [volume], 
+    [vw_RawData].[vph] AS [vph]
+    FROM [dbo].[vw_RawData] AS [vw_RawData]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ApplicationUser_ApplicationRole" Association="Self.FK_ApplicationUser_ApplicationRole">
+            <End Role="ApplicationRole" EntitySet="ApplicationRole" />
+            <End Role="ApplicationUser" EntitySet="ApplicationUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Jacobs_PlayPenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ApplicationRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ApplicationUsers" Relationship="Self.FK_ApplicationUser_ApplicationRole" FromRole="ApplicationRole" ToRole="ApplicationUser" />
+        </EntityType>
+        <EntityType Name="ApplicationUser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="domainName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApplicationRole" Relationship="Self.FK_ApplicationUser_ApplicationRole" FromRole="ApplicationUser" ToRole="ApplicationRole" />
+        </EntityType>
+        <EntityType Name="CorridorDetector">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="corridorId" Type="Int32" Nullable="false" />
+          <Property Name="detectorId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Corridor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+        </EntityType>
+        <EntityType Name="detector_AvgByLane">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="lane" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="avg_speed" Type="Int32" />
+          <Property Name="avg_volume" Type="Int32" />
+          <Property Name="avg_ADT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="detector_AvgHourlySpeed">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="avg_speed" Type="Int32" />
+          <Property Name="hour_in_day" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="detector_AvgHourlyThroughput">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="avg_throughput" Type="Int32" />
+          <Property Name="hour_in_day" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="detector_MiscData">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="num_days" Type="Int32" />
+          <Property Name="gp_lane_cnt" Type="Int32" />
+          <Property Name="hov_lane_cnt" Type="Int32" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="detector_Validity">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="error" Type="Int32" />
+          <Property Name="valid" Type="Int32" />
+          <Property Name="total" Type="Decimal" Precision="13" Scale="1" />
+          <Property Name="pct" Type="Decimal" Precision="28" Scale="15" />
+        </EntityType>
+        <EntityType Name="Detector">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="det_num" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="det_num" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Route" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Milepost" Type="Double" />
+          <Property Name="GPS" Type="Boolean" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Length_ft" Type="Double" />
+          <Property Name="y" Type="Double" />
+          <Property Name="x" Type="Double" />
+          <Property Name="Segment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vw_detector_AvgByLane">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="lane" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="avg_speed" Type="Int32" />
+          <Property Name="avg_volume" Type="Int32" />
+          <Property Name="avg_ADT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vw_detector_AvgHourlySpeed">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="avg_speed" Type="Int32" />
+          <Property Name="hour_in_day" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_detector_AvgHourlyThroughput">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="avg_throughput" Type="Int32" />
+          <Property Name="hour_in_day" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_detector_MiscData">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="num_days" Type="Int32" />
+          <Property Name="gp_lane_cnt" Type="Int32" />
+          <Property Name="hov_lane_cnt" Type="Int32" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_detector_Validity">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="error" Type="Int32" />
+          <Property Name="valid" Type="Int32" />
+          <Property Name="total" Type="Decimal" Precision="13" Scale="1" />
+          <Property Name="pct" Type="Decimal" Precision="28" Scale="15" />
+        </EntityType>
+        <EntityType Name="vw_Errors">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="detector_number" Type="Int32" />
+          <Property Name="collected" Type="DateTime" Precision="0" />
+          <Property Name="min_since" Type="Int16" />
+          <Property Name="speed_error" Type="Boolean" />
+          <Property Name="volume_error" Type="Boolean" />
+          <Property Name="occupancy_error" Type="Boolean" />
+          <Property Name="difference_error" Type="Boolean" />
+          <Property Name="zeros_error" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="vw_ExistingLanes">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="lane1" Type="Int32" />
+          <Property Name="lane2" Type="Int32" />
+          <Property Name="lane3" Type="Int32" />
+          <Property Name="lane4" Type="Int32" />
+          <Property Name="lane5" Type="Int32" />
+          <Property Name="lane6" Type="Int32" />
+          <Property Name="lane7" Type="Int32" />
+          <Property Name="lane8" Type="Int32" />
+          <Property Name="lane9" Type="Int32" />
+          <Property Name="lane10" Type="Int32" />
+          <Property Name="HOV" Type="Int32" />
+          <Property Name="HOV2" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vw_LaneErrors">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="collected" Type="DateTime" Precision="0" />
+          <Property Name="min_since" Type="Int16" />
+          <Property Name="lane1" Type="Int16" />
+          <Property Name="lane2" Type="Int16" />
+          <Property Name="lane3" Type="Int16" />
+          <Property Name="lane4" Type="Int16" />
+          <Property Name="lane5" Type="Int16" />
+          <Property Name="lane6" Type="Int16" />
+          <Property Name="lane7" Type="Int16" />
+          <Property Name="lane8" Type="Int16" />
+          <Property Name="lane9" Type="Int16" />
+          <Property Name="lane10" Type="Int16" />
+          <Property Name="HOV" Type="Int16" />
+          <Property Name="HOV2" Type="Int16" />
+        </EntityType>
+        <EntityType Name="vw_RawData">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="collected" Type="DateTime" Precision="0" />
+          <Property Name="min_since" Type="Int16" />
+          <Property Name="lane" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="speed" Type="Int16" />
+          <Property Name="samples" Type="Int16" />
+          <Property Name="occupancy" Type="Int16" />
+          <Property Name="volume" Type="Int16" />
+          <Property Name="vph" Type="Int16" />
+        </EntityType>
+        <Association Name="FK_ApplicationUser_ApplicationRole">
+          <End Role="ApplicationRole" Type="Self.ApplicationRole" Multiplicity="1" />
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationRole">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ApplicationUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Jacobs_PlayPenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ApplicationRoles" EntityType="Self.ApplicationRole" />
+          <EntitySet Name="ApplicationUsers" EntityType="Self.ApplicationUser" />
+          <EntitySet Name="CorridorDetectors" EntityType="Self.CorridorDetector" />
+          <EntitySet Name="Corridors" EntityType="Self.Corridor" />
+          <EntitySet Name="detector_AvgByLane" EntityType="Self.detector_AvgByLane" />
+          <EntitySet Name="detector_AvgHourlySpeed" EntityType="Self.detector_AvgHourlySpeed" />
+          <EntitySet Name="detector_AvgHourlyThroughput" EntityType="Self.detector_AvgHourlyThroughput" />
+          <EntitySet Name="detector_MiscData" EntityType="Self.detector_MiscData" />
+          <EntitySet Name="detector_Validity" EntityType="Self.detector_Validity" />
+          <EntitySet Name="Detectors" EntityType="Self.Detector" />
+          <EntitySet Name="vw_detector_AvgByLane" EntityType="Self.vw_detector_AvgByLane" />
+          <EntitySet Name="vw_detector_AvgHourlySpeed" EntityType="Self.vw_detector_AvgHourlySpeed" />
+          <EntitySet Name="vw_detector_AvgHourlyThroughput" EntityType="Self.vw_detector_AvgHourlyThroughput" />
+          <EntitySet Name="vw_detector_MiscData" EntityType="Self.vw_detector_MiscData" />
+          <EntitySet Name="vw_detector_Validity" EntityType="Self.vw_detector_Validity" />
+          <EntitySet Name="vw_Errors" EntityType="Self.vw_Errors" />
+          <EntitySet Name="vw_ExistingLanes" EntityType="Self.vw_ExistingLanes" />
+          <EntitySet Name="vw_LaneErrors" EntityType="Self.vw_LaneErrors" />
+          <EntitySet Name="vw_RawData" EntityType="Self.vw_RawData" />
+          <AssociationSet Name="FK_ApplicationUser_ApplicationRole" Association="Self.FK_ApplicationUser_ApplicationRole">
+            <End Role="ApplicationRole" EntitySet="ApplicationRoles" />
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+          </AssociationSet>
+          <EntitySet Name="detector_AvgAnnualVolumeByLane" EntityType="Jacobs_PlayPenModel.detector_AvgAnnualVolumeByLane" />
+        </EntityContainer>
+        <EntityType Name="detector_AvgAnnualVolumeByLane">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="lane" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="avg_annual_daily_traffic" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Jacobs_PlayPenModelStoreContainer" CdmEntityContainer="Jacobs_PlayPenEntities">
+          <EntitySetMapping Name="ApplicationRoles">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.ApplicationRole">
+              <MappingFragment StoreEntitySet="ApplicationRole">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationUsers">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.ApplicationUser">
+              <MappingFragment StoreEntitySet="ApplicationUser">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="domainName" ColumnName="domainName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CorridorDetectors">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.CorridorDetector">
+              <MappingFragment StoreEntitySet="CorridorDetector">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="corridorId" ColumnName="corridorId" />
+                <ScalarProperty Name="detectorId" ColumnName="detectorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Corridors">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.Corridor">
+              <MappingFragment StoreEntitySet="Corridors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detector_AvgByLane">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_AvgByLane">
+              <MappingFragment StoreEntitySet="detector_AvgByLane">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="lane" ColumnName="lane" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="avg_speed" ColumnName="avg_speed" />
+                <ScalarProperty Name="avg_volume" ColumnName="avg_volume" />
+                <ScalarProperty Name="avg_ADT" ColumnName="avg_ADT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detector_AvgHourlySpeed">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_AvgHourlySpeed">
+              <MappingFragment StoreEntitySet="detector_AvgHourlySpeed">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="avg_speed" ColumnName="avg_speed" />
+                <ScalarProperty Name="hour_in_day" ColumnName="hour_in_day" />
+                <ScalarProperty Name="lane_type" ColumnName="lane_type" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detector_AvgHourlyThroughput">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_AvgHourlyThroughput">
+              <MappingFragment StoreEntitySet="detector_AvgHourlyThroughput">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="avg_throughput" ColumnName="avg_throughput" />
+                <ScalarProperty Name="hour_in_day" ColumnName="hour_in_day" />
+                <ScalarProperty Name="lane_type" ColumnName="lane_type" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detector_MiscData">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_MiscData">
+              <MappingFragment StoreEntitySet="detector_MiscData">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="num_days" ColumnName="num_days" />
+                <ScalarProperty Name="gp_lane_cnt" ColumnName="gp_lane_cnt" />
+                <ScalarProperty Name="hov_lane_cnt" ColumnName="hov_lane_cnt" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detector_Validity">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_Validity">
+              <MappingFragment StoreEntitySet="detector_Validity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="error" ColumnName="error" />
+                <ScalarProperty Name="valid" ColumnName="valid" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="pct" ColumnName="pct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detectors">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.Detector">
+              <MappingFragment StoreEntitySet="Detectors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="det_num" ColumnName="det_num" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Route" ColumnName="Route" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Milepost" ColumnName="Milepost" />
+                <ScalarProperty Name="GPS" ColumnName="GPS" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Length_ft" ColumnName="Length_ft" />
+                <ScalarProperty Name="y" ColumnName="y" />
+                <ScalarProperty Name="x" ColumnName="x" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_detector_AvgByLane">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_detector_AvgByLane">
+              <MappingFragment StoreEntitySet="vw_detector_AvgByLane">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="lane" ColumnName="lane" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="avg_speed" ColumnName="avg_speed" />
+                <ScalarProperty Name="avg_volume" ColumnName="avg_volume" />
+                <ScalarProperty Name="avg_ADT" ColumnName="avg_ADT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_detector_AvgHourlySpeed">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_detector_AvgHourlySpeed">
+              <MappingFragment StoreEntitySet="vw_detector_AvgHourlySpeed">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="avg_speed" ColumnName="avg_speed" />
+                <ScalarProperty Name="hour_in_day" ColumnName="hour_in_day" />
+                <ScalarProperty Name="lane_type" ColumnName="lane_type" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_detector_AvgHourlyThroughput">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_detector_AvgHourlyThroughput">
+              <MappingFragment StoreEntitySet="vw_detector_AvgHourlyThroughput">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="avg_throughput" ColumnName="avg_throughput" />
+                <ScalarProperty Name="hour_in_day" ColumnName="hour_in_day" />
+                <ScalarProperty Name="lane_type" ColumnName="lane_type" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_detector_MiscData">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_detector_MiscData">
+              <MappingFragment StoreEntitySet="vw_detector_MiscData">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="num_days" ColumnName="num_days" />
+                <ScalarProperty Name="gp_lane_cnt" ColumnName="gp_lane_cnt" />
+                <ScalarProperty Name="hov_lane_cnt" ColumnName="hov_lane_cnt" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_detector_Validity">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_detector_Validity">
+              <MappingFragment StoreEntitySet="vw_detector_Validity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="error" ColumnName="error" />
+                <ScalarProperty Name="valid" ColumnName="valid" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="pct" ColumnName="pct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Errors">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_Errors">
+              <MappingFragment StoreEntitySet="vw_Errors">
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="min_since" ColumnName="min_since" />
+                <ScalarProperty Name="speed_error" ColumnName="speed_error" />
+                <ScalarProperty Name="volume_error" ColumnName="volume_error" />
+                <ScalarProperty Name="occupancy_error" ColumnName="occupancy_error" />
+                <ScalarProperty Name="difference_error" ColumnName="difference_error" />
+                <ScalarProperty Name="zeros_error" ColumnName="zeros_error" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ExistingLanes">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_ExistingLanes">
+              <MappingFragment StoreEntitySet="vw_ExistingLanes">
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="lane1" ColumnName="lane1" />
+                <ScalarProperty Name="lane2" ColumnName="lane2" />
+                <ScalarProperty Name="lane3" ColumnName="lane3" />
+                <ScalarProperty Name="lane4" ColumnName="lane4" />
+                <ScalarProperty Name="lane5" ColumnName="lane5" />
+                <ScalarProperty Name="lane6" ColumnName="lane6" />
+                <ScalarProperty Name="lane7" ColumnName="lane7" />
+                <ScalarProperty Name="lane8" ColumnName="lane8" />
+                <ScalarProperty Name="lane9" ColumnName="lane9" />
+                <ScalarProperty Name="lane10" ColumnName="lane10" />
+                <ScalarProperty Name="HOV" ColumnName="HOV" />
+                <ScalarProperty Name="HOV2" ColumnName="HOV2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_LaneErrors">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_LaneErrors">
+              <MappingFragment StoreEntitySet="vw_LaneErrors">
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="min_since" ColumnName="min_since" />
+                <ScalarProperty Name="lane1" ColumnName="lane1" />
+                <ScalarProperty Name="lane2" ColumnName="lane2" />
+                <ScalarProperty Name="lane3" ColumnName="lane3" />
+                <ScalarProperty Name="lane4" ColumnName="lane4" />
+                <ScalarProperty Name="lane5" ColumnName="lane5" />
+                <ScalarProperty Name="lane6" ColumnName="lane6" />
+                <ScalarProperty Name="lane7" ColumnName="lane7" />
+                <ScalarProperty Name="lane8" ColumnName="lane8" />
+                <ScalarProperty Name="lane9" ColumnName="lane9" />
+                <ScalarProperty Name="lane10" ColumnName="lane10" />
+                <ScalarProperty Name="HOV" ColumnName="HOV" />
+                <ScalarProperty Name="HOV2" ColumnName="HOV2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_RawData">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_RawData">
+              <MappingFragment StoreEntitySet="vw_RawData">
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="min_since" ColumnName="min_since" />
+                <ScalarProperty Name="lane" ColumnName="lane" />
+                <ScalarProperty Name="speed" ColumnName="speed" />
+                <ScalarProperty Name="samples" ColumnName="samples" />
+                <ScalarProperty Name="occupancy" ColumnName="occupancy" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="vph" ColumnName="vph" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detector_AvgAnnualVolumeByLane">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_AvgAnnualVolumeByLane">
+              <MappingFragment StoreEntitySet="detector_AvgAnnualVolumeByLane">
+                <ScalarProperty Name="avg_annual_daily_traffic" ColumnName="avg_annual_daily_traffic" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="lane" ColumnName="lane" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

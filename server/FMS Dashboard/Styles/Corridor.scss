@@ -1,0 +1,14 @@
+﻿.AddCorridorBtn {
+  background-color: rgb(43, 170, 177);
+  border: none;
+  display: none;
+
+  a {
+    color: white !important;
+  }
+
+  &:hover {
+    background-color: lighten(rgb(43, 170, 177), 10%);
+    text-decoration: underline;
+  }
+}

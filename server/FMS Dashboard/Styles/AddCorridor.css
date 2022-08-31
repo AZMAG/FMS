@@ -1,0 +1,56 @@
+#addCorridor-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 70vh;
+  margin-top: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#addCorridor-container form {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+#addCorridor-container form .nodata {
+  padding: 10px;
+}
+
+#addCorridor-container #detCnt {
+  margin-left: 3px;
+}
+
+#addCorridor-container #viewDiv {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  margin-left: 2%;
+}
+
+#addCorridor-container #detectorsGrid {
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+#addCorridor-container #detectorsGrid .k-grid-Remove {
+  font-size: 11.5px;
+}
+
+#addCorridor-container #detectorsGrid.valid {
+  border: 1px solid green;
+}
+
+#addCorridor-container #detectorsGrid.invalid {
+  border: 1px solid red;
+}
+
+#addCorridor-container #gridInvalid {
+  display: none;
+  margin-bottom: 10px;
+}
+
+#addCorridor-container #addCorridorSubmitBtn:disabled {
+  cursor: not-allowed;
+}

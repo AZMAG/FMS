@@ -1,0 +1,68 @@
+﻿@model FMS_Dashboard.Controllers.QueryBuilderFormData
+
+@{
+    ViewBag.Title = "Query Builder";
+}
+<script src="https://js.arcgis.com/4.15/"></script>
+<script src="~/Scripts/map.js"></script>
+<script src="~/Scripts/detectorsAnalysisBuilder.js"></script>
+<script src="~/Scripts/qbReport.js"></script>
+<link href="~/Styles/QueryBuilderResult.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@("@")fortawesome/fontawesome-free@5.6.3/css/all.min.css" />
+
+<div class="black-banner">@ViewBag.Title</div>
+<div class="container">
+    <div class="main">
+        <div id="leftPanel">
+            <h5>Query Builder Report</h5>
+            @{
+                if (Model.corridor_id > 0)
+                {
+                    <text>Selected Corridor</text>
+                    @Html.DisplayFor(x => x.corridor_id);
+                }
+                if (Model.det_num > 0)
+                {
+                    <text>
+                        <h6>Selected Detector: <b>@Html.DisplayFor(x => x.det_num)</b></h6>
+                        <h6>Location: <b>@Html.DisplayFor(x => x.detector.Location)</b></h6>
+                        <h6>Type: <b>@Html.DisplayFor(x => x.detector.Type)</b></h6>
+                        <h6>Route: <b>@Html.DisplayFor(x => x.detector.Route)</b></h6>
+                        <h6>Direction: <b>@Html.DisplayFor(x => x.detector.Direction)</b></h6>
+                        <h6>Milepost: <b>@Html.DisplayFor(x => x.detector.Milepost)</b></h6>
+                    </text>
+
+                }
+            }
+        </div>
+        <div id="viewDiv"></div>
+    </div>
+    <div class="row">
+        <div class="col-6" id="period1AnalysisContainer">
+            <h5>
+                @{
+                    if (Model.year1 != null)
+                    {
+                        @Html.DisplayFor(x => x.year1);
+                    }
+                }
+            </h5>
+            <div id="period1AnalysisTarget"></div>
+        </div>
+        <div class="col-6" id="period2AnalysisContainer">
+            <h5>
+                @{
+                    if (Model.year2 != null)
+                    {
+                        @Html.DisplayFor(x => x.year2);
+                    }
+                }
+            </h5>
+            <div id="period2AnalysisTarget"></div>
+        </div>
+    </div>
+</div>
+<script>
+   var obj= JSON.parse('@Html.Raw(Json.Encode(Model))');
+   init(obj);
+</script>

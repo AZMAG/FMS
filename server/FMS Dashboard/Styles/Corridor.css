@@ -1,0 +1,14 @@
+.AddCorridorBtn {
+  background-color: #2baab1;
+  border: none;
+  display: none;
+}
+
+.AddCorridorBtn a {
+  color: white !important;
+}
+
+.AddCorridorBtn:hover {
+  background-color: #3fc9d0;
+  text-decoration: underline;
+}

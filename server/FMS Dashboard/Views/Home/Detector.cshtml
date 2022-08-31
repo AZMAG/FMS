@@ -1,0 +1,51 @@
+﻿@using FMS_Dashboard.Models;
+@{
+    ViewBag.Title = "Detector";
+    var det_num = ViewBag.det_num;
+}
+
+<link href="~/Styles/Detector.css" rel="stylesheet" />
+<script src="https://js.arcgis.com/4.15/"></script>
+<script src="~/Scripts/map.js"></script>
+<script src="~/Scripts/detectorsAnalysisBuilder.js"></script>
+<script src="~/Scripts/detectors.js"></script>
+
+<div class="black-banner" style="justify-content: space-between;">
+    <span>Detector Number: @det_num</span>
+    <div>
+        <span style="margin-right:15px;">Year:</span>
+        <span id="yearSelector"></span>
+    </div>
+</div>
+<div class="container" id="detector-container">
+    <div class="main">
+        <div id="leftPanel">
+            <h5>Simple Detector Test Report</h5>
+            <hr />
+            <!-- <div id="viewDiv"></div> -->
+        </div>
+        <div id="detectorHeader">
+            <div style="margin-right: 100px;" id="metaData"></div>
+            <div id="errorTable"></div>
+        </div>
+    </div>
+
+    <div id="chartsContainer">
+        <div class="chart-wrap" style="position: relative;">
+            <div id="speedChart"></div>
+            <div class="chart-loading"></div>
+        </div>
+        <div class="chart-wrap" style="position: relative;">
+            <div id="throughputChart"></div>
+            <div class="chart-loading"></div>
+        </div>
+    </div>
+    <div id="AALChart"></div>
+    <div id="AHAOPChart"></div>
+    <div id="DDPQCCDChart"></div>
+    <br />
+    <div id="DDPQCCWDChart"></div>
+    <br />
+    <br />
+
+</div>
