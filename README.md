@@ -1,4 +1,5 @@
-![](http://geo.azmag.gov/maps/readonaz/app/resources/img/maglogo_black.png)
+![](http://geo.azmag.gov/maps/images/maglogo_black.png)
+![](http://geo.azmag.gov/maps/images/fms-logo.png)
 
 # FMS
 
