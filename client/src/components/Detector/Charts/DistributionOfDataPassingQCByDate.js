@@ -34,12 +34,15 @@ export default function DistributionOfDataPassingQCByDate({ det_num }) {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get('http://magdevarcgis/fmsDetector/GetErrors', {
-        params: {
-          det_num: 50,
-          year: '2021',
-        },
-      });
+      const res = await axios.get(
+        'http://magdevarcgis/fms/Detector/GetErrors',
+        {
+          params: {
+            det_num: 50,
+            year: '2021',
+          },
+        }
+      );
       let _data = res.data.map((item) => {
         item.date = new Date(parseInt(item.collected.replace(/[^0-9 +]/g, '')));
         return item;

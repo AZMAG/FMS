@@ -26,7 +26,7 @@ export default function ErrorTable({ det_num }) {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        'http://magdevarcgis/fmsDetector/GetErrorData',
+        'http://magdevarcgis/fms/Detector/GetErrorData',
         {
           params: {
             det_num: 50,

@@ -24,7 +24,7 @@ export default function MiscDetectorData({ det_num }) {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        'http://magdevarcgis/fmsDetector/GetMiscDetectorData',
+        'http://magdevarcgis/fms/Detector/GetMiscDetectorData',
         {
           params: {
             det_num: 50,
