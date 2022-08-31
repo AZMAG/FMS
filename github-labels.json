@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Mindless: docs",
+    "color": "#FFEAB8"
+  },
+  {
+    "name": "Mindless: documentation",
+    "color": "#FFEAB8"
+  },
+  {
+    "name": "Mindless: structure",
+    "color": "#FFEAB8"
+  },
+  {
+    "name": "Experience: design",
+    "color": "#cef2ac"
+  },
+  {
+    "name": "Experience: database",
+    "color": "#cef2ac"
+  },
+  {
+    "name": "Experience: ux",
+    "color": "#cef2ac"
+  },
+  {
+    "name": "Priority: low",
+    "color": "#0e8a16#FFEAB8"
+  },
+  {
+    "name": "Priority: medium",
+    "color": "#fbca04"
+  },
+  {
+    "name": "Priority: high",
+    "color": "#ee4035"
+  },
+  {
+    "name": "Priority: critical",
+    "color": "#cc2a36"
+  },
+  {
+    "name": "Status: blocked",
+    "color": "#ee4035"
+  },
+  {
+    "name": "Status: completed",
+    "color": "#7ED321"
+  },
+  {
+    "name": "Status: duplicate",
+    "color": "#cccccc"
+  },
+  {
+    "name": "Status: in-progress",
+    "color": "#1d76db"
+  },
+  {
+    "name": "Status: inactive",
+    "color": "#cccccc"
+  },
+  {
+    "name": "Status: on-hold",
+    "color": "#ee9d35"
+  },
+  {
+    "name": "Status: review-needed",
+    "color": "#fbca04"
+  },
+  {
+    "name": "Status: wont-fix",
+    "color": "#cccccc"
+  },
+  {
+    "name": "Status: by-design",
+    "color": "#3865a3"
+  },
+  {
+    "name": "Status: cant-reproduce",
+    "color": "#cccccc"
+  },
+  {
+    "name": "Type: bug",
+    "color": "#b60205"
+  },
+  {
+    "name": "Type: discussion",
+    "color": "#c495f0"
+  },
+  {
+    "name": "Type: enhancement",
+    "color": "#1c82b4"
+  },
+  {
+    "name": "Type: feature",
+    "color": "#00FF00"
+  },
+  {
+    "name": "Type: fix",
+    "color": "#88d263"
+  },
+  {
+    "name": "Type: help-needed",
+    "color": "#5319e7"
+  },
+  {
+    "name": "Type: idea",
+    "color": "#6DE6FF"
+  },
+  {
+    "name": "Type: maintenance",
+    "color": "#FFA500"
+  },
+  {
+    "name": "Type: optimization",
+    "color": "#1c82b4"
+  },
+  {
+    "name": "Type: testing",
+    "color": "#fbca04"
+  }
+]
