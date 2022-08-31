@@ -6,9 +6,9 @@
 MAG's Internal Website for viewing Freeway Management System data.
 
 [![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)]()
-[![GitHub release](https://img.shields.io/github/release/AZMAG/FMS.svgstyle=flat-square)](https://github.com/AZMAG/FMS)
-[![GitHub version](https://badge.fury.io/gh/AZMAG/FMS.svgstyle=flat-square)](https://badge.fury.io/gh/AZMAG/FMS)
-[![GitHub issues](https://img.shields.io/github/issues/AZMAG/FMS.svgstyle=flat-square)](https://github.com/AZMAG/FMS)
+[![GitHub release](https://img.shields.io/github/release/AZMAG/FMS.svg?style=flat-square)](https://github.com/AZMAG/FMS)
+[![GitHub version](https://badge.fury.io/gh/AZMAG/FMS.svg?style=flat-square)](https://badge.fury.io/gh/AZMAG/FMS)
+[![GitHub issues](https://img.shields.io/github/issues/AZMAG/FMS.svg?style=flat-square)](https://github.com/AZMAG/FMS)
 ![semver](https://img.shields.io/badge/semver-2.0.0-blue?style=flat-square)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
