@@ -34,7 +34,7 @@ export default function DistributionOfDataPassingQCByWeekday({ det_num }) {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get('http://localhost:56118/Detector/GetErrors', {
+      const res = await axios.get('http://magdevarcgis/fmsDetector/GetErrors', {
         params: {
           det_num: 50,
           year: '2021',
@@ -49,7 +49,7 @@ export default function DistributionOfDataPassingQCByWeekday({ det_num }) {
       var startDate = new Date('2018-01-01');
       var endDate = new Date('2018-12-31');
 
-      var getDateArray = function(start, end) {
+      var getDateArray = function (start, end) {
         var arr = new Array();
         var dt = new Date(start);
         while (dt <= end) {

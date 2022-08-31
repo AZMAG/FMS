@@ -18,7 +18,7 @@ export default function MiscDetectorData({ det_num }) {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        'http://localhost:56118/Detector/AvgHourlyThroughput',
+        'http://magdevarcgis/fmsDetector/AvgHourlyThroughput',
         {
           params: {
             det_num: 50,
