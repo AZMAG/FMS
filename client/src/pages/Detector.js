@@ -19,20 +19,20 @@ export default function Detector() {
             <div className="black-banner my-2 text-lg font-semibold">
                 <span>Detector Number: {id}</span>
             </div>
-            <div className="charts-section">
-                <div className="flex w-1/2">
+            <div className="charts-section mb-20">
+                <div className="flex w-1/2 my-2">
                     {/* <MiscDetectorData det_num={id} /> */}
                     <ErrorTable det_num={id} />
                 </div>
-                <div className="flex">
+                <div className="flex my-2">
                     <AnnualHourlyAverageSpeeds det_num={id} />
                     <AnnualHourlyAverageThroughput det_num={id} />
                 </div>
-                <div className="flex">
+                <div className="flex my-2">
                     <AnnualHourlyAverageOccupancyPercent det_num={id} />
                     <AnnualAverageByLane det_num={id} />
                 </div>
-                <div className="flex">
+                <div className="flex my-2">
                     <DistributionOfDataPassingQCByDate det_num={id} />
                     <DistributionOfDataPassingQCByWeekday det_num={id} />
                 </div>

@@ -114,7 +114,10 @@ export default function DistributionOfDataPassingQCByDate({ det_num }) {
             {series.length > 0 ? (
                 <div>
                     <Chart>
-                        <ChartTitle text="Distibution of Data Passing Quality Control Criteria by Date" />
+                        <ChartTitle
+                            text="Distribution of Data Passing Quality Control Criteria by Date"
+                            font="bold 14pt Arial sans-serif"
+                        />
                         <ChartValueAxis>
                             <ChartValueAxisItem
                                 title={{
@@ -135,6 +138,7 @@ export default function DistributionOfDataPassingQCByDate({ det_num }) {
                                     visible: true,
                                 }}
                                 categories={dateLabels}
+                                majorGridLines={{ visible: false }}
                             />
                         </ChartCategoryAxis>
                         <ChartSeries>
