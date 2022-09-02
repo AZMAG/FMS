@@ -32,24 +32,27 @@ export default function LineChart({
         <div className="flex-1 mr-3">
             {series.length > 0 ? (
                 <Chart>
-                    <ChartArea background="#f5f6f9" />
+                    <ChartArea background="" />
                     <ChartLegend position="bottom" orientation="horizontal" />
-                    <ChartTitle text={title} />
+                    <ChartTitle
+                        text={title}
+                        font="bold 14pt Arial sans-serif"
+                    />
                     <ChartValueAxis>
                         <ChartValueAxisItem
                             title={{
                                 text: catTitle,
-                                // font,
+                                font: "bold 12px Arial, sans-serif",
                             }}
                         />
                     </ChartValueAxis>
                     <ChartCategoryAxis>
                         <ChartCategoryAxisItem
-                            // labels={{
-                            //     // format: "d",
-                            //     rotation: "auto",
-                            //     font,
-                            // }}
+                            labels={{
+                                format: "d",
+                                rotation: "auto",
+                                font,
+                            }}
                             categories={labels}
                             maxDivisions={8}
                             plotBands={[
@@ -71,7 +74,7 @@ export default function LineChart({
                             <ChartSeriesItem
                                 key={i}
                                 field={field}
-                                type="column"
+                                type="line"
                                 name={series.name}
                                 color={chartColors[i]}
                                 dashType={series.dashType}

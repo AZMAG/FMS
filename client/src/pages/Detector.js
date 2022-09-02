@@ -16,11 +16,11 @@ export default function Detector() {
     const id = 50;
     return (
         <div className="detector-page flex flex-col container mx-auto">
-            <div className="black-banner">
+            <div className="black-banner my-2 text-lg font-semibold">
                 <span>Detector Number: {id}</span>
             </div>
             <div className="charts-section">
-                <div className="flex">
+                <div className="flex w-1/2">
                     {/* <MiscDetectorData det_num={id} /> */}
                     <ErrorTable det_num={id} />
                 </div>

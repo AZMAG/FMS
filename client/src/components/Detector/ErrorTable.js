@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
+import "./detector.css";
 
 axios.defaults.withCredentials = true;
 
@@ -40,11 +41,13 @@ export default function ErrorTable({ det_num }) {
     return (
         <>
             {data ? (
-                <Table striped bordered hover>
+                <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
                             {columns.map((column, i) => (
-                                <th key={i}>{column.title}</th>
+                                <th key={i} className={column.title}>
+                                    {column.title}
+                                </th>
                             ))}
                         </tr>
                     </thead>
@@ -52,7 +55,7 @@ export default function ErrorTable({ det_num }) {
                         {data.map((row, i) => (
                             <tr key={i}>
                                 {columns.map((column, i) => (
-                                    <td key={i}>
+                                    <td key={i} className={column.title}>
                                         {column.format
                                             ? column.format(row[column.field])
                                             : row[column.field]}

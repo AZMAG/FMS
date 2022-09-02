@@ -1,4 +1,7 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@arcgis/core/assets/esri/themes/dark/main.css";
+import "@progress/kendo-theme-default/dist/all.css";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/Home";
 import DetectorPage from "./pages/Detector";
