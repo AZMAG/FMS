@@ -27,6 +27,7 @@ export default function LineChart({
     valueTitle,
     labels,
 }) {
+    console.log(series);
     return (
         <div className="flex-1 mr-3">
             {series.length > 0 ? (
@@ -38,17 +39,17 @@ export default function LineChart({
                         <ChartValueAxisItem
                             title={{
                                 text: catTitle,
-                                font,
+                                // font,
                             }}
                         />
                     </ChartValueAxis>
                     <ChartCategoryAxis>
                         <ChartCategoryAxisItem
-                            labels={{
-                                format: "d",
-                                rotation: "auto",
-                                font,
-                            }}
+                            // labels={{
+                            //     // format: "d",
+                            //     rotation: "auto",
+                            //     font,
+                            // }}
                             categories={labels}
                             maxDivisions={8}
                             plotBands={[
@@ -70,7 +71,7 @@ export default function LineChart({
                             <ChartSeriesItem
                                 key={i}
                                 field={field}
-                                type="line"
+                                type="column"
                                 name={series.name}
                                 color={chartColors[i]}
                                 dashType={series.dashType}
