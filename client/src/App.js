@@ -1,24 +1,27 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import HomePage from './pages/Home';
-import DetectorPage from './pages/Detector';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-import { DataProvider } from './stores/DataContext';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@arcgis/core/assets/esri/themes/dark/main.css";
+import "@progress/kendo-theme-default/dist/all.css";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/Home";
+import DetectorPage from "./pages/Detector";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { DataProvider } from "./stores/DataContext";
 
 function App() {
-  return (
-    <div className="w-full h-screen">
-      <DataProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="detector/:id" element={<DetectorPage />} />
-            <Route exact path="/" element={<HomePage />} />
-          </Routes>
-        </Router>
-      </DataProvider>
-    </div>
-  );
+    return (
+        <div className="w-full h-screen">
+            <DataProvider>
+                <Router>
+                    <Navbar />
+                    <Routes>
+                        <Route path="detector/:id" element={<DetectorPage />} />
+                        <Route exact path="/" element={<HomePage />} />
+                    </Routes>
+                </Router>
+            </DataProvider>
+        </div>
+    );
 }
 
 export default App;
