@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 export default function DetectorDefinition() {
     return (
         <Container className="bg-[#eeeeee] text-sm">
-            <h3>Definition of Error Flag Criteria*</h3>
+            <h4>Definition of Error Flag Criteria*</h4>
             <p>
                 Note: All criteria are applied to individual 5-minute data rows.
             </p>
