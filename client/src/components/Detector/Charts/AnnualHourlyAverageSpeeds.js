@@ -11,7 +11,7 @@ import LineChart from "./LineChart";
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num }) {
-    const [data, setData] = useState(null);
+    const [setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
@@ -38,7 +38,7 @@ export default function MiscDetectorData({ det_num }) {
             setSeries(_series);
             setDateLabels(_dateLabels);
         })();
-    }, [det_num]);
+    }, [det_num, setData, setSeries, setDateLabels]);
     console.log(series);
     return (
         <LineChart

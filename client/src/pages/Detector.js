@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useParams } from "react-router-dom";
-import { Container } from "react-bootstrap";
+// import { useParams } from "react-router-dom";
+// import { Container } from "react-bootstrap";
 import MiscDetectorData from "./../components/Detector/MiscDetectorData";
 import ErrorTable from "./../components/Detector/ErrorTable";
 
@@ -21,7 +21,7 @@ export default function Detector() {
             </div>
             <div className="charts-section mb-20">
                 <div className="flex w-1/2 my-2">
-                    {/* <MiscDetectorData det_num={id} /> */}
+                    <MiscDetectorData det_num={id} />
                     <ErrorTable det_num={id} />
                 </div>
                 <div className="flex my-2">

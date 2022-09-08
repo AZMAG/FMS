@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-    getTimeLabels,
-    getMultipleSeriesByField,
-    sortTimeData,
-} from "./chartDataHelpers";
+// import {
+//     getTimeLabels,
+//     getMultipleSeriesByField,
+//     sortTimeData,
+// } from "./chartDataHelpers";
 
-import LineChart from "./LineChart";
+// import LineChart from "./LineChart";
 
 import {
     Chart,
@@ -17,19 +17,18 @@ import {
     ChartValueAxisItem,
     ChartCategoryAxis,
     ChartCategoryAxisItem,
-    ChartLegend,
-    ChartSeriesItemTooltip,
-    ChartCategoryAxisLabels,
+    // ChartLegend,
+    // ChartSeriesItemTooltip,
+    // ChartCategoryAxisLabels,
 } from "@progress/kendo-react-charts";
-import "hammerjs";
 
 axios.defaults.withCredentials = true;
 
-const chartColors = ["red", "blue", "green"];
+// const chartColors = ["red", "blue", "green"];
 const font = `bold 12px "Avenir Next W00", "Helvetica Neue", Helvetica, Arial, sans-serif`;
 
 export default function DistributionOfDataPassingQCByWeekday({ det_num }) {
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
@@ -56,7 +55,7 @@ export default function DistributionOfDataPassingQCByWeekday({ det_num }) {
             var endDate = new Date("2018-12-31");
 
             var getDateArray = function (start, end) {
-                var arr = new Array();
+                var arr = [];
                 var dt = new Date(start);
                 while (dt <= end) {
                     const totalDailyErrors = _data.filter((item) => {

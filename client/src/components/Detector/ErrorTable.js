@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table } from "react-bootstrap";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+
 import "./detector.css";
 
 axios.defaults.withCredentials = true;
@@ -41,29 +46,29 @@ export default function ErrorTable({ det_num }) {
     return (
         <>
             {data ? (
-                <Table striped bordered hover size="sm">
-                    <thead>
-                        <tr>
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
                             {columns.map((column, i) => (
-                                <th key={i} className={column.title}>
+                                <TableCell key={i} className={column.title}>
                                     {column.title}
-                                </th>
+                                </TableCell>
                             ))}
-                        </tr>
-                    </thead>
-                    <tbody>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {data.map((row, i) => (
-                            <tr key={i}>
+                            <TableRow key={i}>
                                 {columns.map((column, i) => (
-                                    <td key={i} className={column.title}>
+                                    <TableCell key={i} className={column.title}>
                                         {column.format
                                             ? column.format(row[column.field])
                                             : row[column.field]}
-                                    </td>
+                                    </TableCell>
                                 ))}
-                            </tr>
+                            </TableRow>
                         ))}
-                    </tbody>
+                    </TableBody>
                 </Table>
             ) : (
                 <>Loading</>
