@@ -1,6 +1,12 @@
-th.Total,
-th.Percentage,
-td.Total,
-td.Percentage {
+th.total,
+th.ampeak,
+th.mid-daypeak,
+th.pmpeak,
+th.night,
+td.total,
+td.ampeak,
+td.mid-daypeak,
+td.pmpeak,
+td.night {
     text-align: center;
 }
