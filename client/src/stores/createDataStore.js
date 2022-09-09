@@ -31,16 +31,22 @@ export function createDataStore() {
             this.updateDetectorDefinitionExpression();
         },
         updateDetectorDefinitionExpression() {
-            const validityClause = `Validity${this.selectedYear} is not null`;
+            const terms = [`Validity${this.selectedYear} is not null`];
 
-            if (this.selectedRoute === "All") {
-                this.detectorsLayer.definitionExpression = validityClause;
-            } else {
-                console.log(
-                    `${validityClause} AND Route = '${this.selectedRoute}'`
-                );
-                this.detectorsLayer.definitionExpression = `${validityClause} AND Route = '${this.selectedRoute}'`;
+            if (this.selectedRoute !== "All") {
+                terms.push(`Route = '${this.selectedRoute}'`);
             }
+
+            if (this.selectedDirection !== "All") {
+                terms.push(`Direction = '${this.selectedDirection}'`);
+            }
+            const defExpression = terms.join(" AND ");
+            this.detectorsLayer.definitionExpression = defExpression;
+        },
+        selectedDirection: "All",
+        setSelectedDirection(dir) {
+            this.selectedDirection = dir;
+            this.updateDetectorDefinitionExpression();
         },
         mapLoaded: false,
     });

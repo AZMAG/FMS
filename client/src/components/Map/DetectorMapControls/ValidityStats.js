@@ -17,43 +17,38 @@ function ValidityStats() {
     const [cats, setCats] = React.useState([]);
 
     React.useEffect(() => {
-        if (store.detectorsLayer) {
-            const detectorsWithData = store.detectorsLayer.source.filter(
-                (feature) => {
-                    const hasValidity =
-                        feature.attributes["Validity" + store.selectedYear] !==
-                        null;
-
-                    if (store.selectedRoute !== "All") {
-                        return (
-                            feature.attributes["Route"] ===
-                                store.selectedRoute && hasValidity
-                        );
+        (async () => {
+            if (store.detectorsLayer) {
+                const res = await store.detectorsLayer.queryFeatures();
+                setNumDets(res.features.length);
+                const _catsObj = {};
+                res.features.forEach((feature) => {
+                    const validity =
+                        feature.attributes["Validity" + store.selectedYear];
+                    let numIterations = 0;
+                    for (let i = 0; i < 1; i += 0.2) {
+                        let next = i + 0.2;
+                        if (validity >= i && validity < next) {
+                            _catsObj[numIterations] =
+                                _catsObj[numIterations] || 0;
+                            _catsObj[numIterations]++;
+                        }
+                        numIterations++;
                     }
-                    return hasValidity;
-                }
-            );
-            setNumDets(detectorsWithData.length);
-            const _catsObj = {};
-            detectorsWithData.forEach((feature) => {
-                const validity =
-                    feature.attributes["Validity" + store.selectedYear];
-                let numIterations = 0;
-                for (let i = 0; i < 1; i += 0.2) {
-                    let next = i + 0.2;
-                    if (validity >= i && validity < next) {
-                        _catsObj[numIterations] = _catsObj[numIterations] || 0;
-                        _catsObj[numIterations]++;
-                    }
-                    numIterations++;
-                }
-            });
-            const _catsArr = Object.keys(_catsObj).map((key) => {
-                return { name: categoryLookup[key], count: _catsObj[key] };
-            });
-            setCats(_catsArr);
-        }
-    }, [store, store.detectorsLayer, store.selectedYear, store.selectedRoute]);
+                });
+                const _catsArr = Object.keys(_catsObj).map((key) => {
+                    return { name: categoryLookup[key], count: _catsObj[key] };
+                });
+                setCats(_catsArr);
+            }
+        })();
+    }, [
+        store,
+        store.detectorsLayer,
+        store.selectedYear,
+        store.selectedRoute,
+        store.selectedDirection,
+    ]);
 
     return (
         <div className="mt-2">

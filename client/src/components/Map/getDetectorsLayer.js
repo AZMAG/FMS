@@ -74,7 +74,6 @@ async function getDetectorsLayer() {
                     row[`Validity${year}`] = null;
                 }
             });
-            console.log(row);
             return row;
         });
     }

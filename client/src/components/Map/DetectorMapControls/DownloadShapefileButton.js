@@ -1,31 +1,73 @@
 import React from "react";
 import { useDataStore } from "../../../stores/DataContext";
 import { observer } from "mobx-react-lite";
+import shpwrite from "shp-write";
 
 function DownloadShapefileButton() {
     const store = useDataStore();
 
-    function downloadShapefile() {
-        const geoJSONFeatures = store.detectorsLayer.source.items.map(
-            (feature) => {
-                return {
-                    type: "Feature",
-                    geometry: {
-                        type: "Point",
-                        coordinates: [
-                            feature.attributes.y,
-                            feature.attributes.x,
-                        ],
+    async function downloadShapefile() {
+        const { features } = await store.detectorsLayer.queryFeatures();
+        const geoJSONFeatures = features.map((feature) => {
+            return {
+                type: "Feature",
+                geometry: {
+                    type: "Point",
+                    coordinates: [feature.geometry.y, feature.geometry.x],
+                },
+                properties: {
+                    // ...feature.attributes,
+                    // x: feature.geometry.x,
+                    // y: feature.geometry.y,
+                    test: "test",
+                },
+            };
+        });
+
+        var options = {
+            folder: "myshapes",
+            types: {
+                point: "mypoints",
+                polygon: "mypolygons",
+                line: "mylines",
+            },
+        };
+        // a GeoJSON bridge for features
+        shpwrite.download(
+            {
+                type: "FeatureCollection",
+                features: [
+                    {
+                        type: "Feature",
+                        geometry: {
+                            type: "Point",
+                            coordinates: [0, 0],
+                        },
+                        properties: {
+                            name: "Foo",
+                        },
                     },
-                    properties: feature.attributes,
-                };
-            }
+                    {
+                        type: "Feature",
+                        geometry: {
+                            type: "Point",
+                            coordinates: [0, 10],
+                        },
+                        properties: {
+                            name: "Bar",
+                        },
+                    },
+                ],
+            },
+            options
         );
 
-        window.shpwrite.download({
-            type: "FeatureCollection",
-            features: geoJSONFeatures,
-        });
+        // console.log(window.shpwrite);
+
+        // window.shpwrite.download({
+        //     type: "FeatureCollection",
+        //     features: geoJSONFeatures,
+        // });
     }
     return (
         <button
