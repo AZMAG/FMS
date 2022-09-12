@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 import { Card, ListGroup } from "react-bootstrap";
+
 
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num }) {
     const [data, setData] = useState(null);
+
     // console.log(data);
     const dataItems = [
         {
@@ -18,10 +21,7 @@ export default function MiscDetectorData({ det_num }) {
             label: "Number of Days in Dataset",
         },
         {
-            field: "",
-            label: "Number of Qualified Weekdays in the Data",
-        },
-        {
+
             field: "gp_lane_cnt",
             label: "General Purpose Lanes",
         },

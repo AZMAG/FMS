@@ -1,7 +1,9 @@
 import React from "react";
 
+
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+
 import MiscDetectorData from "./../components/Detector/MiscDetectorData";
 import ErrorTable from "./../components/Detector/ErrorTable";
 import DetectorNotes from "./../components/Detector/detectorNotes";
@@ -18,6 +20,7 @@ export default function Detector() {
     const id = 50;
 
     return (
+
         <Container className="detector-page flex flex-col space-y-6 mt-4">
             <Row>
                 <Col xs={4}>

@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 
 import ArcGISMap from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
-import { whenFalseOnce } from "@arcgis/core/core/reactiveUtils";
+
 import { useDataStore } from "../../stores/DataContext";
 
 import getDetectorsLayer from "./getDetectorsLayer";
