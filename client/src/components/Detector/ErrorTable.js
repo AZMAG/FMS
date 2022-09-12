@@ -12,20 +12,36 @@ axios.defaults.withCredentials = true;
 
 export default function ErrorTable({ det_num }) {
     const [data, setData] = useState(null);
+    // console.log(data);
     const columns = [
         {
             field: "label",
             title: "Error Type",
         },
         {
+            field: "pct",
+            format: (num) => Math.round(num * 10000) / 100 + " %",
+            title: "AM Peak",
+        },
+        {
+            field: "",
+            format: (num) => Math.round(num * 10000) / 100 + " %",
+            title: "Mid-day Peak",
+        },
+        {
+            field: "",
+            format: (num) => Math.round(num * 10000) / 100 + " %",
+            title: "PM Peak",
+        },
+        {
+            field: "",
+            format: (num) => Math.round(num * 10000) / 100 + " %",
+            title: "Night",
+        },
+        {
             field: "value",
             format: (num) => num.toLocaleString(),
             title: "Total",
-        },
-        {
-            field: "pct",
-            format: (num) => Math.round(num * 10000) / 100 + " %",
-            title: "Percentage",
         },
     ];
 
@@ -50,7 +66,9 @@ export default function ErrorTable({ det_num }) {
                     <TableHead>
                         <TableRow>
                             {columns.map((column, i) => (
-                                <TableCell key={i} className={column.title}>
+                                <TableCell key={i} className={column.title
+                                        .replace(/\s/g, "")
+                                        .toLowerCase()}>
                                     {column.title}
                                 </TableCell>
                             ))}

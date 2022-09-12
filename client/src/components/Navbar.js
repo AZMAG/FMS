@@ -2,6 +2,8 @@ import React from "react";
 import logo from "../Logo.png";
 import { useNavigate, useLocation } from "react-router-dom";
 
+
+
 export default function CustomNavbar() {
     const navigate = useNavigate();
     const { pathname } = useLocation();
