@@ -1,7 +1,8 @@
 import React from "react";
 import { useDataStore } from "../../../stores/DataContext";
 import { observer } from "mobx-react-lite";
-import shpwrite from "shp-write";
+import JSZip from "jszip";
+import FileSaver from "file-saver";
 
 function DownloadShapefileButton() {
     const store = useDataStore();
@@ -24,45 +25,22 @@ function DownloadShapefileButton() {
             };
         });
 
-        var options = {
-            folder: "myshapes",
-            types: {
-                point: "mypoints",
-                polygon: "mypolygons",
-                line: "mylines",
-            },
-        };
-        // a GeoJSON bridge for features
-        shpwrite.download(
-            {
-                type: "FeatureCollection",
-                features: [
-                    {
-                        type: "Feature",
-                        geometry: {
-                            type: "Point",
-                            coordinates: [0, 0],
-                        },
-                        properties: {
-                            name: "Foo",
-                        },
-                    },
-                    {
-                        type: "Feature",
-                        geometry: {
-                            type: "Point",
-                            coordinates: [0, 10],
-                        },
-                        properties: {
-                            name: "Bar",
-                        },
-                    },
-                ],
-            },
-            options
+        window.shpwrite.write(
+            [{ test: "test", OID: 1, FID: 1 }],
+            "POINT",
+            [[0, 0]],
+            (err, res) => {
+                const zip = new JSZip();
+                console.log(res);
+                zip.file("output.dbf", res.dbf.buffer);
+                zip.file("output.prj", res.prj);
+                zip.file("output.shp", res.shp.buffer);
+                zip.file("output.shx", res.shx.buffer);
+                zip.generateAsync({ type: "blob" }).then(function (content) {
+                    FileSaver.saveAs(content, "output.zip");
+                });
+            }
         );
-
-        // console.log(window.shpwrite);
 
         // window.shpwrite.download({
         //     type: "FeatureCollection",
