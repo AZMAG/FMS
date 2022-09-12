@@ -9,43 +9,28 @@ function DownloadShapefileButton() {
 
     async function downloadShapefile() {
         const { features } = await store.detectorsLayer.queryFeatures();
-        const geoJSONFeatures = features.map((feature) => {
+        const attrs = features.map((feature) => {
             return {
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [feature.geometry.y, feature.geometry.x],
-                },
-                properties: {
-                    // ...feature.attributes,
-                    // x: feature.geometry.x,
-                    // y: feature.geometry.y,
-                    test: "test",
-                },
+                ...feature.attributes,
+                x: feature.geometry.x,
+                y: feature.geometry.y,
             };
         });
+        const shps = features.map((feature) => [
+            feature.geometry.x,
+            feature.geometry.y,
+        ]);
 
-        window.shpwrite.write(
-            [{ test: "test", OID: 1, FID: 1 }],
-            "POINT",
-            [[0, 0]],
-            (err, res) => {
-                const zip = new JSZip();
-                console.log(res);
-                zip.file("output.dbf", res.dbf.buffer);
-                zip.file("output.prj", res.prj);
-                zip.file("output.shp", res.shp.buffer);
-                zip.file("output.shx", res.shx.buffer);
-                zip.generateAsync({ type: "blob" }).then(function (content) {
-                    FileSaver.saveAs(content, "output.zip");
-                });
-            }
-        );
-
-        // window.shpwrite.download({
-        //     type: "FeatureCollection",
-        //     features: geoJSONFeatures,
-        // });
+        window.shpwrite.write(attrs, "POINT", shps, (err, res) => {
+            const zip = new JSZip();
+            zip.file("output.dbf", res.dbf.buffer);
+            zip.file("output.prj", res.prj);
+            zip.file("output.shp", res.shp.buffer);
+            zip.file("output.shx", res.shx.buffer);
+            zip.generateAsync({ type: "blob" }).then(function (content) {
+                FileSaver.saveAs(content, "output.zip");
+            });
+        });
     }
     return (
         <button
