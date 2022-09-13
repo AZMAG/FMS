@@ -7,7 +7,6 @@ import LineChart from "./LineChart";
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num }) {
-    const [setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
@@ -625,11 +624,10 @@ export default function MiscDetectorData({ det_num }) {
                 },
             ];
 
-            setData(_data);
             setSeries(_series);
             setDateLabels(_dateLabels);
         })();
-    }, [det_num, setData, setSeries, setDateLabels]);
+    }, [det_num, setSeries, setDateLabels]);
     return (
         <LineChart
             field="avg_occ"

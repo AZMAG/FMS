@@ -11,9 +11,8 @@ import LineChart from "./LineChart";
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num }) {
-    const [setData] = useState(null);
     const [series, setSeries] = useState([]);
-    const [setDateLabels] = useState([]);
+    // const [dateLabels, setDateLabels] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -89,12 +88,10 @@ export default function MiscDetectorData({ det_num }) {
                     dashType: "dash",
                 },
             ];
-
-            setData(_data);
             setSeries(_series);
-            setDateLabels(_dateLabels);
+            // setDateLabels(_dateLabels);
         })();
-    }, [det_num, setData, setDateLabels]);
+    }, [det_num]);
     return (
         <LineChart
             field="avg_occ"
