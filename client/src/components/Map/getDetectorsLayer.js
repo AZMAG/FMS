@@ -1,7 +1,6 @@
 import Graphic from "@arcgis/core/Graphic";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
-// import { years } from "../../config";
-import DocConfig from "../../config";
+import DocConfig from "../../DocConfig";
 import getValidityData from "./getValidityData";
 import getDetectors from "./getDetectors";
 
