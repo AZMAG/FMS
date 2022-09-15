@@ -6,10 +6,12 @@ import MapView from "@arcgis/core/views/MapView";
 import { useDataStore } from "../../stores/DataContext";
 
 import getDetectorsLayer from "./getDetectorsLayer";
+import { useNavigate } from "react-router-dom";
 
 function DetectorMap() {
     const mapDiv = useRef(null);
     const store = useDataStore();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (mapDiv.current) {
@@ -53,8 +55,16 @@ function DetectorMap() {
                 store.setMap(_map);
                 store.setView(_view);
             })();
+
+            _view.popup.on("trigger-action", (event) => {
+                if (event.action.id === "open-detector-page") {
+                    const det_num =
+                        _view.popup.selectedFeature.attributes.det_num;
+                    navigate(`/detector/${det_num}`);
+                }
+            });
         }
-    }, [mapDiv, store]);
+    }, [mapDiv, store, navigate]);
 
     return <div className="m-auto h-full w-full" ref={mapDiv}></div>;
 }

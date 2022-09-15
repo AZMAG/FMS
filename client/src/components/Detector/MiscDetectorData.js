@@ -1,35 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Card, ListGroup } from "react-bootstrap";
-
-
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num }) {
     const [data, setData] = useState(null);
 
     // console.log(data);
-    const dataItems = [
-        {
-            field: "detector_number",
-            label: "Detector Station ID",
-        },
-        { field: "year", label: "Analysis Year" },
-        {
-            field: "num_days",
-            label: "Number of Days in Dataset",
-        },
-        {
-
-            field: "gp_lane_cnt",
-            label: "General Purpose Lanes",
-        },
-        {
-            field: "hov_lane_cnt",
-            label: "High-Occupancy Lanes",
-        },
-    ];
+    // const dataItems = [
+    //     {
+    //         field: "detector_number",
+    //         label: "Detector Station ID",
+    //     },
+    //     { field: "year", label: "Analysis Year" },
+    //     {
+    //         field: "num_days",
+    //         label: "Number of Days in Dataset",
+    //     },
+    //     {
+    //         field: "gp_lane_cnt",
+    //         label: "General Purpose Lanes",
+    //     },
+    //     {
+    //         field: "hov_lane_cnt",
+    //         label: "High-Occupancy Lanes",
+    //     },
+    // ];
 
     useEffect(() => {
         (async () => {
@@ -50,7 +46,7 @@ export default function MiscDetectorData({ det_num }) {
         <div>
             {data ? (
                 <div>
-                    <Card style={{ width: "25rem" }}>
+                    {/* <Card style={{ width: "25rem" }}>
                         <Card.Header className="text-lg font-bold">
                             ADOT Detector Info
                         </Card.Header>
@@ -67,7 +63,7 @@ export default function MiscDetectorData({ det_num }) {
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
-                    </Card>
+                    </Card> */}
                 </div>
             ) : (
                 <>Loading</>
