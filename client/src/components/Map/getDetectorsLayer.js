@@ -1,12 +1,13 @@
 import Graphic from "@arcgis/core/Graphic";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
-import { years } from "../../config";
+// import { years } from "../../config";
+import DocConfig from "../../config";
 import getValidityData from "./getValidityData";
 import getDetectors from "./getDetectors";
 
 async function getDetectorsLayer() {
     function getCbr() {
-        let maxYear = Math.max(...years);
+        let maxYear = Math.max(...DocConfig.years);
         let validityColors = ["red", "orange", "yellow", "lightgreen", "green"];
 
         let cbr = {
@@ -46,7 +47,7 @@ async function getDetectorsLayer() {
         return cbr;
     }
     function getValidityFields() {
-        return years.map((year) => {
+        return DocConfig.years.map((year) => {
             return {
                 name: `Validity${year}`,
                 type: "single",
@@ -63,7 +64,7 @@ async function getDetectorsLayer() {
                 return valid["detector_number"] === row["det_num"];
             });
 
-            years.forEach((year) => {
+            DocConfig.years.forEach((year) => {
                 const currData = currValidData.filter((dataRow) => {
                     return dataRow.year === year;
                 });
