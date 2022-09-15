@@ -1,9 +1,16 @@
 import React from "react";
+<<<<<<< HEAD
 import { Container } from "react-bootstrap";
 
 export default function DetectorNotes() {
     return (
         <Container className="text-sm">
+=======
+
+export default function DetectorNotes() {
+    return (
+        <div className="container text-sm">
+>>>>>>> origin/master
             <h4>Notes</h4>
             <ol className="list-decimal marker:font-semibold">
                 <li>
@@ -50,6 +57,10 @@ export default function DetectorNotes() {
                     qualified weekdays only.
                 </li>
             </ol>
+<<<<<<< HEAD
         </Container>
+=======
+        </div>
+>>>>>>> origin/master
     );
 }

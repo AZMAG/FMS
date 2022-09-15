@@ -11,7 +11,7 @@ import LineChart from "./LineChart";
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num }) {
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
@@ -34,11 +34,11 @@ export default function MiscDetectorData({ det_num }) {
                 "avg_speed"
             );
 
-            setData(_data);
+            // setData(_data);
             setSeries(_series);
             setDateLabels(_dateLabels);
         })();
-    }, [det_num]);
+    }, [det_num, setSeries, setDateLabels]);
     console.log(series);
     return (
         <LineChart

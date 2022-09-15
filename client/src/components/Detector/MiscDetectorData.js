@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+<<<<<<< HEAD
 import { Card, ListGroup } from "react-bootstrap";
+=======
+>>>>>>> origin/master
 
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num }) {
     const [data, setData] = useState(null);
+<<<<<<< HEAD
     // console.log(data);
     const dataItems = [
         {
@@ -30,6 +34,29 @@ export default function MiscDetectorData({ det_num }) {
             label: "High-Occupancy Lanes",
         },
     ];
+=======
+
+    // console.log(data);
+    // const dataItems = [
+    //     {
+    //         field: "detector_number",
+    //         label: "Detector Station ID",
+    //     },
+    //     { field: "year", label: "Analysis Year" },
+    //     {
+    //         field: "num_days",
+    //         label: "Number of Days in Dataset",
+    //     },
+    //     {
+    //         field: "gp_lane_cnt",
+    //         label: "General Purpose Lanes",
+    //     },
+    //     {
+    //         field: "hov_lane_cnt",
+    //         label: "High-Occupancy Lanes",
+    //     },
+    // ];
+>>>>>>> origin/master
 
     useEffect(() => {
         (async () => {
@@ -50,7 +77,11 @@ export default function MiscDetectorData({ det_num }) {
         <div>
             {data ? (
                 <div>
+<<<<<<< HEAD
                     <Card style={{ width: "25rem" }}>
+=======
+                    {/* <Card style={{ width: "25rem" }}>
+>>>>>>> origin/master
                         <Card.Header className="text-lg font-bold">
                             ADOT Detector Info
                         </Card.Header>
@@ -67,7 +98,11 @@ export default function MiscDetectorData({ det_num }) {
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
+<<<<<<< HEAD
                     </Card>
+=======
+                    </Card> */}
+>>>>>>> origin/master
                 </div>
             ) : (
                 <>Loading</>

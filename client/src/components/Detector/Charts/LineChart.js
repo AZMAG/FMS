@@ -10,11 +10,10 @@ import {
     ChartCategoryAxis,
     ChartCategoryAxisItem,
     ChartLegend,
-    ChartTooltip,
-    ChartSeriesItemTooltip,
-    ChartCategoryAxisLabels,
+    // ChartTooltip,
+    // ChartSeriesItemTooltip,
+    // ChartCategoryAxisLabels,
 } from "@progress/kendo-react-charts";
-import "hammerjs";
 
 const chartColors = ["red", "blue", "green"];
 const font = `bold 12px "Avenir Next W00", "Helvetica Neue", Helvetica, Arial, sans-serif`;
