@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useParams } from "react-router-dom";
-
 import MiscDetectorData from "./../components/Detector/MiscDetectorData";
 import ErrorTable from "./../components/Detector/ErrorTable";
 import DetectorNotes from "./../components/Detector/detectorNotes";
