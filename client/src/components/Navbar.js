@@ -1,8 +1,7 @@
 import React from "react";
 import logo from "../Logo.png";
+import magLogo from "../images/mag-logo-black.png";
 import { useNavigate, useLocation } from "react-router-dom";
-
-
 
 export default function CustomNavbar() {
     const navigate = useNavigate();
@@ -18,18 +17,17 @@ export default function CustomNavbar() {
         <>
             <nav className="bg-white border-gray-200 px-1 sm:px-4 py-2.5 border-b-stone-900 mb-2">
                 <div className="container flex flex-wrap items-center mx-auto">
-                    <a
-                        href="https://flowbite.com/"
-                        className="flex items-center h-16"
-                    >
+                    <a href="https://azmag.gov/">
                         <img
-                            src={logo}
-                            className="mr-3 h-full"
-                            alt="FMS Logo"
-                        ></img>
+                            src={magLogo}
+                            className="mr-3 h-9"
+                            alt="MAG Logo"
+                        />
                     </a>
-                    <div className="flex items-center pl-3">
-                        <ul className="flex">
+                    <img src={logo} className="mr-3 h-14" alt="FMS Logo" />
+
+                    <div className="flex">
+                        <ul className="flex p-0 m-0">
                             {links.map((link, i) => {
                                 console.log(pathname);
                                 const isActive = pathname === link.toLink;
