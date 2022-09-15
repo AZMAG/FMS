@@ -1,0 +1,52 @@
+humanstxt.org/
+# The humans responsible & technology colophon
+==============================================
+
+# TEAM
+
+    Maricopa Association of Governments
+    	Name:  Vern Wolfley
+    	Role: GIS Engineer III
+    	Contact:
+    	Twitter: @vernwolfley
+    	From: Litchfield Park, AZ
+
+        Name:  Jack Fairfield
+        Role: GIS Engineer II
+        Contact:
+        Twitter:
+        From: Tempe, AZ
+
+    	Name:  Jason Howard
+    	Role: GIS Program Manager
+    	Contact:
+    	Twitter:
+    	From: Chandler, AZ
+
+        Name:  Anubhav Bagley
+        Role: Regional Analytics Director
+        Contact:
+        Twitter:
+        From: Phoenix, AZ
+
+# THANKS
+
+    Maricopa Association of Governments
+        Mark Roberts -- @azmag
+
+
+# TECHNOLOGY COLOPHON
+
+    Standards: JavaScript, HTML5, CSS3
+    Components: Normalize.css, React, Webpack, ArcGIS
+
+# SITE
+
+    Site Name: FMS
+    Site URL: https://geo.azmag.gov/
+    Version: 1.3.1
+	Last updated: 2022-08-29
+    Creation date: 2022-08-05
+	Language: English
+	Doctype: HTML5
+	IDE: VS Code
