@@ -26,14 +26,17 @@ function DetectorMap() {
                     spatialReference: {
                         wkid: 102100,
                     },
-                    xmax: -12399883.303088231,
-                    xmin: -12546642.690914528,
-                    ymax: 3993315.240863136,
-                    ymin: 3925821.209899271,
+                    // xmax: -12399883.303088231,
+                    // xmin: -12546642.690914528,
+                    // ymax: 3993315.240863136,
+                    // ymin: 3925821.209899271,
                 },
+                center: [-112.024, 33.541],
+                zoom: 9,
                 constraints: {
                     rotationEnabled: false,
-                    minZoom: 8,
+                    minZoom: 15,
+                    maxZoom: 9,
                     snapToZoom: true,
                 },
                 popup: {

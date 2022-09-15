@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../Logo.png";
+import logo from "../images/fmsLogo.png";
 import magLogo from "../images/mag-logo-black.png";
 import { useNavigate, useLocation } from "react-router-dom";
 
