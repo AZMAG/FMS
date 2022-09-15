@@ -9,7 +9,7 @@ function LabelToggle() {
     const store = useDataStore();
 
     return (
-        <FormGroup>
+        <FormGroup className="ml-3">
             <FormControlLabel
                 control={
                     <Switch
