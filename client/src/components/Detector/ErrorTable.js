@@ -64,11 +64,7 @@ export default function ErrorTable({ det_num }) {
                     <TableHead>
                         <TableRow>
                             {columns.map((column, i) => (
-<<<<<<< HEAD
-                                <th
-=======
                                 <TableCell
->>>>>>> origin/master
                                     key={i}
                                     className={column.title
                                         .replace(/\s/g, "")
@@ -83,16 +79,7 @@ export default function ErrorTable({ det_num }) {
                         {data.map((row, i) => (
                             <TableRow key={i}>
                                 {columns.map((column, i) => (
-<<<<<<< HEAD
-                                    <td
-                                        key={i}
-                                        className={column.title
-                                            .replace(/\s/g, "")
-                                            .toLowerCase()}
-                                    >
-=======
                                     <TableCell key={i} className={column.title}>
->>>>>>> origin/master
                                         {column.format
                                             ? column.format(row[column.field])
                                             : row[column.field]}

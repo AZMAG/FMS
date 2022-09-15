@@ -1,11 +1,6 @@
 import React from "react";
 
 import { useParams } from "react-router-dom";
-<<<<<<< HEAD
-import { Container, Row, Col } from "react-bootstrap";
-=======
-
->>>>>>> origin/master
 import MiscDetectorData from "./../components/Detector/MiscDetectorData";
 import ErrorTable from "./../components/Detector/ErrorTable";
 import DetectorNotes from "./../components/Detector/detectorNotes";
@@ -22,27 +17,6 @@ export default function Detector() {
     const id = 50;
 
     return (
-<<<<<<< HEAD
-        <Container className="detector-page flex flex-col space-y-6 mt-4">
-            <Row>
-                <Col xs={4}>
-                    <MiscDetectorData det_num={id} />
-                </Col>
-                <Col xs={8} className="bg-[#eeeeee]">
-                    <DetectorNotes />
-                </Col>
-            </Row>
-            <Row
-                className="text-xl font-bold text-center"
-                style={{ borderBottom: "1.5px solid" }}
-            >
-                <h5>
-                    Tables, Quality Control Charts and Additional Information
-                </h5>
-            </Row>
-            <Row>
-                <Col xs={5}>
-=======
         <div className="container flex flex-col space-y-6 mt-4">
             <div className="flex">
                 <div className="flex-1">
@@ -59,43 +33,10 @@ export default function Detector() {
             </div>
             <div className="flex">
                 <div className="flex-1">
->>>>>>> origin/master
                     <h6>
                         Count of Quality Control Flags by Time Period - weekdays
                     </h6>
                     <ErrorTable det_num={id} />
-<<<<<<< HEAD
-                </Col>
-                <Col xs={7}>
-                    <AnnualHourlyAverageSpeeds det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={5}></Col>
-                <Col xs={7}>
-                    <AnnualHourlyAverageThroughput det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={5}>
-                    <DetectorDefinition />
-                </Col>
-                <Col xs={7}>
-                    <AnnualHourlyAverageOccupancyPercent det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={5}></Col>
-                <Col xs={7}>
-                    <AnnualAverageByLane det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <DistributionOfDataPassingQCByDate det_num={id} />
-                </Col>
-                <Col>
-=======
                 </div>
                 <div className="flex-1">
                     <AnnualHourlyAverageSpeeds det_num={id} />
@@ -126,10 +67,9 @@ export default function Detector() {
                     <DistributionOfDataPassingQCByDate det_num={id} />
                 </div>
                 <div className="flex-1">
->>>>>>> origin/master
                     <DistributionOfDataPassingQCByWeekday det_num={id} />
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     );
 }
