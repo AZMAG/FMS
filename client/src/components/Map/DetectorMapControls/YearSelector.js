@@ -2,6 +2,7 @@ import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
 import { years } from "../../../config";
 import { useDataStore } from "../../../stores/DataContext";
 import { observer } from "mobx-react-lite";
@@ -16,7 +17,13 @@ function YearSelector() {
 
     return (
         <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
-            <Select value={store.selectedYear} onChange={handleChange}>
+            <InputLabel>Year</InputLabel>
+            <Select
+                size="small"
+                value={store.selectedYear}
+                onChange={handleChange}
+                label="Year"
+            >
                 {sortedYears.map((year, i) => (
                     <MenuItem value={year} key={i}>
                         {year}

@@ -1,6 +1,7 @@
 import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { useDataStore } from "../../../stores/DataContext";
 import { observer } from "mobx-react-lite";
@@ -26,7 +27,12 @@ function DirectionSelector() {
 
     return (
         <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
-            <Select value={store.selectedDirection} onChange={handleChange}>
+            <InputLabel>Direction</InputLabel>
+            <Select
+                label="Direction"
+                value={store.selectedDirection}
+                onChange={handleChange}
+            >
                 {routes.map((route, i) => (
                     <MenuItem value={route} key={i}>
                         {route}
