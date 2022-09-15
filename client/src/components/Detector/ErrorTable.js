@@ -6,8 +6,6 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import "./detector.css";
-
 axios.defaults.withCredentials = true;
 
 export default function ErrorTable({ det_num }) {
@@ -66,9 +64,12 @@ export default function ErrorTable({ det_num }) {
                     <TableHead>
                         <TableRow>
                             {columns.map((column, i) => (
-                                <TableCell key={i} className={column.title
+                                <TableCell
+                                    key={i}
+                                    className={column.title
                                         .replace(/\s/g, "")
-                                        .toLowerCase()}>
+                                        .toLowerCase()}
+                                >
                                     {column.title}
                                 </TableCell>
                             ))}

@@ -1,8 +1,6 @@
 import React from "react";
 
-
 import { useParams } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
 
 import MiscDetectorData from "./../components/Detector/MiscDetectorData";
 import ErrorTable from "./../components/Detector/ErrorTable";
@@ -20,63 +18,59 @@ export default function Detector() {
     const id = 50;
 
     return (
-
-        <Container className="detector-page flex flex-col space-y-6 mt-4">
-            <Row>
-                <Col xs={4}>
+        <div className="container flex flex-col space-y-6 mt-4">
+            <div className="flex">
+                <div className="flex-1">
                     <MiscDetectorData det_num={id} />
-                </Col>
-                <Col xs={8} className="bg-[#eeeeee]">
+                </div>
+                <div className="flex-1 bg-[#eeeeee]">
                     <DetectorNotes />
-                </Col>
-            </Row>
-            <Row
-                className="text-xl font-bold text-center"
-                style={{ borderBottom: "1.5px solid" }}
-            >
+                </div>
+            </div>
+            <div className="text-xl font-bold text-center border-b-2 border-b-black">
                 <h5>
                     Tables, Quality Control Charts and Additional Information
                 </h5>
-            </Row>
-            <Row>
-                <Col xs={5}>
+            </div>
+            <div className="flex">
+                <div className="flex-1">
                     <h6>
                         Count of Quality Control Flags by Time Period - weekdays
                     </h6>
                     <ErrorTable det_num={id} />
-                </Col>
-                <Col xs={7}>
+                </div>
+                <div className="flex-1">
                     <AnnualHourlyAverageSpeeds det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={5}></Col>
-                <Col xs={7}>
+                </div>
+            </div>
+            <div className="flex">
+                <div className="flex-1"></div>
+                <div className="flex-1">
                     <AnnualHourlyAverageThroughput det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={5}>
+                </div>
+            </div>
+            <div className="flex">
+                <div className="flex-1">
                     <DetectorDefinition />
-                </Col>
-                <Col xs={7}>
+                </div>
+                <div className="flex-1">
                     <AnnualHourlyAverageOccupancyPercent det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={5}></Col>
-                <Col xs={7}>
+                </div>
+            </div>
+            <div className="flex">
+                <div className="flex-1"></div>
+                <div className="flex-1">
                     <AnnualAverageByLane det_num={id} />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                </div>
+            </div>
+            <div className="flex">
+                <div className="flex-1">
                     <DistributionOfDataPassingQCByDate det_num={id} />
-                </Col>
-                <Col>
+                </div>
+                <div className="flex-1">
                     <DistributionOfDataPassingQCByWeekday det_num={id} />
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     );
 }

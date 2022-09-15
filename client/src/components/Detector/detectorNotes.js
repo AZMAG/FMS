@@ -1,9 +1,8 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 
 export default function DetectorNotes() {
     return (
-        <Container className="text-sm">
+        <div className="container text-sm">
             <h4>Notes</h4>
             <ol className="list-decimal marker:font-semibold">
                 <li>
@@ -50,6 +49,6 @@ export default function DetectorNotes() {
                     qualified weekdays only.
                 </li>
             </ol>
-        </Container>
+        </div>
     );
 }

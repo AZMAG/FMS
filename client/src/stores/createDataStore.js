@@ -48,6 +48,11 @@ export function createDataStore() {
             this.selectedDirection = dir;
             this.updateDetectorDefinitionExpression();
         },
+        detectorLabels: true,
+        toggleDetectorLabels() {
+            this.detectorLabels = !this.detectorLabels;
+            this.detectorsLayer.labelsVisible = this.detectorLabels;
+        },
         mapLoaded: false,
     });
 }

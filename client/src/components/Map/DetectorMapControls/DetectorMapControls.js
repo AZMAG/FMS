@@ -4,6 +4,7 @@ import ValidityStats from "./ValidityStats";
 import RouteSelector from "./RouteSelector";
 import DownloadShapefileButton from "./DownloadShapefileButton";
 import DirectionSelector from "./DirectionSelector";
+import LabelToggle from "./LabelToggle";
 
 export default function DetectorMapControls() {
     return (
@@ -11,6 +12,7 @@ export default function DetectorMapControls() {
             <YearSelector />
             <RouteSelector />
             <DirectionSelector />
+            <LabelToggle />
             <ValidityStats />
             <br />
             <DownloadShapefileButton />
