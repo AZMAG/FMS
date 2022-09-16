@@ -5,7 +5,7 @@ import DetectorMapControls from "./../components/Map/DetectorMapControls/Detecto
 
 export default function Home() {
     return (
-        <div className="flex mx-8 items-center h-4/5">
+        <div className="flex relative top-24 mx-8 items-center h-4/5">
             <div className="h-full w-2/3">
                 <DetectorMap />
             </div>

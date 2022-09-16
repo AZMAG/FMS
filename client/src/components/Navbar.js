@@ -15,7 +15,7 @@ export default function CustomNavbar() {
 
     return (
         <>
-            <nav className="bg-white border-gray-200 px-1 sm:px-4 py-2.5 border-b-stone-900 mb-2">
+            <nav className="flex flex-row fixed  top-0 w-full bg-white truncate z-50 border-gray-200 px-1 sm:px-4 py-2.5 border-b-stone-900 mb-2">
                 <div className="container flex flex-wrap items-center mx-auto">
                     <a href="https://azmag.gov/">
                         <img
