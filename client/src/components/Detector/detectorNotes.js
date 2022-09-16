@@ -2,12 +2,15 @@ import React from "react";
 
 export default function DetectorNotes() {
     return (
-        <div className="container text-sm">
-            <h4>Notes</h4>
-            <ol className="list-decimal marker:font-semibold">
+        <div className="bg-[#eeeeee] text-sm px-3">
+            <h4 className="text-lg font-semibold">Data Notes</h4>
+            <ol className="list-decimal marker:font-semibold px-8">
                 <li>
                     Original source data is available from ADOT at:&nbsp;
-                    <a href="ftp://ftp.az511.com/pub/traffic/5min/">
+                    <a
+                        href="ftp://ftp.az511.com/pub/traffic/5min/"
+                        className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+                    >
                         ftp://ftp.az511.com/pub/traffic/5min/
                     </a>
                 </li>
@@ -20,12 +23,15 @@ export default function DetectorNotes() {
                     to identify characteristics specific to individual detector
                     locations. Metadata beyond what is listed here can be
                     obtained from Zip file available from ADOT at:&nbsp;
-                    <a href="ftp://ftp.az511.com/pub/traffic/docs/">
+                    <a
+                        href="ftp://ftp.az511.com/pub/traffic/docs/"
+                        className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+                    >
                         ftp://ftp.az511.com/pub/traffic/docs/
                     </a>
                     &nbsp; A spreadsheet called "fms-det.xslx" contains
                     information on individual detectors including:
-                    <ul className="list-disc">
+                    <ul className="list-disc marker:font-semibold pl-6">
                         <li>
                             Detector location (description, milepost, and x/y
                             coordinates)

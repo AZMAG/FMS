@@ -1,8 +1,8 @@
 import React from "react";
 
 import { useParams } from "react-router-dom";
-import MiscDetectorData from "./../components/Detector/MiscDetectorData";
-import ErrorTable from "./../components/Detector/ErrorTable";
+import DetectorData from "./../components/Detector/detectorData";
+import ErrorTable from "./../components/Detector/errorTable";
 import DetectorNotes from "./../components/Detector/detectorNotes";
 import DetectorDefinition from "../components/Detector/detectorDefinition";
 
@@ -17,14 +17,12 @@ export default function Detector() {
     const id = 50;
 
     return (
-        <div className="container flex flex-col space-y-6 mt-4">
-            <div className="flex">
-                <div className="flex-1">
-                    <MiscDetectorData det_num={id} />
-                </div>
-                <div className="flex-1 bg-[#eeeeee]">
-                    <DetectorNotes />
-                </div>
+        <div className="container mx-auto flex flex-col space-y-6 mt-4">
+            <div className="grid grid-cols-2 gap-4">
+                <DetectorData det_num={id} />
+                {/* </div>
+                <div className="container bg-[#eeeeee]"> */}
+                <DetectorNotes />
             </div>
             <div className="text-xl font-bold text-center border-b-2 border-b-black">
                 <h5>
