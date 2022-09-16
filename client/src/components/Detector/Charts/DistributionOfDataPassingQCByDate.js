@@ -10,6 +10,7 @@ import axios from "axios";
 
 import {
     Chart,
+    ChartArea,
     ChartTitle,
     ChartSeries,
     ChartSeriesItem,
@@ -22,7 +23,17 @@ import {
 axios.defaults.withCredentials = true;
 
 // const chartColors = ["red", "blue", "green"];
-const font = `bold 12px "Avenir Next W00", "Helvetica Neue", Helvetica, Arial, sans-serif`;
+const fontTitle = `bold 12pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
+
+const fontAxisTitle = `bold 10pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
+
+const fontAxis = `bold 8pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
 
 export default function DistributionOfDataPassingQCByDate({ det_num }) {
     // const [data, setData] = useState(null);
@@ -106,19 +117,20 @@ export default function DistributionOfDataPassingQCByDate({ det_num }) {
         })();
     }, [det_num]);
     return (
-        <div style={{ marginRight: "15px", flex: 1 }}>
+        <>
             {series.length > 0 ? (
-                <div>
+                <div className="bg-[#eeeeee] p-3">
                     <Chart>
+                        <ChartArea background="#fff" />
                         <ChartTitle
                             text="Distribution of Data Passing Quality Control Criteria by Date"
-                            font="bold 14pt Arial sans-serif"
+                            font={fontTitle}
                         />
                         <ChartValueAxis>
                             <ChartValueAxisItem
                                 title={{
                                     text: "Percent of Data Rows Valid",
-                                    font,
+                                    font: fontAxisTitle,
                                 }}
                                 labels={{ format: "{0:p}" }}
                             />
@@ -126,7 +138,7 @@ export default function DistributionOfDataPassingQCByDate({ det_num }) {
                         <ChartCategoryAxis>
                             <ChartCategoryAxisItem
                                 labels={{
-                                    font,
+                                    font: fontAxis,
                                     step: 15.5,
                                     skip: 15,
                                     rotation: "auto",
@@ -156,6 +168,6 @@ export default function DistributionOfDataPassingQCByDate({ det_num }) {
             ) : (
                 <>Loading</>
             )}
-        </div>
+        </>
     );
 }

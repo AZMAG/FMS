@@ -17,7 +17,7 @@ export default function DetectorData({ det_num }) {
             field: "num_days",
             label: "Number of Days",
         },
-        { field: "", label: "Number of Qualified Weekdays" },
+        { field: "N/A", label: "Number of Qualified Weekdays" },
         {
             field: "gp_lane_cnt",
             label: "General Purpose Lanes",

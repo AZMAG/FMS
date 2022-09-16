@@ -2,7 +2,7 @@ import React from "react";
 
 export default function DetectorNotes() {
     return (
-        <div className="bg-[#eeeeee] text-sm px-3">
+        <div className="bg-[#eeeeee] text-sm p-4">
             <h4 className="text-lg font-semibold">Data Notes</h4>
             <ol className="list-decimal marker:font-semibold px-8">
                 <li>
@@ -31,7 +31,7 @@ export default function DetectorNotes() {
                     </a>
                     &nbsp; A spreadsheet called "fms-det.xslx" contains
                     information on individual detectors including:
-                    <ul className="list-disc marker:font-semibold pl-6">
+                    <ul className="list-disc pl-6">
                         <li>
                             Detector location (description, milepost, and x/y
                             coordinates)

@@ -2,7 +2,8 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 import DetectorData from "./../components/Detector/detectorData";
-import ErrorTable from "./../components/Detector/errorTable";
+import QualityTable from "../components/Detector/qualityTable";
+import ErrorTable from "../components/Detector/errorTable";
 import DetectorNotes from "./../components/Detector/detectorNotes";
 import DetectorDefinition from "../components/Detector/detectorDefinition";
 
@@ -17,55 +18,36 @@ export default function Detector() {
     const id = 50;
 
     return (
-        <div className="container mx-auto flex flex-col space-y-6 mt-4">
-            <div className="grid grid-cols-2 gap-4">
+        <div className="container flex flex-col space-y-6 mx-auto mt-4 mb-8">
+            <div className="grid grid-flow-col gap-6">
                 <DetectorData det_num={id} />
-                {/* </div>
-                <div className="container bg-[#eeeeee]"> */}
                 <DetectorNotes />
             </div>
-            <div className="text-xl font-bold text-center border-b-2 border-b-black">
+            <div className="text-xl font-bold text-center border-b-2 border-b-gray">
                 <h5>
                     Tables, Quality Control Charts and Additional Information
                 </h5>
             </div>
-            <div className="flex">
-                <div className="flex-1">
-                    <h6>
-                        Count of Quality Control Flags by Time Period - weekdays
-                    </h6>
+            <div className="flex grid-cols-2 gap-x-4">
+                <div className="flex-1 grid gap-y-4">
+                    <QualityTable det_num={id} />
                     <ErrorTable det_num={id} />
-                </div>
-                <div className="flex-1">
-                    <AnnualHourlyAverageSpeeds det_num={id} />
-                </div>
-            </div>
-            <div className="flex">
-                <div className="flex-1"></div>
-                <div className="flex-1">
-                    <AnnualHourlyAverageThroughput det_num={id} />
-                </div>
-            </div>
-            <div className="flex">
-                <div className="flex-1">
                     <DetectorDefinition />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 grid gap-y-4">
+                    <AnnualHourlyAverageSpeeds det_num={id} />
+                    <AnnualHourlyAverageThroughput det_num={id} />
                     <AnnualHourlyAverageOccupancyPercent det_num={id} />
                 </div>
             </div>
-            <div className="flex">
-                <div className="flex-1"></div>
-                <div className="flex-1">
-                    <AnnualAverageByLane det_num={id} />
-                </div>
-            </div>
-            <div className="flex">
-                <div className="flex-1">
+            <div className="flex grid-cols-2 gap-x-4">
+                <div className="flex-1 grid gap-y-4">
                     <DistributionOfDataPassingQCByDate det_num={id} />
-                </div>
-                <div className="flex-1">
                     <DistributionOfDataPassingQCByWeekday det_num={id} />
+                </div>
+                <div className="flex-1 grid gap-y-4">
+                    <AnnualAverageByLane det_num={id} />
+                    <span />
                 </div>
             </div>
         </div>
