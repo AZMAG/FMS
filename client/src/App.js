@@ -8,7 +8,7 @@ import "hammerjs";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 import HomePage from "./pages/Home";
 import DetectorPage from "./pages/Detector";
 import CorridorsPage from "./pages/Corridors";
@@ -30,14 +30,26 @@ function App() {
             <DataProvider>
                 <Router>
                     <Navbar />
-                    <Routes>
-                        <Route exact path="/" element={<HomePage />} />
-                        <Route path="detector/:id" element={<DetectorPage />} />
-                        <Route path="corridors" element={<CorridorsPage />} />
-                        <Route path="query" element={<QueryBuilderPage />} />
-                        <Route path="admin" element={<AdminPage />} />
-                    </Routes>
-                    {/* <Footer /> */}
+                    <div className="container flex justify-around absolute top-24">
+                        <Routes>
+                            <Route exact path="/" element={<HomePage />} />
+                            <Route
+                                path="detector/:id"
+                                element={<DetectorPage />}
+                            />
+                            <Route
+                                path="corridors"
+                                element={<CorridorsPage />}
+                            />
+                            <Route
+                                path="query"
+                                element={<QueryBuilderPage />}
+                            />
+                            <Route path="admin" element={<AdminPage />} />
+                        </Routes>
+                    </div>
+
+                    <Footer />
                 </Router>
             </DataProvider>
         </div>
