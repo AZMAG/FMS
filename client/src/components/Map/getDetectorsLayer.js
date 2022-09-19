@@ -125,7 +125,10 @@ async function getDetectorsLayer() {
 
     popupTemplate = {
         title: 'FMS Detector Locations <span style="display: none;">{*}</span>',
-        content: "{*}",
+        content: (graphic) => {
+            return `{det_num} <br /> {Validity2021}`;
+        },
+
         actions: [
             {
                 title: "Report",
