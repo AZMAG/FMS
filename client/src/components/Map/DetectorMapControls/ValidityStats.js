@@ -22,27 +22,31 @@ function ValidityStats() {
             if (store.detectorsLayer) {
                 const res = await store.detectorsLayer.queryFeatures();
                 setNumDets(res.features.length);
-                const _catsObj = {};
+                const _catsObj = { 99: 0 };
                 let categorizedCount = 0;
 
                 res.features.forEach((feature) => {
                     const validity =
                         feature.attributes["Validity" + store.selectedYear];
 
-                    let numIterations = 0;
-                    for (let i = 0; i < 1; i += 0.2) {
-                        let next = i + 0.2;
-                        if (validity >= i && validity < next) {
-                            _catsObj[numIterations] =
-                                _catsObj[numIterations] || 0;
-                            _catsObj[numIterations]++;
-                            categorizedCount++;
+                    if (validity === null) {
+                        _catsObj[99]++;
+                    } else {
+                        let numIterations = 0;
+                        for (let i = 0; i < 1; i += 0.2) {
+                            let next = i + 0.2;
+                            if (validity >= i && validity < next) {
+                                _catsObj[numIterations] =
+                                    _catsObj[numIterations] || 0;
+                                _catsObj[numIterations]++;
+                                categorizedCount++;
+                            }
+                            numIterations++;
                         }
-                        numIterations++;
                     }
                 });
 
-                _catsObj[99] = res.features.length - categorizedCount;
+                // _catsObj[99] = 573 - res.features.length;
 
                 const _catsArr = Object.keys(_catsObj).map((key) => {
                     return {
@@ -71,7 +75,7 @@ function ValidityStats() {
                 <div className="border-t-4 border-gray-300 px-3 pt-2">
                     {cats.map((cat, i) => {
                         return (
-                            <div className="flex items-center">
+                            <div key={i} className="flex items-center">
                                 <span
                                     style={{ backgroundColor: cat.color }}
                                     className="w-4 h-4 block mr-3 border"

@@ -31,7 +31,7 @@ export function createDataStore() {
             this.updateDetectorDefinitionExpression();
         },
         updateDetectorDefinitionExpression() {
-            const terms = [`Validity${this.selectedYear} is not null`];
+            const terms = ["1=1"]; //`Validity${this.selectedYear} is not null`
 
             if (this.selectedRoute !== "All") {
                 terms.push(`Route = '${this.selectedRoute}'`);
@@ -52,6 +52,24 @@ export function createDataStore() {
         toggleDetectorLabels() {
             this.detectorLabels = !this.detectorLabels;
             this.detectorsLayer.labelsVisible = this.detectorLabels;
+        },
+        detectorNoDataShown: true,
+        toggleNoDataShown() {
+            this.detectorNoDataShown = !this.detectorNoDataShown;
+            if (this.detectorNoDataShown) {
+                this.detectorsLayer.renderer.defaultSymbol = {
+                    type: "simple-marker",
+                    style: "triangle",
+                    size: "10px",
+                    outline: {
+                        width: 1,
+                    },
+                    color: "gray",
+                };
+            } else {
+                this.detectorsLayer.renderer.defaultSymbol = null;
+                this.detectorsLayer.renderer.defaultLabel = null;
+            }
         },
         mapLoaded: false,
     });
