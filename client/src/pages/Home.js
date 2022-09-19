@@ -5,10 +5,9 @@ import DetectorMapControls from "./../components/Map/DetectorMapControls/Detecto
 
 export default function Home() {
     return (
-        <div className="grid grid-cols-2 gap-y-4">
-            <DetectorMap />
-
-            <DetectorMapControls />
+        <div className="container flex flex-row mx-auto grid-cols-2 relative top-20 justify-items-center">
+            <DetectorMap className="w-2/3" />
+            <DetectorMapControls className="w-1/3" />
         </div>
     );
 }

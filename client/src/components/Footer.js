@@ -3,8 +3,8 @@ import DocConfig from "../DocConfig";
 
 export default function CustomFooter() {
     return (
-        <footer className="flex flex-col mt-auto gap-y-3 py-2 my-3">
-            <div className="flex flex-row justify-center pt-2 text-xs">
+        <footer className="flex flex-row relative justify-center mt-auto py-2 my-3">
+            <div className="flex text-xs">
                 Copyright&nbsp;&copy;&nbsp;{DocConfig.copyright}&nbsp;
                 <a
                     href={DocConfig.magLink}

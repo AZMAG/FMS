@@ -18,7 +18,7 @@ export default function Detector() {
     const id = 50;
 
     return (
-        <div className="container flex flex-col relative top-24 space-y-6 mx-auto mt-4 mb-8">
+        <div className="container flex flex-col relative top-20 space-y-6 mx-auto mt-4 mb-8">
             <div className="grid grid-flow-col gap-6">
                 <DetectorData det_num={id} />
                 <DetectorNotes />
