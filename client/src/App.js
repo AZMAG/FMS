@@ -30,25 +30,13 @@ function App() {
             <DataProvider>
                 <Router>
                     <Navbar />
-                    <div className="container flex justify-around absolute top-24">
-                        <Routes>
-                            <Route exact path="/" element={<HomePage />} />
-                            <Route
-                                path="detector/:id"
-                                element={<DetectorPage />}
-                            />
-                            <Route
-                                path="corridors"
-                                element={<CorridorsPage />}
-                            />
-                            <Route
-                                path="query"
-                                element={<QueryBuilderPage />}
-                            />
-                            <Route path="admin" element={<AdminPage />} />
-                        </Routes>
-                    </div>
-
+                    <Routes>
+                        <Route exact path="/" element={<HomePage />} />
+                        <Route path="detector/:id" element={<DetectorPage />} />
+                        <Route path="corridors" element={<CorridorsPage />} />
+                        <Route path="query" element={<QueryBuilderPage />} />
+                        <Route path="admin" element={<AdminPage />} />
+                    </Routes>
                     <Footer />
                 </Router>
             </DataProvider>
