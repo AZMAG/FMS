@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 
 axios.defaults.withCredentials = true;
 
-export default function ErrorTable({ det_num }) {
+export default function QualityTable({ det_num }) {
     const [data, setData] = useState(null);
     // console.log(data);
     const columns = [
@@ -64,7 +64,7 @@ export default function ErrorTable({ det_num }) {
             {data ? (
                 <div className="bg-[#eeeeee] p-5">
                     <h6 className="text-lg font-semibold mb-2">
-                        Percent of Data Rows Flagged by Time Period - weekdays
+                        Count of Quality Control Flags by Time Period - weekdays
                     </h6>
                     <TableContainer component={Paper}>
                         <Table size="small" aria-label="Quality table">

@@ -3,7 +3,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import { years } from "../../../config";
+import DocConfig from "../../../DocConfig";
+// import { Donyears } from "../../../config";
 import { useDataStore } from "../../../stores/DataContext";
 import { observer } from "mobx-react-lite";
 
@@ -12,7 +13,7 @@ function YearSelector() {
     function handleChange(e) {
         store.setSelectedYear(e.target.value);
     }
-    let sortedYears = [...years];
+    let sortedYears = [...DocConfig.years];
     sortedYears.sort((a, b) => b - a);
 
     return (
