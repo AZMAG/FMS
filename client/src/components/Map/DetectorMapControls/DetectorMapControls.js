@@ -11,21 +11,22 @@ import LabelToggle from "./LabelToggle";
 
 export default function DetectorMapControls() {
     return (
-        <div className="mx-auto h-full rounded-lg shadow-lg bg-white max-w-md">
+        <div className="flex flex-col h-full px-3 gap-y-2 rounded-lg shadow-lg bg-white">
             <Instructions />
-            <div className="mt-2 bg-gray-100 py-3 px-4">
+            <div className="bg-gray-100 py-3 px-4">
                 <YearSelector />
                 <DirectionSelector />
                 <RouteSelector />
                 <LabelToggle />
             </div>
-            <ValidityStats />
-            <br />
-            <DownloadShapefileButton />
-            <br />
-            <DownloadGeoJSONButton />
-            <br />
-            <DownloadESRIJSONButton />
+            <div className="bg-gray-100 py-3 px-4">
+                <ValidityStats />
+            </div>
+            <div className="flex flex-col mx-24 mt-8">
+                <DownloadShapefileButton />
+                <DownloadGeoJSONButton />
+                <DownloadESRIJSONButton />
+            </div>
         </div>
     );
 }

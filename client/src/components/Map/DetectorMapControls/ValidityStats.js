@@ -63,26 +63,25 @@ function ValidityStats() {
     ]);
 
     return (
-        <div>
-            <div className="mt-2 bg-gray-100 py-3 ">
-                <p className="px-3 text-md pb-1">
-                    {numDets} detectors currently shown.
-                </p>
-                <div className="border-t-4 border-gray-300 px-3 pt-2">
-                    {cats.map((cat, i) => {
-                        return (
-                            <div className="flex items-center">
-                                <span
-                                    style={{ backgroundColor: cat.color }}
-                                    className="w-4 h-4 block mr-3 border"
-                                ></span>
-                                <span key={i}>
-                                    {cat.count} - {cat.name}
-                                </span>
-                            </div>
-                        );
-                    })}
-                </div>
+        <div className="">
+            <p className="px-3 text-lg pb-1">
+                <span className="font-bold">{numDets}</span>&nbsp;detectors
+                currently shown.
+            </p>
+            <div className="border-t-4 border-gray-300 px-3 pt-2">
+                {cats.map((cat, i) => {
+                    return (
+                        <div className="flex items-center">
+                            <span
+                                style={{ backgroundColor: cat.color }}
+                                className="w-4 h-4 block mr-3 border"
+                            ></span>
+                            <span key={i}>
+                                {cat.count} - {cat.name}
+                            </span>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
