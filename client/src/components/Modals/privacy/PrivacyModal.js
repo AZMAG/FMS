@@ -1,49 +1,101 @@
-import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import * as React from "react";
+import PropTypes from "prop-types";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserShield } from "@fortawesome/free-solid-svg-icons";
 import PrivacyText from "./PrivacyText";
-// import "../modals.scss"
 
-function Privacy() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = (e) => {
-        e.preventDefault();
-        setShow(true);
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    "& .MuiDialogContent-root": {
+        padding: theme.spacing(2),
+    },
+    "& .MuiDialogActions-root": {
+        padding: theme.spacing(1),
+    },
+}));
+
+const BootstrapDialogTitle = (props) => {
+    const { children, onClose, ...other } = props;
+
+    return (
+        <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+            {children}
+            {onClose ? (
+                <IconButton
+                    aria-label="close"
+                    onClick={onClose}
+                    sx={{
+                        position: "absolute",
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
+            ) : null}
+        </DialogTitle>
+    );
+};
+
+BootstrapDialogTitle.propTypes = {
+    children: PropTypes.node,
+    onClose: PropTypes.func.isRequired,
+};
+
+export default function CustomizedDialogs() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
     };
 
     let url = "#";
 
     return (
-        <>
-            <a href={url} className="link" onClick={handleShow}>
+        <div>
+            <a
+                href={url}
+                className="underline hover:no-underline
+                   text-blue-600 hover:text-blue-800
+                   visited:text-purple-600"
+                onClick={handleClickOpen}
+            >
                 Privacy
             </a>
 
-            <Modal
-                size="lg"
-                show={show}
-                onHide={handleClose}
-                aria-label="modal privacy"
-                scrollable
+            <BootstrapDialog
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}
             >
-                <Modal.Header closeVariant="white" closeButton>
-                    <Modal.Title>
-                        <FontAwesomeIcon icon={faUserShield} />
-                        &nbsp;Privacy
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+                <BootstrapDialogTitle
+                    id="customized-dialog-title"
+                    onClose={handleClose}
+                >
+                    <FontAwesomeIcon icon={faUserShield} />
+                    &nbsp;Privacy
+                </BootstrapDialogTitle>
+                <DialogContent dividers>
                     <PrivacyText />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" size="sm" onClick={handleClose}>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={handleClose}>
                         Close
                     </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+                </DialogActions>
+            </BootstrapDialog>
+        </div>
     );
 }
-export default Privacy;
