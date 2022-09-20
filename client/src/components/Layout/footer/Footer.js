@@ -1,5 +1,8 @@
 import React from "react";
-import DocConfig from "../DocConfig";
+import DocConfig from "../../../DocConfig";
+// import Privacy from "../../Modals/privacy/PrivacyModal";
+// import Terms from "../../Modals/terms/TermsModal";
+// import LegalDisclaimer from "../../Modals/legal/LegalModal";
 
 export default function CustomFooter() {
     return (

@@ -1,24 +1,24 @@
 import React from "react";
 
 import { useParams } from "react-router-dom";
-import DetectorData from "./../components/Detector/detectorData";
-import QualityTable from "../components/Detector/qualityTable";
-import ErrorTable from "../components/Detector/errorTable";
-import DetectorNotes from "./../components/Detector/detectorNotes";
-import DetectorDefinition from "../components/Detector/detectorDefinition";
+import DetectorData from "../../Detector/detectorData";
+import QualityTable from "../../Detector/qualityTable";
+import ErrorTable from "../../Detector/errorTable";
+import DetectorNotes from "../../Detector/detectorNotes";
+import DetectorDefinition from "../../Detector/detectorDefinition";
 
-import AnnualHourlyAverageSpeeds from "./../components/Detector/Charts/AnnualHourlyAverageSpeeds";
-import AnnualHourlyAverageThroughput from "./../components/Detector/Charts/AnnualHourlyAverageThroughput";
-import AnnualHourlyAverageOccupancyPercent from "./../components/Detector/Charts/AnnualHourlyAverageOccupancyPercent";
-import AnnualAverageByLane from "./../components/Detector/Charts/AnnualAverageByLane";
-import DistributionOfDataPassingQCByDate from "./../components/Detector/Charts/DistributionOfDataPassingQCByDate";
-import DistributionOfDataPassingQCByWeekday from "./../components/Detector/Charts/DistributionOfDataPassingQCByWeekday";
+import AnnualHourlyAverageSpeeds from "../../Detector/Charts/AnnualHourlyAverageSpeeds";
+import AnnualHourlyAverageThroughput from "../../Detector/Charts/AnnualHourlyAverageThroughput";
+import AnnualHourlyAverageOccupancyPercent from "../../Detector/Charts/AnnualHourlyAverageOccupancyPercent";
+import AnnualAverageByLane from "../../Detector/Charts/AnnualAverageByLane";
+import DistributionOfDataPassingQCByDate from "../../Detector/Charts/DistributionOfDataPassingQCByDate";
+import DistributionOfDataPassingQCByWeekday from "../../Detector/Charts/DistributionOfDataPassingQCByWeekday";
 
 export default function Detector() {
     const id = 50;
 
     return (
-        <div className="container flex flex-col relative top-20 space-y-6 mx-auto mt-4 mb-8">
+        <main className="container flex flex-col w-full h-full space-y-6 m-auto">
             <div className="grid grid-flow-col gap-6">
                 <DetectorData det_num={id} />
                 <DetectorNotes />
@@ -50,6 +50,6 @@ export default function Detector() {
                     <span />
                 </div>
             </div>
-        </div>
+        </main>
     );
 }

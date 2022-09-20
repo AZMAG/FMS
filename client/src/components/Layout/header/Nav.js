@@ -1,5 +1,43 @@
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Nav() {
-    return <nav></nav>;
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+    const links = [
+        { text: "Home", toLink: "/" },
+        { text: "Corridors", toLink: "/corridors" },
+        { text: "Query Builder", toLink: "/query" },
+        { text: "Admin", toLink: "/admin" },
+    ];
+
+    return (
+        <div className="flex flex-row items-center">
+            <nav className="flex">
+                <ul className="flex p-0 m-0">
+                    {links.map((link, i) => {
+                        console.log(pathname);
+                        const isActive = pathname === link.toLink;
+
+                        function linkClicked() {
+                            navigate(link.toLink);
+                        }
+                        return (
+                            <li
+                                onClick={linkClicked}
+                                key={i}
+                                className={`bg-gray-400 text-mag-teal font-semibold color block py-2 px-2 mx-1 cursor-pointer hover:underline text-lg ${
+                                    isActive
+                                        ? "bg-opacity-30"
+                                        : "bg-opacity-0 hover:bg-opacity-5"
+                                }`}
+                            >
+                                {link.text}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </nav>
+        </div>
+    );
 }
