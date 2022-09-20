@@ -22,27 +22,31 @@ function ValidityStats() {
             if (store.detectorsLayer) {
                 const res = await store.detectorsLayer.queryFeatures();
                 setNumDets(res.features.length);
-                const _catsObj = {};
+                const _catsObj = { 99: 0 };
                 let categorizedCount = 0;
 
                 res.features.forEach((feature) => {
                     const validity =
                         feature.attributes["Validity" + store.selectedYear];
 
-                    let numIterations = 0;
-                    for (let i = 0; i < 1; i += 0.2) {
-                        let next = i + 0.2;
-                        if (validity >= i && validity < next) {
-                            _catsObj[numIterations] =
-                                _catsObj[numIterations] || 0;
-                            _catsObj[numIterations]++;
-                            categorizedCount++;
+                    if (validity === null) {
+                        _catsObj[99]++;
+                    } else {
+                        let numIterations = 0;
+                        for (let i = 0; i < 1; i += 0.2) {
+                            let next = i + 0.2;
+                            if (validity >= i && validity < next) {
+                                _catsObj[numIterations] =
+                                    _catsObj[numIterations] || 0;
+                                _catsObj[numIterations]++;
+                                categorizedCount++;
+                            }
+                            numIterations++;
                         }
-                        numIterations++;
                     }
                 });
 
-                _catsObj[99] = res.features.length - categorizedCount;
+                // _catsObj[99] = 573 - res.features.length;
 
                 const _catsArr = Object.keys(_catsObj).map((key) => {
                     return {
@@ -82,6 +86,7 @@ function ValidityStats() {
                         </div>
                     );
                 })}
+
             </div>
         </div>
     );

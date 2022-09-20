@@ -22,6 +22,15 @@ async function getDetectorsLayer() {
                 },
             ],
             classBreakInfos: [],
+            defaultSymbol: {
+                type: "simple-marker",
+                style: "triangle",
+                size: "10px",
+                outline: {
+                    width: 1,
+                },
+                color: "gray",
+            },
         };
         let iterCnt = 0;
         for (let i = 0; i < 1; i += 0.2) {
@@ -116,7 +125,10 @@ async function getDetectorsLayer() {
 
     popupTemplate = {
         title: 'FMS Detector Locations <span style="display: none;">{*}</span>',
-        content: "{*}",
+        content: (graphic) => {
+            return `{det_num} <br /> {Validity2021}`;
+        },
+
         actions: [
             {
                 title: "Report",

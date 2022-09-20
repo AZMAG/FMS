@@ -5,7 +5,7 @@ import Switch from "@mui/material/Switch";
 import { observer } from "mobx-react-lite";
 import { useDataStore } from "../../../stores/DataContext";
 
-function LabelToggle() {
+function NoDataToggle() {
     const store = useDataStore();
 
     return (
@@ -15,14 +15,14 @@ function LabelToggle() {
                     <Switch
                         className="mr-2"
                         size="small"
-                        checked={store.detectorLabels}
-                        onChange={() => store.toggleDetectorLabels()}
+                        checked={store.detectorNoDataShown}
+                        onChange={() => store.toggleNoDataShown()}
                     />
                 }
-                label="Show detector numbers"
+                label="Show detectors with no data available"
             />
         </FormGroup>
     );
 }
 
-export default observer(LabelToggle);
+export default observer(NoDataToggle);

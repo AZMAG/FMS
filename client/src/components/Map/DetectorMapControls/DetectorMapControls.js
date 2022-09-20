@@ -8,6 +8,7 @@ import DownloadESRIJSONButton from "./DownloadESRIJSONButton";
 import DirectionSelector from "./DirectionSelector";
 import Instructions from "./Instructions";
 import LabelToggle from "./LabelToggle";
+import NoDataToggle from "./NoDataToggle";
 
 export default function DetectorMapControls() {
     return (
