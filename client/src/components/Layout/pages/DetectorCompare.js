@@ -15,7 +15,7 @@ import DistributionOfDataPassingQCByWeekday from "../../Detector/Charts/Distribu
 
 import ScrollToTopButton from "../../ScrollToTop/scrollToTop";
 
-export default function Detector() {
+export default function DetectorCompare() {
     const containerRef = useRef();
     const id = 50;
 
