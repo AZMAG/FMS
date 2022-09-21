@@ -8,6 +8,10 @@ import { useDataStore } from "../../stores/DataContext";
 import getDetectorsLayer from "./getDetectorsLayer";
 import { useNavigate } from "react-router-dom";
 
+import ZoomWidget from "../MapWidgets/zoomWidget";
+import HomeWidget from "../MapWidgets/homeWidget";
+import BasemapToggleWidget from "../MapWidgets/basemapToggleWidget";
+
 function DetectorMap() {
     const mapDiv = useRef(null);
     const store = useDataStore();
@@ -66,6 +70,10 @@ function DetectorMap() {
                     navigate(`/detector/${det_num}`);
                 }
             });
+            // Call Widgets
+            ZoomWidget(_view);
+            HomeWidget(_view);
+            BasemapToggleWidget(_view);
         }
     }, [mapDiv, store, navigate]);
 
