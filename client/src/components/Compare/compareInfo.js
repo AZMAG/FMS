@@ -3,28 +3,28 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-export default function DetectorData({ det_num }) {
+export default function CompareInfo({ det_num }) {
     const [data, setData] = useState(null);
 
     // console.log(data);
     const dataItems = [
         {
-            field: "detector_number",
-            label: "ADOT Detector ID",
+            data: 4,
+            label: "Selected Detector",
         },
-        { field: "year", label: "Analysis Year" },
+        { data: "I-10 WB 75th Ave", label: "Location" },
         {
-            field: "num_days",
-            label: "Number of Days",
+            data: "pad",
+            label: "Type",
         },
-        { field: "N/A", label: "Number of Qualified Weekdays" },
+        { data: "I-10", label: "Route" },
         {
-            field: "gp_lane_cnt",
-            label: "General Purpose Lanes",
+            data: "WB",
+            label: "Direction",
         },
         {
-            field: "hov_lane_cnt",
-            label: "High-Occupancy Lanes",
+            data: "136",
+            label: "Milepost",
         },
     ];
 
@@ -48,7 +48,7 @@ export default function DetectorData({ det_num }) {
             {data ? (
                 <div className="px-2">
                     <div className="font-bold text-lg mb-1">
-                        ADOT Detector Info
+                        Query Builder Report
                     </div>
                     <div className="">
                         <ul className="bg-white rounded-lg border border-gray-200 w-96">
