@@ -6,8 +6,8 @@ function DownloadShapefileButton() {
     const store = useDataStore();
 
     function downloadShapefile() {
-        const geoJSONFeatures = store.detectorsLayer.source.items.map(
-            (feature) => {
+        const geoJSONFeatures =
+            store.detectorMap.detectorsLayer.source.items.map((feature) => {
                 // console.log(feature);
                 return {
                     type: "Feature",
@@ -20,8 +20,7 @@ function DownloadShapefileButton() {
                     },
                     properties: feature.attributes,
                 };
-            }
-        );
+            });
 
         window.shpwrite.download({
             type: "FeatureCollection",

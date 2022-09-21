@@ -10,12 +10,15 @@ function DirectionSelector() {
     const store = useDataStore();
 
     function handleChange(e) {
-        store.setSelectedDirection(e.target.value);
+        store.detectorMap.setSelectedDirection(e.target.value);
     }
     let routes = [];
-    if (store.detectorsLayer && store.detectorsLayer.source) {
+    if (
+        store.detectorMap.detectorsLayer &&
+        store.detectorMap.detectorsLayer.source
+    ) {
         const distinctDirections = [];
-        store.detectorsLayer.source.items.forEach((feature) => {
+        store.detectorMap.detectorsLayer.source.items.forEach((feature) => {
             const direction = feature.attributes.Direction;
             if (!distinctDirections.includes(direction)) {
                 distinctDirections.push(direction);
@@ -30,7 +33,7 @@ function DirectionSelector() {
             <InputLabel>Direction</InputLabel>
             <Select
                 label="Direction"
-                value={store.selectedDirection}
+                value={store.detectorMap.selectedDirection}
                 onChange={handleChange}
             >
                 {routes.map((route, i) => (

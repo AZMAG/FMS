@@ -22,7 +22,7 @@ async function getDetectorsLayer(store) {
                 },
             ],
             classBreakInfos: [],
-            defaultSymbol: store.detectorNoDataShown
+            defaultSymbol: store.detectorMap.noDataAvailableShown
                 ? {
                       type: "simple-marker",
                       style: "triangle",
@@ -170,6 +170,7 @@ async function getDetectorsLayer(store) {
         });
         return graphic;
     });
+    console.log(store.detectorMap);
 
     const fl = new FeatureLayer({
         id: "detectors",
@@ -182,8 +183,8 @@ async function getDetectorsLayer(store) {
         objectIdField: "ID",
         popupTemplate,
         renderer,
-        definitionExpression: store.getDetectorDefinitionExpression(),
-        labelsVisible: store.detectorLabels,
+        definitionExpression: store.detectorMap.getDefExpression(),
+        labelsVisible: store.detectorMap.labelsVisible,
     });
 
     return fl;

@@ -54,9 +54,9 @@ function DetectorMap() {
             (async () => {
                 const detectorsLayer = await getDetectorsLayer(store);
                 _map.add(detectorsLayer);
-                store.setDetectorsLayer(detectorsLayer);
-                store.setMap(_map);
-                store.setView(_view);
+                store.detectorMap.setDetectorsLayer(detectorsLayer);
+                store.detectorMap.setMap(_map);
+                store.detectorMap.setView(_view);
             })();
 
             _view.popup.on("trigger-action", (event) => {

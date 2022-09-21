@@ -7,7 +7,8 @@ function DownloadGeoJsonButton() {
     const store = useDataStore();
 
     async function downloadGeoJson() {
-        const { features } = await store.detectorsLayer.queryFeatures();
+        const { features } =
+            await store.detectorMap.detectorsLayer.queryFeatures();
         const geoJSONFeatures = features.map((feature) => {
             return {
                 type: "Feature",
