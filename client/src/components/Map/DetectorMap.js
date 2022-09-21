@@ -52,7 +52,7 @@ function DetectorMap() {
                 ui: { components: [] },
             });
             (async () => {
-                const detectorsLayer = await getDetectorsLayer();
+                const detectorsLayer = await getDetectorsLayer(store);
                 _map.add(detectorsLayer);
                 store.setDetectorsLayer(detectorsLayer);
                 store.setMap(_map);

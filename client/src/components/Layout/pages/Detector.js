@@ -18,7 +18,7 @@ export default function Detector() {
     const id = 50;
 
     return (
-        <main className="container flex-1 overflow-y-auto m-auto no-scrollbar">
+        <main className="container flex-1 m-auto">
             <div className="flex flex-col space-y-6 m-auto grid-cols-2 gap-x-4 justify-items-center">
                 <div className="grid grid-flow-col gap-6">
                     <DetectorData det_num={id} />

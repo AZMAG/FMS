@@ -4,7 +4,7 @@ import DocConfig from "../../DocConfig";
 import getValidityData from "./getValidityData";
 import getDetectors from "./getDetectors";
 
-async function getDetectorsLayer() {
+async function getDetectorsLayer(store) {
     function getCbr() {
         let maxYear = Math.max(...DocConfig.years);
         let validityColors = ["red", "orange", "yellow", "lightgreen", "green"];
@@ -22,15 +22,17 @@ async function getDetectorsLayer() {
                 },
             ],
             classBreakInfos: [],
-            defaultSymbol: {
-                type: "simple-marker",
-                style: "triangle",
-                size: "10px",
-                outline: {
-                    width: 1,
-                },
-                color: "gray",
-            },
+            defaultSymbol: store.detectorNoDataShown
+                ? {
+                      type: "simple-marker",
+                      style: "triangle",
+                      size: "10px",
+                      outline: {
+                          width: 1,
+                      },
+                      color: "gray",
+                  }
+                : null,
         };
         let iterCnt = 0;
         for (let i = 0; i < 1; i += 0.2) {
@@ -180,6 +182,8 @@ async function getDetectorsLayer() {
         objectIdField: "ID",
         popupTemplate,
         renderer,
+        definitionExpression: store.getDetectorDefinitionExpression(),
+        labelsVisible: store.detectorLabels,
     });
 
     return fl;

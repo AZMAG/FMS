@@ -7,8 +7,8 @@ import "hammerjs";
 
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./components/Layout/header/Header";
-import Footer from "./components/Layout/footer/Footer";
+import Header from "./components/Layout/Header/Header";
+import Footer from "./components/Layout/Footer/Footer";
 import HomePage from "./components/Layout/pages/Home";
 import DetectorPage from "./components/Layout/pages/Detector";
 import CorridorsPage from "./components/Layout/pages/Corridors";

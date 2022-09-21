@@ -30,7 +30,7 @@ export function createDataStore() {
             this.selectedYear = year;
             this.updateDetectorDefinitionExpression();
         },
-        updateDetectorDefinitionExpression() {
+        getDetectorDefinitionExpression() {
             const terms = ["1=1"]; //`Validity${this.selectedYear} is not null`
 
             if (this.selectedRoute !== "All") {
@@ -40,7 +40,10 @@ export function createDataStore() {
             if (this.selectedDirection !== "All") {
                 terms.push(`Direction = '${this.selectedDirection}'`);
             }
-            const defExpression = terms.join(" AND ");
+            return terms.join(" AND ");
+        },
+        updateDetectorDefinitionExpression() {
+            const defExpression = this.getDetectorDefinitionExpression();
             this.detectorsLayer.definitionExpression = defExpression;
         },
         selectedDirection: "All",

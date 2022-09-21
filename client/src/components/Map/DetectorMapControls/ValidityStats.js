@@ -3,12 +3,12 @@ import { useDataStore } from "../../../stores/DataContext";
 import { observer } from "mobx-react-lite";
 
 const categoryLookup = {
-    99: { label: "No Data Available", color: "gray" },
     0: { label: "Very Low (0% - 20%)", color: "red" },
     1: { label: "Low (20% - 40%)", color: "orange" },
     2: { label: "Average (40% - 60%)", color: "yellow" },
     3: { label: "High (40% - 80%)", color: "lightgreen" },
     4: { label: "Very High (80%+)", color: "green" },
+    99: { label: "No Data Available", color: "gray" },
 };
 
 function ValidityStats() {
@@ -23,7 +23,6 @@ function ValidityStats() {
                 const res = await store.detectorsLayer.queryFeatures();
                 setNumDets(res.features.length);
                 const _catsObj = { 99: 0 };
-                let categorizedCount = 0;
 
                 res.features.forEach((feature) => {
                     const validity =
@@ -39,14 +38,11 @@ function ValidityStats() {
                                 _catsObj[numIterations] =
                                     _catsObj[numIterations] || 0;
                                 _catsObj[numIterations]++;
-                                categorizedCount++;
                             }
                             numIterations++;
                         }
                     }
                 });
-
-                // _catsObj[99] = 573 - res.features.length;
 
                 const _catsArr = Object.keys(_catsObj).map((key) => {
                     return {
@@ -78,15 +74,17 @@ function ValidityStats() {
                         <div className="flex items-center">
                             <span
                                 style={{ backgroundColor: cat.color }}
-                                className="w-4 h-4 block mr-3 border"
+                                className="w-4 h-4 block mr-0 border border-gray-600"
                             ></span>
-                            <span key={i}>
-                                {cat.count} - {cat.name}
+                            <span className="w-full flex" key={i}>
+                                <span className="w-12 text-center">
+                                    {cat.count}
+                                </span>
+                                <span>{cat.name}</span>
                             </span>
                         </div>
                     );
                 })}
-
             </div>
         </div>
     );

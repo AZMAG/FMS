@@ -19,6 +19,7 @@ export default function DetectorMapControls() {
                 <DirectionSelector />
                 <RouteSelector />
                 <LabelToggle />
+                <NoDataToggle />
             </div>
             <div className="bg-gray-100 py-3 px-4">
                 <ValidityStats />
