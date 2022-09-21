@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import DetectorData from "../../Detector/detectorData";
 import QualityTable from "../../Detector/qualityTable";
@@ -14,11 +14,14 @@ import AnnualAverageByLane from "../../Detector/Charts/AnnualAverageByLane";
 import DistributionOfDataPassingQCByDate from "../../Detector/Charts/DistributionOfDataPassingQCByDate";
 import DistributionOfDataPassingQCByWeekday from "../../Detector/Charts/DistributionOfDataPassingQCByWeekday";
 
+import ScrollToTopButton from "../../ScrollToTop/scrollToTop";
+
 export default function Detector() {
+    const containerRef = useRef();
     const id = 50;
 
     return (
-        <main className="container flex-1 m-auto">
+        <main className="flex-1 overflow-y-auto px-16 mt-4" ref={containerRef}>
             <div className="flex flex-col space-y-6 m-auto grid-cols-2 gap-x-4 justify-items-center">
                 <div className="grid grid-flow-col gap-6">
                     <DetectorData det_num={id} />
@@ -53,6 +56,7 @@ export default function Detector() {
                     </div>
                 </div>
             </div>
+            <ScrollToTopButton containerRef={containerRef} />
         </main>
     );
 }
