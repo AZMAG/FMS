@@ -2,20 +2,14 @@ import React, { useRef, useEffect } from "react";
 
 import ArcGISMap from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
+import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 
 import { useDataStore } from "../../stores/DataContext";
+import getDetectorsLayer from "../Map/getDetectorsLayer";
 
-import getDetectorsLayer from "./getDetectorsLayer";
-import { useNavigate } from "react-router-dom";
-
-import ZoomWidget from "../MapWidgets/zoomWidget";
-import HomeWidget from "../MapWidgets/homeWidget";
-import BasemapToggleWidget from "../MapWidgets/basemapToggleWidget";
-
-function DetectorMap() {
+function QueryBuilderMap() {
     const mapDiv = useRef(null);
     const store = useDataStore();
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (mapDiv.current) {
@@ -47,28 +41,22 @@ function DetectorMap() {
                 ui: { components: [] },
             });
             (async () => {
-                const detectorsLayer = await getDetectorsLayer(store);
-                _map.add(detectorsLayer);
-                store.detectorMap.setDetectorsLayer(detectorsLayer);
-                store.detectorMap.setMap(_map);
-                store.detectorMap.setView(_view);
-            })();
+                const graphicsLayer = new GraphicsLayer();
+                _map.add(graphicsLayer);
+                store.queryBuilder.setGraphicsLayer(graphicsLayer);
 
-            _view.popup.on("trigger-action", (event) => {
-                if (event.action.id === "open-detector-page") {
-                    const det_num =
-                        _view.popup.selectedFeature.attributes.det_num;
-                    navigate(`/detector/${det_num}`);
-                }
-            });
-            // Call Widgets
-            ZoomWidget(_view);
-            HomeWidget(_view);
-            BasemapToggleWidget(_view);
+                const detectorsLayer = await getDetectorsLayer();
+                _map.add(detectorsLayer);
+
+                store.queryBuilder.setDetectorsLayer(detectorsLayer);
+
+                store.queryBuilder.setMap(_map);
+                store.queryBuilder.setView(_view);
+            })();
         }
-    }, [mapDiv, store, navigate]);
+    }, [mapDiv, store]);
 
     return <div className="m-auto h-full w-full" ref={mapDiv}></div>;
 }
 
-export default DetectorMap;
+export default QueryBuilderMap;
