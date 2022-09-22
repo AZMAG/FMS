@@ -36,7 +36,7 @@ export default function DetectorMapControls() {
             <div className="bg-gray-100 py-3 px-4">
                 <ValidityStats />
             </div>
-            <div className="flex flex-col justify-center items-center mt-8 mb-2">
+            <div className="flex flex-col justify-center items-center bg-gray-100 py-10">
                 <DownloadShapefileButton />
                 <DownloadGeoJSONButton />
                 <DownloadESRIJSONButton />
