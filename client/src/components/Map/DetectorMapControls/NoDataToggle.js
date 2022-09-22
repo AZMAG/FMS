@@ -15,8 +15,10 @@ function NoDataToggle() {
                     <Switch
                         className="mr-2"
                         size="small"
-                        checked={store.detectorNoDataShown}
-                        onChange={() => store.toggleNoDataShown()}
+                        checked={store.detectorMap.noDataAvailableShown}
+                        onChange={() =>
+                            store.detectorMap.toggleNoDataAvailableShown()
+                        }
                     />
                 }
                 label="Show detectors with no data available"

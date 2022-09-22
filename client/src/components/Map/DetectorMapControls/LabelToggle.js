@@ -15,8 +15,8 @@ function LabelToggle() {
                     <Switch
                         className="mr-2"
                         size="small"
-                        checked={store.detectorLabels}
-                        onChange={() => store.toggleDetectorLabels()}
+                        checked={store.detectorMap.labelsVisible}
+                        onChange={() => store.detectorMap.toggleLabels()}
                     />
                 }
                 label="Show detector numbers"

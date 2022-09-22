@@ -1,5 +1,6 @@
+// import { useParams } from "react-router-dom";
 import React, { useRef } from "react";
-import { useParams } from "react-router-dom";
+
 import DetectorData from "../../Detector/detectorData";
 import QualityTable from "../../Detector/qualityTable";
 import ErrorTable from "../../Detector/errorTable";

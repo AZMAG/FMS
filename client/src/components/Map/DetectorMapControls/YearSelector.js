@@ -11,7 +11,7 @@ import { observer } from "mobx-react-lite";
 function YearSelector() {
     const store = useDataStore();
     function handleChange(e) {
-        store.setSelectedYear(e.target.value);
+        store.detectorMap.setSelectedYear(e.target.value);
     }
     let sortedYears = [...DocConfig.years];
     sortedYears.sort((a, b) => b - a);
@@ -21,7 +21,7 @@ function YearSelector() {
             <InputLabel>Year</InputLabel>
             <Select
                 size="small"
-                value={store.selectedYear}
+                value={store.detectorMap.selectedYear}
                 onChange={handleChange}
                 label="Year"
             >

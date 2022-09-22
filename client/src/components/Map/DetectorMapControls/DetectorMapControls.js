@@ -9,15 +9,24 @@ import DirectionSelector from "./DirectionSelector";
 import Instructions from "./Instructions";
 import LabelToggle from "./LabelToggle";
 import NoDataToggle from "./NoDataToggle";
+import ResetButton from "./ResetButton";
 
 export default function DetectorMapControls() {
     return (
         <div className="flex flex-col h-full px-3 gap-y-2 rounded-lg shadow-lg bg-white overflow-y-auto">
             <Instructions />
             <div className="bg-gray-100 py-3 px-4">
-                <YearSelector />
-                <DirectionSelector />
-                <RouteSelector />
+                <div className="flex">
+                    <div className="flex-1">
+                        <YearSelector />
+                        <DirectionSelector />
+                        <RouteSelector />
+                    </div>
+                    <div>
+                        <ResetButton />
+                    </div>
+                </div>
+
                 <LabelToggle />
                 <NoDataToggle />
             </div>

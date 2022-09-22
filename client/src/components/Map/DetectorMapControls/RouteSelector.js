@@ -10,12 +10,15 @@ function RouteSelector() {
     const store = useDataStore();
 
     function handleChange(e) {
-        store.setSelectedRoute(e.target.value);
+        store.detectorMap.setSelectedRoute(e.target.value);
     }
     let routes = [];
-    if (store.detectorsLayer && store.detectorsLayer.source) {
+    if (
+        store.detectorMap.detectorsLayer &&
+        store.detectorMap.detectorsLayer.source
+    ) {
         const distinctRoutes = [];
-        store.detectorsLayer.source.items.forEach((feature) => {
+        store.detectorMap.detectorsLayer.source.items.forEach((feature) => {
             const route = feature.attributes.Route;
             if (!distinctRoutes.includes(route)) {
                 distinctRoutes.push(route);
@@ -29,7 +32,7 @@ function RouteSelector() {
         <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
             <InputLabel>Route</InputLabel>
             <Select
-                value={store.selectedRoute}
+                value={store.detectorMap.selectedRoute}
                 onChange={handleChange}
                 label="Route"
             >

@@ -7,7 +7,8 @@ function DownloadESRIJSONButton() {
     const store = useDataStore();
 
     async function downloadESRIJSON() {
-        const { features } = await store.detectorsLayer.queryFeatures();
+        const { features } =
+            await store.detectorMap.detectorsLayer.queryFeatures();
         const esriJson = {
             objectIdFieldName: "objectid",
             geometryType: "esriGeometryPoint",

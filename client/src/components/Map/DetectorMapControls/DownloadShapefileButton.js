@@ -8,7 +8,8 @@ function DownloadShapefileButton() {
     const store = useDataStore();
 
     async function downloadShapefile() {
-        const { features } = await store.detectorsLayer.queryFeatures();
+        const { features } =
+            await store.detectorMap.detectorsLayer.queryFeatures();
         const attrs = features.map((feature) => {
             return {
                 ...feature.attributes,
