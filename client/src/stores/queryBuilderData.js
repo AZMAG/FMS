@@ -103,8 +103,115 @@ const queryBuilderData = {
         SVD: false,
         SVF: false,
     },
+    toggleAllAnalysisOptions(val) {
+        const analysisKeys = Object.keys(this.analysisOptions);
+        return analysisKeys.forEach((key) => {
+            this.analysisOptions[key] = val;
+        });
+    },
+    anyAnalysisOptionSelected() {
+        if (this.analysisOptions) {
+            const analysisKeys = Object.keys(this.analysisOptions);
+            return analysisKeys.some((key) => {
+                return this.analysisOptions[key];
+            });
+        }
+        return false;
+    },
     setAnalysisOption(key, val) {
         this.analysisOptions[key] = val;
+    },
+    timePeriodYear1: "",
+    setTimePeriodYear(timePeriod, year) {
+        this["timePeriodYear" + timePeriod] = year;
+    },
+    timePeriodYear2: "",
+    startDate1: "",
+    startDate2: "",
+    setStartDate(timePeriod, date) {
+        this["startDate" + timePeriod] = date;
+    },
+    endDate1: "",
+    endDate2: "",
+    setEndDate(timePeriod, date) {
+        this["endDate" + timePeriod] = date;
+    },
+    validated: false,
+    setValidated(val) {
+        this.validated = val;
+    },
+    checkValidity() {
+        this.setValidated(true);
+        if (
+            this.anyAnalysisOptionSelected() &&
+            this.selectedDetector &&
+            this.isTimePeriodValid(1) &&
+            this.isTimePeriodValid(2)
+        ) {
+            return true;
+        }
+        return false;
+    },
+    resetQueryBuilder() {
+        this.setSelectedDetector(null);
+        this.setTimePeriodYear(1, "");
+        this.setTimePeriodYear(2, "");
+        this.setStartDate(1, "");
+        this.setStartDate(2, "");
+        this.setEndDate(1, "");
+        this.setEndDate(2, "");
+        this.toggleAllAnalysisOptions(false);
+        this.setValidated(false);
+    },
+    anyChanges() {
+        if (this.anyAnalysisOptionSelected()) {
+            return true;
+        }
+
+        if (this.selectedDetector) {
+            return true;
+        }
+
+        if (this.timePeriodYear1 !== "") {
+            return true;
+        }
+        if (this.timePeriodYear2 !== "") {
+            return true;
+        }
+        if (this.startDate1 !== "") {
+            return true;
+        }
+        if (this.startDate2 !== "") {
+            return true;
+        }
+        if (this.endDate1 !== "") {
+            return true;
+        }
+        if (this.endDate2 !== "") {
+            return true;
+        }
+        if (this.validated) {
+            return true;
+        }
+
+        return false;
+    },
+    isTimePeriodValid(timePeriod) {
+        if (this["timePeriodYear" + timePeriod] !== "") {
+            return true;
+        }
+
+        const startDate = this["startDate" + timePeriod];
+        const endDate = this["endDate" + timePeriod];
+
+        if (startDate !== "" && endDate !== "") {
+            return true;
+        }
+        return false;
+    },
+    submitModalShown: false,
+    setSubmitModalShown(val) {
+        this.submitModalShown = val;
     },
 };
 
