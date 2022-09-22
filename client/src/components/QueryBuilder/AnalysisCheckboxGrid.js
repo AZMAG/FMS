@@ -65,7 +65,7 @@ function AnalysisCheckboxGrid() {
             >
                 <div className="flex">
                     <button
-                        className="bg-gray-500 text-white font-bold py-1 px-4 rounded"
+                        className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-4 rounded"
                         onClick={() =>
                             store.queryBuilder.toggleAllAnalysisOptions(true)
                         }
