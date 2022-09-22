@@ -8,6 +8,15 @@ async function getDetectorsLayer(store) {
     function getCbr() {
         let maxYear = Math.max(...DocConfig.years);
         let validityColors = ["red", "orange", "yellow", "lightgreen", "green"];
+        const noDataSymbol = {
+            type: "simple-marker",
+            style: "triangle",
+            size: "10px",
+            outline: {
+                width: 1,
+            },
+            color: "gray",
+        };
 
         let cbr = {
             type: "class-breaks",
@@ -22,17 +31,11 @@ async function getDetectorsLayer(store) {
                 },
             ],
             classBreakInfos: [],
-            defaultSymbol: store.detectorMap.noDataAvailableShown
-                ? {
-                      type: "simple-marker",
-                      style: "triangle",
-                      size: "10px",
-                      outline: {
-                          width: 1,
-                      },
-                      color: "gray",
-                  }
-                : null,
+            defaultSymbol: store
+                ? store?.detectorMap.noDataAvailableShown
+                    ? noDataSymbol
+                    : null
+                : noDataSymbol,
         };
         let iterCnt = 0;
         for (let i = 0; i < 1; i += 0.2) {
@@ -170,7 +173,6 @@ async function getDetectorsLayer(store) {
         });
         return graphic;
     });
-    console.log(store.detectorMap);
 
     const fl = new FeatureLayer({
         id: "detectors",
@@ -182,9 +184,9 @@ async function getDetectorsLayer(store) {
         labelingInfo,
         objectIdField: "ID",
         popupTemplate,
-        renderer,
-        definitionExpression: store.detectorMap.getDefExpression(),
-        labelsVisible: store.detectorMap.labelsVisible,
+        renderer: renderer,
+        definitionExpression: store?.detectorMap.getDefExpression(),
+        labelsVisible: store ? store.detectorMap.labelsVisible : true,
     });
 
     return fl;
