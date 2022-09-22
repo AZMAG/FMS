@@ -36,7 +36,7 @@ function DownloadShapefileButton() {
     return (
         <button
             onClick={downloadShapefile}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-4 rounded inline-flex items-center"
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold w-56 py-1 px-4 rounded inline-flex items-center"
         >
             <svg
                 className="fill-current w-4 h-4 mr-2"

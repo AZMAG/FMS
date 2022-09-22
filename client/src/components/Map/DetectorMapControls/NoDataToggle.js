@@ -21,7 +21,11 @@ function NoDataToggle() {
                         }
                     />
                 }
-                label="Show detectors with no data available"
+                label={
+                    <span className="text-sm">
+                        Show detectors with no data available
+                    </span>
+                }
             />
         </FormGroup>
     );
