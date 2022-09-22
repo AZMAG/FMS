@@ -19,7 +19,7 @@ function LabelToggle() {
                         onChange={() => store.detectorMap.toggleLabels()}
                     />
                 }
-                label="Show detector numbers"
+                label={<span className="text-sm">Show detector numbers</span>}
             />
         </FormGroup>
     );

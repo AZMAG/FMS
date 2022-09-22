@@ -15,25 +15,28 @@ export default function DetectorMapControls() {
     return (
         <div className="flex flex-col h-full px-3 gap-y-2 rounded-lg shadow-lg bg-white overflow-y-auto">
             <Instructions />
-            <div className="bg-gray-100 py-3 px-4">
-                <div className="flex">
-                    <div className="flex-1">
+            <div className="grid grid-rows-3 grid-flow-col bg-gray-100 py-3 px-4">
+                <div className="flex justify-between">
+                    <div>
                         <YearSelector />
                         <DirectionSelector />
-                        <RouteSelector />
                     </div>
                     <div>
                         <ResetButton />
                     </div>
                 </div>
-
-                <LabelToggle />
-                <NoDataToggle />
+                <div className="">
+                    <RouteSelector />
+                </div>
+                <div className="">
+                    <LabelToggle />
+                    <NoDataToggle />
+                </div>
             </div>
             <div className="bg-gray-100 py-3 px-4">
                 <ValidityStats />
             </div>
-            <div className="flex flex-col justify-center items-center mt-8 mb-2">
+            <div className="flex flex-col justify-center items-center bg-gray-100 py-10">
                 <DownloadShapefileButton />
                 <DownloadGeoJSONButton />
                 <DownloadESRIJSONButton />
