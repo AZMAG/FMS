@@ -1,0 +1,28 @@
+.scrollTopButton {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background: #2baab1;
+    height: 50px;
+    width: 60px;
+    border: none;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    outline: none;
+    bottom: 0px;
+    right: 30px;
+    -webkit-transition: opacity 0.35s;
+    -o-transition: opacity 0.35s;
+    animation: fadeIn 0.3s;
+    transition: opacity 0.35s;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
