@@ -7,7 +7,8 @@ export default function Nav() {
     const links = [
         { text: "Home", toLink: "/" },
         { text: "Corridors", toLink: "/corridors" },
-        { text: "Query Builder", toLink: "/query" },
+        { text: "Report Builder", toLink: "/report-builder" },
+        { text: "Reports History", toLink: "/reports" },
         { text: "Admin", toLink: "/admin" },
     ];
 
@@ -16,7 +17,6 @@ export default function Nav() {
             <nav className="flex">
                 <ul className="flex p-0 m-0">
                     {links.map((link, i) => {
-                        console.log(pathname);
                         const isActive = pathname === link.toLink;
 
                         function linkClicked() {
