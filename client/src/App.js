@@ -39,7 +39,7 @@ function App() {
                             element={<DetectorComparePage />}
                         />
                         <Route path="corridors" element={<CorridorsPage />} />
-                        <Route path="query" element={<QueryBuilderPage />} />
+                        <Route path="report" element={<QueryBuilderPage />} />
                         <Route path="admin" element={<AdminPage />} />
                     </Routes>
                     <Footer />

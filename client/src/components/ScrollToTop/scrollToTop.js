@@ -26,12 +26,12 @@ const ScrollToTopButton = ({ containerRef }) => {
 
     return (
         <button
-            className="scrollTopButton hover:bg-[#2baab1]/50"
+            className="scrollTopButton  hover:bg-[#2baab1]/50"
             type="button"
             title="Scroll to top"
             aria-label="Scroll to top"
             onClick={scrollTop}
-            style={{ display: showScroll ? "flex" : "none" }}
+            style={{ display: showScroll ? "inline-flex" : "none" }}
         >
             <FontAwesomeIcon
                 icon={faArrowCircleUp}
