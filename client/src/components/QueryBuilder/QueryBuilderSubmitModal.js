@@ -8,11 +8,18 @@ function QueryBuilderSubmitModal() {
     const store = useDataStore();
     const navigate = useNavigate();
 
-    function submitClicked() {
+    async function submitClicked() {
+        const res = await store.queryBuilder.addGenereatedReport();
+
+        if (res.status === 200) {
+            navigate(`/report/${res.data.id}`);
+        } else {
+            alert(
+                "There was an error generating your report request.  Please try again later."
+            );
+        }
+
         store.queryBuilder.setSubmitModalShown(false);
-        navigate(
-            "/detector/" + store.queryBuilder.selectedDetector.detector.det_num
-        );
     }
 
     return (
