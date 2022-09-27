@@ -1,13 +1,13 @@
 import React from "react";
-import DetectorDropdown from "./../../QueryBuilder/DetectorDropdown";
-import AnalysisCheckboxGrid from "./../../QueryBuilder/AnalysisCheckboxGrid";
-import TimePeriodSelection from "./../../QueryBuilder/TimePeriodSelection";
-import QueryBuilderMap from "./../../QueryBuilder/QueryBuilderMap";
-import ResetButton from "./../../QueryBuilder/ResetButton";
-import SubmitButton from "./../../QueryBuilder/SubmitButton";
-import QueryBuilderSubmitModal from "./../../QueryBuilder/QueryBuilderSubmitModal";
+import DetectorDropdown from "./../../ReportBuilder/DetectorDropdown";
+import AnalysisCheckboxGrid from "./../../ReportBuilder/AnalysisCheckboxGrid";
+import TimePeriodSelection from "./../../ReportBuilder/TimePeriodSelection";
+import ReportBuilderMap from "./../../ReportBuilder/ReportBuilderMap";
+import ResetButton from "./../../ReportBuilder/ResetButton";
+import SubmitButton from "./../../ReportBuilder/SubmitButton";
+import ReportBuilderSubmitModal from "./../../ReportBuilder/ReportBuilderSubmitModal";
 
-export default function QueryBuilder() {
+export default function ReportBuilder() {
     return (
         <>
             <div className="w-full h-full container m-auto mt-2 flex py-4 px-4">
@@ -25,10 +25,10 @@ export default function QueryBuilder() {
                     </div>
                 </div>
                 <div className="w-1/2">
-                    <QueryBuilderMap />
+                    <ReportBuilderMap />
                 </div>
             </div>
-            <QueryBuilderSubmitModal />
+            <ReportBuilderSubmitModal />
         </>
     );
 }

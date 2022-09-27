@@ -1,24 +1,22 @@
 import React, { useRef } from "react";
-import { useParams } from "react-router-dom";
 
-import CompareInfo from "../../Compare/compareInfo";
+import CompareInfo from "./CompareInfo";
 
-import DetectorData from "../../Detector/detectorData";
-import QualityTable from "../../Detector/qualityTable";
-import ErrorTable from "../../Detector/errorTable";
-import DetectorNotes from "../../Detector/detectorNotes";
-import DetectorDefinition from "../../Detector/detectorDefinition";
+import QualityTable from "../Detector/qualityTable";
+import ErrorTable from "../Detector/errorTable";
+// import DetectorNotes from "../Detector/detectorNotes";
+import DetectorDefinition from "../Detector/detectorDefinition";
 
-import AnnualHourlyAverageSpeeds from "../../Detector/Charts/AnnualHourlyAverageSpeeds";
-import AnnualHourlyAverageThroughput from "../../Detector/Charts/AnnualHourlyAverageThroughput";
-import AnnualHourlyAverageOccupancyPercent from "../../Detector/Charts/AnnualHourlyAverageOccupancyPercent";
-import AnnualAverageByLane from "../../Detector/Charts/AnnualAverageByLane";
-import DistributionOfDataPassingQCByDate from "../../Detector/Charts/DistributionOfDataPassingQCByDate";
-import DistributionOfDataPassingQCByWeekday from "../../Detector/Charts/DistributionOfDataPassingQCByWeekday";
+import AnnualHourlyAverageSpeeds from "../Detector/Charts/AnnualHourlyAverageSpeeds";
+import AnnualHourlyAverageThroughput from "../Detector/Charts/AnnualHourlyAverageThroughput";
+import AnnualHourlyAverageOccupancyPercent from "../Detector/Charts/AnnualHourlyAverageOccupancyPercent";
+import AnnualAverageByLane from "../Detector/Charts/AnnualAverageByLane";
+import DistributionOfDataPassingQCByDate from "../Detector/Charts/DistributionOfDataPassingQCByDate";
+import DistributionOfDataPassingQCByWeekday from "../Detector/Charts/DistributionOfDataPassingQCByWeekday";
 
-import ScrollToTopButton from "../../ScrollToTop/scrollToTop";
+import ScrollToTopButton from "./ScrollToTop/scrollToTop";
 
-export default function DetectorCompare() {
+export default function GeneratedReport({ data }) {
     const containerRef = useRef();
     const id = 50;
 
@@ -28,7 +26,7 @@ export default function DetectorCompare() {
                 <div className="grid grid-flow-col gap-6">
                     <CompareInfo />
                     <div className="bg-slate-200 px-2 my-auto">
-                        Place Map Hear
+                        Place Map Here
                     </div>
                     {/* <DetectorData det_num={id} /> */}
                     {/* <DetectorNotes /> */}

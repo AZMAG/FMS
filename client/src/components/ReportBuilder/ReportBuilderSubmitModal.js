@@ -26,7 +26,7 @@ function QueryBuilderSubmitModal() {
         <Modal open={store.queryBuilder.submitModalShown}>
             <div className="w-screen h-screen flex">
                 <div className="m-auto bg-white p-6 w-1/4 rounded-sm shadow-lg">
-                    Your time estimate is ...
+                    Are you sure you want to create a new report?
                     <div className="mt-2">
                         <button
                             onClick={() =>

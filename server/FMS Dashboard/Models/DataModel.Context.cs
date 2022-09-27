@@ -45,5 +45,6 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<vw_LaneErrors> vw_LaneErrors { get; set; }
         public virtual DbSet<vw_RawData> vw_RawData { get; set; }
         public virtual DbSet<detector_AvgAnnualVolumeByLane> detector_AvgAnnualVolumeByLane { get; set; }
+        public virtual DbSet<GeneratedReport> GeneratedReports { get; set; }
     }
 }

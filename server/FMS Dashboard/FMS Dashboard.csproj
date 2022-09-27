@@ -191,6 +191,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QueryBuilderController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +243,9 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\detector_Validity.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedReport.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vw_detector_AvgByLane.cs">
@@ -321,6 +325,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Detectors\" />
+    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\DataModel.edmx">

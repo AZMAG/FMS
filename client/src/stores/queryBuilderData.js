@@ -1,4 +1,9 @@
 import Graphic from "@arcgis/core/Graphic";
+import axios from "axios";
+import { v4 as uuid } from "uuid";
+
+axios.defaults.withCredentials = true;
+
 const queryBuilderData = {
     selectedDetector: null,
     setSelectedDetector(newSelected) {
@@ -212,6 +217,30 @@ const queryBuilderData = {
     submitModalShown: false,
     setSubmitModalShown(val) {
         this.submitModalShown = val;
+    },
+    async addGenereatedReport() {
+        const url = "http://magdevarcgis/fms/Reports/AddGeneratedReport";
+        const data = {
+            id: uuid(),
+            ...this.analysisOptions,
+            det_num: this.selectedDetector.detector.det_num,
+            timePeriodYear1: this.timePeriodYear1,
+            timePeriodYear2: this.timePeriodYear2,
+            startDate1: this.startDate1,
+            startDate2: this.startDate2,
+            endDate1: this.endDate1,
+            endDate2: this.endDate2,
+            completed: false,
+            date_submitted: new Date(),
+        };
+
+        const res = await axios.post(url, JSON.stringify(data), {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        return res;
     },
 };
 
