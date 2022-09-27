@@ -7,12 +7,8 @@ export default function Nav() {
     const links = [
         { text: "Home", toLink: "/" },
         { text: "Corridors", toLink: "/corridors" },
-<<<<<<< HEAD
-        { text: "Report Builder", toLink: "/report" },
-=======
         { text: "Report Builder", toLink: "/report-builder" },
         { text: "Reports History", toLink: "/reports" },
->>>>>>> f363d4ff8dfcc32ee2456de106e9dd4722d6d3cf
         { text: "Admin", toLink: "/admin" },
     ];
 

@@ -12,8 +12,10 @@
 .esri-widget--button:focus {
     outline: 0.5px solid #2baab1;
 }
-.esri-widget.esri-disabled {
+.esri-widget--button.esri-disabled {
     background-color: #95d4d8;
+}
+.esri-widget--button.esri-disabled [class*=" esri-icon-"] {
     color: #ffffff;
 }
 

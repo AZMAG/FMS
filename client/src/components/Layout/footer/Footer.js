@@ -11,7 +11,7 @@ export default function CustomFooter() {
                 Copyright&nbsp;&copy;&nbsp;{DocConfig.copyright}&nbsp;
                 <a
                     href={DocConfig.magLink}
-                    className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+                    className=" text-blue-600 hover:text-blue-800 hover:underline visited:text-purple-600"
                     target="_blank"
                     rel="noreferrer"
                 >
@@ -20,11 +20,11 @@ export default function CustomFooter() {
                 &nbsp;|&nbsp;
                 {DocConfig.version}&nbsp;|&nbsp;{DocConfig.date}
                 &nbsp;|&nbsp;
-                <Privacy className="text-blue-600 hover:text-blue-800 visited:text-purple-600" />
+                <Privacy />
                 &nbsp;|&nbsp;
-                <Terms className="text-blue-600 hover:text-blue-800 visited:text-purple-600" />
+                <Terms />
                 &nbsp;|&nbsp;
-                <LegalDisclaimer className="text-blue-600 hover:text-blue-800 visited:text-purple-600" />
+                <LegalDisclaimer />
             </div>
         </footer>
     );

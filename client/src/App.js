@@ -44,14 +44,10 @@ function App() {
                             element={<GeneratedReportsPage />}
                         />
                         <Route path="corridors" element={<CorridorsPage />} />
-<<<<<<< HEAD
-                        <Route path="report" element={<QueryBuilderPage />} />
-=======
                         <Route
                             path="report-builder"
                             element={<ReportBuilderPage />}
                         />
->>>>>>> f363d4ff8dfcc32ee2456de106e9dd4722d6d3cf
                         <Route path="admin" element={<AdminPage />} />
                     </Routes>
                     <Footer />
