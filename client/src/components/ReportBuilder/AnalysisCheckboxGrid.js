@@ -56,10 +56,12 @@ function AnalysisCheckboxGrid() {
         !store.queryBuilder.anyAnalysisOptionSelected();
 
     return (
-        <>
-            <h4 className="mb-3">Choose analysis to include in your report</h4>
+        <div className="flex flex-col">
+            <h4 className="font-semibold mb-1">
+                Choose analysis to include in your report
+            </h4>
             <div
-                className={`border border-gray-300 px-4 mr-4 py-3 ${
+                className={`flex flex-col border border-gray-300 gap-y-1 px-4 py-3 ${
                     showErrors ? "border-red-500" : ""
                 }`}
             >
@@ -79,8 +81,8 @@ function AnalysisCheckboxGrid() {
                         </span>
                     )}
                 </div>
-                <div className="flex">
-                    <div className="mr-1">
+                <div className="flex gap-x-1 text-sm">
+                    <div className="">
                         {analysisOptions.slice(0, half).map((option, i) => (
                             <AnalysisCheckbox
                                 checked={
@@ -114,7 +116,7 @@ function AnalysisCheckboxGrid() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

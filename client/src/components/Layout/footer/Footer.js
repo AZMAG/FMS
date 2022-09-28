@@ -6,7 +6,7 @@ import LegalDisclaimer from "../../Modals/legal/LegalModal";
 
 export default function CustomFooter() {
     return (
-        <footer className="flex flex-row relative bottom-0 justify-center mt-auto py-2 my-3">
+        <footer className="container flex flex-row relative bottom-0 justify-center mx-auto mt-auto py-2 my-3">
             <div className="flex text-xs">
                 Copyright&nbsp;&copy;&nbsp;{DocConfig.copyright}&nbsp;
                 <a
