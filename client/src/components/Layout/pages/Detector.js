@@ -14,7 +14,7 @@ import AnnualAverageByLane from "../../Detector/Charts/AnnualAverageByLane";
 import DistributionOfDataPassingQCByDate from "../../Detector/Charts/DistributionOfDataPassingQCByDate";
 import DistributionOfDataPassingQCByWeekday from "../../Detector/Charts/DistributionOfDataPassingQCByWeekday";
 
-import ScrollToTopButton from "./../../GeneratedReport/ScrollToTop/scrollToTop";
+import ScrollToTopButton from "../../ScrollToTop/scrollToTop";
 
 export default function Detector() {
     const containerRef = useRef();
