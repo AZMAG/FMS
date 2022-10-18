@@ -67,8 +67,8 @@ export default function CustomizedDialogs() {
         <div>
             <a
                 href={url}
-                className="underline hover:no-underline
-                   text-blue-600 hover:text-blue-800
+                className="
+                   text-blue-600 hover:text-blue-800 hover:underline
                    visited:text-purple-600"
                 onClick={handleClickOpen}
             >

@@ -26,10 +26,10 @@ export default function Nav() {
                             <li
                                 onClick={linkClicked}
                                 key={i}
-                                className={`bg-gray-400 text-mag-teal font-semibold color block py-2 px-2 mx-1 cursor-pointer hover:underline text-lg ${
+                                className={`bg-mag-teal text-mag-teal font-semibold color block py-2 px-2 mx-1 cursor-pointer text-lg ${
                                     isActive
-                                        ? "bg-opacity-30"
-                                        : "bg-opacity-0 hover:bg-opacity-5"
+                                        ? "bg-opacity-10"
+                                        : "bg-opacity-0 hover:bg-opacity-30"
                                 }`}
                             >
                                 {link.text}

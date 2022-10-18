@@ -3,7 +3,13 @@ import { useParams } from "react-router-dom";
 import getGeneratedReports from "./../../GeneratedReport/getGeneratedReports";
 import GeneratedReportLink from "./../../GeneratedReport/GeneratedReportLink";
 
+import { useNavigate } from "react-router-dom";
+import { Grid, GridColumn } from "@progress/kendo-react-grid";
+import { orderBy } from "@progress/kendo-data-query";
+import "./pages.css";
+
 export default function GeneratedReport() {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [reports, setReports] = useState([]);
     const { id } = useParams();
@@ -16,13 +22,29 @@ export default function GeneratedReport() {
             setLoading(false);
         })();
     }, [id]);
+    console.log(reports);
+
+    const [data, setData] = useState(reports);
+    const [sort, setSort] = useState([
+        {
+            field: "det_num",
+            dir: "desc",
+        },
+    ]);
+    const sortChange = (event) => {
+        setData(getReports(event.sort));
+        setSort(event.sort);
+    };
+    const getReports = (sort) => {
+        return orderBy(reports, sort);
+    };
 
     return (
-        <div>
+        <main className="container flex flex-row w-full h-full mx-auto grid-cols-2 gap-x-4 justify-items-center">
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <div className="w-1/2 bg-slate-100 m-auto p-4 text-center">
+                <div className="bg-slate-100 m-auto p-4">
                     <span>
                         There are currently {reports.length} generated reports.
                     </span>
@@ -31,8 +53,38 @@ export default function GeneratedReport() {
                             <GeneratedReportLink key={i} data={report} />
                         ))}
                     </div>
+                    {/* <Grid
+                        style={{
+                            height: "200px",
+                        }}
+                        data={data}
+                        sortable={true}
+                        sort={sort}
+                        onSortChange={sortChange}
+                        className="kui-grid-header"
+                    >
+                        <GridColumn
+                            className="kui-grid-col"
+                            field="det_num"
+                            title="Detector ID"
+                            width="130"
+                        />
+                        <GridColumn
+                            className="kui-grid-col"
+                            field="completed"
+                            title="Completed"
+                            width="100"
+                        />
+                        <GridColumn
+                            field="date_submitted"
+                            title="Date"
+                            width="200"
+                        />
+                        <GridColumn field="" title="Time Stamp" width="100" />
+                        <GridColumn field="id" title="Report ID" width="300" />
+                    </Grid> */}
                 </div>
             )}
-        </div>
+        </main>
     );
 }

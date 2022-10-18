@@ -31,15 +31,15 @@ function TimePeriodSelection({ timePeriod }) {
     sortedYears.sort((a, b) => b - a);
 
     return (
-        <div className=" flex-1">
-            <p className="mt-4 mb-1">Time Period {timePeriod}</p>
+        <div className="flex flex-col gap-0.5">
+            <p className="font-medium">Time Period {timePeriod}</p>
             <div
-                className={`border border-gray-300 p-1 mr-4 pb-3 pl-3  ${
+                className={`flex text-sm border border-gray-300 p-2  ${
                     showErrors ? "border-red-500" : ""
                 }`}
             >
                 <div className="flex items-center">
-                    <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
+                    <FormControl sx={{ minWidth: 85 }} size="small">
                         <InputLabel>Year</InputLabel>
                         <Select
                             size="small"
@@ -58,7 +58,7 @@ function TimePeriodSelection({ timePeriod }) {
                             ))}
                         </Select>
                     </FormControl>
-                    <span className="ml-4 mr-4">OR</span>
+                    <span className="font-medium mx-2">OR</span>
                     <div className="flex flex-col">
                         <TextField
                             onChange={(e) =>
@@ -68,7 +68,7 @@ function TimePeriodSelection({ timePeriod }) {
                             size="small"
                             label="Start Date"
                             type="date"
-                            sx={{ my: 2 }}
+                            sx={{ my: 1 }}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -81,6 +81,7 @@ function TimePeriodSelection({ timePeriod }) {
                             size="small"
                             label="End Date"
                             type="date"
+                            sx={{ my: 1 }}
                             InputLabelProps={{
                                 shrink: true,
                             }}

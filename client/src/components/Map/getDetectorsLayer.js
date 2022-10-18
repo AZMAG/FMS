@@ -129,9 +129,10 @@ async function getDetectorsLayer(store) {
     renderer = getCbr();
 
     popupTemplate = {
-        title: 'FMS Detector Locations <span style="display: none;">{*}</span>',
+        title: "FMS Detector Locations",
         content: (graphic) => {
-            return `{det_num} <br /> {Validity2021}`;
+            // return `{det_num} <br /> {Validity2021}`;
+            return `<div className="${"text-xl"}">{det_num} <br /> {Validity2021}</div>`;
         },
 
         actions: [

@@ -32,7 +32,7 @@ function DetectorDropdown() {
 
     return (
         <>
-            <div className="flex items-center mr-4">
+            <div className="flex items-center">
                 <p className="w-1/2">Select Detector:</p>
                 <Autocomplete
                     isOptionEqualToValue={(option, val) => {
