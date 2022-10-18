@@ -12,6 +12,8 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Jacobs_PlayPenEntities : DbContext
     {
@@ -32,7 +34,6 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<detector_AvgByLane> detector_AvgByLane { get; set; }
         public virtual DbSet<detector_AvgHourlySpeed> detector_AvgHourlySpeed { get; set; }
         public virtual DbSet<detector_AvgHourlyThroughput> detector_AvgHourlyThroughput { get; set; }
-        public virtual DbSet<detector_MiscData> detector_MiscData { get; set; }
         public virtual DbSet<detector_Validity> detector_Validity { get; set; }
         public virtual DbSet<Detector> Detectors { get; set; }
         public virtual DbSet<vw_detector_AvgByLane> vw_detector_AvgByLane { get; set; }
@@ -46,5 +47,31 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<vw_RawData> vw_RawData { get; set; }
         public virtual DbSet<detector_AvgAnnualVolumeByLane> detector_AvgAnnualVolumeByLane { get; set; }
         public virtual DbSet<GeneratedReport> GeneratedReports { get; set; }
+        public virtual DbSet<detector_MiscData> detector_MiscData { get; set; }
+    
+        public virtual int GenerateMiscDataReport(Nullable<System.Guid> report_id, Nullable<int> det_num, string start_date, string end_date, Nullable<bool> isPeriod1)
+        {
+            var report_idParameter = report_id.HasValue ?
+                new ObjectParameter("report_id", report_id) :
+                new ObjectParameter("report_id", typeof(System.Guid));
+    
+            var det_numParameter = det_num.HasValue ?
+                new ObjectParameter("det_num", det_num) :
+                new ObjectParameter("det_num", typeof(int));
+    
+            var start_dateParameter = start_date != null ?
+                new ObjectParameter("start_date", start_date) :
+                new ObjectParameter("start_date", typeof(string));
+    
+            var end_dateParameter = end_date != null ?
+                new ObjectParameter("end_date", end_date) :
+                new ObjectParameter("end_date", typeof(string));
+    
+            var isPeriod1Parameter = isPeriod1.HasValue ?
+                new ObjectParameter("isPeriod1", isPeriod1) :
+                new ObjectParameter("isPeriod1", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerateMiscDataReport", report_idParameter, det_numParameter, start_dateParameter, end_dateParameter, isPeriod1Parameter);
+        }
     }
 }

@@ -61,9 +61,9 @@ function TimePeriodSelection({ timePeriod }) {
                     <span className="ml-4 mr-4">OR</span>
                     <div className="flex flex-col">
                         <TextField
-                            onChange={(e) =>
-                                datePickerChange(true, e.target.value)
-                            }
+                            onChange={(e) => {
+                                datePickerChange(true, e.target.value);
+                            }}
                             value={store.queryBuilder["startDate" + timePeriod]}
                             size="small"
                             label="Start Date"
@@ -74,9 +74,9 @@ function TimePeriodSelection({ timePeriod }) {
                             }}
                         />
                         <TextField
-                            onChange={(e) =>
-                                datePickerChange(false, e.target.value)
-                            }
+                            onChange={(e) => {
+                                datePickerChange(false, e.target.value);
+                            }}
                             value={store.queryBuilder["endDate" + timePeriod]}
                             size="small"
                             label="End Date"
