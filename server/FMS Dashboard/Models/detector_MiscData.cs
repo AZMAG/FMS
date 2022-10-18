@@ -14,11 +14,13 @@ namespace FMS_Dashboard.Models
     
     public partial class detector_MiscData
     {
-        public int Id { get; set; }
+        public System.Guid id { get; set; }
         public Nullable<short> detector_number { get; set; }
         public Nullable<int> num_days { get; set; }
         public Nullable<int> gp_lane_cnt { get; set; }
         public Nullable<int> hov_lane_cnt { get; set; }
-        public int year { get; set; }
+        public Nullable<int> year { get; set; }
+        public Nullable<System.Guid> reportId { get; set; }
+        public Nullable<bool> isPeriod1 { get; set; }
     }
 }
