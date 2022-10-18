@@ -219,17 +219,31 @@ const queryBuilderData = {
         this.submitModalShown = val;
     },
     async addGenereatedReport() {
-        const url = "http://magdevarcgis/fms/Reports/AddGeneratedReport";
+        function formatDate(val) {
+            if (val === "") {
+                return "";
+            } else {
+                const tempDate = new Date(val);
+                tempDate.setDate(tempDate.getDate() + 1);
+                const yyyy = tempDate.getFullYear();
+                let mm = tempDate.getMonth() + 1;
+                let dd = tempDate.getDate();
+                return `${mm}/${dd}/${yyyy}`;
+            }
+        }
+
+        const url = "http://localhost:56118/Reports/AddGeneratedReport";
+        // const url = "http://magdevarcgis/fms/Reports/AddGeneratedReport";
         const data = {
             id: uuid(),
             ...this.analysisOptions,
             det_num: this.selectedDetector.detector.det_num,
             timePeriodYear1: this.timePeriodYear1,
             timePeriodYear2: this.timePeriodYear2,
-            startDate1: this.startDate1,
-            startDate2: this.startDate2,
-            endDate1: this.endDate1,
-            endDate2: this.endDate2,
+            startDate1: formatDate(this.startDate1),
+            startDate2: formatDate(this.startDate2),
+            endDate1: formatDate(this.endDate1),
+            endDate2: formatDate(this.endDate2),
             completed: false,
             date_submitted: new Date(),
         };

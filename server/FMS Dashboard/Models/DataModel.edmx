@@ -90,19 +90,18 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_AvgHourlyThroughput' d
           <Property Name="lane_type" Type="varchar" MaxLength="9" />
           <Property Name="year" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_MiscData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="detector_MiscData">
           <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="year" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="detector_number" Type="smallint" />
           <Property Name="num_days" Type="int" />
           <Property Name="gp_lane_cnt" Type="int" />
           <Property Name="hov_lane_cnt" Type="int" />
-          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="reportId" Type="uniqueidentifier" />
+          <Property Name="isPeriod1" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_Validity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -334,11 +333,19 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Parameter Name="det_num" Type="int" Mode="In" />
           <Parameter Name="year" Type="int" Mode="In" />
         </Function>
+        <Function Name="GenerateMiscDataReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="report_id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="det_num" Type="int" Mode="In" />
+          <Parameter Name="start_date" Type="nvarchar" Mode="In" />
+          <Parameter Name="end_date" Type="nvarchar" Mode="In" />
+          <Parameter Name="isPeriod1" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="Jacobs_PlayPenModelStoreContainer">
           <EntitySet Name="ApplicationRole" EntityType="Self.ApplicationRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationUser" EntityType="Self.ApplicationUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CorridorDetector" EntityType="Self.CorridorDetector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Corridors" EntityType="Self.Corridors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detector_MiscData" EntityType="Self.detector_MiscData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GeneratedReports" EntityType="Self.GeneratedReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="detector_AvgAnnualVolumeByLane" EntityType="Self.detector_AvgAnnualVolumeByLane" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -378,16 +385,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
     [detector_AvgHourlyThroughput].[lane_type] AS [lane_type], 
     [detector_AvgHourlyThroughput].[year] AS [year]
     FROM [dbo].[detector_AvgHourlyThroughput] AS [detector_AvgHourlyThroughput]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="detector_MiscData" EntityType="Self.detector_MiscData" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [detector_MiscData].[Id] AS [Id], 
-    [detector_MiscData].[detector_number] AS [detector_number], 
-    [detector_MiscData].[num_days] AS [num_days], 
-    [detector_MiscData].[gp_lane_cnt] AS [gp_lane_cnt], 
-    [detector_MiscData].[hov_lane_cnt] AS [hov_lane_cnt], 
-    [detector_MiscData].[year] AS [year]
-    FROM [dbo].[detector_MiscData] AS [detector_MiscData]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="detector_Validity" EntityType="Self.detector_Validity" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -615,18 +612,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="detector_MiscData">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="year" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="detector_number" Type="Int16" />
-          <Property Name="num_days" Type="Int32" />
-          <Property Name="gp_lane_cnt" Type="Int32" />
-          <Property Name="hov_lane_cnt" Type="Int32" />
-          <Property Name="year" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="detector_Validity">
           <Key>
             <PropertyRef Name="id" />
@@ -814,7 +799,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <EntitySet Name="detector_AvgByLane" EntityType="Self.detector_AvgByLane" />
           <EntitySet Name="detector_AvgHourlySpeed" EntityType="Self.detector_AvgHourlySpeed" />
           <EntitySet Name="detector_AvgHourlyThroughput" EntityType="Self.detector_AvgHourlyThroughput" />
-          <EntitySet Name="detector_MiscData" EntityType="Self.detector_MiscData" />
           <EntitySet Name="detector_Validity" EntityType="Self.detector_Validity" />
           <EntitySet Name="Detectors" EntityType="Self.Detector" />
           <EntitySet Name="vw_detector_AvgByLane" EntityType="Self.vw_detector_AvgByLane" />
@@ -832,6 +816,14 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           </AssociationSet>
           <EntitySet Name="detector_AvgAnnualVolumeByLane" EntityType="Jacobs_PlayPenModel.detector_AvgAnnualVolumeByLane" />
           <EntitySet Name="GeneratedReports" EntityType="Jacobs_PlayPenModel.GeneratedReport" />
+          <FunctionImport Name="GenerateMiscDataReport">
+            <Parameter Name="report_id" Mode="In" Type="Guid" />
+            <Parameter Name="det_num" Mode="In" Type="Int32" />
+            <Parameter Name="start_date" Mode="In" Type="String" />
+            <Parameter Name="end_date" Mode="In" Type="String" />
+            <Parameter Name="isPeriod1" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="detector_MiscData" EntityType="Jacobs_PlayPenModel.detector_MiscData" />
         </EntityContainer>
         <EntityType Name="detector_AvgAnnualVolumeByLane">
           <Key>
@@ -866,6 +858,19 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="endDate2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="completed" Type="Boolean" Nullable="false" />
           <Property Name="date_submitted" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="detector_MiscData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="num_days" Type="Int32" />
+          <Property Name="gp_lane_cnt" Type="Int32" />
+          <Property Name="hov_lane_cnt" Type="Int32" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="reportId" Type="Guid" />
+          <Property Name="isPeriod1" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -942,18 +947,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
                 <ScalarProperty Name="avg_throughput" ColumnName="avg_throughput" />
                 <ScalarProperty Name="hour_in_day" ColumnName="hour_in_day" />
                 <ScalarProperty Name="lane_type" ColumnName="lane_type" />
-                <ScalarProperty Name="year" ColumnName="year" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="detector_MiscData">
-            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_MiscData">
-              <MappingFragment StoreEntitySet="detector_MiscData">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
-                <ScalarProperty Name="num_days" ColumnName="num_days" />
-                <ScalarProperty Name="gp_lane_cnt" ColumnName="gp_lane_cnt" />
-                <ScalarProperty Name="hov_lane_cnt" ColumnName="hov_lane_cnt" />
                 <ScalarProperty Name="year" ColumnName="year" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1159,6 +1152,21 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
                 <ScalarProperty Name="AHAOP" ColumnName="AHAOP" />
                 <ScalarProperty Name="AHATPL" ColumnName="AHATPL" />
                 <ScalarProperty Name="AHAS" ColumnName="AHAS" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerateMiscDataReport" FunctionName="Jacobs_PlayPenModel.Store.GenerateMiscDataReport" />
+          <EntitySetMapping Name="detector_MiscData">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_MiscData">
+              <MappingFragment StoreEntitySet="detector_MiscData">
+                <ScalarProperty Name="isPeriod1" ColumnName="isPeriod1" />
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="hov_lane_cnt" ColumnName="hov_lane_cnt" />
+                <ScalarProperty Name="gp_lane_cnt" ColumnName="gp_lane_cnt" />
+                <ScalarProperty Name="num_days" ColumnName="num_days" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
