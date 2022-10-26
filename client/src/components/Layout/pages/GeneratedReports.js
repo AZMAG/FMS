@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import getGeneratedReports from "./../../GeneratedReport/getGeneratedReports";
-import GeneratedReportLink from "./../../GeneratedReport/GeneratedReportLink";
-
+import getGeneratedReports from "../../GeneratedReport/getGeneratedReports";
+import GeneratedReportLink from "../../GeneratedReport/GeneratedReportLink";
 import { useNavigate } from "react-router-dom";
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { orderBy } from "@progress/kendo-data-query";
-import { Button } from "@progress/kendo-react-buttons";
 import "./pages.css";
 
 export default function GeneratedReport() {
@@ -80,17 +78,7 @@ export default function GeneratedReport() {
                         There are currently <b>{reports.length}</b> generated
                         reports.
                     </span>
-                    {/* <div>
-                        {reports.map((report, i) => (
-                            <GeneratedReportLink key={i} data={report} />
-                        ))}
-                    </div> */}
                     <Grid
-                        style={
-                            {
-                                // height: "400px",
-                            }
-                        }
                         data={orderBy(newData, sort)}
                         sortable={true}
                         sort={sort}
@@ -103,28 +91,29 @@ export default function GeneratedReport() {
                             className="kui-grid-col"
                             field="det_num"
                             title="Detector ID"
-                            width="130"
                         />
                         <GridColumn
                             field="completed"
                             title="Completed"
                             cell={MyCustomCell}
-                            width="100"
                         />
                         <GridColumn
                             className="kui-grid-col"
                             field="dateSubmitted"
                             title="Date"
-                            width="110"
                         />
                         <GridColumn
                             className="kui-grid-col"
                             field="timeSubmitted"
                             title="Time Stamp"
-                            width="110"
                         />
-                        <GridColumn title="Submit" />
-                        {/* <GridColumn field="id" title="Report ID" /> */}
+                        <GridColumn
+                            className="kui-grid-col"
+                            title="Submit"
+                            cell={({ dataItem }) => (
+                                <GeneratedReportLink data={dataItem} />
+                            )}
+                        />
                     </Grid>
                 </div>
             )}
