@@ -110,13 +110,14 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.detector_Validity' does not hav
             <PropertyRef Name="id" />
             <PropertyRef Name="year" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="detector_number" Type="smallint" />
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="error" Type="int" />
           <Property Name="valid" Type="int" />
           <Property Name="total" Type="numeric" Precision="13" Scale="1" />
-          <Property Name="pct" Type="numeric" Precision="28" Scale="15" />
+          <Property Name="reportId" Type="uniqueidentifier" />
+          <Property Name="isPeriod1" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Jacobs_PlayPen.dbo.Detectors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -394,7 +395,8 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
     [detector_Validity].[error] AS [error], 
     [detector_Validity].[valid] AS [valid], 
     [detector_Validity].[total] AS [total], 
-    [detector_Validity].[pct] AS [pct]
+    [detector_Validity].[reportId] AS [reportId], 
+    [detector_Validity].[isPeriod1] AS [isPeriod1]
     FROM [dbo].[detector_Validity] AS [detector_Validity]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Detectors" EntityType="Self.Detectors" store:Type="Tables" store:Schema="dbo">
@@ -612,19 +614,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="detector_Validity">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="year" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" />
-          <Property Name="detector_number" Type="Int16" />
-          <Property Name="year" Type="Int32" Nullable="false" />
-          <Property Name="error" Type="Int32" />
-          <Property Name="valid" Type="Int32" />
-          <Property Name="total" Type="Decimal" Precision="13" Scale="1" />
-          <Property Name="pct" Type="Decimal" Precision="28" Scale="15" />
-        </EntityType>
         <EntityType Name="Detector">
           <Key>
             <PropertyRef Name="ID" />
@@ -799,7 +788,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <EntitySet Name="detector_AvgByLane" EntityType="Self.detector_AvgByLane" />
           <EntitySet Name="detector_AvgHourlySpeed" EntityType="Self.detector_AvgHourlySpeed" />
           <EntitySet Name="detector_AvgHourlyThroughput" EntityType="Self.detector_AvgHourlyThroughput" />
-          <EntitySet Name="detector_Validity" EntityType="Self.detector_Validity" />
           <EntitySet Name="Detectors" EntityType="Self.Detector" />
           <EntitySet Name="vw_detector_AvgByLane" EntityType="Self.vw_detector_AvgByLane" />
           <EntitySet Name="vw_detector_AvgHourlySpeed" EntityType="Self.vw_detector_AvgHourlySpeed" />
@@ -824,6 +812,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
             <Parameter Name="isPeriod1" Mode="In" Type="Boolean" />
           </FunctionImport>
           <EntitySet Name="detector_MiscData" EntityType="Jacobs_PlayPenModel.detector_MiscData" />
+          <EntitySet Name="detector_Validity" EntityType="Jacobs_PlayPenModel.detector_Validity" />
         </EntityContainer>
         <EntityType Name="detector_AvgAnnualVolumeByLane">
           <Key>
@@ -869,6 +858,20 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="gp_lane_cnt" Type="Int32" />
           <Property Name="hov_lane_cnt" Type="Int32" />
           <Property Name="year" Type="Int32" />
+          <Property Name="reportId" Type="Guid" />
+          <Property Name="isPeriod1" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="detector_Validity">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="error" Type="Int32" />
+          <Property Name="valid" Type="Int32" />
+          <Property Name="total" Type="Decimal" Precision="13" Scale="1" />
           <Property Name="reportId" Type="Guid" />
           <Property Name="isPeriod1" Type="Boolean" />
         </EntityType>
@@ -948,19 +951,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
                 <ScalarProperty Name="hour_in_day" ColumnName="hour_in_day" />
                 <ScalarProperty Name="lane_type" ColumnName="lane_type" />
                 <ScalarProperty Name="year" ColumnName="year" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="detector_Validity">
-            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_Validity">
-              <MappingFragment StoreEntitySet="detector_Validity">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
-                <ScalarProperty Name="year" ColumnName="year" />
-                <ScalarProperty Name="error" ColumnName="error" />
-                <ScalarProperty Name="valid" ColumnName="valid" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="pct" ColumnName="pct" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1166,6 +1156,20 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
                 <ScalarProperty Name="hov_lane_cnt" ColumnName="hov_lane_cnt" />
                 <ScalarProperty Name="gp_lane_cnt" ColumnName="gp_lane_cnt" />
                 <ScalarProperty Name="num_days" ColumnName="num_days" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detector_Validity">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_Validity">
+              <MappingFragment StoreEntitySet="detector_Validity">
+                <ScalarProperty Name="isPeriod1" ColumnName="isPeriod1" />
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="valid" ColumnName="valid" />
+                <ScalarProperty Name="error" ColumnName="error" />
+                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="detector_number" ColumnName="detector_number" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

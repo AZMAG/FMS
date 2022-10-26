@@ -83,7 +83,8 @@ async function getDetectorsLayer(store) {
                 });
 
                 if (currData.length === 1) {
-                    row[`Validity${year}`] = currData[0].pct;
+                    row[`Validity${year}`] =
+                        currData[0].valid / currData[0].total;
                 } else {
                     row[`Validity${year}`] = null;
                 }
