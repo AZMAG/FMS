@@ -14,12 +14,13 @@ namespace FMS_Dashboard.Models
     
     public partial class detector_Validity
     {
-        public long id { get; set; }
+        public System.Guid id { get; set; }
         public Nullable<short> detector_number { get; set; }
         public int year { get; set; }
         public Nullable<int> error { get; set; }
         public Nullable<int> valid { get; set; }
         public Nullable<decimal> total { get; set; }
-        public Nullable<decimal> pct { get; set; }
+        public Nullable<System.Guid> reportId { get; set; }
+        public Nullable<bool> isPeriod1 { get; set; }
     }
 }
