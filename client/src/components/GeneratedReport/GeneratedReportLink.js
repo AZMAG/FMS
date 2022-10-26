@@ -3,26 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 export default function GeneratedReportLink({ data }) {
     const navigate = useNavigate();
-    // console.log(data);
+    console.log(data);
 
     function linkClicked(e) {
         navigate(`/report/${data.id}`);
     }
-    const date = new Date(parseInt(data.date_submitted.substr(6)));
 
     return (
         <button
-            className="cursor-pointer font-bold text-blue-600 underline block border border-black p-3 m-3"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={linkClicked}
         >
-            <span className="mr-2">Detector: {data.det_num}</span>
-            <span>
-                <b>
-                    {date.toLocaleDateString() +
-                        " " +
-                        date.toLocaleTimeString()}
-                </b>
-            </span>
+            Get Report
         </button>
     );
 }

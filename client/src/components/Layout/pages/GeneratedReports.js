@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import getGeneratedReports from "./../../GeneratedReport/getGeneratedReports";
-import GeneratedReportLink from "./../../GeneratedReport/GeneratedReportLink";
-
+import getGeneratedReports from "../../GeneratedReport/getGeneratedReports";
+import GeneratedReportLink from "../../GeneratedReport/GeneratedReportLink";
 import { useNavigate } from "react-router-dom";
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { orderBy } from "@progress/kendo-data-query";
@@ -22,67 +21,100 @@ export default function GeneratedReport() {
             setLoading(false);
         })();
     }, [id]);
-    console.log(reports);
+    // console.log(reports);
 
-    const [data, setData] = useState(reports);
-    const [sort, setSort] = useState([
+    const newData = [];
+    reports.forEach((x) => {
+        const date = new Date(parseInt(x.date_submitted.substr(6)));
+        newData.push({
+            det_num: x.det_num,
+            completed: x.completed,
+            dateSubmitted: date.toLocaleDateString(),
+            timeSubmitted: date.toLocaleTimeString(),
+            id: x.id,
+        });
+    });
+    // console.log(newData);
+
+    const initSort = [
         {
             field: "det_num",
             dir: "desc",
         },
-    ]);
-    const sortChange = (event) => {
-        setData(getReports(event.sort));
-        setSort(event.sort);
+    ];
+    const [sort, setSort] = useState(initSort);
+
+    // Style the completed column
+    const CustomCell = (props) => {
+        const field = props.field || "";
+        const value = props.dataItem[field];
+        return (
+            <td
+                style={{
+                    color: value
+                        ? props.myProp[0].color
+                        : props.myProp[1].color,
+                }}
+                className="kui-grid-col"
+                colSpan={props.colSpan}
+                role={"gridcell"}
+            >
+                {value === null ? "" : props.dataItem[field].toString()}
+            </td>
+        );
     };
-    const getReports = (sort) => {
-        return orderBy(reports, sort);
-    };
+    const customData = [{ color: "green" }, { color: "red" }];
+    const MyCustomCell = (props) => (
+        <CustomCell {...props} myProp={customData} />
+    );
 
     return (
         <main className="container flex flex-row w-full h-full mx-auto grid-cols-2 gap-x-4 justify-items-center">
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <div className="bg-slate-100 m-auto p-4">
+                <div className="container bg-slate-100 mx-80 p-4">
                     <span>
-                        There are currently {reports.length} generated reports.
+                        There are currently <b>{reports.length}</b> generated
+                        reports.
                     </span>
-                    <div>
-                        {reports.map((report, i) => (
-                            <GeneratedReportLink key={i} data={report} />
-                        ))}
-                    </div>
-                    {/* <Grid
-                        style={{
-                            height: "200px",
-                        }}
-                        data={data}
+                    <Grid
+                        data={orderBy(newData, sort)}
                         sortable={true}
                         sort={sort}
-                        onSortChange={sortChange}
+                        onSortChange={(e) => {
+                            setSort(e.sort);
+                        }}
                         className="kui-grid-header"
                     >
                         <GridColumn
                             className="kui-grid-col"
                             field="det_num"
                             title="Detector ID"
-                            width="130"
+                        />
+                        <GridColumn
+                            field="completed"
+                            title="Completed"
+                            cell={MyCustomCell}
                         />
                         <GridColumn
                             className="kui-grid-col"
-                            field="completed"
-                            title="Completed"
-                            width="100"
+                            field="dateSubmitted"
+                            title="Date"
                         />
                         <GridColumn
-                            field="date_submitted"
-                            title="Date"
-                            width="200"
+                            className="kui-grid-col"
+                            field="timeSubmitted"
+                            title="Time Stamp"
                         />
-                        <GridColumn field="" title="Time Stamp" width="100" />
-                        <GridColumn field="id" title="Report ID" width="300" />
-                    </Grid> */}
+                        <GridColumn
+                            className="kui-grid-col"
+                            title="Submit"
+                            cell={({ dataItem }) => (
+                                <GeneratedReportLink data={dataItem} />
+                            )}
+                        />
+                    </Grid>
                 </div>
             )}
         </main>

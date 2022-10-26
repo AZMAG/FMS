@@ -36,7 +36,7 @@ const BootstrapDialogTitle = (props) => {
                         position: "absolute",
                         right: 8,
                         top: 8,
-                        color: (theme) => theme.palette.grey[500],
+                        color: (theme) => theme.palette.grey[50],
                     }}
                 >
                     <CloseIcon />
@@ -83,6 +83,7 @@ export default function CustomizedDialogs() {
                 <BootstrapDialogTitle
                     id="customized-dialog-title"
                     onClose={handleClose}
+                    className="bg-mag-teal text-white"
                 >
                     <FontAwesomeIcon icon={faUserEdit} />
                     &nbsp;Terms
