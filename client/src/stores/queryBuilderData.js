@@ -232,8 +232,8 @@ const queryBuilderData = {
             }
         }
 
-        const url = "http://localhost:56118/Reports/AddGeneratedReport";
-        // const url = "http://magdevarcgis/fms/Reports/AddGeneratedReport";
+        // const url = "http://localhost:56118/Reports/AddGeneratedReport";
+        const url = "http://magdevarcgis/fms/Reports/AddGeneratedReport";
         const data = {
             id: uuid(),
             ...this.analysisOptions,

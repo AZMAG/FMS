@@ -147,9 +147,8 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.Detectors' does not have a prim
           <Property Name="AHAS" Type="bit" Nullable="false" />
           <Property Name="AHATPL" Type="bit" Nullable="false" />
           <Property Name="AHAOP" Type="bit" Nullable="false" />
-          <Property Name="AAL" Type="bit" Nullable="false" />
+          <Property Name="AAL" Type="int" Nullable="false" />
           <Property Name="DDPQCCD" Type="bit" Nullable="false" />
-          <Property Name="DDPQCCW" Type="bit" Nullable="false" />
           <Property Name="AQCFHD" Type="bit" Nullable="false" />
           <Property Name="FVD" Type="bit" Nullable="false" />
           <Property Name="SVD" Type="bit" Nullable="false" />
@@ -157,10 +156,10 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.Detectors' does not have a prim
           <Property Name="det_num" Type="int" Nullable="false" />
           <Property Name="timePeriodYear1" Type="int" />
           <Property Name="timePeriodYear2" Type="int" />
-          <Property Name="startDate1" Type="nvarchar" MaxLength="255" />
-          <Property Name="startDate2" Type="nvarchar" MaxLength="255" />
-          <Property Name="endDate1" Type="nvarchar" MaxLength="255" />
-          <Property Name="endDate2" Type="nvarchar" MaxLength="255" />
+          <Property Name="startDate1" Type="nvarchar" MaxLength="50" />
+          <Property Name="startDate2" Type="nvarchar" MaxLength="50" />
+          <Property Name="endDate1" Type="nvarchar" MaxLength="50" />
+          <Property Name="endDate2" Type="nvarchar" MaxLength="50" />
           <Property Name="completed" Type="bit" Nullable="false" />
           <Property Name="date_submitted" Type="datetime" Nullable="false" />
         </EntityType>
@@ -803,7 +802,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
             <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
           </AssociationSet>
           <EntitySet Name="detector_AvgAnnualVolumeByLane" EntityType="Jacobs_PlayPenModel.detector_AvgAnnualVolumeByLane" />
-          <EntitySet Name="GeneratedReports" EntityType="Jacobs_PlayPenModel.GeneratedReport" />
           <FunctionImport Name="GenerateMiscDataReport">
             <Parameter Name="report_id" Mode="In" Type="Guid" />
             <Parameter Name="det_num" Mode="In" Type="Int32" />
@@ -813,6 +811,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           </FunctionImport>
           <EntitySet Name="detector_MiscData" EntityType="Jacobs_PlayPenModel.detector_MiscData" />
           <EntitySet Name="detector_Validity" EntityType="Jacobs_PlayPenModel.detector_Validity" />
+          <EntitySet Name="GeneratedReports" EntityType="Jacobs_PlayPenModel.GeneratedReport" />
         </EntityContainer>
         <EntityType Name="detector_AvgAnnualVolumeByLane">
           <Key>
@@ -822,31 +821,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="lane" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="avg_annual_daily_traffic" Type="Int32" />
-        </EntityType>
-        <EntityType Name="GeneratedReport">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="AHAS" Type="Boolean" Nullable="false" />
-          <Property Name="AHATPL" Type="Boolean" Nullable="false" />
-          <Property Name="AHAOP" Type="Boolean" Nullable="false" />
-          <Property Name="AAL" Type="Boolean" Nullable="false" />
-          <Property Name="DDPQCCD" Type="Boolean" Nullable="false" />
-          <Property Name="DDPQCCW" Type="Boolean" Nullable="false" />
-          <Property Name="AQCFHD" Type="Boolean" Nullable="false" />
-          <Property Name="FVD" Type="Boolean" Nullable="false" />
-          <Property Name="SVD" Type="Boolean" Nullable="false" />
-          <Property Name="SVF" Type="Boolean" Nullable="false" />
-          <Property Name="det_num" Type="Int32" Nullable="false" />
-          <Property Name="timePeriodYear1" Type="Int32" />
-          <Property Name="timePeriodYear2" Type="Int32" />
-          <Property Name="startDate1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="startDate2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="endDate1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="endDate2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="completed" Type="Boolean" Nullable="false" />
-          <Property Name="date_submitted" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="detector_MiscData">
           <Key>
@@ -874,6 +848,30 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="total" Type="Decimal" Precision="13" Scale="1" />
           <Property Name="reportId" Type="Guid" />
           <Property Name="isPeriod1" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GeneratedReport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="AHAS" Type="Boolean" Nullable="false" />
+          <Property Name="AHATPL" Type="Boolean" Nullable="false" />
+          <Property Name="AHAOP" Type="Boolean" Nullable="false" />
+          <Property Name="AAL" Type="Int32" Nullable="false" />
+          <Property Name="DDPQCCD" Type="Boolean" Nullable="false" />
+          <Property Name="AQCFHD" Type="Boolean" Nullable="false" />
+          <Property Name="FVD" Type="Boolean" Nullable="false" />
+          <Property Name="SVD" Type="Boolean" Nullable="false" />
+          <Property Name="SVF" Type="Boolean" Nullable="false" />
+          <Property Name="det_num" Type="Int32" Nullable="false" />
+          <Property Name="timePeriodYear1" Type="Int32" />
+          <Property Name="timePeriodYear2" Type="Int32" />
+          <Property Name="startDate1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="startDate2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="endDate1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="endDate2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="completed" Type="Boolean" Nullable="false" />
+          <Property Name="date_submitted" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1120,32 +1118,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GeneratedReports">
-            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.GeneratedReport">
-              <MappingFragment StoreEntitySet="GeneratedReports">
-                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
-                <ScalarProperty Name="completed" ColumnName="completed" />
-                <ScalarProperty Name="endDate2" ColumnName="endDate2" />
-                <ScalarProperty Name="endDate1" ColumnName="endDate1" />
-                <ScalarProperty Name="startDate2" ColumnName="startDate2" />
-                <ScalarProperty Name="startDate1" ColumnName="startDate1" />
-                <ScalarProperty Name="timePeriodYear2" ColumnName="timePeriodYear2" />
-                <ScalarProperty Name="timePeriodYear1" ColumnName="timePeriodYear1" />
-                <ScalarProperty Name="det_num" ColumnName="det_num" />
-                <ScalarProperty Name="SVF" ColumnName="SVF" />
-                <ScalarProperty Name="SVD" ColumnName="SVD" />
-                <ScalarProperty Name="FVD" ColumnName="FVD" />
-                <ScalarProperty Name="AQCFHD" ColumnName="AQCFHD" />
-                <ScalarProperty Name="DDPQCCW" ColumnName="DDPQCCW" />
-                <ScalarProperty Name="DDPQCCD" ColumnName="DDPQCCD" />
-                <ScalarProperty Name="AAL" ColumnName="AAL" />
-                <ScalarProperty Name="AHAOP" ColumnName="AHAOP" />
-                <ScalarProperty Name="AHATPL" ColumnName="AHATPL" />
-                <ScalarProperty Name="AHAS" ColumnName="AHAS" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GenerateMiscDataReport" FunctionName="Jacobs_PlayPenModel.Store.GenerateMiscDataReport" />
           <EntitySetMapping Name="detector_MiscData">
             <EntityTypeMapping TypeName="Jacobs_PlayPenModel.detector_MiscData">
@@ -1171,6 +1143,31 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
                 <ScalarProperty Name="error" ColumnName="error" />
                 <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneratedReports">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.GeneratedReport">
+              <MappingFragment StoreEntitySet="GeneratedReports">
+                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+                <ScalarProperty Name="completed" ColumnName="completed" />
+                <ScalarProperty Name="endDate2" ColumnName="endDate2" />
+                <ScalarProperty Name="endDate1" ColumnName="endDate1" />
+                <ScalarProperty Name="startDate2" ColumnName="startDate2" />
+                <ScalarProperty Name="startDate1" ColumnName="startDate1" />
+                <ScalarProperty Name="timePeriodYear2" ColumnName="timePeriodYear2" />
+                <ScalarProperty Name="timePeriodYear1" ColumnName="timePeriodYear1" />
+                <ScalarProperty Name="det_num" ColumnName="det_num" />
+                <ScalarProperty Name="SVF" ColumnName="SVF" />
+                <ScalarProperty Name="SVD" ColumnName="SVD" />
+                <ScalarProperty Name="FVD" ColumnName="FVD" />
+                <ScalarProperty Name="AQCFHD" ColumnName="AQCFHD" />
+                <ScalarProperty Name="DDPQCCD" ColumnName="DDPQCCD" />
+                <ScalarProperty Name="AAL" ColumnName="AAL" />
+                <ScalarProperty Name="AHAOP" ColumnName="AHAOP" />
+                <ScalarProperty Name="AHATPL" ColumnName="AHATPL" />
+                <ScalarProperty Name="AHAS" ColumnName="AHAS" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

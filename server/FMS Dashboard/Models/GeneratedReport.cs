@@ -18,9 +18,8 @@ namespace FMS_Dashboard.Models
         public bool AHAS { get; set; }
         public bool AHATPL { get; set; }
         public bool AHAOP { get; set; }
-        public bool AAL { get; set; }
+        public int AAL { get; set; }
         public bool DDPQCCD { get; set; }
-        public bool DDPQCCW { get; set; }
         public bool AQCFHD { get; set; }
         public bool FVD { get; set; }
         public bool SVD { get; set; }

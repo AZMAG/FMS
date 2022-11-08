@@ -24,9 +24,9 @@
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_RawData" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Jacobs_PlayPenModel.FK_ApplicationUser_ApplicationRole" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgAnnualVolumeByLane" Width="1.5" PointX="0.75" PointY="12.75" />
-        <EntityTypeShape EntityType="Jacobs_PlayPenModel.GeneratedReport" Width="1.5" PointX="13.375" PointY="4.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_MiscData" Width="1.5" PointX="9.375" PointY="13.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_Validity" Width="1.5" PointX="13.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.GeneratedReport" Width="1.5" PointX="13.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

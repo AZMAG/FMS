@@ -45,9 +45,9 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<vw_LaneErrors> vw_LaneErrors { get; set; }
         public virtual DbSet<vw_RawData> vw_RawData { get; set; }
         public virtual DbSet<detector_AvgAnnualVolumeByLane> detector_AvgAnnualVolumeByLane { get; set; }
-        public virtual DbSet<GeneratedReport> GeneratedReports { get; set; }
         public virtual DbSet<detector_MiscData> detector_MiscData { get; set; }
         public virtual DbSet<detector_Validity> detector_Validity { get; set; }
+        public virtual DbSet<GeneratedReport> GeneratedReports { get; set; }
     
         public virtual int GenerateMiscDataReport(Nullable<System.Guid> report_id, Nullable<int> det_num, string start_date, string end_date, Nullable<bool> isPeriod1)
         {

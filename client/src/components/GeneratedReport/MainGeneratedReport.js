@@ -25,9 +25,9 @@ export default function GeneratedReport({ data }) {
             <div className="flex flex-col space-y-6 m-auto grid-cols-2 gap-x-4 justify-items-center">
                 <div className="grid grid-flow-col gap-6">
                     <CompareInfo />
-                    <div className="bg-slate-200 px-2 my-auto">
+                    {/* <div className="bg-slate-200 px-2 my-auto">
                         Place Map Here
-                    </div>
+                    </div> */}
                     {/* <DetectorData det_num={id} /> */}
                     {/* <DetectorNotes /> */}
                 </div>
@@ -58,7 +58,7 @@ export default function GeneratedReport({ data }) {
                         <div className="border-solid border-1"></div>
                     </div>
                 </div>
-                <div className="flex grid-cols-2 gap-x-4">
+                {/* <div className="flex grid-cols-2 gap-x-4">
                     <div className="flex-1 grid gap-y-4">
                         <QualityTable det_num={id} />
                         <ErrorTable det_num={id} />
@@ -79,7 +79,7 @@ export default function GeneratedReport({ data }) {
                         <AnnualAverageByLane det_num={id} />
                         <span />
                     </div>
-                </div>
+                </div> */}
             </div>
             <ScrollToTopButton containerRef={containerRef} />
         </main>
