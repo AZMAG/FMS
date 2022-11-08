@@ -55,7 +55,7 @@ export default function GeneratedReport() {
                         ? props.myProp[0].color
                         : props.myProp[1].color,
                 }}
-                className="kui-grid-col"
+                className="kui-grid-col uppercase"
                 colSpan={props.colSpan}
                 role={"gridcell"}
             >
@@ -93,7 +93,6 @@ export default function GeneratedReport() {
                             title="Detector ID"
                         />
                         <GridColumn
-                            className="uppercase"
                             field="completed"
                             title="Completed"
                             cell={MyCustomCell}
