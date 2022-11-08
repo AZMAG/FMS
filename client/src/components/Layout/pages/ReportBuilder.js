@@ -9,7 +9,7 @@ import ReportBuilderSubmitModal from "./../../ReportBuilder/ReportBuilderSubmitM
 
 export default function ReportBuilder() {
     return (
-        <main className="container mx-auto flex min-h-screen w-full grid-cols-2 flex-row justify-items-center gap-x-4">
+        <main className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4">
             <div className="flex w-1/2 flex-col gap-y-1 pt-2">
                 <DetectorDropdown />
                 <AnalysisCheckboxGrid />
