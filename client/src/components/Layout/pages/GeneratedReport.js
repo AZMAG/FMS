@@ -23,7 +23,7 @@ export default function GeneratedReport() {
     }, [id]);
 
     return (
-        <div>
+        <>
             {loading ? (
                 <div>Loading...</div>
             ) : (
@@ -41,6 +41,6 @@ export default function GeneratedReport() {
                     )}
                 </>
             )}
-        </div>
+        </>
     );
 }

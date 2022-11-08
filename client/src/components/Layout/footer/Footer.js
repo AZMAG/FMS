@@ -6,12 +6,12 @@ import LegalDisclaimer from "../../Modals/legal/LegalModal";
 
 export default function CustomFooter() {
     return (
-        <footer className="container flex flex-row relative bottom-0 justify-center mx-auto mt-auto py-2 my-3">
-            <div className="flex text-xs">
+        <footer className="container mx-auto my-auto bg-white py-2">
+            <div className="my-4 flex flex-row justify-center text-xs">
                 Copyright&nbsp;&copy;&nbsp;{DocConfig.copyright}&nbsp;
                 <a
                     href={DocConfig.magLink}
-                    className=" text-blue-600 hover:text-blue-800 hover:underline visited:text-purple-600"
+                    className=" text-blue-600 visited:text-purple-600 hover:text-blue-800 hover:underline"
                     target="_blank"
                     rel="noreferrer"
                 >

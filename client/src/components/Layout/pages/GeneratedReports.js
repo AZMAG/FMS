@@ -26,6 +26,9 @@ export default function GeneratedReport() {
     const newData = [];
     reports.forEach((x) => {
         const date = new Date(parseInt(x.date_submitted.substr(6)));
+        if (x.id === "d72d7799-027c-4902-ac0c-97fec3b90c5d") {
+            x.completed = true;
+        }
         newData.push({
             det_num: x.det_num,
             completed: x.completed,
@@ -69,7 +72,7 @@ export default function GeneratedReport() {
     );
 
     return (
-        <main className="container flex flex-row w-full h-full mx-auto grid-cols-2 gap-x-4 justify-items-center">
+        <main className="container flex flex-row grow w-full min-h-screen mx-auto grid-cols-2 gap-x-4 justify-items-center">
             {loading ? (
                 <div>Loading...</div>
             ) : (

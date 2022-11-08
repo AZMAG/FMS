@@ -28,7 +28,7 @@ function App() {
     //     });
     //   ReactGA.pageview(window.location.pathname + window.location.search)
     return (
-        <div className="flex flex-col w-full h-screen">
+        <div className="flex h-screen w-full flex-col">
             <DataProvider>
                 <Router>
                     <Header />

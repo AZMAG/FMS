@@ -7,6 +7,10 @@ import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import { useDataStore } from "../../stores/DataContext";
 import getDetectorsLayer from "../Map/getDetectorsLayer";
 
+import ZoomWidget from "../MapWidgets/zoomWidget";
+import HomeWidget from "../MapWidgets/homeWidget";
+import BasemapToggleWidget from "../MapWidgets/basemapToggleWidget";
+
 function QueryBuilderMap() {
     const mapDiv = useRef(null);
     const store = useDataStore();
@@ -53,6 +57,10 @@ function QueryBuilderMap() {
                 store.queryBuilder.setMap(_map);
                 store.queryBuilder.setView(_view);
             })();
+            // Call Widgets
+            ZoomWidget(_view);
+            HomeWidget(_view);
+            BasemapToggleWidget(_view);
         }
     }, [mapDiv, store]);
 
