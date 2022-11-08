@@ -26,9 +26,6 @@ export default function GeneratedReport() {
     const newData = [];
     reports.forEach((x) => {
         const date = new Date(parseInt(x.date_submitted.substr(6)));
-        if (x.id === "d72d7799-027c-4902-ac0c-97fec3b90c5d") {
-            x.completed = true;
-        }
         newData.push({
             det_num: x.det_num,
             completed: x.completed,
@@ -72,11 +69,11 @@ export default function GeneratedReport() {
     );
 
     return (
-        <main className="container flex flex-row grow w-full min-h-screen mx-auto grid-cols-2 gap-x-4 justify-items-center">
+        <main className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4">
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <div className="container bg-slate-100 mx-80 p-4">
+                <div className="container mx-80 bg-slate-100 p-4">
                     <span>
                         There are currently <b>{reports.length}</b> generated
                         reports.
@@ -96,6 +93,7 @@ export default function GeneratedReport() {
                             title="Detector ID"
                         />
                         <GridColumn
+                            className="uppercase"
                             field="completed"
                             title="Completed"
                             cell={MyCustomCell}

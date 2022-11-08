@@ -5,3 +5,6 @@
 td.kui-grid-col {
     text-align: center;
 }
+td.uppercase {
+    text-transform: uppercase;
+}
