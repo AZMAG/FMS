@@ -21,7 +21,7 @@ function ResetButton() {
             onClick={resetClicked}
             className={anyChanges ? defaultStyle : disabledStyle}
         >
-            <span>Reset</span>
+            Reset
         </button>
     );
 }

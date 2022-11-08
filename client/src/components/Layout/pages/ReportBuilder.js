@@ -9,15 +9,15 @@ import ReportBuilderSubmitModal from "./../../ReportBuilder/ReportBuilderSubmitM
 
 export default function ReportBuilder() {
     return (
-        <main className="container flex flex-row w-full h-full mx-auto grid-cols-2 justify-items-center">
-            <div className="flex flex-col gap-y-1 w-1/2 p-4">
+        <main className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4">
+            <div className="flex w-1/2 flex-col gap-y-1 pt-2">
                 <DetectorDropdown />
                 <AnalysisCheckboxGrid />
-                <div className="flex flex-wrap justify-around">
+                <div className="flex flex-wrap justify-between">
                     <TimePeriodSelection timePeriod={1} />
                     <TimePeriodSelection timePeriod={2} />
                 </div>
-                <div className="flex py-2 mt-2">
+                <div className="mt-3 flex space-x-4">
                     <ResetButton />
                     <SubmitButton />
                 </div>

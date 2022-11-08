@@ -55,7 +55,7 @@ export default function GeneratedReport() {
                         ? props.myProp[0].color
                         : props.myProp[1].color,
                 }}
-                className="kui-grid-col"
+                className="kui-grid-col uppercase"
                 colSpan={props.colSpan}
                 role={"gridcell"}
             >
@@ -69,11 +69,11 @@ export default function GeneratedReport() {
     );
 
     return (
-        <main className="container flex flex-row w-full h-full mx-auto grid-cols-2 gap-x-4 justify-items-center">
+        <main className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4">
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <div className="container bg-slate-100 mx-80 p-4">
+                <div className="container mx-80 bg-slate-100 p-4">
                     <span>
                         There are currently <b>{reports.length}</b> generated
                         reports.
