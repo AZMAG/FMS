@@ -67,7 +67,7 @@ export default function CustomizedDialogs() {
         <div>
             <a
                 href={url}
-                className="text-blue-600 hover:text-blue-800 hover:underline visited:text-purple-600"
+                className="text-blue-600 visited:text-purple-600 hover:text-blue-800 hover:underline"
                 onClick={handleClickOpen}
             >
                 Legal Disclaimer
@@ -90,7 +90,11 @@ export default function CustomizedDialogs() {
                     <LegalText />
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
+                    <Button
+                        className="bg-mag-teal text-white hover:bg-mag-teal/50"
+                        autoFocus
+                        onClick={handleClose}
+                    >
                         Close
                     </Button>
                 </DialogActions>
