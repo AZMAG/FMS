@@ -14,9 +14,12 @@ namespace FMS_Dashboard.Models
     
     public partial class detector_AvgAnnualVolumeByLane
     {
+        public System.Guid id { get; set; }
         public Nullable<short> detector_number { get; set; }
         public string lane { get; set; }
         public int year { get; set; }
         public Nullable<int> avg_annual_daily_traffic { get; set; }
+        public Nullable<System.Guid> reportId { get; set; }
+        public Nullable<bool> isPeriod1 { get; set; }
     }
 }

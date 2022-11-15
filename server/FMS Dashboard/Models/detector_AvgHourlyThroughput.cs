@@ -14,11 +14,13 @@ namespace FMS_Dashboard.Models
     
     public partial class detector_AvgHourlyThroughput
     {
-        public long id { get; set; }
+        public System.Guid id { get; set; }
         public Nullable<short> detector_number { get; set; }
         public Nullable<int> avg_throughput { get; set; }
         public string hour_in_day { get; set; }
         public string lane_type { get; set; }
-        public int year { get; set; }
+        public Nullable<int> year { get; set; }
+        public Nullable<System.Guid> reportId { get; set; }
+        public Nullable<bool> isPeriod1 { get; set; }
     }
 }
