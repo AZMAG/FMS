@@ -14,11 +14,11 @@ import {
 // import DetectorDefinition from "../Detector/detectorDefinition";
 
 import AnnualHourlyAverageSpeeds from "../Detector/Charts/AnnualHourlyAverageSpeeds";
-import AnnualHourlyAverageThroughput from "../Detector/Charts/AnnualHourlyAverageThroughput";
-import AnnualHourlyAverageOccupancyPercent from "../Detector/Charts/AnnualHourlyAverageOccupancyPercent";
-import AnnualAverageByLane from "../Detector/Charts/AnnualAverageByLane";
-import DistributionOfDataPassingQCByDate from "../Detector/Charts/DistributionOfDataPassingQCByDate";
-import DistributionOfDataPassingQCByWeekday from "../Detector/Charts/DistributionOfDataPassingQCByWeekday";
+// import AnnualHourlyAverageThroughput from "../Detector/Charts/AnnualHourlyAverageThroughput";
+// import AnnualHourlyAverageOccupancyPercent from "../Detector/Charts/AnnualHourlyAverageOccupancyPercent";
+// import AnnualAverageByLane from "../Detector/Charts/AnnualAverageByLane";
+// import DistributionOfDataPassingQCByDate from "../Detector/Charts/DistributionOfDataPassingQCByDate";
+// import DistributionOfDataPassingQCByWeekday from "../Detector/Charts/DistributionOfDataPassingQCByWeekday";
 
 import ScrollToTopButton from "../ScrollToTop/scrollToTop";
 
@@ -113,6 +113,12 @@ export default function GeneratedReport({ data }) {
                         />
                         {timePeriod1}
                     </div>
+                    <div className="mt-3 rounded bg-slate-100 py-1 px-3">
+                        <AnnualHourlyAverageSpeeds
+                            reportId={data.id}
+                            period1={true}
+                        />
+                    </div>
                 </div>
                 <div className="flex-1 border-l-2 px-3">
                     <div className="rounded bg-slate-100 py-1 px-3">
@@ -125,6 +131,13 @@ export default function GeneratedReport({ data }) {
                             aria-hidden="true"
                         />
                         {timePeriod2}
+                    </div>
+
+                    <div className="mt-3 rounded bg-slate-100 py-1 px-3">
+                        <AnnualHourlyAverageSpeeds
+                            reportId={data.id}
+                            period1={false}
+                        />
                     </div>
                 </div>
             </div>
