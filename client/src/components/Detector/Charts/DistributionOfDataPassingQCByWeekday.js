@@ -22,6 +22,7 @@ import {
     // ChartSeriesItemTooltip,
     // ChartCategoryAxisLabels,
 } from "@progress/kendo-react-charts";
+import LoadingChart from "../../Loaders/loadingChart";
 
 axios.defaults.withCredentials = true;
 
@@ -39,22 +40,32 @@ const fontAxis = `bold 8pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto
         "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
 
-export default function DistributionOfDataPassingQCByWeekday({ det_num }) {
+export default function DistributionOfDataPassingQCByWeekday({
+    det_num,
+    reportId,
+    period1,
+}) {
     // const [data, setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get(
-                "http://magdevarcgis/fms/Detector/GetErrors",
-                {
-                    params: {
-                        det_num: 50,
-                        year: "2021",
-                    },
-                }
-            );
+            let res = null;
+
+            if (reportId) {
+            } else {
+                res = await axios.get(
+                    "http://magdevarcgis/fms/Detector/GetErrors",
+                    {
+                        params: {
+                            det_num: 50,
+                            year: "2021",
+                        },
+                    }
+                );
+            }
+
             let _data = res.data.map((item) => {
                 item.date = new Date(
                     parseInt(item.collected.replace(/[^0-9 +]/g, ""))
@@ -109,7 +120,7 @@ export default function DistributionOfDataPassingQCByWeekday({ det_num }) {
             setDateLabels(labels);
             setSeries(seriesData);
         })();
-    }, [det_num]);
+    }, [det_num, setSeries, setDateLabels, period1, reportId]);
     return (
         <>
             {series.length > 0 ? (
@@ -160,7 +171,7 @@ export default function DistributionOfDataPassingQCByWeekday({ det_num }) {
                     </Chart>
                 </div>
             ) : (
-                <>Loading</>
+                <LoadingChart />
             )}
         </>
     );

@@ -6,25 +6,12 @@ import {
     faShield,
     faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import LoadingChart from "../Loaders/loadingChart";
-
-// import QualityTable from "../Detector/qualityTable";
-// import ErrorTable from "../Detector/errorTable";
-// import DetectorNotes from "../Detector/detectorNotes";
-// import DetectorDefinition from "../Detector/detectorDefinition";
-
-import AnnualHourlyAverageSpeeds from "../Detector/Charts/AnnualHourlyAverageSpeeds";
-// import AnnualHourlyAverageThroughput from "../Detector/Charts/AnnualHourlyAverageThroughput";
-// import AnnualHourlyAverageOccupancyPercent from "../Detector/Charts/AnnualHourlyAverageOccupancyPercent";
-// import AnnualAverageByLane from "../Detector/Charts/AnnualAverageByLane";
-// import DistributionOfDataPassingQCByDate from "../Detector/Charts/DistributionOfDataPassingQCByDate";
-// import DistributionOfDataPassingQCByWeekday from "../Detector/Charts/DistributionOfDataPassingQCByWeekday";
-
+import ReportChartsSection from "./ReportChartsSection";
 import ScrollToTopButton from "../ScrollToTop/scrollToTop";
 
 export default function GeneratedReport({ data }) {
     const containerRef = useRef();
-    console.log(data);
+    // console.log(data);
 
     let timePeriod1;
     let timePeriod2;
@@ -113,10 +100,7 @@ export default function GeneratedReport({ data }) {
                         />
                         {timePeriod1}
                     </div>
-                    <AnnualHourlyAverageSpeeds
-                        reportId={data.id}
-                        period1={true}
-                    />
+                    <ReportChartsSection id={data.id} period1={true} />
                 </div>
                 <div className="flex-1 space-y-4 border-l-2 px-3">
                     <div className="rounded bg-slate-100 py-1 px-3">
@@ -130,10 +114,7 @@ export default function GeneratedReport({ data }) {
                         />
                         {timePeriod2}
                     </div>
-                    <AnnualHourlyAverageSpeeds
-                        reportId={data.id}
-                        period1={false}
-                    />
+                    <ReportChartsSection id={data.id} period1={false} />
                 </div>
             </div>
             <ScrollToTopButton containerRef={containerRef} />

@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getTimeLabels, sortTimeData } from "./chartDataHelpers";
-
 import LineChart from "./LineChart";
+import LoadingChart from "../../Loaders/loadingChart";
 
 axios.defaults.withCredentials = true;
 
-export default function MiscDetectorData({ det_num }) {
+export default function MiscDetectorData({ det_num, reportId, period1 }) {
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get(
-                "http://magdevarcgis/fms/Detector/AvgHourlyThroughput",
-                {
-                    params: {
-                        det_num: 50,
-                        year: "2021",
-                    },
-                }
-            );
+            let res = null;
+            if (reportId) {
+            } else {
+                res = await axios.get(
+                    "http://magdevarcgis/fms/Detector/AvgHourlyThroughput",
+                    {
+                        params: {
+                            det_num,
+                            year: "2021",
+                        },
+                    }
+                );
+            }
+
             const _data = sortTimeData(res.data, "hour_in_day");
             const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
 
@@ -627,15 +632,21 @@ export default function MiscDetectorData({ det_num }) {
             setSeries(_series);
             setDateLabels(_dateLabels);
         })();
-    }, [det_num, setSeries, setDateLabels]);
+    }, [det_num, setSeries, setDateLabels, period1, reportId]);
     return (
-        <LineChart
-            field="avg_occ"
-            series={series}
-            title="Annual Hourly Average Occupancy Percent - weekdays"
-            catTitle="Average Occupancy Percent"
-            valueTitle=""
-            labels={dateLabels}
-        />
+        <>
+            {series.length ? (
+                <LineChart
+                    field="avg_occ"
+                    series={series}
+                    title="Annual Hourly Average Occupancy Percent - Weekdays"
+                    catTitle="Average Occupancy Percent"
+                    valueTitle=""
+                    labels={dateLabels}
+                />
+            ) : (
+                <LoadingChart />
+            )}
+        </>
     );
 }
