@@ -37,7 +37,7 @@ export default function LineChart({
     valueTitle,
     labels,
 }) {
-    console.log(series);
+    // console.log(series);
     return (
         <>
             {series.length > 0 ? (

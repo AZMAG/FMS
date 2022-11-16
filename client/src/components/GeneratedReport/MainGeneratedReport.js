@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCalendarDays,
@@ -7,6 +6,7 @@ import {
     faShield,
     faClock,
 } from "@fortawesome/free-solid-svg-icons";
+import LoadingChart from "../Loaders/loadingChart";
 
 // import QualityTable from "../Detector/qualityTable";
 // import ErrorTable from "../Detector/errorTable";
@@ -101,7 +101,7 @@ export default function GeneratedReport({ data }) {
                 className="container mx-auto mt-6 flex grow grid-cols-2 flex-row
                 justify-items-center"
             >
-                <div className="flex-1 border-r-2 px-3">
+                <div className="flex-1 space-y-4 border-r-2 px-3">
                     <div className="rounded bg-slate-100 py-1 px-3">
                         <h2 className="mb-1.5 text-xl font-bold tracking-tight text-gray-900">
                             Time Period
@@ -113,14 +113,12 @@ export default function GeneratedReport({ data }) {
                         />
                         {timePeriod1}
                     </div>
-                    <div className="mt-3 rounded bg-slate-100 py-1 px-3">
-                        <AnnualHourlyAverageSpeeds
-                            reportId={data.id}
-                            period1={true}
-                        />
-                    </div>
+                    <AnnualHourlyAverageSpeeds
+                        reportId={data.id}
+                        period1={true}
+                    />
                 </div>
-                <div className="flex-1 border-l-2 px-3">
+                <div className="flex-1 space-y-4 border-l-2 px-3">
                     <div className="rounded bg-slate-100 py-1 px-3">
                         <h2 className="mb-1.5 text-xl font-bold tracking-tight text-gray-900">
                             Time Period
@@ -132,13 +130,10 @@ export default function GeneratedReport({ data }) {
                         />
                         {timePeriod2}
                     </div>
-
-                    <div className="mt-3 rounded bg-slate-100 py-1 px-3">
-                        <AnnualHourlyAverageSpeeds
-                            reportId={data.id}
-                            period1={false}
-                        />
-                    </div>
+                    <AnnualHourlyAverageSpeeds
+                        reportId={data.id}
+                        period1={false}
+                    />
                 </div>
             </div>
             <ScrollToTopButton containerRef={containerRef} />

@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
+import LoadingList from "../Loaders/loadingList";
 
 axios.defaults.withCredentials = true;
 
@@ -63,7 +64,7 @@ export default function QualityTable({ det_num }) {
         <>
             {data ? (
                 <div className="bg-[#eeeeee] p-5">
-                    <h6 className="text-lg font-semibold mb-2">
+                    <h6 className="mb-2 text-lg font-semibold">
                         Count of Quality Control Flags by Time Period - weekdays
                     </h6>
                     <TableContainer component={Paper}>
@@ -104,7 +105,7 @@ export default function QualityTable({ det_num }) {
                     </TableContainer>
                 </div>
             ) : (
-                <>Loading</>
+                <LoadingList />
             )}
         </>
     );
