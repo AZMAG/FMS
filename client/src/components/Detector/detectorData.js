@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import loadingText from "../Loaders/loadingText";
+import LoadingList from "../Loaders/loadingList";
 
 axios.defaults.withCredentials = true;
 
@@ -68,7 +68,7 @@ export default function DetectorData({ det_num }) {
                     </div>
                 </div>
             ) : (
-                <loadingText />
+                <LoadingList />
             )}
         </>
     );

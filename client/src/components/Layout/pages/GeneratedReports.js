@@ -5,6 +5,7 @@ import GeneratedReportLink from "../../GeneratedReport/GeneratedReportLink";
 import { useNavigate } from "react-router-dom";
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { orderBy } from "@progress/kendo-data-query";
+import LoadingSpin from "../../Loaders/loadingSpin";
 import "./pages.css";
 
 export default function GeneratedReport() {
@@ -69,11 +70,17 @@ export default function GeneratedReport() {
     );
 
     return (
-        <main className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4">
+        <main
+            id="ReportsHistory"
+            className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4"
+        >
             {loading ? (
-                <div>Loading...</div>
+                <LoadingSpin />
             ) : (
                 <div className="container mx-80 bg-slate-100 p-4">
+                    <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        Generated Report History
+                    </h2>
                     <span>
                         There are currently <b>{reports.length}</b> generated
                         reports.

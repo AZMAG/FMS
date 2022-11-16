@@ -4,6 +4,7 @@ import getGeneratedReports from "./../../GeneratedReport/getGeneratedReports";
 import NoReportFound from "./../../GeneratedReport/NoReportFound";
 import NotComplete from "./../../GeneratedReport/NotComplete";
 import MainGeneratedReport from "./../../GeneratedReport/MainGeneratedReport";
+import LoadingSpin from "../../Loaders/loadingSpin";
 
 export default function GeneratedReport() {
     const [loading, setLoading] = useState(true);
@@ -25,7 +26,7 @@ export default function GeneratedReport() {
     return (
         <>
             {loading ? (
-                <div>Loading...</div>
+                <LoadingSpin />
             ) : (
                 <>
                     {reportData && reportData.id === id ? (

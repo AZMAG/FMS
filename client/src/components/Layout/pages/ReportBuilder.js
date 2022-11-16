@@ -9,8 +9,14 @@ import ReportBuilderSubmitModal from "./../../ReportBuilder/ReportBuilderSubmitM
 
 export default function ReportBuilder() {
     return (
-        <main className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4">
+        <main
+            id="ReportBuilder"
+            className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4"
+        >
             <div className="flex w-1/2 flex-col gap-y-1 pt-2">
+                <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                    Report Builder
+                </h2>
                 <DetectorDropdown />
                 <AnalysisCheckboxGrid />
                 <div className="flex flex-wrap justify-between">
