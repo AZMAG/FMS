@@ -7,10 +7,11 @@ import axios from "axios";
 // } from "./chartDataHelpers";
 
 import LineChart from "./LineChart";
+import LoadingChart from "../../Loaders/loadingChart";
 
 axios.defaults.withCredentials = true;
 
-export default function MiscDetectorData({ det_num }) {
+export default function MiscDetectorData({ det_num, reportId, period1 }) {
     const [series, setSeries] = useState([]);
     // const [dateLabels, setDateLabels] = useState([]);
 
@@ -93,13 +94,25 @@ export default function MiscDetectorData({ det_num }) {
         })();
     }, [det_num]);
     return (
-        <LineChart
-            field="avg_occ"
-            series={series}
-            title="Annual Average by Lane - raw data with zero values and without"
-            catTitle="ADT"
-            valueTitle=""
-            labels={["HOV Lane", "Lane 4", "Lane 3", "Lane 2", "Lane 1"]}
-        />
+        <>
+            {series.length ? (
+                <LineChart
+                    field="avg_occ"
+                    series={series}
+                    title="Annual Average by Lane - raw data with zero values and without"
+                    catTitle="ADT"
+                    valueTitle=""
+                    labels={[
+                        "HOV Lane",
+                        "Lane 4",
+                        "Lane 3",
+                        "Lane 2",
+                        "Lane 1",
+                    ]}
+                />
+            ) : (
+                <LoadingChart />
+            )}
+        </>
     );
 }

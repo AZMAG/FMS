@@ -7,12 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
+import LoadingList from "../Loaders/loadingList";
 
 axios.defaults.withCredentials = true;
 
 export default function ErrorTable({ det_num }) {
     const [data, setData] = useState(null);
-    // console.log(data);
+    console.log(data);
     const columns = [
         {
             field: "label",
@@ -63,7 +64,7 @@ export default function ErrorTable({ det_num }) {
         <>
             {data ? (
                 <div className="bg-[#eeeeee] p-5">
-                    <h6 className="text-lg font-semibold mb-2">
+                    <h6 className="mb-2 text-lg font-semibold">
                         Percent of Data Rows Flagged by Time Period - weekdays
                     </h6>
                     <TableContainer component={Paper}>
@@ -104,7 +105,7 @@ export default function ErrorTable({ det_num }) {
                     </TableContainer>
                 </div>
             ) : (
-                <>Loading</>
+                <LoadingList />
             )}
         </>
     );

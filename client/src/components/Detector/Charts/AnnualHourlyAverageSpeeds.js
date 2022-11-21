@@ -5,8 +5,8 @@ import {
     getMultipleSeriesByField,
     sortTimeData,
 } from "./chartDataHelpers";
-
 import LineChart from "./LineChart";
+import LoadingChart from "../../Loaders/loadingChart";
 
 axios.defaults.withCredentials = true;
 
@@ -55,15 +55,21 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
             setDateLabels(_dateLabels);
         })();
     }, [det_num, setSeries, setDateLabels, period1, reportId]);
-    console.log(series);
+    // console.log(series);
     return (
-        <LineChart
-            field="avg_speed"
-            series={series}
-            title="Annual Hourly Average Speeds - Weekdays"
-            catTitle="Average Speed (mph)"
-            valueTitle=""
-            labels={dateLabels}
-        />
+        <>
+            {series.length ? (
+                <LineChart
+                    field="avg_speed"
+                    series={series}
+                    title="Annual Hourly Average Speeds - Weekdays"
+                    catTitle="Average Speed (mph)"
+                    valueTitle=""
+                    labels={dateLabels}
+                />
+            ) : (
+                <LoadingChart />
+            )}
+        </>
     );
 }
