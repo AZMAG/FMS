@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import LoadingList from "../Loaders/loadingList";
+import { apiUrl } from "../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
@@ -48,15 +49,12 @@ export default function QualityTable({ det_num }) {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get(
-                "http://magdevarcgis/fms/Detector/GetErrorData",
-                {
-                    params: {
-                        det_num: 50,
-                        year: "2021",
-                    },
-                }
-            );
+            const res = await axios.get(apiUrl + "/Detector/GetErrorData", {
+                params: {
+                    det_num: 50,
+                    year: "2021",
+                },
+            });
             setData(res.data);
         })();
     }, [det_num]);

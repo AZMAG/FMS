@@ -1,5 +1,6 @@
 import Graphic from "@arcgis/core/Graphic";
 import axios from "axios";
+import { apiUrl } from "../DocConfig";
 import { v4 as uuid } from "uuid";
 
 axios.defaults.withCredentials = true;
@@ -233,7 +234,8 @@ const queryBuilderData = {
         }
 
         // const url = "http://localhost:56118/Reports/AddGeneratedReport";
-        const url = "http://magdevarcgis/fms/Reports/AddGeneratedReport";
+
+        const url = apiUrl + "/Reports/AddGeneratedReport";
         const data = {
             id: uuid(),
             ...this.analysisOptions,

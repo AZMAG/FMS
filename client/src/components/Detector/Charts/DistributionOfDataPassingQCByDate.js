@@ -20,6 +20,7 @@ import {
     ChartCategoryAxisItem,
 } from "@progress/kendo-react-charts";
 import LoadingChart from "../../Loaders/loadingChart";
+import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
@@ -51,15 +52,12 @@ export default function DistributionOfDataPassingQCByDate({
 
             if (reportId) {
             } else {
-                res = await axios.get(
-                    "http://magdevarcgis/fms/Detector/GetErrors",
-                    {
-                        params: {
-                            det_num,
-                            year: "2021",
-                        },
-                    }
-                );
+                res = await axios.get(apiUrl + "/Detector/GetErrors", {
+                    params: {
+                        det_num,
+                        year: "2021",
+                    },
+                });
             }
 
             let _data = res.data.map((item) => {

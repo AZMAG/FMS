@@ -10,28 +10,55 @@ import ReportChartsSection from "./ReportChartsSection";
 import ScrollToTopButton from "../ScrollToTop/scrollToTop";
 
 export default function GeneratedReport({ data }) {
-    const containerRef = useRef();
-    // console.log(data);
+    const toTimeString = (value, singularName) =>
+        `${value} ${singularName}${value !== 1 ? "s" : ""}`;
 
-    let timePeriod1;
-    let timePeriod2;
-    if (data.startDate1 === null) {
-        timePeriod1 = data.timePeriodYear1;
-        timePeriod2 = data.timePeriodYear2;
-    } else {
-        timePeriod1 = (
-            <>
-                {data.startDate1} - {data.endDate1}
-            </>
-        );
-        timePeriod2 = (
-            <>
-                {data.startDate2} - {data.endDate2}
-            </>
-        );
-    }
+    const readableTime = (ms) => {
+        const days = Math.floor(ms / (24 * 60 * 60 * 1000));
+        const daysMs = ms % (24 * 60 * 60 * 1000);
+        const hours = Math.floor(daysMs / (60 * 60 * 1000));
+        const hoursMs = ms % (60 * 60 * 1000);
+        const minutes = Math.floor(hoursMs / (60 * 1000));
+        const minutesMs = ms % (60 * 1000);
+        const seconds = Math.round(minutesMs / 1000);
+
+        const data = [
+            [days, "day"],
+            [hours, "hour"],
+            [minutes, "minute"],
+            [seconds, "second"],
+        ];
+
+        return data
+            .filter(([value]) => value > 0)
+            .map(([value, name]) => toTimeString(value, name))
+            .join(", ");
+    };
+    const containerRef = useRef();
+
+    // let timePeriod1Str;
+    // let timePeriod2Str;
+    // if (data.startDate1 === null) {
+    //     timePeriod1 = data.timePeriodYear1;
+    //     timePeriod2 = data.timePeriodYear2;
+    // } else {
+    //     timePeriod1 = (
+    //         <>
+    //             {data.startDate1} - {data.endDate1}
+    //         </>
+    //     );
+    //     timePeriod2 = (
+    //         <>
+    //             {data.startDate2} - {data.endDate2}
+    //         </>
+    //     );
+    // }
 
     const SubmittedDate = new Date(parseInt(data.date_submitted.substr(6)));
+    const CompletedDate = new Date(parseInt(data.date_completed.substr(6)));
+
+    const processingTimeString = CompletedDate - SubmittedDate;
+
     return (
         <main
             className="container mx-auto flex grow flex-col justify-items-center"
@@ -77,9 +104,9 @@ export default function GeneratedReport({ data }) {
                             className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                             aria-hidden="true"
                         />
-                        Time Submitted:
+                        Processing Time:
                         <span className="font-bold">
-                            &nbsp;{SubmittedDate.toLocaleTimeString()}
+                            &nbsp;{readableTime(processingTimeString)}
                         </span>
                     </div>
                 </div>
@@ -98,7 +125,13 @@ export default function GeneratedReport({ data }) {
                             className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                             aria-hidden="true"
                         />
-                        {timePeriod1}
+                        {data.startDate1 === null ? (
+                            <span>{data.timePeriodYear1}</span>
+                        ) : (
+                            <span>
+                                {data.startDate1} - {data.endDate1}
+                            </span>
+                        )}
                     </div>
                     <ReportChartsSection id={data.id} period1={true} />
                 </div>
@@ -112,7 +145,13 @@ export default function GeneratedReport({ data }) {
                             className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                             aria-hidden="true"
                         />
-                        {timePeriod2}
+                        {data.startDate2 === null ? (
+                            <span>{data.timePeriodYear2}</span>
+                        ) : (
+                            <span>
+                                {data.startDate2} - {data.endDate2}
+                            </span>
+                        )}
                     </div>
                     <ReportChartsSection id={data.id} period1={false} />
                 </div>

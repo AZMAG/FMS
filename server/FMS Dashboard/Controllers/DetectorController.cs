@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using FMS_Dashboard.Models;
 using System.Web.Mvc;
 
@@ -161,6 +160,15 @@ namespace FMS_Dashboard.Controllers
             using (var context = new Jacobs_PlayPenEntities())
             {
                 var data = context.detector_AvgHourlySpeed.Where(x => x.reportId == reportId).ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult AvgHourlyThroughputByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                var data = context.detector_AvgHourlyThroughput.Where(x => x.reportId == reportId).ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }

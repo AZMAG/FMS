@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 
 import DetectorData from "../../Detector/detectorData";
 import QualityTable from "../../Detector/qualityTable";
-import ErrorTable from "../../Detector/errorTable";
+import ErrorTable from "../../Detector/ErrorTable";
 import DetectorNotes from "../../Detector/detectorNotes";
 import DetectorDefinition from "../../Detector/detectorDefinition";
 

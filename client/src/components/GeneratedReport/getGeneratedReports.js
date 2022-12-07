@@ -1,8 +1,8 @@
 import axios from "axios";
+import { apiUrl } from "../../DocConfig";
 
-const url = "http://magdevarcgis/fms/Reports/GetGeneratedReports";
 async function getGeneratedReports() {
-    const res = await axios.get(url);
+    const res = await axios.get(apiUrl + "/Reports/GetGeneratedReports");
     return res.data;
 }
 

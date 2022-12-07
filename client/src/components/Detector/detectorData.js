@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingList from "../Loaders/loadingList";
+import { apiUrl } from "../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
@@ -32,7 +33,7 @@ export default function DetectorData({ det_num }) {
     useEffect(() => {
         (async () => {
             const res = await axios.get(
-                "http://magdevarcgis/fms/Detector/GetMiscDetectorData",
+                `${apiUrl}/Detector/GetMiscDetectorData`,
                 {
                     params: {
                         det_num: 50,

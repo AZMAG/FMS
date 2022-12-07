@@ -3,6 +3,7 @@ import axios from "axios";
 import { getTimeLabels, sortTimeData } from "./chartDataHelpers";
 import LineChart from "./LineChart";
 import LoadingChart from "../../Loaders/loadingChart";
+import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
@@ -16,7 +17,8 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
             if (reportId) {
             } else {
                 res = await axios.get(
-                    "http://magdevarcgis/fms/Detector/AvgHourlyThroughput",
+                    apiUrl + "/Detector/AvgHourlyThroughput",
+
                     {
                         params: {
                             det_num,

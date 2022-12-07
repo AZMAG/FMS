@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { apiUrl } from "../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
@@ -31,7 +32,7 @@ export default function CompareInfo({ det_num }) {
     useEffect(() => {
         (async () => {
             const res = await axios.get(
-                "http://magdevarcgis/fms/Detector/GetMiscDetectorData",
+                apiUrl + "/Detector/GetMiscDetectorData",
                 {
                     params: {
                         det_num: 50,
@@ -47,15 +48,15 @@ export default function CompareInfo({ det_num }) {
         <>
             {data ? (
                 <div className="px-2">
-                    <div className="font-bold text-lg mb-1">
+                    <div className="mb-1 text-lg font-bold">
                         Query Builder Report
                     </div>
                     <div className="">
-                        <ul className="bg-white rounded-lg border border-gray-200 w-96">
+                        <ul className="w-96 rounded-lg border border-gray-200 bg-white">
                             {dataItems.map((item, i) => (
                                 <li
                                     key={i}
-                                    className="flex justify-between px-6 py-2 border-b border-gray-200 w-full"
+                                    className="flex w-full justify-between border-b border-gray-200 px-6 py-2"
                                 >
                                     {item.label}:
                                     <span className="font-bold">

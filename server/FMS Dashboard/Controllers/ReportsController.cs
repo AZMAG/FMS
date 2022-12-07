@@ -46,6 +46,7 @@ namespace FMS_Dashboard.Controllers
                                     endDate2 = gr.endDate2,
                                     completed = gr.completed,
                                     date_submitted = gr.date_submitted,
+                                    date_completed = gr.date_completed,
                                     Location = det.Location,
                                     Route = det.Route,
                                     Direction = det.Direction,
@@ -73,8 +74,10 @@ namespace FMS_Dashboard.Controllers
                     {
                         AddReportMiscData(newReport);
                         AddAvgHourlySpeed(newReport);
+                        AddAvgHourlyThroughput(newReport);
                         UpdateStatusToComplete(newReport);
-                    });
+                       
+                     });
                     
                     return Json(newReport, JsonRequestBehavior.AllowGet);
                 }
@@ -89,10 +92,13 @@ namespace FMS_Dashboard.Controllers
         {
             using (var context = new Jacobs_PlayPenEntities())
             {
+
+                context.Database.CommandTimeout = 180;
                 try
                 {
                     var rep = context.GeneratedReports.First(r => r.id == report.id);
                        rep.completed = true;
+                    rep.date_completed = DateTime.Now;
                     context.SaveChanges();
 
                     return true;
@@ -103,33 +109,71 @@ namespace FMS_Dashboard.Controllers
                 }
             }
         }
+        class StartAndEndDates {
+            public string startDate1 { get; set; }
+            public string endDate1 { get; set; }
+            public string startDate2 { get; set; }
+            public string endDate2 { get; set; }
+        }
 
-        public bool AddAvgHourlySpeed(GeneratedReport newReport)
+        private StartAndEndDates GetStartAndEndDatesFromReport(GeneratedReport report)
         {
-            string startDate1 = newReport.startDate1;
-            string endDate1 = newReport.endDate1;
+            string startDate1 = report.startDate1;
+            string endDate1 = report.endDate1;
 
-            if (newReport.timePeriodYear1 != null)
+            if (report.timePeriodYear1 != null)
             {
-                startDate1 = "1/1/" + newReport.timePeriodYear1;
-                endDate1 = "12/31/" + newReport.timePeriodYear1;
+                startDate1 = "1/1/" + report.timePeriodYear1;
+                endDate1 = "12/31/" + report.timePeriodYear1;
             }
 
-            string startDate2 = newReport.startDate2;
-            string endDate2 = newReport.endDate2;
+            string startDate2 = report.startDate2;
+            string endDate2 = report.endDate2;
 
-            if (newReport.timePeriodYear2 != null)
+            if (report.timePeriodYear2 != null)
             {
-                startDate2 = "1/1/" + newReport.timePeriodYear2;
-                endDate2 = "12/31/" + newReport.timePeriodYear2;
+                startDate2 = "1/1/" + report.timePeriodYear2;
+                endDate2 = "12/31/" + report.timePeriodYear2;
             }
+            var rtnObj = new StartAndEndDates();
+            rtnObj.startDate1 = startDate1;
+            rtnObj.endDate1 = endDate1;
+            rtnObj.startDate2 = startDate2;
+            rtnObj.endDate2 = endDate2;
+            return rtnObj;
+        }
+
+        public bool AddAvgHourlySpeed(GeneratedReport newReport)    
+        {
+            var dateObj = GetStartAndEndDatesFromReport(newReport);
 
             using (var context = new Jacobs_PlayPenEntities())
             {
                 try
                 {
-                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, startDate1, endDate1, true);
-                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, startDate2, endDate2, false);
+                    context.Database.CommandTimeout = 180;
+                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+        public bool AddAvgHourlyThroughput(GeneratedReport newReport)
+        {
+            var dateObj = GetStartAndEndDatesFromReport(newReport);
+
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+
+                context.Database.CommandTimeout = 180;
+                try
+                {
+                    context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
                     return true;
                 }
                 catch (Exception ex)
@@ -142,30 +186,16 @@ namespace FMS_Dashboard.Controllers
         public bool AddReportMiscData(GeneratedReport newReport)
         {
 
-            string startDate1 = newReport.startDate1;
-            string endDate1 = newReport.endDate1;
-
-            if (newReport.timePeriodYear1 != null)
-            {
-                startDate1 = "1/1/" + newReport.timePeriodYear1;
-                endDate1 = "12/31/" + newReport.timePeriodYear1;
-            }
-
-            string startDate2 = newReport.startDate2;
-            string endDate2 = newReport.endDate2;
-
-            if (newReport.timePeriodYear2 != null)
-            {
-                startDate2 = "1/1/" + newReport.timePeriodYear2;
-                endDate2 = "12/31/" + newReport.timePeriodYear2;
-            }
+            var dateObj = GetStartAndEndDatesFromReport(newReport);
 
             using (var context = new Jacobs_PlayPenEntities())
             {
+
+                context.Database.CommandTimeout = 180;
                 try
                 {
-                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, startDate1, endDate1, true);
-                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, startDate2, endDate2, false);
+                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
                     return true;
                 }
                 catch (Exception ex)

@@ -25,8 +25,8 @@
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgHourlyThroughput" Width="1.5" PointX="9.75" PointY="13.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_MiscData" Width="1.5" PointX="13.75" PointY="10.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_Validity" Width="1.5" PointX="2.75" PointY="14.75" />
-        <EntityTypeShape EntityType="Jacobs_PlayPenModel.GeneratedReport" Width="1.5" PointX="13.375" PointY="4.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgHourlySpeed" Width="1.5" PointX="12.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.GeneratedReport" Width="1.5" PointX="13.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

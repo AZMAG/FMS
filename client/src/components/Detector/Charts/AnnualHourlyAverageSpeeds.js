@@ -7,10 +7,12 @@ import {
 } from "./chartDataHelpers";
 import LineChart from "./LineChart";
 import LoadingChart from "../../Loaders/loadingChart";
+import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num, reportId, period1 }) {
+    console.log(reportId);
     // const [data, setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
@@ -21,7 +23,7 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
 
             if (reportId) {
                 res = await axios.get(
-                    "http://magdevarcgis/fms/Detector/AvgHourlySpeedByReportId",
+                    apiUrl + "/Detector/AvgHourlySpeedByReportId",
                     {
                         params: {
                             reportId,
@@ -32,7 +34,8 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                 res.data = res.data.filter((d) => d.isPeriod1 === period1);
             } else {
                 res = await axios.get(
-                    "http://magdevarcgis/fms/Detector/AvgHourlySpeed",
+                    apiUrl + "/Detector/AvgHourlySpeed",
+
                     {
                         params: {
                             det_num,
