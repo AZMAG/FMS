@@ -55,7 +55,8 @@ namespace FMS_Dashboard.Controllers
                                     Type = det.Type,
                                     Length_ft = det.Length_ft,
                                     y = det.y,
-                                    x = det.x
+                                    x = det.x,
+                                    segment = det.Segment
                                 });
 
                 return Json(query.ToList(), JsonRequestBehavior.AllowGet);
@@ -72,9 +73,11 @@ namespace FMS_Dashboard.Controllers
                     context.SaveChanges();
                     Task.Run(() =>
                     {
-                        AddReportMiscData(newReport);
+                       AddReportMiscData(newReport);
                         AddAvgHourlySpeed(newReport);
                         AddAvgHourlyThroughput(newReport);
+                        AddAvgVolumeByLane(newReport);
+                        AddAvgOccupancyByLane(newReport);
                         UpdateStatusToComplete(newReport);
                        
                      });
@@ -162,6 +165,49 @@ namespace FMS_Dashboard.Controllers
                 }
             }
         }
+
+        public bool AddAvgOccupancyByLane(GeneratedReport newReport)
+        {
+            var dateObj = GetStartAndEndDatesFromReport(newReport);
+
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+
+                context.Database.CommandTimeout = 180;
+                try
+                {
+                    context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool AddAvgVolumeByLane(GeneratedReport newReport)
+        {
+            var dateObj = GetStartAndEndDatesFromReport(newReport);
+
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+
+                context.Database.CommandTimeout = 180;
+                try
+                {
+                    context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
         public bool AddAvgHourlyThroughput(GeneratedReport newReport)
         {
             var dateObj = GetStartAndEndDatesFromReport(newReport);

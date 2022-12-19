@@ -228,16 +228,19 @@
     <Compile Include="Models\Detector.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\detector_AvgAnnualVolumeByLane.cs">
+    <Compile Include="Models\detector_AvgByLane.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\detector_AvgByLane.cs">
+    <Compile Include="Models\detector_AvgHourlyOccupancy.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\detector_AvgHourlySpeed.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\detector_AvgHourlyThroughput.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\detector_AvgVolumeByLane.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\detector_MiscData.cs">

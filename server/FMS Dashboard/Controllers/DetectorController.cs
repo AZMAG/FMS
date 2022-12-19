@@ -154,6 +154,39 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
+        public JsonResult AvgHourlyOccupancyByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                var data = context.detector_AvgHourlyOccupancy.Where(x => x.reportId == reportId).ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetMiscDetectorDataByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                //if (year != null)
+                //{
+                var data = context.detector_MiscData.Where(x => x.reportId == reportId).ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+                //}
+
+            }
+        }
+
+        public JsonResult AvgVolumeByLaneByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                var data = context.detector_AvgVolumeByLane.Where(x => x.reportId == reportId).ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //detector_AvgVolumeByLane
+
 
         public JsonResult AvgHourlySpeedByReportId(Guid reportId)
         {
@@ -186,7 +219,7 @@ namespace FMS_Dashboard.Controllers
         {
             using (var context = new Jacobs_PlayPenEntities())
             {
-                var data = context.detector_AvgAnnualVolumeByLane.Where(x => x.detector_number == det_num && x.year == year).ToList();
+                var data = context.detector_AvgVolumeByLane.Where(x => x.detector_number == det_num && x.year == year).ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }

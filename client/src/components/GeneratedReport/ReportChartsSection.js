@@ -11,12 +11,12 @@ export default function ReportChartsSection({ id, period1 }) {
         <>
             <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
             <AnnualHourlyAverageThroughput reportId={id} period1={period1} />
-            {/* <AnnualHourlyAverageOccupancyPercent
+            <AnnualHourlyAverageOccupancyPercent
                 reportId={id}
                 period1={period1}
             />
             <AnnualAverageByLane reportId={id} period1={period1} />
-            <DistributionOfDataPassingQCByDate
+            {/* <DistributionOfDataPassingQCByDate
                 reportId={id}
                 period1={period1}
             />

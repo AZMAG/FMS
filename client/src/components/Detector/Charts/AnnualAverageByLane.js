@@ -1,98 +1,60 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import {
-// getTimeLabels,
-//   getMultipleSeriesByField,
-// sortTimeData,
-// } from "./chartDataHelpers";
-
+import {
+    getTimeLabels,
+    sortTimeData,
+    getMultipleSeriesByField,
+} from "./chartDataHelpers";
 import LineChart from "./LineChart";
 import LoadingChart from "../../Loaders/loadingChart";
+import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num, reportId, period1 }) {
     const [series, setSeries] = useState([]);
-    // const [dateLabels, setDateLabels] = useState([]);
+    const [dateLabels, setDateLabels] = useState([]);
 
     useEffect(() => {
         (async () => {
-            // const res = await axios.get(
-            //     "http://magdevarcgis/fms/Detector/AvgHourlyThroughput",
-            //     {
-            //         params: {
-            //             det_num: 50,
-            //             year: "2021",
-            //         },
-            //     }
-            // );
-            // const _data = sortTimeData(res.data, "hour_in_day");
-            // const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
-            const _series = [
-                {
-                    name: "ADT",
-                    field: "avg_occ",
-                    data: [
-                        {
-                            id: 3819,
-                            detector_number: 50,
-                            avg_occ: 2.14,
-                            hour_in_day: "HOV Lane",
-                            lane_type: "ALL Lanes",
-                            year: 2021,
+            let res = null;
+            if (reportId) {
+                res = await axios.get(
+                    apiUrl + "/Detector/AvgVolumeByLaneByReportId",
+                    {
+                        params: {
+                            reportId,
                         },
-                        {
-                            id: 3819,
-                            detector_number: 50,
-                            avg_occ: 2.14,
-                            hour_in_day: "12:30 AM",
-                            lane_type: "ALL Lanes",
-                            year: 2021,
+                    }
+                );
+
+                res.data = res.data.filter((d) => d.isPeriod1 === period1);
+            } else {
+                res = await axios.get(
+                    apiUrl + "/Detector/AvgHourlyThroughput",
+
+                    {
+                        params: {
+                            det_num,
+                            year: "2021",
                         },
-                        {
-                            id: 3819,
-                            detector_number: 50,
-                            avg_occ: 2.14,
-                            hour_in_day: "12:30 AM",
-                            lane_type: "ALL Lanes",
-                            year: 2021,
-                        },
-                        {
-                            id: 3819,
-                            detector_number: 50,
-                            avg_occ: 2.14,
-                            hour_in_day: "12:30 AM",
-                            lane_type: "ALL Lanes",
-                            year: 2021,
-                        },
-                    ],
-                    dashType: "solid",
-                },
-                {
-                    name: "Speed",
-                    field: "avg_occ",
-                    data: [],
-                    dashType: "longDash",
-                },
-                {
-                    name: "Occupancy",
-                    field: "avg_occ",
-                    data: [
-                        {
-                            id: 6530,
-                            detector_number: 50,
-                            avg_occ: 1.04,
-                            lane_type: "HOV",
-                            year: 2021,
-                        },
-                    ],
-                    dashType: "dash",
-                },
-            ];
+                    }
+                );
+            }
+
+            console.log(res.data);
+
+            const _data = sortTimeData(res.data, "hour_in_day");
+            const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
+            const _series = getMultipleSeriesByField(
+                _data,
+                "lane_type",
+                "avg_occupancy_percent"
+            );
             setSeries(_series);
-            // setDateLabels(_dateLabels);
+            setDateLabels(_dateLabels);
         })();
-    }, [det_num]);
+    }, [det_num, setSeries, setDateLabels, period1, reportId]);
     return (
         <>
             {series.length ? (

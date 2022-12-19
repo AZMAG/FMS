@@ -4,7 +4,8 @@ let docConfig = {
     copyright: "2022",
     magLink: "https://www.azmag.gov/",
     mainURL: "",
-    apiUrl: "http://localhost:56118/",
+    // apiUrl: "http://localhost:56118/",
+    apiUrl: "http://magdevarcgis/fms/",
     // 'http://magdevarcgis/fms/',
 
     years: [2015, 2016, 2017, 2018, 2019, 2020, 2021],

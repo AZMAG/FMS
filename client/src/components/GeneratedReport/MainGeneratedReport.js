@@ -8,6 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ReportChartsSection from "./ReportChartsSection";
 import ScrollToTopButton from "../ScrollToTop/scrollToTop";
+import GeneratedReportMap from "./GeneratedReportMap";
+import TimePeriodCard from "./TimePeriodCard";
 
 export default function GeneratedReport({ data }) {
     const toTimeString = (value, singularName) =>
@@ -58,6 +60,8 @@ export default function GeneratedReport({ data }) {
     const CompletedDate = new Date(parseInt(data.date_completed.substr(6)));
 
     const processingTimeString = CompletedDate - SubmittedDate;
+
+    console.log(data);
 
     return (
         <main
@@ -111,48 +115,24 @@ export default function GeneratedReport({ data }) {
                     </div>
                 </div>
             </div>
+            <div className="flex flex-grow flex-col justify-items-center">
+                <GeneratedReportMap
+                    x={data.x}
+                    y={data.y}
+                    segment={data.segment}
+                    direction={data.Direction}
+                />
+            </div>
             <div
                 className="container mx-auto mt-6 flex grow grid-cols-2 flex-row
                 justify-items-center"
             >
                 <div className="flex-1 space-y-4 border-r-2 px-3">
-                    <div className="rounded bg-slate-100 py-1 px-3">
-                        <h2 className="mb-1.5 text-xl font-bold tracking-tight text-gray-900">
-                            Time Period
-                        </h2>
-                        <FontAwesomeIcon
-                            icon={faCalendarDays}
-                            className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                            aria-hidden="true"
-                        />
-                        {data.startDate1 === null ? (
-                            <span>{data.timePeriodYear1}</span>
-                        ) : (
-                            <span>
-                                {data.startDate1} - {data.endDate1}
-                            </span>
-                        )}
-                    </div>
+                    <TimePeriodCard data={data} period1={true} />
                     <ReportChartsSection id={data.id} period1={true} />
                 </div>
                 <div className="flex-1 space-y-4 border-l-2 px-3">
-                    <div className="rounded bg-slate-100 py-1 px-3">
-                        <h2 className="mb-1.5 text-xl font-bold tracking-tight text-gray-900">
-                            Time Period
-                        </h2>
-                        <FontAwesomeIcon
-                            icon={faCalendarDays}
-                            className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                            aria-hidden="true"
-                        />
-                        {data.startDate2 === null ? (
-                            <span>{data.timePeriodYear2}</span>
-                        ) : (
-                            <span>
-                                {data.startDate2} - {data.endDate2}
-                            </span>
-                        )}
-                    </div>
+                    <TimePeriodCard data={data} period1={false} />
                     <ReportChartsSection id={data.id} period1={false} />
                 </div>
             </div>
