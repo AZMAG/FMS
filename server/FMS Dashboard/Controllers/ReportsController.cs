@@ -73,11 +73,12 @@ namespace FMS_Dashboard.Controllers
                     context.SaveChanges();
                     Task.Run(() =>
                     {
-                       AddReportMiscData(newReport);
-                        AddAvgHourlySpeed(newReport);
-                        AddAvgHourlyThroughput(newReport);
-                        AddAvgVolumeByLane(newReport);
-                        AddAvgOccupancyByLane(newReport);
+                        AddReportMiscData(newReport);
+                        AddSpeedVsFlow(newReport);
+                        // AddAvgHourlySpeed(newReport);
+                        // AddAvgHourlyThroughput(newReport);
+                        // AddAvgVolumeByLane(newReport);
+                        // AddAvgOccupancyByLane(newReport);
                         UpdateStatusToComplete(newReport);
                        
                      });
@@ -157,6 +158,26 @@ namespace FMS_Dashboard.Controllers
                     context.Database.CommandTimeout = 180;
                     context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
                     context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool AddSpeedVsFlow(GeneratedReport newReport)
+        {
+            var dateObj = GetStartAndEndDatesFromReport(newReport);
+
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                try
+                {
+                    context.Database.CommandTimeout = 180;
+                    context.GenerateSpeedVsFlowData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateSpeedVsFlowData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
                     return true;
                 }
                 catch (Exception ex)
