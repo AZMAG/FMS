@@ -176,7 +176,7 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-        public JsonResult SpeedVsFlowByReportId(Guid reportId)
+        public JsonResult SpeedVsFlowByReportId(Guid reportId, bool isPeriod1)
         {
             using (var context = new Jacobs_PlayPenEntities())
             {
@@ -186,8 +186,12 @@ namespace FMS_Dashboard.Controllers
                 
                 //if (year != null)
                 //{
-                var data = context.detector_SpeedVsFlow.Where(x => x.reportId == reportId).ToList();
-                return Json(data, JsonRequestBehavior.AllowGet);
+                var data = context.detector_SpeedVsFlow.Where(x => x.reportId == reportId && (x.isPeriod1 == isPeriod1))
+                        .Select(x => new { x.speed, x.vph, x.time_of_day, x.isPeriod1})
+                        .Take(30000)
+                        .ToList();
+                
+                    return Json(data, JsonRequestBehavior.AllowGet);
                     //}
                 }
                 catch (Exception ex)

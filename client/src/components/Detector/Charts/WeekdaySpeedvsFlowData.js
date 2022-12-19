@@ -24,6 +24,7 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                     {
                         params: {
                             reportId,
+                            isPeriod1: period1,
                         },
                     }
                 );
