@@ -11,14 +11,12 @@
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.Corridor" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.Detector" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_detector_AvgByLane" Width="1.875" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_detector_AvgHourlySpeed" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_detector_AvgHourlyThroughput" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_detector_MiscData" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_detector_Validity" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_Errors" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_ExistingLanes" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_LaneErrors" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_RawData" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Jacobs_PlayPenModel.FK_ApplicationUser_ApplicationRole" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgByLane" Width="1.5" PointX="5.75" PointY="4.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgHourlyThroughput" Width="1.5" PointX="9.75" PointY="13.75" />
@@ -28,6 +26,10 @@
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.GeneratedReport" Width="1.5" PointX="13.375" PointY="4.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgVolumeByLane" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgHourlyOccupancy" Width="1.5" PointX="14.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_SpeedVsFlow" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_RawData" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_detector_AvgAnnualVolumeByLane" Width="1.5" PointX="15.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_detector_AvgHourlySpeed" Width="1.5" PointX="5.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

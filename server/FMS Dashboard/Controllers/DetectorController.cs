@@ -176,6 +176,30 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
+        public JsonResult SpeedVsFlowByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                try
+                {
+
+                
+                //if (year != null)
+                //{
+                var data = context.detector_SpeedVsFlow.Where(x => x.reportId == reportId).ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+
+
+
         public JsonResult AvgVolumeByLaneByReportId(Guid reportId)
         {
             using (var context = new Jacobs_PlayPenEntities())
