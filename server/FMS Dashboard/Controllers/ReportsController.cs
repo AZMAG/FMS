@@ -105,11 +105,11 @@ namespace FMS_Dashboard.Controllers
                     context.SaveChanges();
                     Task.Run(() =>
                     {
-                        //AddReportMiscData(newReport);
+                        AddReportMiscData(newReport);
                         AddAvgHourlySpeed(newReport);
                         AddAvgHourlyThroughput(newReport);
-                        //AddAvgVolumeByLane(newReport);
-                        //AddAvgOccupancyByLane(newReport);
+                        AddAvgVolumeByLane(newReport);
+                        AddAvgOccupancyByLane(newReport);
                         UpdateStatusToComplete(newReport);
                         SendEmail(newReport);
                        

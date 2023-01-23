@@ -10,32 +10,9 @@ import ReportChartsSection from "./ReportChartsSection";
 import ScrollToTopButton from "../ScrollToTop/scrollToTop";
 import GeneratedReportMap from "./GeneratedReportMap";
 import TimePeriodCard from "./TimePeriodCard";
+import getReadableTime from "./getReadableTime";
 
 export default function GeneratedReport({ data }) {
-    const toTimeString = (value, singularName) =>
-        `${value} ${singularName}${value !== 1 ? "s" : ""}`;
-
-    const readableTime = (ms) => {
-        const days = Math.floor(ms / (24 * 60 * 60 * 1000));
-        const daysMs = ms % (24 * 60 * 60 * 1000);
-        const hours = Math.floor(daysMs / (60 * 60 * 1000));
-        const hoursMs = ms % (60 * 60 * 1000);
-        const minutes = Math.floor(hoursMs / (60 * 1000));
-        const minutesMs = ms % (60 * 1000);
-        const seconds = Math.round(minutesMs / 1000);
-
-        const data = [
-            [days, "day"],
-            [hours, "hour"],
-            [minutes, "minute"],
-            [seconds, "second"],
-        ];
-
-        return data
-            .filter(([value]) => value > 0)
-            .map(([value, name]) => toTimeString(value, name))
-            .join(", ");
-    };
     const containerRef = useRef();
 
     // let timePeriod1Str;
@@ -110,7 +87,7 @@ export default function GeneratedReport({ data }) {
                         />
                         Processing Time:
                         <span className="font-bold">
-                            &nbsp;{readableTime(processingTimeString)}
+                            &nbsp;{getReadableTime(processingTimeString)}
                         </span>
                     </div>
                 </div>
@@ -131,10 +108,12 @@ export default function GeneratedReport({ data }) {
                     <TimePeriodCard data={data} period1={true} />
                     <ReportChartsSection id={data.id} period1={true} />
                 </div>
-                <div className="flex-1 space-y-4 border-l-2 px-3">
-                    <TimePeriodCard data={data} period1={false} />
-                    <ReportChartsSection id={data.id} period1={false} />
-                </div>
+                {(data.startDate2 || data.timePeriodYear2) && (
+                    <div className="flex-1 space-y-4 border-l-2 px-3">
+                        <TimePeriodCard data={data} period1={false} />
+                        <ReportChartsSection id={data.id} period1={false} />
+                    </div>
+                )}
             </div>
             <ScrollToTopButton containerRef={containerRef} />
         </main>

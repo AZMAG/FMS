@@ -52,13 +52,13 @@ export default function TimePeriodCard({ data, period1 }) {
                 </>
             )}
             <p>
-                Number of usable days: <b>{metaData.num_days}</b>
+                Number of usable days: <b>{metaData?.num_days}</b>
             </p>
             <p>
-                GP Lanes: <b>{metaData.gp_lane_cnt}</b>
+                GP Lanes: <b>{metaData?.gp_lane_cnt}</b>
             </p>
             <p>
-                HOV Lane: <b>{metaData.hov_lane_cnt}</b>
+                HOV Lane: <b>{metaData?.hov_lane_cnt}</b>
             </p>
         </div>
     );

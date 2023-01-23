@@ -10,7 +10,7 @@ export default function DeleteReportButton({ data, onClick }) {
                 onClick={() => onClick(data)}
             >
                 <DeleteIcon />
-                <span className="ml-2">Delete Report</span>
+                <span className="ml-2">Delete</span>
             </button>
         </td>
     );
