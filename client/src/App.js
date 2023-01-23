@@ -8,7 +8,7 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Layout/header/Header";
 import Footer from "./components/Layout/footer/Footer";
-import HomePage from "./components/Layout/pages/Home";
+import DetectorsPage from "./components/Layout/pages/Detectors";
 import DetectorPage from "./components/Layout/pages/Detector";
 import GeneratedReportPage from "./components/Layout/pages/GeneratedReport";
 import CorridorsPage from "./components/Layout/pages/Corridors";
@@ -32,7 +32,7 @@ function App() {
                 <Router>
                     <Header />
                     <Routes>
-                        <Route exact path="/" element={<HomePage />} />
+                        <Route exact path="/" element={<DetectorsPage />} />
                         <Route path="detector/:id" element={<DetectorPage />} />
                         <Route
                             path="report/:id"

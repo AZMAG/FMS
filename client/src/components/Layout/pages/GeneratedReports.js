@@ -103,7 +103,7 @@ export default function GeneratedReport() {
                         onSortChange={(e) => {
                             setSort(e.sort);
                         }}
-                        className="kui-grid-header"
+                        className="kui-grid-header mt-2"
                     >
                         <GridColumn
                             className="kui-grid-col"
