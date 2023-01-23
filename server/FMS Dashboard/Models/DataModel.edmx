@@ -185,6 +185,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.Detectors' does not have a prim
           <Property Name="completed" Type="bit" Nullable="false" />
           <Property Name="date_submitted" Type="datetime" Nullable="false" />
           <Property Name="date_completed" Type="datetime" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgAnnualVolumeByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -350,6 +351,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="vph" Type="smallint" />
           <Property Name="GP" Type="bit" />
           <Property Name="HOV" Type="bit" />
+          <Property Name="time_of_day" Type="smallint" />
         </EntityType>
         <Association Name="FK_ApplicationUser_ApplicationRole">
           <End Role="ApplicationRole" Type="Self.ApplicationRole" Multiplicity="1" />
@@ -363,7 +365,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fnTimeOfDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+        <Function Name="fnTimeOfDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="smallint">
           <Parameter Name="min_since" Type="int" Mode="In" />
         </Function>
         <Function Name="fnTotalRowsByDetector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
@@ -568,7 +570,8 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
     [vw_RawData].[volume] AS [volume], 
     [vw_RawData].[vph] AS [vph], 
     [vw_RawData].[GP] AS [GP], 
-    [vw_RawData].[HOV] AS [HOV]
+    [vw_RawData].[HOV] AS [HOV], 
+    [vw_RawData].[time_of_day] AS [time_of_day]
     FROM [dbo].[vw_RawData] AS [vw_RawData]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ApplicationUser_ApplicationRole" Association="Self.FK_ApplicationUser_ApplicationRole">
@@ -914,6 +917,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="completed" Type="Boolean" Nullable="false" />
           <Property Name="date_submitted" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="date_completed" Type="DateTime" Precision="3" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="detector_AvgVolumeByLane">
           <Key>
@@ -970,6 +974,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="vph" Type="Int16" />
           <Property Name="GP" Type="Boolean" />
           <Property Name="HOV" Type="Boolean" />
+          <Property Name="time_of_day" Type="Int16" />
         </EntityType>
         <EntityType Name="vw_detector_AvgAnnualVolumeByLane">
           <Key>
@@ -1236,6 +1241,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <EntitySetMapping Name="GeneratedReports">
             <EntityTypeMapping TypeName="Jacobs_PlayPenModel.GeneratedReport">
               <MappingFragment StoreEntitySet="GeneratedReports">
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="date_completed" ColumnName="date_completed" />
                 <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
                 <ScalarProperty Name="completed" ColumnName="completed" />
@@ -1305,6 +1311,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <EntitySetMapping Name="vw_RawData">
             <EntityTypeMapping TypeName="Jacobs_PlayPenModel.vw_RawData">
               <MappingFragment StoreEntitySet="vw_RawData">
+                <ScalarProperty Name="time_of_day" ColumnName="time_of_day" />
                 <ScalarProperty Name="HOV" ColumnName="HOV" />
                 <ScalarProperty Name="GP" ColumnName="GP" />
                 <ScalarProperty Name="vph" ColumnName="vph" />

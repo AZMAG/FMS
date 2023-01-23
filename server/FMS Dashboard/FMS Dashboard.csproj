@@ -288,6 +288,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Email Templates\ReportFinished.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\loading.gif" />

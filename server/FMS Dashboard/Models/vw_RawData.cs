@@ -27,5 +27,6 @@ namespace FMS_Dashboard.Models
         public Nullable<short> vph { get; set; }
         public Nullable<bool> GP { get; set; }
         public Nullable<bool> HOV { get; set; }
+        public Nullable<short> time_of_day { get; set; }
     }
 }

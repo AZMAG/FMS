@@ -1,12 +1,18 @@
 using FMS_Dashboard.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using System.IO;
 
 namespace FMS_Dashboard.Controllers
 {
@@ -62,6 +68,32 @@ namespace FMS_Dashboard.Controllers
                 return Json(query.ToList(), JsonRequestBehavior.AllowGet);
             }
         }
+        public bool SendEmail(GeneratedReport report)
+        {
+            if (report.email != "")
+            {
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Email Templates\ReportFinished.html");
+               
+                ListDictionary replacements = new ListDictionary();
+                foreach (var p in report.GetType().GetProperties())
+                {
+                    replacements.Add("{{" + p.Name + "}}", p.GetValue(report, null)?.ToString() ?? "");
+                }
+
+                string body = System.IO.File.ReadAllText(path);
+
+                MailDefinition md = new MailDefinition();
+                md.CC = "Jfairfield@azmag.gov";
+                md.From = "fmsAdmin@azmag.gov";
+                md.IsBodyHtml = true;
+                md.Subject = "Report Finished";
+
+                MailMessage mailMsg = md.CreateMailMessage(report.email, replacements, body, new System.Web.UI.Control());
+                SmtpClient client = new SmtpClient();
+                client.Send(mailMsg);
+            }
+            return true;
+        }
 
         public JsonResult AddGeneratedReport(GeneratedReport newReport)
         {
@@ -73,12 +105,13 @@ namespace FMS_Dashboard.Controllers
                     context.SaveChanges();
                     Task.Run(() =>
                     {
-                        AddReportMiscData(newReport);
+                        //AddReportMiscData(newReport);
                         AddAvgHourlySpeed(newReport);
                         AddAvgHourlyThroughput(newReport);
-                        AddAvgVolumeByLane(newReport);
-                        AddAvgOccupancyByLane(newReport);
+                        //AddAvgVolumeByLane(newReport);
+                        //AddAvgOccupancyByLane(newReport);
                         UpdateStatusToComplete(newReport);
+                        SendEmail(newReport);
                        
                      });
                     
@@ -157,8 +190,12 @@ namespace FMS_Dashboard.Controllers
                 try
                 {
                     context.Database.CommandTimeout = 180;
+                    
                     context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    if (dateObj.startDate2 != null)
+                    {
+                        context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    }
                     return true;
                 }
                 catch (Exception ex)
@@ -179,7 +216,10 @@ namespace FMS_Dashboard.Controllers
                 try
                 {
                     context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    if (dateObj.startDate2 != null)
+                    {
+                        context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    }
                     return true;
                 }
                 catch (Exception ex)
@@ -200,7 +240,10 @@ namespace FMS_Dashboard.Controllers
                 try
                 {
                     context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    if (dateObj.startDate2 != null)
+                    {
+                        context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    }
                     return true;
                 }
                 catch (Exception ex)
@@ -221,7 +264,10 @@ namespace FMS_Dashboard.Controllers
                 try
                 {
                     context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    if (dateObj.startDate2 != null)
+                    {
+                        context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    }
                     return true;
                 }
                 catch (Exception ex)
@@ -269,7 +315,10 @@ namespace FMS_Dashboard.Controllers
                 try
                 {
                     context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    if (dateObj.startDate2 != null)
+                    {
+                        context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                    }
                     return true;
                 }
                 catch (Exception ex)

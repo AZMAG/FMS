@@ -6,6 +6,18 @@ import { v4 as uuid } from "uuid";
 axios.defaults.withCredentials = true;
 
 const queryBuilderData = {
+    emailRequested: false,
+    setEmailRequested(val) {
+        this.emailRequested = val;
+    },
+    email: "",
+    setEmail(val) {
+        this.email = val;
+    },
+    emailError: false,
+    setEmailError(val) {
+        this.emailError = val;
+    },
     selectedDetector: null,
     setSelectedDetector(newSelected) {
         this.selectedDetector = newSelected;
@@ -262,6 +274,7 @@ const queryBuilderData = {
             endDate1: formatDate(this.endDate1),
             endDate2: formatDate(this.endDate2),
             completed: false,
+            email: this.email,
             date_submitted: new Date(),
         };
 
