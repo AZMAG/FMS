@@ -74,11 +74,10 @@ namespace FMS_Dashboard.Controllers
                     Task.Run(() =>
                     {
                         AddReportMiscData(newReport);
-                        AddSpeedVsFlow(newReport);
-                        // AddAvgHourlySpeed(newReport);
-                        // AddAvgHourlyThroughput(newReport);
-                        // AddAvgVolumeByLane(newReport);
-                        // AddAvgOccupancyByLane(newReport);
+                        AddAvgHourlySpeed(newReport);
+                        AddAvgHourlyThroughput(newReport);
+                        AddAvgVolumeByLane(newReport);
+                        AddAvgOccupancyByLane(newReport);
                         UpdateStatusToComplete(newReport);
                        
                      });
@@ -120,6 +119,8 @@ namespace FMS_Dashboard.Controllers
             public string endDate2 { get; set; }
         }
 
+        
+
         private StartAndEndDates GetStartAndEndDatesFromReport(GeneratedReport report)
         {
             string startDate1 = report.startDate1;
@@ -158,26 +159,6 @@ namespace FMS_Dashboard.Controllers
                     context.Database.CommandTimeout = 180;
                     context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
                     context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            }
-        }
-
-        public bool AddSpeedVsFlow(GeneratedReport newReport)
-        {
-            var dateObj = GetStartAndEndDatesFromReport(newReport);
-
-            using (var context = new Jacobs_PlayPenEntities())
-            {
-                try
-                {
-                    context.Database.CommandTimeout = 180;
-                    context.GenerateSpeedVsFlowData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateSpeedVsFlowData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
                     return true;
                 }
                 catch (Exception ex)
@@ -246,6 +227,32 @@ namespace FMS_Dashboard.Controllers
                 catch (Exception ex)
                 {
                     return false;
+                }
+            }
+        }
+
+        public JsonResult DeleteGeneratedReport(Guid id)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                context.Database.CommandTimeout = 180;
+                try
+                {
+                    var report = context.GeneratedReports.SingleOrDefault(x => x.id == id);
+                    if (report != null)
+                    {
+                        context.GeneratedReports.Remove(report);
+                        context.SaveChanges();
+                        return Json(new { id = id }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { id = "Record not found" }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { id = "Error!" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }

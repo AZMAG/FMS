@@ -10,14 +10,14 @@ import WeekdaySpeedvsFlowData from "../Detector/Charts/WeekdaySpeedvsFlowData";
 export default function ReportChartsSection({ id, period1 }) {
     return (
         <>
-            <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
+            {/* <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
             <AnnualHourlyAverageThroughput reportId={id} period1={period1} />
             <AnnualHourlyAverageOccupancyPercent
                 reportId={id}
                 period1={period1}
             />
-            <AnnualAverageByLane reportId={id} period1={period1} />
-            <WeekdaySpeedvsFlowData reportId={id} period1={period1} />
+            <AnnualAverageByLane reportId={id} period1={period1} /> */}
+            {/* <WeekdaySpeedvsFlowData reportId={id} period1={period1} /> */}
             {/* <DistributionOfDataPassingQCByDate
                 reportId={id}
                 period1={period1}
