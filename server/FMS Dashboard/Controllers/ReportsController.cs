@@ -73,7 +73,7 @@ namespace FMS_Dashboard.Controllers
                     context.SaveChanges();
                     Task.Run(() =>
                     {
-                       AddReportMiscData(newReport);
+                        AddReportMiscData(newReport);
                         AddAvgHourlySpeed(newReport);
                         AddAvgHourlyThroughput(newReport);
                         AddAvgVolumeByLane(newReport);
@@ -118,6 +118,8 @@ namespace FMS_Dashboard.Controllers
             public string startDate2 { get; set; }
             public string endDate2 { get; set; }
         }
+
+        
 
         private StartAndEndDates GetStartAndEndDatesFromReport(GeneratedReport report)
         {
@@ -225,6 +227,32 @@ namespace FMS_Dashboard.Controllers
                 catch (Exception ex)
                 {
                     return false;
+                }
+            }
+        }
+
+        public JsonResult DeleteGeneratedReport(Guid id)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                context.Database.CommandTimeout = 180;
+                try
+                {
+                    var report = context.GeneratedReports.SingleOrDefault(x => x.id == id);
+                    if (report != null)
+                    {
+                        context.GeneratedReports.Remove(report);
+                        context.SaveChanges();
+                        return Json(new { id = id }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { id = "Record not found" }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { id = "Error!" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }

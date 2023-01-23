@@ -5,17 +5,19 @@ import AnnualHourlyAverageOccupancyPercent from "../Detector/Charts/AnnualHourly
 import AnnualAverageByLane from "../Detector/Charts/AnnualAverageByLane";
 import DistributionOfDataPassingQCByDate from "../Detector/Charts/DistributionOfDataPassingQCByDate";
 import DistributionOfDataPassingQCByWeekday from "../Detector/Charts/DistributionOfDataPassingQCByWeekday";
+import WeekdaySpeedvsFlowData from "../Detector/Charts/WeekdaySpeedvsFlowData";
 
 export default function ReportChartsSection({ id, period1 }) {
     return (
         <>
-            <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
+            {/* <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
             <AnnualHourlyAverageThroughput reportId={id} period1={period1} />
             <AnnualHourlyAverageOccupancyPercent
                 reportId={id}
                 period1={period1}
             />
-            <AnnualAverageByLane reportId={id} period1={period1} />
+            <AnnualAverageByLane reportId={id} period1={period1} /> */}
+            {/* <WeekdaySpeedvsFlowData reportId={id} period1={period1} /> */}
             {/* <DistributionOfDataPassingQCByDate
                 reportId={id}
                 period1={period1}

@@ -145,6 +145,8 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
+
+
         public JsonResult AvgHourlySpeed(int det_num, int year)
         {
             using (var context = new Jacobs_PlayPenEntities())
@@ -176,6 +178,42 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
+        public JsonResult SpeedVsFlowByReportId(Guid reportId, bool isPeriod1)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                try
+                {
+
+
+                    //if (year != null)
+                    //{
+            //        var data = context.vw_RawData
+            //.Where(ad => (ad.GP == true || ad.HOV == true)
+            //    && ad.detector_number == 50
+            //    && ad.collected >= new DateTime(2015, 1, 1)
+            //    && ad.collected < new DateTime(2015, 2, 1)
+            //    //&& (int)ad.collected.DayOfWeek >= 2
+            //    //&& (int)ad.collected.DayOfWeek <= 6)
+            //.Select(ad => new { ad.speed, ad.vph, ad.time_of_day });
+                    //var data = context.detector_SpeedVsFlow.Where(x => x.reportId == reportId && (x.isPeriod1 == isPeriod1))
+                    //        .Select(x => new { x.speed, x.vph, x.time_of_day, x.isPeriod1})
+                    //        .Take(10000)
+                    //        .ToList();
+                    return Json(context, JsonRequestBehavior.AllowGet);
+                    //return Json(data, JsonRequestBehavior.AllowGet);
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+
+
+
         public JsonResult AvgVolumeByLaneByReportId(Guid reportId)
         {
             using (var context = new Jacobs_PlayPenEntities())
@@ -184,9 +222,6 @@ namespace FMS_Dashboard.Controllers
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
-
-        //detector_AvgVolumeByLane
-
 
         public JsonResult AvgHourlySpeedByReportId(Guid reportId)
         {

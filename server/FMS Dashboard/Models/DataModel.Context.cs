@@ -33,14 +33,12 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<Corridor> Corridors { get; set; }
         public virtual DbSet<Detector> Detectors { get; set; }
         public virtual DbSet<vw_detector_AvgByLane> vw_detector_AvgByLane { get; set; }
-        public virtual DbSet<vw_detector_AvgHourlySpeed> vw_detector_AvgHourlySpeed { get; set; }
         public virtual DbSet<vw_detector_AvgHourlyThroughput> vw_detector_AvgHourlyThroughput { get; set; }
         public virtual DbSet<vw_detector_MiscData> vw_detector_MiscData { get; set; }
         public virtual DbSet<vw_detector_Validity> vw_detector_Validity { get; set; }
         public virtual DbSet<vw_Errors> vw_Errors { get; set; }
         public virtual DbSet<vw_ExistingLanes> vw_ExistingLanes { get; set; }
         public virtual DbSet<vw_LaneErrors> vw_LaneErrors { get; set; }
-        public virtual DbSet<vw_RawData> vw_RawData { get; set; }
         public virtual DbSet<detector_AvgByLane> detector_AvgByLane { get; set; }
         public virtual DbSet<detector_AvgHourlyThroughput> detector_AvgHourlyThroughput { get; set; }
         public virtual DbSet<detector_MiscData> detector_MiscData { get; set; }
@@ -49,6 +47,10 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<GeneratedReport> GeneratedReports { get; set; }
         public virtual DbSet<detector_AvgVolumeByLane> detector_AvgVolumeByLane { get; set; }
         public virtual DbSet<detector_AvgHourlyOccupancy> detector_AvgHourlyOccupancy { get; set; }
+        public virtual DbSet<detector_SpeedVsFlow> detector_SpeedVsFlow { get; set; }
+        public virtual DbSet<vw_RawData> vw_RawData { get; set; }
+        public virtual DbSet<vw_detector_AvgAnnualVolumeByLane> vw_detector_AvgAnnualVolumeByLane { get; set; }
+        public virtual DbSet<vw_detector_AvgHourlySpeed> vw_detector_AvgHourlySpeed { get; set; }
     
         public virtual int GenerateMiscDataReport(Nullable<System.Guid> report_id, Nullable<int> det_num, string start_date, string end_date, Nullable<bool> isPeriod1)
         {
@@ -173,6 +175,31 @@ namespace FMS_Dashboard.Models
                 new ObjectParameter("isPeriod1", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerateAvgHourlyOccupancyData", report_idParameter, det_numParameter, start_dateParameter, end_dateParameter, isPeriod1Parameter);
+        }
+    
+        public virtual int GenerateSpeedVsFlowData(Nullable<System.Guid> report_id, Nullable<int> det_num, string start_date, string end_date, Nullable<bool> isPeriod1)
+        {
+            var report_idParameter = report_id.HasValue ?
+                new ObjectParameter("report_id", report_id) :
+                new ObjectParameter("report_id", typeof(System.Guid));
+    
+            var det_numParameter = det_num.HasValue ?
+                new ObjectParameter("det_num", det_num) :
+                new ObjectParameter("det_num", typeof(int));
+    
+            var start_dateParameter = start_date != null ?
+                new ObjectParameter("start_date", start_date) :
+                new ObjectParameter("start_date", typeof(string));
+    
+            var end_dateParameter = end_date != null ?
+                new ObjectParameter("end_date", end_date) :
+                new ObjectParameter("end_date", typeof(string));
+    
+            var isPeriod1Parameter = isPeriod1.HasValue ?
+                new ObjectParameter("isPeriod1", isPeriod1) :
+                new ObjectParameter("isPeriod1", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerateSpeedVsFlowData", report_idParameter, det_numParameter, start_dateParameter, end_dateParameter, isPeriod1Parameter);
         }
     }
 }
