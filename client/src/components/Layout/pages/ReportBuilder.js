@@ -6,8 +6,11 @@ import ReportBuilderMap from "./../../ReportBuilder/ReportBuilderMap";
 import ResetButton from "./../../ReportBuilder/ResetButton";
 import SubmitButton from "./../../ReportBuilder/SubmitButton";
 import ReportBuilderSubmitModal from "./../../ReportBuilder/ReportBuilderSubmitModal";
+import { observer } from "mobx-react-lite";
+import { useDataStore } from "../../../stores/DataContext";
 
-export default function ReportBuilder() {
+function ReportBuilder() {
+    const store = useDataStore();
     return (
         <main
             id="ReportBuilder"
@@ -18,15 +21,39 @@ export default function ReportBuilder() {
                     Report Builder
                 </h2>
                 <DetectorDropdown />
-                <AnalysisCheckboxGrid />
-                <div className="flex flex-wrap justify-between">
-                    <TimePeriodSelection timePeriod={1} />
-                    <TimePeriodSelection timePeriod={2} />
-                </div>
-                <div className="mt-3 flex space-x-4">
-                    <ResetButton />
-                    <SubmitButton />
-                </div>
+                {store.queryBuilder.selectedDetector && (
+                    <>
+                        <AnalysisCheckboxGrid />
+                        <div className="flex w-full">
+                            <TimePeriodSelection timePeriod={1} />
+                            {store.queryBuilder.isTwoTimePeriods ? (
+                                <>
+                                    <TimePeriodSelection timePeriod={2} />
+                                </>
+                            ) : (
+                                <div className="flex w-1/2 flex-col items-center border border-gray-300 p-2 text-sm">
+                                    <p>
+                                        To add a second time period to compare,
+                                    </p>
+                                    <button
+                                        onClick={() =>
+                                            store.queryBuilder.setIsTwoTimePeriods(
+                                                true
+                                            )
+                                        }
+                                        className="mt-3 rounded bg-gray-500 py-1 px-4 font-bold text-white hover:bg-gray-600"
+                                    >
+                                        Click here
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        <div className="mt-3 flex space-x-4">
+                            <ResetButton />
+                            <SubmitButton />
+                        </div>
+                    </>
+                )}
             </div>
             <div className="flex w-1/2">
                 <ReportBuilderMap />
@@ -35,3 +62,4 @@ export default function ReportBuilder() {
         </main>
     );
 }
+export default observer(ReportBuilder);

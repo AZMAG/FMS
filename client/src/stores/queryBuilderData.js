@@ -11,6 +11,10 @@ const queryBuilderData = {
         this.selectedDetector = newSelected;
         this.zoomToSelectedDetector();
         this.highlightSelectedDetector();
+        this.resetTimePeriodData(1);
+        this.resetTimePeriodData(2);
+        this.setIsTwoTimePeriods(false);
+        this.toggleAllAnalysisOptions(false);
 
         if (this.selectedDetector) {
             this.detectorsLayer.definitionExpression = `det_num = ${this.selectedDetector.detector.det_num}`;
@@ -127,6 +131,11 @@ const queryBuilderData = {
     setAnalysisOption(key, val) {
         this.analysisOptions[key] = val;
     },
+    resetTimePeriodData(timePeriod) {
+        this.setTimePeriodYear(timePeriod, "");
+        this.setStartDate(timePeriod, "");
+        this.setEndDate(timePeriod, "");
+    },
     timePeriodYear1: "",
     setTimePeriodYear(timePeriod, year) {
         this["timePeriodYear" + timePeriod] = year;
@@ -160,12 +169,8 @@ const queryBuilderData = {
     },
     resetQueryBuilder() {
         this.setSelectedDetector(null);
-        this.setTimePeriodYear(1, "");
-        this.setTimePeriodYear(2, "");
-        this.setStartDate(1, "");
-        this.setStartDate(2, "");
-        this.setEndDate(1, "");
-        this.setEndDate(2, "");
+        this.resetTimePeriodData(1);
+        this.resetTimePeriodData(2);
         this.toggleAllAnalysisOptions(false);
         this.setValidated(false);
     },
@@ -202,7 +207,17 @@ const queryBuilderData = {
 
         return false;
     },
+    isTwoTimePeriods: false,
+    setIsTwoTimePeriods(val) {
+        if (val) {
+            this.resetTimePeriodData(2);
+        }
+        this.isTwoTimePeriods = val;
+    },
     isTimePeriodValid(timePeriod) {
+        if (!this.isTwoTimePeriods && timePeriod === 2) {
+            return true;
+        }
         if (this["timePeriodYear" + timePeriod] !== "") {
             return true;
         }

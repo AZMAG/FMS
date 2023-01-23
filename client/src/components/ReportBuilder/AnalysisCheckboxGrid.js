@@ -56,18 +56,22 @@ function AnalysisCheckboxGrid() {
         !store.queryBuilder.anyAnalysisOptionSelected();
 
     return (
-        <div className="flex flex-col">
-            <h4 className="font-semibold mb-1">
+        <div
+            className={`flex flex-col ${
+                store.queryBuilder.selectedDetector ? "" : " hidden"
+            }`}
+        >
+            <h4 className="mb-1 font-semibold">
                 Choose analysis to include in your report
             </h4>
             <div
-                className={`flex flex-col border border-gray-300 gap-y-1 px-4 py-3 ${
+                className={`flex flex-col gap-y-1 border border-gray-300 px-4 py-3 ${
                     showErrors ? "border-red-500" : ""
                 }`}
             >
                 <div className="flex">
                     <button
-                        className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-4 rounded"
+                        className="rounded bg-gray-500 py-1 px-4 font-bold text-white hover:bg-gray-600"
                         onClick={() =>
                             store.queryBuilder.toggleAllAnalysisOptions(true)
                         }
@@ -75,7 +79,7 @@ function AnalysisCheckboxGrid() {
                         Select All
                     </button>
                     {showErrors && (
-                        <span className="flex-1 ml-6 bg-red-100 rounded-lg py-1 px-3 text-base text-red-700">
+                        <span className="ml-6 flex-1 rounded-lg bg-red-100 py-1 px-3 text-base text-red-700">
                             <ErrorOutlineIcon /> You must select at least one
                             option.
                         </span>
