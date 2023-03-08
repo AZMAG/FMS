@@ -70,7 +70,7 @@ namespace FMS_Dashboard.Controllers
         }
         public bool SendEmail(GeneratedReport report)
         {
-            if (report.email != "")
+            if (report.email != null)
             {
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Email Templates\ReportFinished.html");
                
@@ -105,11 +105,7 @@ namespace FMS_Dashboard.Controllers
                     context.SaveChanges();
                     Task.Run(() =>
                     {
-                        AddReportMiscData(newReport);
-                        AddAvgHourlySpeed(newReport);
-                        AddAvgHourlyThroughput(newReport);
-                        AddAvgVolumeByLane(newReport);
-                        AddAvgOccupancyByLane(newReport);
+                        GenerateReportData(newReport);
                         UpdateStatusToComplete(newReport);
                         SendEmail(newReport);
                        
@@ -181,102 +177,6 @@ namespace FMS_Dashboard.Controllers
             return rtnObj;
         }
 
-        public bool AddAvgHourlySpeed(GeneratedReport newReport)    
-        {
-            var dateObj = GetStartAndEndDatesFromReport(newReport);
-
-            using (var context = new Jacobs_PlayPenEntities())
-            {
-                try
-                {
-                    context.Database.CommandTimeout = 180;
-                    
-                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    if (dateObj.startDate2 != null)
-                    {
-                        context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
-                    }
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            }
-        }
-
-        public bool AddAvgOccupancyByLane(GeneratedReport newReport)
-        {
-            var dateObj = GetStartAndEndDatesFromReport(newReport);
-
-            using (var context = new Jacobs_PlayPenEntities())
-            {
-
-                context.Database.CommandTimeout = 180;
-                try
-                {
-                    context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    if (dateObj.startDate2 != null)
-                    {
-                        context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
-                    }
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            }
-        }
-
-        public bool AddAvgVolumeByLane(GeneratedReport newReport)
-        {
-            var dateObj = GetStartAndEndDatesFromReport(newReport);
-
-            using (var context = new Jacobs_PlayPenEntities())
-            {
-
-                context.Database.CommandTimeout = 180;
-                try
-                {
-                    context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    if (dateObj.startDate2 != null)
-                    {
-                        context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
-                    }
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            }
-        }
-
-        public bool AddAvgHourlyThroughput(GeneratedReport newReport)
-        {
-            var dateObj = GetStartAndEndDatesFromReport(newReport);
-
-            using (var context = new Jacobs_PlayPenEntities())
-            {
-
-                context.Database.CommandTimeout = 180;
-                try
-                {
-                    context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    if (dateObj.startDate2 != null)
-                    {
-                        context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
-                    }
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            }
-        }
-
         public JsonResult DeleteGeneratedReport(Guid id)
         {
             using (var context = new Jacobs_PlayPenEntities())
@@ -303,9 +203,8 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-        public bool AddReportMiscData(GeneratedReport newReport)
+        public bool GenerateReportData(GeneratedReport newReport)
         {
-
             var dateObj = GetStartAndEndDatesFromReport(newReport);
 
             using (var context = new Jacobs_PlayPenEntities())
@@ -314,10 +213,20 @@ namespace FMS_Dashboard.Controllers
                 context.Database.CommandTimeout = 180;
                 try
                 {
-                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    //context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+
+
                     if (dateObj.startDate2 != null)
                     {
-                        context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                        //context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                        context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
+                        context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
+                        context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
+                        context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
                     }
                     return true;
                 }
@@ -327,5 +236,7 @@ namespace FMS_Dashboard.Controllers
                 }
             }
         }
+
+        
     }
 }

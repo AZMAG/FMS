@@ -3,6 +3,7 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import DocConfig from "../../DocConfig";
 import getValidityData from "./getValidityData";
 import getDetectors from "./getDetectors";
+import * as ReactDOM from "react-dom/client";
 
 async function getDetectorsLayer(store) {
     function getCbr() {
@@ -110,6 +111,7 @@ async function getDetectorsLayer(store) {
     ];
 
     let data = await getDetectors();
+
     let renderer = {
         type: "simple",
         symbol: {
@@ -131,9 +133,44 @@ async function getDetectorsLayer(store) {
 
     popupTemplate = {
         title: "FMS Detector Locations",
-        content: (graphic) => {
-            // return `{det_num} <br /> {Validity2021}`;
-            return `<div className="${"text-xl"}">{det_num} <br /> {Validity2021}</div>`;
+        content: ({ graphic }) => {
+            const fullDataset = data.filter((row) => {
+                return row.det_num === graphic.attributes.det_num;
+            })[0];
+
+            let det_num = graphic.attributes.det_num;
+            let validity =
+                graphic.attributes["Validity" + store.detectorMap.selectedYear];
+
+            const div = document.createElement("div");
+            const root = ReactDOM.createRoot(div);
+
+            root.render(
+                <div className="mt-3 text-black">
+                    <div>
+                        <span className="font-semibold">Detector Number</span>:{" "}
+                        {det_num}
+                    </div>
+                    <div>
+                        <span className="font-semibold">Location</span>:{" "}
+                        {fullDataset.Location}
+                    </div>
+                    <div>
+                        <span className="font-semibold">Direction</span>:{" "}
+                        {fullDataset.Direction}
+                    </div>
+                    <div>
+                        <span className="font-semibold">Route</span>:{" "}
+                        {fullDataset.Route}
+                    </div>
+                    <div>
+                        <span className="font-semibold">Validity</span>:{" "}
+                        {validity.toFixed(2) * 100}%
+                    </div>
+                </div>
+            );
+
+            return div;
         },
 
         actions: [

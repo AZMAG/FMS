@@ -33,7 +33,10 @@ function App() {
                     <Header />
                     <Routes>
                         <Route exact path="/" element={<DetectorsPage />} />
-                        <Route path="detector/:id" element={<DetectorPage />} />
+                        <Route
+                            path="detector/:year/:id"
+                            element={<DetectorPage />}
+                        />
                         <Route
                             path="report/:id"
                             element={<GeneratedReportPage />}
@@ -49,7 +52,7 @@ function App() {
                         />
                         <Route path="admin" element={<AdminPage />} />
                     </Routes>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Router>
             </DataProvider>
         </div>

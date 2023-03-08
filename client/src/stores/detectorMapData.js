@@ -16,7 +16,7 @@ const detectorMapData = {
         this.selectedRoute = route;
         this.updateDefExpression();
     },
-    selectedYear: 2021,
+    selectedYear: 2022,
     setSelectedYear(year) {
         const newRenderField = `Validity${year}`;
         this.detectorsLayer.renderer.field = newRenderField;
@@ -81,7 +81,7 @@ const detectorMapData = {
             return true;
         }
 
-        if (this.selectedYear !== 2021) {
+        if (this.selectedYear !== 2022) {
             return true;
         }
 
@@ -101,7 +101,7 @@ const detectorMapData = {
     },
     resetMapControls() {
         this.setSelectedRoute("All");
-        this.setSelectedYear(2021);
+        this.setSelectedYear(2022);
         this.setSelectedDirection("All");
         this.toggleLabels(true);
         this.toggleNoDataAvailableShown(true);

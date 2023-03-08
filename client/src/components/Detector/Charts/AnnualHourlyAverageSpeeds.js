@@ -44,7 +44,7 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                     }
                 );
             }
-
+            console.log(res.data);
             const _data = sortTimeData(res.data, "hour_in_day");
             const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
             const _series = getMultipleSeriesByField(

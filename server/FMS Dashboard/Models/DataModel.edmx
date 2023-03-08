@@ -97,7 +97,7 @@
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="detector_number" Type="smallint" />
           <Property Name="lane" Type="varchar" MaxLength="128" />
-          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" />
           <Property Name="avg_daily_traffic" Type="int" />
           <Property Name="reportId" Type="uniqueidentifier" />
           <Property Name="isPeriod1" Type="bit" />
@@ -926,7 +926,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="id" Type="Guid" Nullable="false" />
           <Property Name="detector_number" Type="Int16" />
           <Property Name="lane" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" />
           <Property Name="avg_daily_traffic" Type="Int32" />
           <Property Name="reportId" Type="Guid" />
           <Property Name="isPeriod1" Type="Boolean" />

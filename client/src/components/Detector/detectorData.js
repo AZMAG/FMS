@@ -5,7 +5,7 @@ import { apiUrl } from "../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
-export default function DetectorData({ det_num }) {
+export default function DetectorData({ det_num, year }) {
     const [data, setData] = useState(null);
 
     console.log(data);
@@ -36,8 +36,8 @@ export default function DetectorData({ det_num }) {
                 `${apiUrl}/Detector/GetMiscDetectorData`,
                 {
                     params: {
-                        det_num: 50,
-                        year: "2021",
+                        det_num: det_num,
+                        year,
                     },
                 }
             );
