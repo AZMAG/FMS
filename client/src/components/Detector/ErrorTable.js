@@ -14,36 +14,42 @@ axios.defaults.withCredentials = true;
 
 export default function ErrorTable({ det_num }) {
     const [data, setData] = useState(null);
+
     console.log(data);
     const columns = [
         {
             field: "label",
             title: "Error Type",
         },
-        {
-            field: "pct",
-            format: (num) => Math.round(num * 10000) / 100 + " %",
-            title: "AM Peak",
-        },
-        {
-            field: "",
-            format: (num) => Math.round(num * 10000) / 100 + " %",
-            title: "Mid-day Peak",
-        },
-        {
-            field: "",
-            format: (num) => Math.round(num * 10000) / 100 + " %",
-            title: "PM Peak",
-        },
-        {
-            field: "",
-            format: (num) => Math.round(num * 10000) / 100 + " %",
-            title: "Night",
-        },
+        // {
+        //     field: "pct",
+        //     format: (num) => Math.round(num * 10000) / 100 + " %",
+        //     title: "AM Peak",
+        // },
+        // {
+        //     field: "",
+        //     format: (num) => Math.round(num * 10000) / 100 + " %",
+        //     title: "Mid-day Peak",
+        // },
+        // {
+        //     field: "",
+        //     format: (num) => Math.round(num * 10000) / 100 + " %",
+        //     title: "PM Peak",
+        // },
+        // {
+        //     field: "",
+        //     format: (num) => Math.round(num * 10000) / 100 + " %",
+        //     title: "Night",
+        // },
         {
             field: "value",
             format: (num) => num.toLocaleString(),
-            title: "Total",
+            title: "Number of Daily Errors",
+        },
+        {
+            field: "pct",
+            format: (num) => Math.round(num * 10000) / 100 + " %",
+            title: "Error %",
         },
     ];
 

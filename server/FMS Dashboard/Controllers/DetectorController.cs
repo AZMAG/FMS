@@ -211,9 +211,6 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-
-
-
         public JsonResult AvgVolumeByLaneByReportId(Guid reportId)
         {
             using (var context = new Jacobs_PlayPenEntities())

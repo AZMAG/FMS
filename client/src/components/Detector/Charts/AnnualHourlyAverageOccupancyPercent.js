@@ -11,7 +11,11 @@ import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
-export default function MiscDetectorData({ det_num, reportId, period1 }) {
+export default function AnnualHourlyAverageOccupancyPercent({
+    det_num,
+    reportId,
+    period1,
+}) {
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 

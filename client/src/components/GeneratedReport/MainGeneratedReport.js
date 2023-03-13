@@ -11,34 +11,14 @@ import ScrollToTopButton from "../ScrollToTop/scrollToTop";
 import GeneratedReportMap from "./GeneratedReportMap";
 import TimePeriodCard from "./TimePeriodCard";
 import getReadableTime from "./getReadableTime";
+import ErrorTable from "../Detector/ErrorTable";
 
 export default function GeneratedReport({ data }) {
     const containerRef = useRef();
 
-    // let timePeriod1Str;
-    // let timePeriod2Str;
-    // if (data.startDate1 === null) {
-    //     timePeriod1 = data.timePeriodYear1;
-    //     timePeriod2 = data.timePeriodYear2;
-    // } else {
-    //     timePeriod1 = (
-    //         <>
-    //             {data.startDate1} - {data.endDate1}
-    //         </>
-    //     );
-    //     timePeriod2 = (
-    //         <>
-    //             {data.startDate2} - {data.endDate2}
-    //         </>
-    //     );
-    // }
-
     const SubmittedDate = new Date(parseInt(data.date_submitted.substr(6)));
     const CompletedDate = new Date(parseInt(data.date_completed.substr(6)));
-
     const processingTimeString = CompletedDate - SubmittedDate;
-
-    console.log(data);
 
     return (
         <main
@@ -106,6 +86,7 @@ export default function GeneratedReport({ data }) {
             >
                 <div className="flex-1 space-y-4 border-r-2 px-3">
                     <TimePeriodCard data={data} period1={true} />
+                    <ErrorTable />
                     <ReportChartsSection id={data.id} period1={true} />
                 </div>
                 {(data.startDate2 || data.timePeriodYear2) && (
@@ -115,6 +96,7 @@ export default function GeneratedReport({ data }) {
                     </div>
                 )}
             </div>
+
             <ScrollToTopButton containerRef={containerRef} />
         </main>
     );

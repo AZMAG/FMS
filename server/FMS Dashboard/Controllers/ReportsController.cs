@@ -213,7 +213,7 @@ namespace FMS_Dashboard.Controllers
                 context.Database.CommandTimeout = 180;
                 try
                 {
-                    //context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
+                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
                     context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
                     context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
                     context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
@@ -222,7 +222,7 @@ namespace FMS_Dashboard.Controllers
 
                     if (dateObj.startDate2 != null)
                     {
-                        //context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
+                        context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
                         context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
                         context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
                         context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
