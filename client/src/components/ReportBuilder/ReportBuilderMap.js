@@ -50,6 +50,22 @@ function QueryBuilderMap() {
                 store.queryBuilder.setGraphicsLayer(graphicsLayer);
 
                 const detectorsLayer = await getDetectorsLayer();
+                const visualVariables = detectorsLayer.renderer.visualVariables;
+
+                detectorsLayer.renderer = {
+                    type: "simple",
+                    symbol: {
+                        type: "simple-marker",
+                        style: "triangle",
+                        size: "10px",
+                        outline: {
+                            width: 1,
+                        },
+                        color: "darkgray",
+                    },
+                    visualVariables,
+                };
+
                 _map.add(detectorsLayer);
 
                 store.queryBuilder.setDetectorsLayer(detectorsLayer);
@@ -57,6 +73,7 @@ function QueryBuilderMap() {
                 store.queryBuilder.setMap(_map);
                 store.queryBuilder.setView(_view);
             })();
+
             // Call Widgets
             ZoomWidget(_view);
             HomeWidget(_view);

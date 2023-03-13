@@ -1,4 +1,4 @@
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React, { useRef } from "react";
 
 import DetectorData from "../../Detector/detectorData";
@@ -16,15 +16,15 @@ import DistributionOfDataPassingQCByWeekday from "../../Detector/Charts/Distribu
 
 import ScrollToTopButton from "../../ScrollToTop/scrollToTop";
 
-export default function Detector({ det_num }) {
+export default function Detector() {
+    const { id, year } = useParams();
     const containerRef = useRef();
-    const id = 50;
 
     return (
         <main className="mt-4 flex-1 overflow-y-auto px-16" ref={containerRef}>
             <div className="m-auto flex grid-cols-2 flex-col justify-items-center gap-x-4 space-y-6">
                 <div className="grid grid-flow-col gap-6">
-                    <DetectorData det_num={id} />
+                    <DetectorData det_num={id} year={year} />
                     <DetectorNotes />
                 </div>
                 <div className="border-b-gray border-b-2 text-center text-xl font-bold">

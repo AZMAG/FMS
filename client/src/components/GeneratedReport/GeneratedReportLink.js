@@ -22,7 +22,7 @@ export default function GeneratedReportLink({ data }) {
                 onClick={linkClicked}
             >
                 <AssessmentIcon />
-                <span className="ml-2">Open Report</span>
+                <span className="ml-2">Open</span>
             </button>
         </td>
     );

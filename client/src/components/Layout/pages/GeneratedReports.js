@@ -9,6 +9,7 @@ import { orderBy } from "@progress/kendo-data-query";
 import LoadingSpin from "../../Loaders/loadingSpin";
 
 import "./pages.css";
+import getReadableTime from "./../../GeneratedReport/getReadableTime";
 
 export default function GeneratedReport() {
     const [loading, setLoading] = useState(true);
@@ -38,11 +39,33 @@ export default function GeneratedReport() {
     const newData = [];
     reports.forEach((x) => {
         const date = new Date(parseInt(x.date_submitted.substr(6)));
+        const SubmittedDate = new Date(parseInt(x.date_submitted.substr(6)));
+        const CompletedDate = new Date(parseInt(x.date_completed?.substr(6)));
+        let timePeriod1Str;
+        let timePeriod2Str;
+
+        if (x.startDate1 === null) {
+            timePeriod1Str = x.timePeriodYear1;
+        } else {
+            timePeriod1Str = `${x.startDate1} - ${x.endDate1}`;
+        }
+
+        if (x.startDate2 === null) {
+            if (x.timePeriodYear2 === null) {
+                timePeriod2Str = "N/A";
+            }
+        }
+
+        const processingTimeString = CompletedDate - SubmittedDate;
+
         newData.push({
             det_num: x.det_num,
             completed: x.completed,
             dateSubmitted: date.toLocaleDateString(),
             timeSubmitted: date.toLocaleTimeString(),
+            readableTime: getReadableTime(processingTimeString),
+            timePeriod1Str,
+            timePeriod2Str,
             id: x.id,
         });
     });
@@ -80,6 +103,8 @@ export default function GeneratedReport() {
         <CustomCell {...props} myProp={customData} />
     );
 
+    console.log(reports);
+
     return (
         <main
             id="ReportsHistory"
@@ -103,28 +128,45 @@ export default function GeneratedReport() {
                         onSortChange={(e) => {
                             setSort(e.sort);
                         }}
-                        className="kui-grid-header"
+                        className="kui-grid-header mt-2"
                     >
                         <GridColumn
                             className="kui-grid-col"
                             field="det_num"
-                            title="Detector ID"
-                        />
-                        <GridColumn
-                            field="completed"
-                            title="Completed"
-                            cell={MyCustomCell}
+                            title="Detector #"
+                            width="140px"
                         />
                         <GridColumn
                             className="kui-grid-col"
                             field="dateSubmitted"
                             title="Date"
+                            width="100px"
                         />
                         <GridColumn
                             className="kui-grid-col"
                             field="timeSubmitted"
                             title="Time Stamp"
+                            width="150px"
                         />
+                        <GridColumn
+                            className="kui-grid-col"
+                            field="readableTime"
+                            title="Processing Time"
+                            width="200px"
+                        />
+                        <GridColumn
+                            className="kui-grid-col"
+                            field="timePeriod1Str"
+                            title="Time Period 1"
+                            width="180px"
+                        />
+                        <GridColumn
+                            className="kui-grid-col"
+                            field="timePeriod2Str"
+                            title="Time Period 2"
+                            width="180px"
+                        />
+
                         <GridColumn
                             className="kui-grid-col"
                             title=""

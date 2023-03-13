@@ -12,8 +12,6 @@ import { apiUrl } from "../../../DocConfig";
 axios.defaults.withCredentials = true;
 
 export default function MiscDetectorData({ det_num, reportId, period1 }) {
-    console.log(reportId);
-    // const [data, setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
@@ -44,7 +42,6 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                     }
                 );
             }
-
             const _data = sortTimeData(res.data, "hour_in_day");
             const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
             const _series = getMultipleSeriesByField(
@@ -58,7 +55,6 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
             setDateLabels(_dateLabels);
         })();
     }, [det_num, setSeries, setDateLabels, period1, reportId]);
-    // console.log(series);
     return (
         <>
             {series.length ? (

@@ -35,5 +35,6 @@ namespace FMS_Dashboard.Models
         public bool completed { get; set; }
         public System.DateTime date_submitted { get; set; }
         public Nullable<System.DateTime> date_completed { get; set; }
+        public string email { get; set; }
     }
 }

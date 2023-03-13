@@ -7,6 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import DocConfig from "../../DocConfig";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function TimePeriodSelection({ timePeriod }) {
     const store = useDataStore();
@@ -22,6 +23,7 @@ function TimePeriodSelection({ timePeriod }) {
             store.queryBuilder.setEndDate(timePeriod, val);
         }
     }
+    console.log(store.queryBuilder);
 
     const showErrors =
         store.queryBuilder.validated &&
@@ -31,13 +33,29 @@ function TimePeriodSelection({ timePeriod }) {
     sortedYears.sort((a, b) => b - a);
 
     return (
-        <div className="flex flex-col gap-0.5">
-            <p className="font-medium">Time Period {timePeriod}</p>
+        <div className="flex w-1/2 flex-col gap-0.5">
             <div
-                className={`flex text-sm border border-gray-300 p-2  ${
+                className={`border border-gray-300 p-2 text-sm  ${
                     showErrors ? "border-red-500" : ""
                 }`}
             >
+                <p className="flex h-8 items-center font-medium">
+                    <span className="flex-1">
+                        Time Period{" "}
+                        {store.queryBuilder.isTwoTimePeriods ? timePeriod : ""}
+                    </span>
+                    {store.queryBuilder.isTwoTimePeriods && timePeriod === 2 && (
+                        <button
+                            title="Remove Time Period 2"
+                            onClick={() =>
+                                store.queryBuilder.setIsTwoTimePeriods(false)
+                            }
+                            className="rounded bg-red-500 p-1 text-white hover:bg-red-600"
+                        >
+                            <DeleteIcon fontSize="small" />
+                        </button>
+                    )}
+                </p>
                 <div className="flex items-center">
                     <FormControl sx={{ minWidth: 85 }} size="small">
                         <InputLabel>Year</InputLabel>
@@ -58,7 +76,8 @@ function TimePeriodSelection({ timePeriod }) {
                             ))}
                         </Select>
                     </FormControl>
-                    <span className="font-medium mx-2">OR</span>
+
+                    <span className="mx-2 font-medium">OR</span>
                     <div className="flex flex-col">
                         <TextField
                             onChange={(e) => {
@@ -88,8 +107,9 @@ function TimePeriodSelection({ timePeriod }) {
                         />
                     </div>
                 </div>
+
                 {showErrors && (
-                    <div className=" mx-2 mt-3 flex-1 bg-red-100 rounded-lg py-1 px-2 text-base text-red-700">
+                    <div className=" mx-2 mt-3 flex-1 rounded-lg bg-red-100 py-1 px-2 text-base text-red-700">
                         <ErrorOutlineIcon /> Please select a year or choose a
                         start and end date.
                     </div>
