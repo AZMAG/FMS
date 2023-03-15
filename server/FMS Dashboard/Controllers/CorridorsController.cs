@@ -9,17 +9,6 @@ namespace FMS_Dashboard.Controllers
 {
     public class CorridorsController : Controller
     {
-        // GET: Corridors
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Add()
-        {
-            return View();
-        }
-
         public ActionResult AddNew(AddCorridorVM vm)
         {
             using (var context = new Jacobs_PlayPenEntities())
