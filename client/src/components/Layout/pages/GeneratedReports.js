@@ -108,12 +108,12 @@ export default function GeneratedReport() {
     return (
         <main
             id="ReportsHistory"
-            className="mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4"
+            className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4"
         >
             {loading ? (
                 <LoadingSpin />
             ) : (
-                <div className="mx-80 bg-slate-100 p-4">
+                <div className="bg-slate-100 p-4">
                     <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                         Generated Report History
                     </h2>
@@ -128,6 +128,7 @@ export default function GeneratedReport() {
                         onSortChange={(e) => {
                             setSort(e.sort);
                         }}
+                        resizable={true}
                         className="kui-grid-header mt-2"
                     >
                         <GridColumn
@@ -164,7 +165,7 @@ export default function GeneratedReport() {
                             className="kui-grid-col"
                             field="timePeriod2Str"
                             title="Time Period 2"
-                            width="180px"
+                            // width="180px"
                         />
 
                         <GridColumn

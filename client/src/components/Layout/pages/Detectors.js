@@ -5,7 +5,10 @@ import DetectorMapControls from "../../Map/DetectorMapControls/DetectorMapContro
 
 export default function Detectors() {
     return (
-        <main className="container mx-auto flex grow grid-cols-2 flex-row justify-items-center gap-x-4">
+        <main
+            tag="mainPage"
+            className="container mx-auto flex grid-cols-2 flex-row justify-items-center gap-x-4 px-2"
+        >
             <DetectorMap className="w-3/4" />
             <DetectorMapControls className="w-1/4" />
         </main>

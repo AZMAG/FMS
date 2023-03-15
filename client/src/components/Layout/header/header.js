@@ -4,8 +4,8 @@ import Nav from "./Nav";
 
 export default function Header() {
     return (
-        <header className="container bg-white sticky top-0 mx-auto z-10">
-            <div className="flex items-center my-2.5">
+        <header className="container sticky top-0 z-10 mx-auto bg-white px-6">
+            <div className="my-2.5 flex items-center">
                 <Logo />
                 <Nav />
             </div>
