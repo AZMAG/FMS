@@ -16,12 +16,15 @@ export default function GeneratedReport({ data }) {
     return (
         <main
             tag="ReportsPage"
-            className="container mx-auto flex grow flex-col justify-items-center py-8 px-10"
+            className="container mx-auto flex flex-col justify-items-center py-8 px-10"
+
             ref={containerRef}
         >
             <PageHeader data={data} />
             <div className="flex">
-                <div className="mt-4 w-1/5">
+
+                <div className="static mt-4 w-1/5">
+
                     <PageSideMenu />
                 </div>
                 <div className="flex w-4/5 flex-col justify-items-center">

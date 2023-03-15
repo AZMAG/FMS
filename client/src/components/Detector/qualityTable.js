@@ -61,7 +61,7 @@ export default function QualityTable({ det_num }) {
     return (
         <>
             {data ? (
-                <div className="bg-[#eeeeee] p-5">
+                <div id="section-quality" className="bg-[#eeeeee] p-5">
                     <h6 className="mb-2 text-lg font-semibold">
                         Count of Quality Control Flags by Time Period - weekdays
                     </h6>
