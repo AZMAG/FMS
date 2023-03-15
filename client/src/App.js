@@ -52,7 +52,7 @@ function App() {
                         />
                         <Route path="admin" element={<AdminPage />} />
                     </Routes>
-                    {/* <Footer /> */}
+                    <Footer />
                 </Router>
             </DataProvider>
         </div>
