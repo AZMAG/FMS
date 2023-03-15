@@ -6,7 +6,7 @@ import "hammerjs";
 
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./components/Layout/header/Header";
+import Header from "./components/Layout/header/header";
 import Footer from "./components/Layout/footer/Footer";
 import DetectorsPage from "./components/Layout/pages/Detectors";
 import DetectorPage from "./components/Layout/pages/Detector";
@@ -52,7 +52,7 @@ function App() {
                         />
                         <Route path="admin" element={<AdminPage />} />
                     </Routes>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Router>
             </DataProvider>
         </div>

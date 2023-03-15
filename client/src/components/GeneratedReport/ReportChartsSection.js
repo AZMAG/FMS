@@ -11,14 +11,14 @@ import AnnualControlFlagsByHourOfDays from "../Detector/Charts/AnnualControlFlag
 export default function ReportChartsSection({ id, period1 }) {
     return (
         <>
-            {/* <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
+            <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
             <AnnualHourlyAverageThroughput reportId={id} period1={period1} />
             <AnnualHourlyAverageOccupancyPercent
                 reportId={id}
                 period1={period1}
             />
             <AnnualAverageByLane reportId={id} period1={period1} />
-            <WeekdaySpeedvsFlowData reportId={id} period1={period1} />
+            {/* <WeekdaySpeedvsFlowData reportId={id} period1={period1} /> */}
             <DistributionOfDataPassingQCByDate
                 reportId={id}
                 period1={period1}
@@ -26,8 +26,8 @@ export default function ReportChartsSection({ id, period1 }) {
             <DistributionOfDataPassingQCByWeekday
                 reportId={id}
                 period1={period1}
-            /> */}
-            <AnnualControlFlagsByHourOfDays reportId={id} />
+            />
+            {/* <AnnualControlFlagsByHourOfDays reportId={id} /> */}
         </>
     );
 }

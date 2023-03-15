@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import exportToCsv from "./exportToCsv";
 // import {
 //     getTimeLabels,
 //     getMultipleSeriesByField,
@@ -115,6 +116,12 @@ export default function DistributionOfDataPassingQCByWeekday({
         <>
             {series.length > 0 ? (
                 <div className="bg-[#eeeeee] p-3">
+                    <button
+                        onClick={() => exportToCsv(series)}
+                        className="mb-2 rounded bg-gray-500 py-1 px-2 font-bold text-white hover:bg-gray-700"
+                    >
+                        Export to CSV
+                    </button>
                     <Chart>
                         <ChartArea background="#fff" />
                         <ChartTitle

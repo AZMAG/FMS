@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+import exportToCsv from "./exportToCsv";
 // import {
 //     getTimeLabels,
 //     getMultipleSeriesByField,
@@ -100,6 +102,12 @@ export default function DistributionOfDataPassingQCByDate({
         <>
             {series.length > 0 ? (
                 <div className="bg-[#eeeeee] p-3">
+                    <button
+                        onClick={() => exportToCsv(series)}
+                        className="mb-2 rounded bg-gray-500 py-1 px-2 font-bold text-white hover:bg-gray-700"
+                    >
+                        Export to CSV
+                    </button>
                     <Chart>
                         <ChartArea background="#fff" />
                         <ChartTitle
@@ -119,7 +127,7 @@ export default function DistributionOfDataPassingQCByDate({
                             <ChartCategoryAxisItem
                                 labels={{
                                     font: fontAxis,
-                                    step: 5,
+                                    step: Math.floor(series.length / 10),
                                     skip: 0,
                                     rotation: "auto",
                                     padding: [0, 0, 0, 120],

@@ -15,6 +15,8 @@ import {
     // ChartCategoryAxisLabels,
 } from "@progress/kendo-react-charts";
 
+import exportToCsv from "./exportToCsv";
+
 const chartColors = ["red", "blue", "green"];
 
 const fontTitle = `bold 12pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -42,6 +44,12 @@ export default function LineChart({
         <>
             {series.length > 0 ? (
                 <div className="bg-[#eeeeee] p-3">
+                    <button
+                        onClick={() => exportToCsv(series[0].data)}
+                        className="mb-2 rounded bg-gray-500 py-1 px-2 font-bold text-white hover:bg-gray-700"
+                    >
+                        Export to CSV
+                    </button>
                     <Chart>
                         <ChartArea background="#fff" />
                         <ChartLegend
