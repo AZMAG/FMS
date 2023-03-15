@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FMS_Dashboard.Models;
 using System.Web.Mvc;
+using System.Linq.Dynamic.Core;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace FMS_Dashboard.Controllers
 {
@@ -153,6 +156,87 @@ namespace FMS_Dashboard.Controllers
             {
                 var data = context.detector_AvgHourlySpeed.Where(x => x.detector_number == det_num && x.year == year).ToList();
                 return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult DistributionDataPassingQualityControlCriteriaByDateByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+                DateTime startDate = DateTime.Parse(report.startDate1);
+                DateTime endDate = DateTime.Parse(report.endDate1);
+
+                var data = context.vw_Errors
+                    .Where(x => x.detector_number == report.det_num && x.collected > startDate && x.collected < endDate)
+                    .GroupBy(x => x.collected)
+                    .Select(g => new { num_errors = g.Count(), collected = g.Key })
+                    .ToList();
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //public JsonResult AnnualQualityControlFlagsByHourOfDay(Guid reportId)
+        //{
+        //    using (var context = new Jacobs_PlayPenEntities())
+        //    {
+        //        var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+        //        DateTime startDate = DateTime.Parse(report.startDate1);
+        //        DateTime endDate = DateTime.Parse(report.endDate1).Date;
+        //        endDate = endDate.AddDays(1);
+
+        //        //var data = context)
+        //        //    .Where(x => x.detector_number == report.det_num
+        //        //            && startDate <= x.collected
+        //        //            && x.collected < endDate)
+        //        //    .ToList();
+                
+
+        //        return Json(data, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+
+        private bool isWeekday(DateTime? date)
+        {
+            if (date == null) return false;
+
+            return date.Value.DayOfWeek <= DayOfWeek.Friday; // weekday is Monday-Friday (0-4)
+        }
+
+
+        public JsonResult DistributionDataPassingQualityControlCriteriaByWeekdayByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+                DateTime startDate = DateTime.Parse(report.startDate1);
+                DateTime endDate = DateTime.Parse(report.endDate1);
+
+                TimeSpan span = endDate - startDate;
+                int numDays = span.Days + 1;
+
+                var data = context.vw_Errors
+                    .Where(x => x.detector_number == report.det_num && x.collected > startDate && x.collected < endDate)
+                    .Select(x => new { x.collected, x.min_since })
+                    .ToList()
+                    .Select(x => new { Weekday = x.collected.HasValue ? x.collected.Value.DayOfWeek : DayOfWeek.Sunday, MinSince = x.min_since })
+                    .GroupBy(x => new { x.Weekday, x.MinSince })
+                    .Select(g => new { NumErrors = g.Count(), Weekday = g.Key.Weekday.ToString(), MinSince = g.Key.MinSince })
+                    .OrderBy(x => x.Weekday)
+                    .ThenBy(x => x.MinSince)
+                    .ToList();
+
+
+                return Json(new
+                {
+                    data = data,
+                    numDays = numDays
+                }, JsonRequestBehavior.AllowGet);
             }
         }
 

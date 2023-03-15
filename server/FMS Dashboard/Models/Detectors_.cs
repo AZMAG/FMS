@@ -12,14 +12,15 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_detector_Validity
+    public partial class Detectors_
     {
-        public Nullable<System.Guid> id { get; set; }
-        public Nullable<short> detector_number { get; set; }
-        public int year { get; set; }
-        public Nullable<int> error { get; set; }
-        public Nullable<int> valid { get; set; }
-        public Nullable<decimal> total { get; set; }
-        public Nullable<decimal> pct { get; set; }
+        public int ID { get; set; }
+        public int det_num { get; set; }
+        public Nullable<double> Milepost { get; set; }
+        public Nullable<double> x { get; set; }
+        public Nullable<double> y { get; set; }
+        public string Route { get; set; }
+        public string Direction { get; set; }
+        public string Location { get; set; }
     }
 }

@@ -51,78 +51,49 @@ export default function DistributionOfDataPassingQCByDate({
             let res = null;
 
             if (reportId) {
+                res = await axios.get(
+                    apiUrl +
+                        "/Detector/DistributionDataPassingQualityControlCriteriaByDateByReportId",
+                    {
+                        params: {
+                            reportId,
+                        },
+                    }
+                );
             } else {
-                res = await axios.get(apiUrl + "/Detector/GetErrors", {
-                    params: {
-                        det_num,
-                        year: "2021",
-                    },
-                });
+                res = await axios.get(
+                    apiUrl +
+                        "/Detector/DistributionDataPassingQualityControlCriteriaByDateByReportId",
+                    {
+                        params: {
+                            det_num,
+                            year: "2021",
+                        },
+                    }
+                );
             }
 
-            let _data = res.data.map((item) => {
-                item.date = new Date(
-                    parseInt(item.collected.replace(/[^0-9 +]/g, ""))
-                );
-                return item;
+            const _dateLabels = [];
+
+            let _data = res.data
+                .map((item) => {
+                    item.date = new Date(
+                        parseInt(item.collected.replace(/[^0-9 +]/g, ""))
+                    );
+                    item.passing = 1 - item.num_errors / 288;
+                    return item;
+                })
+                .sort((a, b) => a.date - b.date);
+
+            _data.forEach((item) => {
+                const strMonth = item.date.toLocaleString("default", {
+                    month: "long",
+                });
+                _dateLabels.push(strMonth + " " + (item.date.getDate() + 1));
             });
 
-            var startDate = new Date("2018-01-01");
-            var endDate = new Date("2018-12-31");
-
-            var getDateArray = function (start, end) {
-                var arr = [];
-                var dt = new Date(start);
-                while (dt <= end) {
-                    const totalDailyErrors = _data.filter((item) => {
-                        // console.log(item);
-                        return item.date.getDate() === dt.getDate();
-                    });
-
-                    const min_since = {};
-                    totalDailyErrors.forEach((error) => {
-                        min_since[error.min_since] = true;
-                    });
-
-                    let passing = 1 - Object.keys(min_since).length / 288;
-
-                    if (passing < 0) {
-                        alert("passing is less than 0");
-                        passing = 0;
-                    }
-
-                    const obj = {
-                        date: new Date(dt),
-                        passing,
-                        month: dt.getMonth(),
-                    };
-
-                    arr.push(obj);
-                    dt.setDate(dt.getDate() + 1);
-                }
-                return arr;
-            };
-            const seriesData = getDateArray(startDate, endDate);
-            var months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-            ];
-
-            const labels = seriesData.map((ser) => {
-                return months[ser.month];
-            });
-            setDateLabels(labels);
-            setSeries(seriesData);
+            setDateLabels(_dateLabels);
+            setSeries(_data);
         })();
     }, [det_num, setSeries, setDateLabels, period1, reportId]);
     return (
@@ -148,8 +119,8 @@ export default function DistributionOfDataPassingQCByDate({
                             <ChartCategoryAxisItem
                                 labels={{
                                     font: fontAxis,
-                                    step: 15.5,
-                                    skip: 15,
+                                    step: 5,
+                                    skip: 0,
                                     rotation: "auto",
                                     padding: [0, 0, 0, 120],
                                     visible: true,
