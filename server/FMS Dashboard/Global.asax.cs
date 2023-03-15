@@ -1,4 +1,4 @@
-﻿using FMS_Dashboard.Models;
+using FMS_Dashboard.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
