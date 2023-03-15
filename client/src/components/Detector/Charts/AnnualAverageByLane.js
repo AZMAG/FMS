@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-    getTimeLabels,
-    sortTimeData,
-    getMultipleSeriesByField,
-} from "./chartDataHelpers";
+import { getSingleSeriesByField } from "./chartDataHelpers";
 import LineChart from "./LineChart";
 import LoadingChart from "../../Loaders/loadingChart";
 import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
-export default function MiscDetectorData({ det_num, reportId, period1 }) {
+export default function AnnualAverageByLane({ det_num, reportId, period1 }) {
     const [series, setSeries] = useState([]);
-    const [dateLabels, setDateLabels] = useState([]);
+    const [labels, setLabels] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -42,35 +38,28 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                 );
             }
 
-            console.log(res.data);
+            const _data = res.data.sort((a, b) => a.lane.localeCompare(b.lane));
+            const _labels = _data.map((d) => d.lane);
 
-            const _data = sortTimeData(res.data, "hour_in_day");
-            const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
-            const _series = getMultipleSeriesByField(
-                _data,
-                "lane_type",
-                "avg_occupancy_percent"
+            const _series = getSingleSeriesByField(
+                res.data,
+                "avg_daily_traffic"
             );
+
             setSeries(_series);
-            setDateLabels(_dateLabels);
+            setLabels(_labels);
         })();
-    }, [det_num, setSeries, setDateLabels, period1, reportId]);
+    }, [det_num, setSeries, setLabels, period1, reportId]);
     return (
         <>
             {series.length ? (
                 <LineChart
-                    field="avg_occ"
+                    field="avg_daily_traffic"
                     series={series}
                     title="Annual Average by Lane - raw data with zero values and without"
                     catTitle="ADT"
                     valueTitle=""
-                    labels={[
-                        "HOV Lane",
-                        "Lane 4",
-                        "Lane 3",
-                        "Lane 2",
-                        "Lane 1",
-                    ]}
+                    labels={labels}
                 />
             ) : (
                 <LoadingChart />

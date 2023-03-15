@@ -35,6 +35,16 @@ function sortTimeData(data, timeField) {
     });
 }
 
+function getSingleSeriesByField(data, dataField) {
+    return [
+        {
+            name: dataField,
+            field: dataField,
+            data: data,
+        },
+    ];
+}
+
 function getMultipleSeriesByField(data, filterField, dataField) {
     const seriesKeys = getDistinctPropertyList(data, filterField, true);
     const seriesList = [];
@@ -51,4 +61,9 @@ function getMultipleSeriesByField(data, filterField, dataField) {
     return seriesList;
 }
 
-export { getMultipleSeriesByField, getTimeLabels, sortTimeData };
+export {
+    getMultipleSeriesByField,
+    getTimeLabels,
+    sortTimeData,
+    getSingleSeriesByField,
+};

@@ -8,6 +8,7 @@ export default function Detectors() {
         <main
             tag="mainPage"
             className="container mx-auto flex h-screen grid-cols-2 flex-row justify-items-center gap-x-4 px-2"
+
         >
             <DetectorMap className="w-3/4" />
             <DetectorMapControls className="w-1/4" />
