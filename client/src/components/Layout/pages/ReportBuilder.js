@@ -55,7 +55,7 @@ function ReportBuilder() {
                     </>
                 )}
             </div>
-            <div className="flex w-1/2">
+            <div className="h-screen w-1/2 pt-2">
                 <ReportBuilderMap />
             </div>
             <ReportBuilderSubmitModal />
