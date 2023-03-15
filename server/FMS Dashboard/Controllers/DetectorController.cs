@@ -11,10 +11,13 @@ namespace FMS_Dashboard.Controllers
 {
     public class DetectorController : Controller
     {
-        public ActionResult Index(int det_num)
+        public JsonResult GetValidityData()
         {
-            ViewBag.det_num = det_num;
-            return View("../Home/Detector");
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                var data = context.detector_Validity.ToList();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public JsonResult GetMiscDetectorData(int det_num, int? year, DateTime? start, DateTime? end)

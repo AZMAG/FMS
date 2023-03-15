@@ -23,8 +23,7 @@ namespace FMS_Dashboard
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);            
+            RouteConfig.RegisterRoutes(RouteTable.Routes);         
         }
         protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {

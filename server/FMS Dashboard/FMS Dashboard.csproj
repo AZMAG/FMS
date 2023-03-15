@@ -253,21 +253,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CorridorsController.cs" />
     <Compile Include="Controllers\DetectorController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\QueryBuilderController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CustomAuthorize.cs" />
-    <Compile Include="Helpers\LabelExtensions.cs" />
     <Compile Include="Models\ApplicationRole.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -437,10 +430,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Email Templates\ReportFinished.html" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Images\loading.gif" />
-    <Content Include="Images\Logo.png" />
     <Content Include="Models\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>
@@ -451,22 +441,6 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\addCorridor.js" />
-    <Content Include="Scripts\admin.js" />
-    <Content Include="Scripts\config.js" />
-    <Content Include="Scripts\corridors.js" />
-    <Content Include="Scripts\detectors.js" />
-    <Content Include="Scripts\detectorsAnalysisBuilder.js" />
-    <Content Include="Scripts\kendo.modernizr.custom.js" />
-    <Content Include="Scripts\main.js" />
-    <Content Include="Scripts\map.js" />
-    <Content Include="Scripts\qbReport.js" />
-    <Content Include="Scripts\queryBuilder.js" />
-    <Content Include="Styles\AddCorridor.css" />
-    <Content Include="Styles\Detector.css" />
-    <Content Include="Styles\Layout.css" />
-    <Content Include="Styles\Main.css" />
-    <Content Include="Styles\QueryBuilder.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -474,17 +448,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Detectors\" />
-    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\DataModel.edmx">
@@ -495,35 +461,6 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
-    <Content Include="Views\Shared\_HeaderNavBar.cshtml" />
-    <Content Include="Views\Home\Detector.cshtml" />
-    <Content Include="Styles\Main.scss" />
-    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\RoleId.cshtml" />
-    <Content Include="Views\Error\AccessDenied.cshtml" />
-    <Content Include="Styles\_Shared.scss" />
-    <Content Include="Styles\Detector.scss" />
-    <Content Include="Styles\Layout.scss" />
-    <Content Include="Views\Corridors\Index.cshtml" />
-    <Content Include="Views\Corridors\Add.cshtml" />
-    <Content Include="Styles\AddCorridor.scss" />
-    <Content Include="Styles\Corridor.scss" />
-    <Content Include="Views\QueryBuilder\Index.cshtml" />
-    <Content Include="Styles\QueryBuilder.scss" />
-    <Content Include="Views\QueryBuilder\Result.cshtml" />
-    <Content Include="Styles\QueryBuilderResult.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
