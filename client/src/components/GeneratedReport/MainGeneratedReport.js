@@ -16,7 +16,7 @@ export default function GeneratedReport({ data }) {
     return (
         <main
             tag="ReportsPage"
-            className="container mx-auto flex grow flex-col justify-items-center py-8 px-10"
+            className="container mx-auto flex h-96 grow flex-col justify-items-center py-8 px-10"
             ref={containerRef}
         >
             <PageHeader data={data} />
