@@ -27,8 +27,6 @@ namespace FMS_Dashboard.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
-        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public virtual DbSet<CorridorDetector> CorridorDetectors { get; set; }
         public virtual DbSet<Corridor> Corridors { get; set; }
         public virtual DbSet<detector_AvgByLane> detector_AvgByLane { get; set; }
@@ -39,34 +37,8 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<detector_MiscData> detector_MiscData { get; set; }
         public virtual DbSet<detector_SpeedVsFlow> detector_SpeedVsFlow { get; set; }
         public virtual DbSet<detector_Validity> detector_Validity { get; set; }
-        public virtual DbSet<Errors2015> Errors2015 { get; set; }
-        public virtual DbSet<Errors2016> Errors2016 { get; set; }
-        public virtual DbSet<Errors2017> Errors2017 { get; set; }
-        public virtual DbSet<Errors2018> Errors2018 { get; set; }
-        public virtual DbSet<Errors2019> Errors2019 { get; set; }
-        public virtual DbSet<Errors2020> Errors2020 { get; set; }
-        public virtual DbSet<Errors2021> Errors2021 { get; set; }
-        public virtual DbSet<Errors2022> Errors2022 { get; set; }
         public virtual DbSet<GeneratedReport> GeneratedReports { get; set; }
-        public virtual DbSet<LaneErrors2015> LaneErrors2015 { get; set; }
-        public virtual DbSet<LaneErrors2016> LaneErrors2016 { get; set; }
-        public virtual DbSet<LaneErrors2017> LaneErrors2017 { get; set; }
-        public virtual DbSet<LaneErrors2018> LaneErrors2018 { get; set; }
-        public virtual DbSet<LaneErrors2019> LaneErrors2019 { get; set; }
-        public virtual DbSet<LaneErrors2020> LaneErrors2020 { get; set; }
-        public virtual DbSet<LaneErrors2021> LaneErrors2021 { get; set; }
-        public virtual DbSet<LaneErrors2022> LaneErrors2022 { get; set; }
-        public virtual DbSet<RawData2015> RawData2015 { get; set; }
-        public virtual DbSet<RawData2016> RawData2016 { get; set; }
-        public virtual DbSet<RawData2017> RawData2017 { get; set; }
-        public virtual DbSet<RawData2019> RawData2019 { get; set; }
-        public virtual DbSet<RawData2020> RawData2020 { get; set; }
-        public virtual DbSet<RawData2021> RawData2021 { get; set; }
-        public virtual DbSet<RawData2022> RawData2022 { get; set; }
         public virtual DbSet<Detector> Detectors { get; set; }
-        public virtual DbSet<Detectors_> Detectors_ { get; set; }
-        public virtual DbSet<Detectors_123> Detectors_123 { get; set; }
-        public virtual DbSet<RawData2018> RawData2018 { get; set; }
         public virtual DbSet<vw_detector_AvgAnnualVolumeByLane> vw_detector_AvgAnnualVolumeByLane { get; set; }
         public virtual DbSet<vw_detector_AvgByLane> vw_detector_AvgByLane { get; set; }
         public virtual DbSet<vw_detector_AvgHourlySpeed> vw_detector_AvgHourlySpeed { get; set; }
