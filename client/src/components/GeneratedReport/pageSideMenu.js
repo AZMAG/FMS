@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 
 export default function PageSideMenu() {
     return (
-        <>
+        <div className="">
             <h6 className="mb-1 text-lg font-bold">On this page</h6>
             <ul className="text-sm font-medium leading-loose text-slate-400">
                 <li className="hover:text-slate-700 hover:underline">
@@ -56,6 +56,6 @@ export default function PageSideMenu() {
                     </a>
                 </li>
             </ul>
-        </>
+        </div>
     );
 }

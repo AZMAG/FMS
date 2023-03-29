@@ -14,54 +14,57 @@ export default function GeneratedReport({ data }) {
     const containerRef = useRef();
 
     return (
-        <main
-            tag="ReportsPage"
-            className="container mx-auto flex flex-col justify-items-center py-8 px-10"
-            ref={containerRef}
-        >
+        <div>
             <PageHeader data={data} />
-            <div className="flex">
-                <div className="static mt-4 w-1/5">
+            <div className="mx-36 flex pt-32">
+                <div className="fixed z-50 h-screen w-64 overflow-y-auto">
                     <PageSideMenu />
                 </div>
-                <div className="flex w-4/5 flex-col justify-items-center">
-                    <div id="section-map" className="flex">
-                        <GeneratedReportMap
-                            x={data.x}
-                            y={data.y}
-                            segment={data.segment}
-                            direction={data.Direction}
-                        />
-                    </div>
-                    <div className="mt-6 flex grid-cols-2 ">
-                        <div className="flex-1 space-y-4 border-r-2 px-3">
-                            <TimePeriodCard data={data} period1={true} />
-                            <ErrorTable />
-                            <DetectorQualityTable />
-                            <ReportChartsSection id={data.id} period1={true} />
+                <div className="ml-64 flex-1 overflow-y-auto">
+                    <div>
+                        <div id="section-map" className="flex">
+                            <GeneratedReportMap
+                                x={data.x}
+                                y={data.y}
+                                segment={data.segment}
+                                direction={data.Direction}
+                            />
                         </div>
-                        {(data.startDate2 || data.timePeriodYear2) && (
-                            <div className="flex-1 space-y-4 border-l-2 px-3">
-                                <TimePeriodCard data={data} period1={false} />
+                        <div className="mt-6 flex grid-cols-2 ">
+                            <div className="flex-1 space-y-4 border-r-2 px-3">
+                                <TimePeriodCard data={data} period1={true} />
                                 <ErrorTable />
                                 <DetectorQualityTable />
                                 <ReportChartsSection
                                     id={data.id}
-                                    period1={false}
+                                    period1={true}
                                 />
                             </div>
-                        )}
-                    </div>
-                    <div id="section-notes" className="mt-4">
-                        <DetectorNotes />
-                    </div>
-                    <div id="section-def" className="mt-4">
-                        <DetectorDefinition />
+                            {data.startDate2 || data.timePeriodYear2 ? (
+                                <div className="flex-1 space-y-4 border-l-2 px-3">
+                                    <TimePeriodCard
+                                        data={data}
+                                        period1={false}
+                                    />
+                                    <ErrorTable />
+                                    <DetectorQualityTable />
+                                    <ReportChartsSection
+                                        id={data.id}
+                                        period1={false}
+                                    />
+                                </div>
+                            ) : null}
+                        </div>
+                        <div id="section-notes" className="mt-4">
+                            <DetectorNotes />
+                        </div>
+                        <div id="section-def" className="mt-4">
+                            <DetectorDefinition />
+                        </div>
                     </div>
                 </div>
             </div>
-
             <ScrollToTopButton containerRef={containerRef} />
-        </main>
+        </div>
     );
 }

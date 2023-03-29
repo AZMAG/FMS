@@ -49,6 +49,7 @@ function GeneratedReportMap({ x, y, segment, direction }) {
                 },
                 ui: { components: [] },
             });
+            view.on("mouse-wheel", (e) => e.stopPropagation());
 
             const pointGraphic = new Graphic({
                 symbol: {
