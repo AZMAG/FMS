@@ -115,7 +115,10 @@ export default function DistributionOfDataPassingQCByWeekday({
     return (
         <>
             {series.length > 0 ? (
-                <div className="bg-[#eeeeee] p-3">
+                <div
+                    id="distribution-of-data-passing-quality-control-criteria-by-weekday"
+                    className="bg-[#eeeeee] p-3"
+                >
                     <button
                         onClick={() => exportToCsv(series)}
                         className="mb-2 rounded bg-gray-500 py-1 px-2 font-bold text-white hover:bg-gray-700"

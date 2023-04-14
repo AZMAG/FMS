@@ -49,7 +49,6 @@ function GeneratedReportMap({ x, y, segment, direction }) {
                 },
                 ui: { components: [] },
             });
-            view.on("mouse-wheel", (e) => e.stopPropagation());
 
             const pointGraphic = new Graphic({
                 symbol: {
@@ -83,8 +82,8 @@ function GeneratedReportMap({ x, y, segment, direction }) {
 
             view.graphics.add(segmentGraphic);
             view.graphics.add(pointGraphic);
-
-            view.goTo(segmentGraphic);
+            view.extent = segmentGraphic.geometry.extent.expand(6);
+            view.on("mouse-wheel", (e) => e.stopPropagation());
         }
     }, [mapDiv]);
 

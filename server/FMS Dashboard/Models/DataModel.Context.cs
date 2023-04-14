@@ -49,6 +49,7 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<vw_ExistingLanes> vw_ExistingLanes { get; set; }
         public virtual DbSet<vw_LaneErrors> vw_LaneErrors { get; set; }
         public virtual DbSet<vw_RawData> vw_RawData { get; set; }
+        public virtual DbSet<RawData2022> RawData2022 { get; set; }
     
         public virtual int GenerateAvgHourlyOccupancyData(Nullable<System.Guid> report_id, Nullable<int> det_num, string start_date, string end_date, Nullable<bool> isPeriod1)
         {

@@ -56,7 +56,7 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
         })();
     }, [det_num, setSeries, setDateLabels, period1, reportId]);
     return (
-        <>
+        <div id="annual-avg-hourly-speed">
             {series.length ? (
                 <LineChart
                     field="avg_speed"
@@ -69,6 +69,6 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
             ) : (
                 <LoadingChart />
             )}
-        </>
+        </div>
     );
 }

@@ -18,7 +18,7 @@ export default function PageHeader({ data }) {
     return (
         <div className="fixed z-10 w-full border bg-white py-4 text-center">
             <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                Generated Report
+                Detector Report
             </h2>
             <div className="flex flex-col justify-center pt-4 sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
                 <div className={divStyle}>

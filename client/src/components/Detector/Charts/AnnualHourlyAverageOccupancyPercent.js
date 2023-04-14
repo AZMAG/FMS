@@ -47,12 +47,15 @@ export default function AnnualHourlyAverageOccupancyPercent({
             }
 
             const _data = sortTimeData(res.data, "hour_in_day");
+
             const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
             const _series = getMultipleSeriesByField(
                 _data,
                 "lane_type",
                 "avg_occupancy_percent"
             );
+            console.log(_series);
+
             setSeries(_series);
             setDateLabels(_dateLabels);
         })();
@@ -60,7 +63,7 @@ export default function AnnualHourlyAverageOccupancyPercent({
     return (
         <>
             {series.length ? (
-                <>
+                <div id="annual-avg-hourly-occupancy">
                     <LineChart
                         field="avg_occupancy_pct"
                         series={series}
@@ -69,7 +72,7 @@ export default function AnnualHourlyAverageOccupancyPercent({
                         valueTitle=""
                         labels={dateLabels}
                     />
-                </>
+                </div>
             ) : (
                 <LoadingChart />
             )}

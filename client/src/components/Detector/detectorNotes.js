@@ -2,14 +2,14 @@ import React from "react";
 
 export default function DetectorNotes() {
     return (
-        <div className="bg-[#eeeeee] text-sm p-4">
+        <div className="flex-1 bg-[#eeeeee] p-4 text-sm">
             <h4 className="text-lg font-semibold">Data Notes</h4>
-            <ol className="list-decimal marker:font-semibold px-8">
+            <ol className="list-decimal px-8 marker:font-semibold">
                 <li>
                     Original source data is available from ADOT at:&nbsp;
                     <a
                         href="ftp://ftp.az511.com/pub/traffic/5min/"
-                        className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+                        className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
                     >
                         ftp://ftp.az511.com/pub/traffic/5min/
                     </a>
@@ -25,7 +25,7 @@ export default function DetectorNotes() {
                     obtained from Zip file available from ADOT at:&nbsp;
                     <a
                         href="ftp://ftp.az511.com/pub/traffic/docs/"
-                        className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+                        className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
                     >
                         ftp://ftp.az511.com/pub/traffic/docs/
                     </a>

@@ -16,21 +16,21 @@ const fontAxis = `bold 8pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
 
 export default function ScatterChart({
-    field,
-    series,
+    xField,
+    yField,
+    xUnit,
+    yUnit,
+    xLabel,
+    yLabel,
     title,
-    catTitle,
-    valueTitle,
-    labels,
+    data,
 }) {
-    console.log(series);
-
     Highcharts.setOptions({
         colors: chartColors,
     });
     const options = {
         title: {
-            text: "Weekday Speed vs Flow",
+            text: title,
         },
         chart: {
             type: "scatter",
@@ -43,10 +43,10 @@ export default function ScatterChart({
         },
         series: [
             {
-                data: series[0].data
-                    .filter((x) => x.time_of_day === "AM Peak")
+                data: data
+                    ?.filter((x) => x.time_of_day === "AM Peak")
                     .map((s) => {
-                        return [s.speed, s.vph];
+                        return [s[xField], s[yField]];
                     }),
                 marker: {
                     symbol: "circle",
@@ -57,10 +57,10 @@ export default function ScatterChart({
                 id: "am-peak",
             },
             {
-                data: series[0].data
-                    .filter((x) => x.time_of_day === "Mid Day")
+                data: data
+                    ?.filter((x) => x.time_of_day === "Mid Day")
                     .map((s) => {
-                        return [s.speed, s.vph];
+                        return [s[xField], s[yField]];
                     }),
                 marker: {
                     symbol: "circle",
@@ -71,10 +71,10 @@ export default function ScatterChart({
                 id: "mid-day",
             },
             {
-                data: series[0].data
-                    .filter((x) => x.time_of_day === "PM Peak")
+                data: data
+                    ?.filter((x) => x.time_of_day === "PM Peak")
                     .map((s) => {
-                        return [s.speed, s.vph];
+                        return [s[xField], s[yField]];
                     }),
                 marker: {
                     symbol: "circle",
@@ -85,10 +85,10 @@ export default function ScatterChart({
                 id: "pm-peak",
             },
             {
-                data: series[0].data
-                    .filter((x) => x.time_of_day === "Night")
+                data: data
+                    ?.filter((x) => x.time_of_day === "Night")
                     .map((s) => {
-                        return [s.speed, s.vph];
+                        return [s[xField], s[yField]];
                     }),
                 marker: {
                     symbol: "circle",
@@ -99,35 +99,34 @@ export default function ScatterChart({
                 id: "night",
             },
         ],
-        xAxis: {
+        yAxis: {
             title: {
-                text: "Speed",
+                text: yLabel,
             },
             labels: {
-                format: "{value} MPH",
+                format: `{value} ${yUnit}`,
             },
             startOnTick: true,
             endOnTick: true,
             showLastLabel: true,
         },
-        yAxis: {
+        xAxis: {
+            min: 0,
             title: {
-                text: "Flow",
+                text: xLabel,
             },
             labels: {
-                format: "{value} VPH",
+                format: `{value} ${xUnit}`,
             },
         },
         tooltip: {
-            pointFormat: "Speed: {point.x} MPH <br/> Flow: {point.y} VPH",
+            pointFormat: `${xLabel}: {point.x} ${xUnit} <br/> ${yLabel}: {point.y} ${yUnit}`,
         },
     };
 
-    console.log(options);
-
     return (
         <>
-            {series.length > 0 ? (
+            {data ? (
                 <div className="bg-[#eeeeee] p-3">
                     <HighchartsReact
                         highcharts={Highcharts}

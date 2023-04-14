@@ -8,14 +8,15 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import LoadingList from "../Loaders/loadingList";
+import DetectorDefinition from "../Detector/detectorDefinition";
 import { apiUrl } from "../../DocConfig";
+import QualityTable from "./qualityTable";
 
 axios.defaults.withCredentials = true;
 
 export default function ErrorTable({ det_num }) {
     const [data, setData] = useState(null);
 
-    console.log(data);
     const columns = [
         {
             field: "label",
@@ -67,46 +68,56 @@ export default function ErrorTable({ det_num }) {
     return (
         <>
             {data ? (
-                <div className="bg-[#eeeeee] p-5">
-                    <h6 className="mb-2 text-lg font-semibold">
-                        Percent of Data Rows Flagged by Time Period - weekdays
-                    </h6>
-                    <TableContainer component={Paper}>
-                        <Table size="small" aria-label="Quality table">
-                            <TableHead className="bg-slate-100">
-                                <TableRow>
-                                    {columns.map((column, i) => (
-                                        <TableCell
-                                            key={i}
-                                            className={column.title
-                                                .replace(/\s/g, "")
-                                                .toLowerCase()}
-                                        >
-                                            {column.title}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {data.map((row, i) => (
-                                    <TableRow key={i}>
+                <div className="flex">
+                    <div
+                        id="error-flag-tables"
+                        className="flex-1 bg-[#eeeeee] p-5"
+                    >
+                        <h6 className="mb-2 text-lg font-semibold">
+                            Percent of Data Rows Flagged by Time Period -
+                            weekdays
+                        </h6>
+                        <TableContainer component={Paper}>
+                            <Table size="small" aria-label="Quality table">
+                                <TableHead className="bg-slate-100">
+                                    <TableRow>
                                         {columns.map((column, i) => (
                                             <TableCell
                                                 key={i}
-                                                className={column.title}
+                                                className={column.title
+                                                    .replace(/\s/g, "")
+                                                    .toLowerCase()}
                                             >
-                                                {column.format
-                                                    ? column.format(
-                                                          row[column.field]
-                                                      )
-                                                    : row[column.field]}
+                                                {column.title}
                                             </TableCell>
                                         ))}
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                                </TableHead>
+                                <TableBody>
+                                    {data.map((row, i) => (
+                                        <TableRow key={i}>
+                                            {columns.map((column, i) => (
+                                                <TableCell
+                                                    key={i}
+                                                    className={column.title}
+                                                >
+                                                    {column.format
+                                                        ? column.format(
+                                                              row[column.field]
+                                                          )
+                                                        : row[column.field]}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <QualityTable />
+                    </div>
+                    <div className="flex-1">
+                        <DetectorDefinition />
+                    </div>
                 </div>
             ) : (
                 <LoadingList />

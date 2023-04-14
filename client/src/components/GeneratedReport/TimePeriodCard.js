@@ -57,7 +57,7 @@ export default function TimePeriodCard({ data, period1 }) {
     return (
         <div
             id="section-time-period"
-            className="rounded bg-slate-100 py-1 px-3"
+            className="flex-1 rounded bg-slate-100 py-1 px-3"
         >
             <h2 className="mb-1.5 text-xl font-bold tracking-tight text-gray-900">
                 Time Period

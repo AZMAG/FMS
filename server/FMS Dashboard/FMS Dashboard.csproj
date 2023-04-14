@@ -312,6 +312,9 @@
     <Compile Include="Models\GeneratedReport.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RawData2022.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vw_detector_AvgAnnualVolumeByLane.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="71312c646b5b4ac58b45ef8ee70018fd" Name="Diagram1">
+      <Diagram DiagramId="71312c646b5b4ac58b45ef8ee70018fd" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.CorridorDetector" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.Corridor" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.detector_AvgByLane" Width="1.5" PointX="0.75" PointY="3.75" />
@@ -27,6 +27,7 @@
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_ExistingLanes" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_LaneErrors" Width="1.5" PointX="12.75" PointY="5.75" />
         <EntityTypeShape EntityType="Jacobs_PlayPenModel.vw_RawData" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Jacobs_PlayPenModel.RawData2022" Width="1.5" PointX="5.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

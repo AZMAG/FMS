@@ -50,7 +50,7 @@ export default function AnnualHourlyAverageThroughput({
         })();
     }, [det_num, setSeries, setDateLabels, period1, reportId]);
     return (
-        <>
+        <div id="annual-avg-hourly-throughput">
             {series.length ? (
                 <LineChart
                     field="avg_throughput"
@@ -63,6 +63,6 @@ export default function AnnualHourlyAverageThroughput({
             ) : (
                 <LoadingChart />
             )}
-        </>
+        </div>
     );
 }

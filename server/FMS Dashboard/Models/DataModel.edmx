@@ -126,7 +126,7 @@
           <Property Name="isPeriod1" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.Detectors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.Detectors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Detectors">
           <Key>
             <PropertyRef Name="ID" />
@@ -172,15 +172,26 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.Detectors' does not have a prim
           <Property Name="date_completed" Type="datetime" />
           <Property Name="email" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.AZMAG\jfairfield.occupancy_pct_attempt' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="occupancy_pct_attempt">
+        <EntityType Name="RawData2022">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="detector_number" Type="smallint" />
+          <Property Name="collected" Type="date" />
           <Property Name="min_since" Type="smallint" />
-          <Property Name="avg_speed" Type="int" />
-          <Property Name="occupancy_pct" Type="numeric" Precision="19" Scale="7" />
-        </EntityType>-->
+          <Property Name="lane" Type="varchar" MaxLength="128" />
+          <Property Name="speed" Type="smallint" />
+          <Property Name="samples" Type="smallint" />
+          <Property Name="occupancy" Type="smallint" />
+          <Property Name="volume" Type="smallint" />
+          <Property Name="vph" Type="smallint" />
+          <Property Name="GP" Type="bit" />
+          <Property Name="HOV" Type="bit" />
+          <Property Name="time_of_day" Type="smallint" />
+        </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AnnualQualityControlFlagsByHourOfDay' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'FreewayMS.dbo.vw_detector_AnnualQualityControlFlagsByHourOfDay' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="vw_detector_AnnualQualityControlFlagsByHourOfDay">
           <Property Name="detector_number" Type="int" />
           <Property Name="collected" Type="date" />
@@ -192,7 +203,7 @@ warning 6013: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AnnualQualityContro
           <Property Name="hour_in_day" Type="varchar" MaxLength="12" />
         </EntityType>-->
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgAnnualVolumeByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_detector_AvgAnnualVolumeByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_detector_AvgAnnualVolumeByLane">
           <Key>
             <PropertyRef Name="year" />
@@ -203,7 +214,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgAnnualVolumeByLa
           <Property Name="avg_annual_daily_traffic" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_detector_AvgByLane' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_detector_AvgByLane">
           <Key>
             <PropertyRef Name="year" />
@@ -217,7 +228,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgByLane' does not
           <Property Name="avg_ADT" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgHourlySpeed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_detector_AvgHourlySpeed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_detector_AvgHourlySpeed">
           <Key>
             <PropertyRef Name="year" />
@@ -229,7 +240,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgHourlySpeed' doe
           <Property Name="year" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgHourlyThroughput' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_detector_AvgHourlyThroughput' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_detector_AvgHourlyThroughput">
           <Key>
             <PropertyRef Name="year" />
@@ -241,7 +252,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_AvgHourlyThroughput
           <Property Name="year" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_MiscData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_detector_MiscData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_detector_MiscData">
           <Key>
             <PropertyRef Name="year" />
@@ -254,7 +265,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_MiscData' does not 
           <Property Name="year" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_Validity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_detector_Validity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_detector_Validity">
           <Key>
             <PropertyRef Name="year" />
@@ -268,7 +279,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_detector_Validity' does not 
           <Property Name="pct" Type="numeric" Precision="28" Scale="15" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_Errors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_Errors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_Errors">
           <Key>
             <PropertyRef Name="year" />
@@ -286,7 +297,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_Errors' does not have a prim
           <Property Name="zeros_error" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_ExistingLanes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_ExistingLanes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_ExistingLanes">
           <Key>
             <PropertyRef Name="year" />
@@ -307,7 +318,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_ExistingLanes' does not have
           <Property Name="HOV2" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_LaneErrors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_LaneErrors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_LaneErrors">
           <Key>
             <PropertyRef Name="year" />
@@ -332,7 +343,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_LaneErrors' does not have a 
           <Property Name="HOV2" Type="smallint" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'FreewayMS.dbo.vw_RawData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_RawData">
           <Key>
             <PropertyRef Name="year" />
@@ -353,9 +364,6 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="HOV" Type="bit" />
           <Property Name="time_of_day" Type="smallint" />
         </EntityType>
-        <Function Name="fnHourInDayFromMinsSinceMN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-          <Parameter Name="min_since" Type="int" Mode="In" />
-        </Function>
         <Function Name="fnTimeOfDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="smallint">
           <Parameter Name="min_since" Type="int" Mode="In" />
         </Function>
@@ -417,6 +425,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <EntitySet Name="detector_SpeedVsFlow" EntityType="Self.detector_SpeedVsFlow" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="detector_Validity" EntityType="Self.detector_Validity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GeneratedReports" EntityType="Self.GeneratedReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RawData2022" EntityType="Self.RawData2022" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detectors" EntityType="Self.Detectors" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Detectors].[ID] AS [ID], 
@@ -632,6 +641,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <EntitySet Name="vw_ExistingLanes" EntityType="Jacobs_PlayPenModel.vw_ExistingLanes" />
           <EntitySet Name="vw_LaneErrors" EntityType="Jacobs_PlayPenModel.vw_LaneErrors" />
           <EntitySet Name="vw_RawData" EntityType="Jacobs_PlayPenModel.vw_RawData" />
+          <EntitySet Name="RawData2022" EntityType="Jacobs_PlayPenModel.RawData2022" />
         </EntityContainer>
         <EntityType Name="CorridorDetector">
           <Key>
@@ -839,6 +849,7 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           <Property Name="lane_type" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
         </EntityType>
+
         <EntityType Name="vw_detector_MiscData">
           <Key>
             <PropertyRef Name="year" />
@@ -927,6 +938,24 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
           </Key>
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="detector_number" Type="Int16" />
+          <Property Name="collected" Type="DateTime" Precision="0" />
+          <Property Name="min_since" Type="Int16" />
+          <Property Name="lane" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="speed" Type="Int16" />
+          <Property Name="samples" Type="Int16" />
+          <Property Name="occupancy" Type="Int16" />
+          <Property Name="volume" Type="Int16" />
+          <Property Name="vph" Type="Int16" />
+          <Property Name="GP" Type="Boolean" />
+          <Property Name="HOV" Type="Boolean" />
+          <Property Name="time_of_day" Type="Int16" />
+        </EntityType>
+        <EntityType Name="RawData2022">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="detector_number" Type="Int16" />
           <Property Name="collected" Type="DateTime" Precision="0" />
           <Property Name="min_since" Type="Int16" />
@@ -1274,6 +1303,25 @@ warning 6002: The table/view 'Jacobs_PlayPen.dbo.vw_RawData' does not have a pri
                 <ScalarProperty Name="detector_number" ColumnName="detector_number" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RawData2022">
+            <EntityTypeMapping TypeName="Jacobs_PlayPenModel.RawData2022">
+              <MappingFragment StoreEntitySet="RawData2022">
+                <ScalarProperty Name="time_of_day" ColumnName="time_of_day" />
+                <ScalarProperty Name="HOV" ColumnName="HOV" />
+                <ScalarProperty Name="GP" ColumnName="GP" />
+                <ScalarProperty Name="vph" ColumnName="vph" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="occupancy" ColumnName="occupancy" />
+                <ScalarProperty Name="samples" ColumnName="samples" />
+                <ScalarProperty Name="speed" ColumnName="speed" />
+                <ScalarProperty Name="lane" ColumnName="lane" />
+                <ScalarProperty Name="min_since" ColumnName="min_since" />
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="detector_number" ColumnName="detector_number" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

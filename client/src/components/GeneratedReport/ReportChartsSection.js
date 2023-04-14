@@ -6,6 +6,8 @@ import AnnualAverageByLane from "../Detector/Charts/AnnualAverageByLane";
 import DistributionOfDataPassingQCByDate from "../Detector/Charts/DistributionOfDataPassingQCByDate";
 import DistributionOfDataPassingQCByWeekday from "../Detector/Charts/DistributionOfDataPassingQCByWeekday";
 import WeekdaySpeedvsFlowData from "../Detector/Charts/WeekdaySpeedvsFlowData";
+import WeekdayFlowvsDensity from "../Detector/Charts/WeekdayFlowvsDensity";
+import WeekdaySpeedvsDensity from "../Detector/Charts/WeekdaySpeedvsDensity";
 import AnnualControlFlagsByHourOfDays from "../Detector/Charts/AnnualControlFlagsByHourOfDays";
 
 export default function ReportChartsSection({ id, period1 }) {
@@ -18,7 +20,6 @@ export default function ReportChartsSection({ id, period1 }) {
                 period1={period1}
             />
             <AnnualAverageByLane reportId={id} period1={period1} />
-            {/* <WeekdaySpeedvsFlowData reportId={id} period1={period1} /> */}
             <DistributionOfDataPassingQCByDate
                 reportId={id}
                 period1={period1}
@@ -27,7 +28,11 @@ export default function ReportChartsSection({ id, period1 }) {
                 reportId={id}
                 period1={period1}
             />
-            {/* <AnnualControlFlagsByHourOfDays reportId={id} /> */}
+            <AnnualControlFlagsByHourOfDays reportId={id} />
+
+            <WeekdayFlowvsDensity reportId={id} period1={period1} />
+            <WeekdaySpeedvsDensity reportId={id} period1={period1} />
+            <WeekdaySpeedvsFlowData reportId={id} period1={period1} />
         </>
     );
 }

@@ -7,8 +7,8 @@ import ErrorTable from "../Detector/ErrorTable";
 import DetectorNotes from "../Detector/detectorNotes";
 import DetectorQualityTable from "../Detector/qualityTable";
 import DetectorDefinition from "../Detector/detectorDefinition";
-import PageHeader from "./pageHeader";
-import PageSideMenu from "./pageSideMenu";
+import PageHeader from "./PageHeader";
+import PageSideMenu from "./PageSideMenu";
 
 export default function GeneratedReport({ data }) {
     const containerRef = useRef();
@@ -32,13 +32,26 @@ export default function GeneratedReport({ data }) {
                         </div>
                         <div className="mt-6 flex grid-cols-2 ">
                             <div className="flex-1 space-y-4 border-r-2 px-3">
-                                <TimePeriodCard data={data} period1={true} />
+                                <div className="flex items-start">
+                                    <TimePeriodCard
+                                        data={data}
+                                        period1={true}
+                                    />
+
+                                    <div
+                                        id="section-notes"
+                                        className="ml-2 flex-1"
+                                    >
+                                        <DetectorNotes />
+                                    </div>
+                                </div>
                                 <ErrorTable />
-                                <DetectorQualityTable />
+                                {/* <DetectorQualityTable /> */}
                                 <ReportChartsSection
                                     id={data.id}
                                     period1={true}
                                 />
+                                <div className="h-52"></div>
                             </div>
                             {data.startDate2 || data.timePeriodYear2 ? (
                                 <div className="flex-1 space-y-4 border-l-2 px-3">
@@ -55,12 +68,10 @@ export default function GeneratedReport({ data }) {
                                 </div>
                             ) : null}
                         </div>
-                        <div id="section-notes" className="mt-4">
-                            <DetectorNotes />
-                        </div>
-                        <div id="section-def" className="mt-4">
+
+                        {/* <div id="section-def" className="mt-4">
                             <DetectorDefinition />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

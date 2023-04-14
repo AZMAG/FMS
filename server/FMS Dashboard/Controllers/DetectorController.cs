@@ -5,7 +5,8 @@ using FMS_Dashboard.Models;
 using System.Web.Mvc;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
-
+using System.Data.Entity.SqlServer;
+using System.Data.SqlTypes;
 
 namespace FMS_Dashboard.Controllers
 {
@@ -182,26 +183,40 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-        //public JsonResult AnnualQualityControlFlagsByHourOfDay(Guid reportId)
-        //{
-        //    using (var context = new Jacobs_PlayPenEntities())
-        //    {
-        //        var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+        public JsonResult AnnualQualityControlFlagsByHourOfDay(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
 
-        //        DateTime startDate = DateTime.Parse(report.startDate1);
-        //        DateTime endDate = DateTime.Parse(report.endDate1).Date;
-        //        endDate = endDate.AddDays(1);
+                DateTime startDate = DateTime.Parse(report.startDate1);
+                DateTime endDate = DateTime.Parse(report.endDate1).Date;
+                endDate = endDate.AddDays(1);
 
-        //        //var data = context)
-        //        //    .Where(x => x.detector_number == report.det_num
-        //        //            && startDate <= x.collected
-        //        //            && x.collected < endDate)
-        //        //    .ToList();
-                
+                var results = from e in context.vw_Errors
+                              where SqlFunctions.DatePart("dw", e.collected) >= 2 &&
+                                    SqlFunctions.DatePart("dw", e.collected) <= 6
+                                    && e.detector_number == report.det_num
+                                    && e.collected > startDate && e.collected < endDate
+                              group e by new
+                              {
+                                  min_since = e.min_since
+                              } into g
+                              select new
+                              {
+                                  min_since = g.Key.min_since,
+                                  all_rows = g.Count(),
+                                  occupancy_error = g.Count(x => x.occupancy_error == true),
+                                  speed_error = g.Count(x => x.speed_error == true),
+                                  volume_error = g.Count(x => x.volume_error == true),
+                                  zeros_error = g.Count(x => x.zeros_error == true),
+                                  difference_error = g.Count(x => x.difference_error == true)
+                              };
+                var data = results.ToList();
 
-        //        return Json(data, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         private bool isWeekday(DateTime? date)
         {
@@ -265,31 +280,128 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
+        public JsonResult GetErrorDataByReportId(Guid reportId)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                //if (year != null)
+                //{
+                var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+                DateTime startDate = DateTime.Parse(report.startDate1);
+                DateTime endDate = DateTime.Parse(report.endDate1).Date;
+                endDate = endDate.AddDays(1);
+
+                
+                return Json(new {}, JsonRequestBehavior.AllowGet);
+                //}
+
+            }
+        }
+
+        public JsonResult SpeedVsDensityByReportId(Guid reportId, bool isPeriod1)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                try
+                {
+                    var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+                    DateTime startDate = DateTime.Parse(report.startDate1);
+                    DateTime endDate = DateTime.Parse(report.endDate1).Date;
+                    endDate = endDate.AddDays(1);
+
+                    var results = from e in context.vw_RawData
+                                  where SqlFunctions.DatePart("dw", e.collected) >= 2 &&
+                                        SqlFunctions.DatePart("dw", e.collected) <= 6
+                                        && e.detector_number == report.det_num
+                                        && e.collected > startDate && e.collected < endDate
+                                        && e.speed > 0
+                                  select new
+                                  {
+                                      min_since = e.min_since,
+                                      occupancy = e.occupancy,
+                                      speed = e.speed
+                                  };
+
+                    var data = results.Take(5000).ToList();
+
+                    return Json(data, JsonRequestBehavior.AllowGet);
+
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        public JsonResult FlowVsDensityByReportId(Guid reportId, bool isPeriod1)
+        {
+            using (var context = new Jacobs_PlayPenEntities())
+            {
+                try
+                {
+                    var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+                    DateTime startDate = DateTime.Parse(report.startDate1);
+                    DateTime endDate = DateTime.Parse(report.endDate1).Date;
+                    endDate = endDate.AddDays(1);
+
+                    var results = from e in context.vw_RawData
+                                  where SqlFunctions.DatePart("dw", e.collected) >= 2 &&
+                                        SqlFunctions.DatePart("dw", e.collected) <= 6
+                                        && e.detector_number == report.det_num
+                                        && e.collected > startDate && e.collected < endDate
+                                        && e.speed > 0
+                                  select new
+                                  {
+                                      min_since = e.min_since,
+                                      occupancy = e.occupancy,
+                                      vph = e.vph
+                                  };
+
+                    var data = results.Take(5000).ToList();
+
+                    return Json(data, JsonRequestBehavior.AllowGet);
+
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
         public JsonResult SpeedVsFlowByReportId(Guid reportId, bool isPeriod1)
         {
             using (var context = new Jacobs_PlayPenEntities())
             {
                 try
                 {
+                    var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
 
+                    DateTime startDate = DateTime.Parse(report.startDate1);
+                    DateTime endDate = DateTime.Parse(report.endDate1).Date;
+                    endDate = endDate.AddDays(1);
 
-                    //if (year != null)
-                    //{
-            //        var data = context.vw_RawData
-            //.Where(ad => (ad.GP == true || ad.HOV == true)
-            //    && ad.detector_number == 50
-            //    && ad.collected >= new DateTime(2015, 1, 1)
-            //    && ad.collected < new DateTime(2015, 2, 1)
-            //    //&& (int)ad.collected.DayOfWeek >= 2
-            //    //&& (int)ad.collected.DayOfWeek <= 6)
-            //.Select(ad => new { ad.speed, ad.vph, ad.time_of_day });
-                    //var data = context.detector_SpeedVsFlow.Where(x => x.reportId == reportId && (x.isPeriod1 == isPeriod1))
-                    //        .Select(x => new { x.speed, x.vph, x.time_of_day, x.isPeriod1})
-                    //        .Take(10000)
-                    //        .ToList();
-                    return Json(context, JsonRequestBehavior.AllowGet);
-                    //return Json(data, JsonRequestBehavior.AllowGet);
-                    //}
+                    var results = from e in context.vw_RawData
+                                  where SqlFunctions.DatePart("dw", e.collected) >= 2 &&
+                                        SqlFunctions.DatePart("dw", e.collected) <= 6
+                                        && e.detector_number == report.det_num
+                                        && e.collected > startDate && e.collected < endDate
+                                        && e.speed > 0
+                                  select new
+                                  {
+                                      min_since = e.min_since,
+                                      speed = e.speed,
+                                      vph = e.vph
+                                  };
+
+                    var data = results.Take(5000).ToList();
+
+                    return Json(data, JsonRequestBehavior.AllowGet);
+                    
                 }
                 catch (Exception ex)
                 {

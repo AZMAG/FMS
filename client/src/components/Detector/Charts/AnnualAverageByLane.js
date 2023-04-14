@@ -51,7 +51,7 @@ export default function AnnualAverageByLane({ det_num, reportId, period1 }) {
         })();
     }, [det_num, setSeries, setLabels, period1, reportId]);
     return (
-        <>
+        <div id="annual-avg-by-lane">
             {series.length ? (
                 <LineChart
                     field="avg_daily_traffic"
@@ -64,6 +64,6 @@ export default function AnnualAverageByLane({ det_num, reportId, period1 }) {
             ) : (
                 <LoadingChart />
             )}
-        </>
+        </div>
     );
 }

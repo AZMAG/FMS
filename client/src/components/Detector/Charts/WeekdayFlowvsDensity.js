@@ -20,7 +20,7 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
             let res = null;
             if (reportId) {
                 res = await axios.get(
-                    apiUrl + "Detector/SpeedVsFlowByReportId",
+                    apiUrl + "Detector/FlowVsDensityByReportId",
                     {
                         params: {
                             reportId,
@@ -28,19 +28,7 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                         },
                     }
                 );
-                // console.log(res.data);
                 // res.data = res.data.filter((d) => d.isPeriod1 === period1);
-            } else {
-                res = await axios.get(
-                    apiUrl + "/Detector/AvgHourlyThroughput",
-
-                    {
-                        params: {
-                            det_num,
-                            year: "2021",
-                        },
-                    }
-                );
             }
 
             const _data = res.data.map((row) => {
@@ -63,16 +51,16 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
     return (
         <>
             {series.length ? (
-                <div id="speed-vs-flow">
+                <div id="flow-vs-density">
                     <ScatterChart
                         data={series}
                         xField="vph"
-                        yField="speed"
+                        yField="occupancy"
                         xUnit="VPH"
-                        yUnit="MPH"
+                        yUnit="%"
                         xLabel="Flow (Veh/hr)"
-                        yLabel="Speed (mph)"
-                        title="Speed vs Flow - all data rows & 5-min weekday average"
+                        yLabel="Occupancy %"
+                        title="Flow vs Density - all data rows & 5-min weekday average"
                     />
                 </div>
             ) : (
