@@ -7,7 +7,7 @@ import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
-export default function AnnualAverageByLane({ det_num, reportId, period1 }) {
+export default function AnnualAverageByLane({ det_num, reportId, year }) {
     const [series, setSeries] = useState([]);
     const [labels, setLabels] = useState([]);
 
@@ -23,19 +23,18 @@ export default function AnnualAverageByLane({ det_num, reportId, period1 }) {
                         },
                     }
                 );
-
-                res.data = res.data.filter((d) => d.isPeriod1 === period1);
             } else {
                 res = await axios.get(
-                    apiUrl + "/Detector/AvgHourlyThroughput",
+                    apiUrl + "/Detector/AvgVolumeByLaneByDetNum",
 
                     {
                         params: {
                             det_num,
-                            year: "2021",
+                            year
                         },
                     }
                 );
+                
             }
 
             const _data = res.data.sort((a, b) => a.lane.localeCompare(b.lane));
@@ -49,7 +48,7 @@ export default function AnnualAverageByLane({ det_num, reportId, period1 }) {
             setSeries(_series);
             setLabels(_labels);
         })();
-    }, [det_num, setSeries, setLabels, period1, reportId]);
+    }, [det_num, setSeries, setLabels, year, reportId]);
     return (
         <div id="annual-avg-by-lane">
             {series.length ? (

@@ -40,10 +40,6 @@ function DetectorDropdown() {
                 Select a detector from the dropdown below to open the report for
                 the year selected above. ({store.detectorMap.selectedYear}).
             </p>
-            <p className="pb-4 text-sm italic">
-                To build a custom report or to compare detectors use the "Report
-                Builder" tab.
-            </p>
 
             <div className="flex items-center justify-between">
                 <Autocomplete

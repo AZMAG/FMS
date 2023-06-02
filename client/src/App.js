@@ -27,10 +27,11 @@ function App() {
     //     });
     //   ReactGA.pageview(window.location.pathname + window.location.search)
     return (
-        <div className="">
+        <div className="h-screen">
             <DataProvider>
                 <Router>
                     <Header />
+                    <div className="h-20"></div>
                     <Routes>
                         <Route exact path="/" element={<DetectorsPage />} />
                         <Route

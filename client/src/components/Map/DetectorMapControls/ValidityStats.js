@@ -71,8 +71,8 @@ function ValidityStats() {
     ]);
 
     return (
-        <div className="">
-            <p className="px-3 text-lg pb-1">
+        <div className="h-52">
+            <p className="px-3 pb-1 text-lg">
                 <span className="font-bold">{numDets}</span>&nbsp;detectors
                 currently shown.
             </p>
@@ -86,9 +86,9 @@ function ValidityStats() {
                             <div key={i} className="flex items-center">
                                 <span
                                     style={{ backgroundColor: cat.color }}
-                                    className="w-4 h-4 block mr-0 border border-gray-600"
+                                    className="mr-0 block h-4 w-4 border border-gray-600"
                                 ></span>
-                                <span className="w-full flex" key={i}>
+                                <span className="flex w-full" key={i}>
                                     <span className="w-12 text-center">
                                         {cat.count}
                                     </span>

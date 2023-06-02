@@ -6,7 +6,7 @@ export default function Nav() {
     const { pathname } = useLocation();
     const links = [
         { text: "Detectors", toLink: "/" },
-        // { text: "Corridors", toLink: "/corridors" },
+        { text: "Corridors", toLink: "/corridors" },
         { text: "Report Builder", toLink: "/report-builder" },
         { text: "Reports History", toLink: "/reports" },
         // { text: "Admin", toLink: "/admin" },

@@ -10,29 +10,47 @@ import WeekdayFlowvsDensity from "../Detector/Charts/WeekdayFlowvsDensity";
 import WeekdaySpeedvsDensity from "../Detector/Charts/WeekdaySpeedvsDensity";
 import AnnualControlFlagsByHourOfDays from "../Detector/Charts/AnnualControlFlagsByHourOfDays";
 
-export default function ReportChartsSection({ id, period1 }) {
+export default function ReportChartsSection({ id, det_num, year }) {
     return (
         <>
-            <AnnualHourlyAverageSpeeds reportId={id} period1={period1} />
-            <AnnualHourlyAverageThroughput reportId={id} period1={period1} />
+            {det_num}
+            <AnnualHourlyAverageSpeeds
+                reportId={id}
+                det_num={det_num}
+                year={year}
+            />
+            <AnnualHourlyAverageThroughput
+                reportId={id}
+                det_num={det_num}
+                year={year}
+            />
             <AnnualHourlyAverageOccupancyPercent
                 reportId={id}
-                period1={period1}
+                det_num={det_num}
+                year={year}
             />
-            <AnnualAverageByLane reportId={id} period1={period1} />
+            <AnnualAverageByLane reportId={id} det_num={det_num} year={year} />
             <DistributionOfDataPassingQCByDate
                 reportId={id}
-                period1={period1}
+                det_num={det_num}
+                year={year}
             />
             <DistributionOfDataPassingQCByWeekday
                 reportId={id}
-                period1={period1}
+                det_num={det_num}
+                year={year}
             />
-            <AnnualControlFlagsByHourOfDays reportId={id} />
-
-            <WeekdayFlowvsDensity reportId={id} period1={period1} />
-            <WeekdaySpeedvsDensity reportId={id} period1={period1} />
-            <WeekdaySpeedvsFlowData reportId={id} period1={period1} />
+            <WeekdayFlowvsDensity reportId={id} det_num={det_num} year={year} />
+            <WeekdaySpeedvsDensity
+                reportId={id}
+                det_num={det_num}
+                year={year}
+            />
+            <WeekdaySpeedvsFlowData
+                reportId={id}
+                det_num={det_num}
+                year={year}
+            />
         </>
     );
 }

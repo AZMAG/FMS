@@ -1,10 +1,23 @@
-function getTimeLabels(data, timeField) {
-    timeField = timeField || "hour_in_day";
-    let times = getDistinctPropertyList(data, timeField);
-    times = times.map((time, i) => {
-        return time.replace(":00 PM", " PM").replace(":00 AM", " AM");
+function getTimeLabels(data) {
+    const seen = {};
+    return data.map((row) => {
+        const hour_since = Math.floor(row.min_since / 60) * 60;
+        const date = new Date();
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMinutes(hour_since);
+        const time = date.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+        if (seen[time]) {
+            return "";
+        } else {
+            seen[time] = true;
+            return time;
+        }
     });
-    return times;
 }
 
 function getDistinctPropertyList(data, prop, sort) {

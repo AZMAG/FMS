@@ -13,12 +13,12 @@ import DetectorDropdown from "./DetectorDropdown";
 
 export default function DetectorMapControls() {
     return (
-        <div className="flex h-full flex-col gap-y-2 overflow-y-auto rounded-lg bg-white px-3 shadow-lg">
+        <div className="flex flex-col rounded-lg bg-white px-3 py-2 shadow-lg">
             <p className="bg-gray-100 py-3 px-4 text-sm italic">
                 Use the dropdown options below to change the detector data to be
                 shown on the map.
             </p>
-            <div className="grid grid-flow-col grid-rows-3 bg-gray-100 py-3 px-4">
+            <div className="bg-gray-100 py-3 px-4">
                 <div className="flex justify-between">
                     <div>
                         <YearSelector />
@@ -49,7 +49,7 @@ export default function DetectorMapControls() {
             </div>
 
             <div className="bg-gray-100 px-4 py-4">
-                <h3 className="text-md  font-semibold">Download Data</h3>
+                <h3 className="text-md font-semibold">Download Data</h3>
                 <p className="mb-4 text-sm italic">
                     Click one of the options below to download the current map
                     data.

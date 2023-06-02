@@ -21,30 +21,16 @@ namespace FMS_Dashboard.Controllers
 
         public JsonResult GetGeneratedReports()
         {
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
                 var query = context.GeneratedReports.Join(context.Detectors,
                                 generatedReport => generatedReport.det_num,
                                 detector => detector.det_num,
                                 (gr, det) => new {
                                     id = gr.id,
-                                    AHAS = gr.AHAS,
-                                    AHATPL = gr.AHATPL,
-                                    AHAOP = gr.AHAOP,
-                                    AAL = gr.AAL,
-                                    DDPQCCD = gr.DDPQCCD,
-                                    DDPQCCW = gr.DDPQCCW,
-                                    AQCFHD = gr.AQCFHD,
-                                    FVD = gr.FVD,
-                                    SVD = gr.SVD,
-                                    SVF = gr.SVF,
                                     det_num = gr.det_num,
-                                    timePeriodYear1 = gr.timePeriodYear1,
-                                    timePeriodYear2 = gr.timePeriodYear2,
-                                    startDate1 = gr.startDate1,
-                                    startDate2 = gr.startDate2,
-                                    endDate1 = gr.endDate1,
-                                    endDate2 = gr.endDate2,
+                                    startDate = gr.startDate,
+                                    endDate = gr.endDate,
                                     completed = gr.completed,
                                     date_submitted = gr.date_submitted,
                                     date_completed = gr.date_completed,
@@ -92,7 +78,7 @@ namespace FMS_Dashboard.Controllers
 
         public JsonResult AddGeneratedReport(GeneratedReport newReport)
         {
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
                 try
                 {
@@ -103,7 +89,6 @@ namespace FMS_Dashboard.Controllers
                         GenerateReportData(newReport);
                         UpdateStatusToComplete(newReport);
                         SendEmail(newReport);
-                       
                      });
                     
                     return Json(newReport, JsonRequestBehavior.AllowGet);
@@ -117,7 +102,7 @@ namespace FMS_Dashboard.Controllers
 
         public bool UpdateStatusToComplete(GeneratedReport report)
         {
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
 
                 context.Database.CommandTimeout = 180;
@@ -143,38 +128,9 @@ namespace FMS_Dashboard.Controllers
             public string endDate2 { get; set; }
         }
 
-        
-
-        private StartAndEndDates GetStartAndEndDatesFromReport(GeneratedReport report)
-        {
-            string startDate1 = report.startDate1;
-            string endDate1 = report.endDate1;
-
-            if (report.timePeriodYear1 != null)
-            {
-                startDate1 = "1/1/" + report.timePeriodYear1;
-                endDate1 = "12/31/" + report.timePeriodYear1;
-            }
-
-            string startDate2 = report.startDate2;
-            string endDate2 = report.endDate2;
-
-            if (report.timePeriodYear2 != null)
-            {
-                startDate2 = "1/1/" + report.timePeriodYear2;
-                endDate2 = "12/31/" + report.timePeriodYear2;
-            }
-            var rtnObj = new StartAndEndDates();
-            rtnObj.startDate1 = startDate1;
-            rtnObj.endDate1 = endDate1;
-            rtnObj.startDate2 = startDate2;
-            rtnObj.endDate2 = endDate2;
-            return rtnObj;
-        }
-
         public JsonResult DeleteGeneratedReport(Guid id)
         {
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
                 context.Database.CommandTimeout = 180;
                 try
@@ -200,29 +156,17 @@ namespace FMS_Dashboard.Controllers
 
         public bool GenerateReportData(GeneratedReport newReport)
         {
-            var dateObj = GetStartAndEndDatesFromReport(newReport);
 
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
 
                 context.Database.CommandTimeout = 180;
                 try
                 {
-                    context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate1, dateObj.endDate1, true);
-
-
-                    if (dateObj.startDate2 != null)
-                    {
-                        context.GenerateMiscDataReport(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, false);
-                        context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
-                        context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
-                        context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
-                        context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, dateObj.startDate2, dateObj.endDate2, true);
-                    }
+                    context.GenerateAvgVolumeByLane(newReport.id, newReport.det_num, newReport.startDate, newReport.endDate);
+                    context.GenerateAvgHourlyOccupancyData(newReport.id, newReport.det_num, newReport.startDate, newReport.endDate);
+                    context.GenerateAvgHourlyThroughputData(newReport.id, newReport.det_num, newReport.startDate, newReport.endDate);
+                    context.GenerateAvgHourlySpeedData(newReport.id, newReport.det_num, newReport.startDate, newReport.endDate);
                     return true;
                 }
                 catch (Exception ex)

@@ -68,7 +68,7 @@ function DetectorMap() {
         }
     }, [mapDiv, store, navigate]);
 
-    return <div className="m-auto h-full w-full pb-10" ref={mapDiv}></div>;
+    return <div className="m-auto mx-6 h-[700px] w-full" ref={mapDiv}></div>;
 }
 
 export default DetectorMap;

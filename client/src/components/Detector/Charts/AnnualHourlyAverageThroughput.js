@@ -11,11 +11,7 @@ import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
-export default function AnnualHourlyAverageThroughput({
-    det_num,
-    reportId,
-    period1,
-}) {
+export default function AnnualHourlyAverageThroughput({ reportId, det_num, year }) {
     // const [setData] = useState(null);
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
@@ -32,12 +28,25 @@ export default function AnnualHourlyAverageThroughput({
                         },
                     }
                 );
-                res.data = res.data.filter((d) => d.isPeriod1 === period1);
-            } else {
+            } else if (det_num && year) {
+                res = await axios.get(
+                    apiUrl + "/Detector/AvgHourlyThroughputByDetNum",
+                    {
+                        params: {
+                            det_num,
+                            year,
+                        },
+                    }
+                );
             }
 
-            const _data = sortTimeData(res.data, "hour_in_day");
-            const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
+            const _data = res.data.sort((a, b) => {
+                return a.min_since - b.min_since;
+            });
+
+            const _dateLabels = getTimeLabels(
+                _data.filter((row) => row.lane_type === "All Lanes")
+            );
             const _series = getMultipleSeriesByField(
                 _data,
                 "lane_type",
@@ -46,9 +55,8 @@ export default function AnnualHourlyAverageThroughput({
 
             setSeries(_series);
             setDateLabels(_dateLabels);
-            console.log(_series);
         })();
-    }, [det_num, setSeries, setDateLabels, period1, reportId]);
+    }, [setSeries, setDateLabels, reportId]);
     return (
         <div id="annual-avg-hourly-throughput">
             {series.length ? (

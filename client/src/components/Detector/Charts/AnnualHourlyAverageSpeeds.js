@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-    getTimeLabels,
-    getMultipleSeriesByField,
-    sortTimeData,
-} from "./chartDataHelpers";
+import { getTimeLabels, getMultipleSeriesByField } from "./chartDataHelpers";
 import LineChart from "./LineChart";
 import LoadingChart from "../../Loaders/loadingChart";
 import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
-export default function MiscDetectorData({ det_num, reportId, period1 }) {
+export default function AnnualHourlyAverageSpeeds({ reportId, det_num, year }) {
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
@@ -28,33 +24,35 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                         },
                     }
                 );
-
-                res.data = res.data.filter((d) => d.isPeriod1 === period1);
-            } else {
+            } else if (det_num && year) {
                 res = await axios.get(
-                    apiUrl + "/Detector/AvgHourlySpeed",
-
+                    apiUrl + "/Detector/AvgHourlySpeedByDetNum",
                     {
                         params: {
                             det_num,
-                            year: "2021",
+                            year,
                         },
                     }
                 );
             }
-            const _data = sortTimeData(res.data, "hour_in_day");
-            const _dateLabels = getTimeLabels(_data, "hour_in_day", true);
+
+            const _data = res.data.sort((a, b) => {
+                return a.min_since - b.min_since;
+            });
+
+            const _dateLabels = getTimeLabels(
+                _data.filter((row) => row.lane_type === "All Lanes")
+            );
             const _series = getMultipleSeriesByField(
                 _data,
                 "lane_type",
                 "avg_speed"
             );
 
-            // setData(_data);
             setSeries(_series);
             setDateLabels(_dateLabels);
         })();
-    }, [det_num, setSeries, setDateLabels, period1, reportId]);
+    }, [setSeries, setDateLabels, reportId]);
     return (
         <div id="annual-avg-hourly-speed">
             {series.length ? (

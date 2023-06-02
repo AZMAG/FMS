@@ -1,0 +1,49 @@
+import React from "react";
+import YearSelector from "./YearSelector";
+import ValidityStats from "./ValidityStats";
+import DownloadShapefileButton from "./DownloadShapefileButton";
+import DownloadGeoJSONButton from "./DownloadGeoJSONButton";
+import DownloadESRIJSONButton from "./DownloadESRIJSONButton";
+
+import CorridorDropdown from "./CorridorDropdown";
+
+export default function DetectorMapControls() {
+    return (
+        <div className="flex flex-col rounded-lg bg-white px-3 py-2 shadow-lg">
+            <p className="bg-gray-100 py-3 px-4 text-sm italic">
+                Select a year to change the corridor colors on the map.
+            </p>
+            <div className="bg-gray-100 py-3 px-4">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <YearSelector />
+                    </div>
+                </div>
+            </div>
+            <div className="bg-gray-100 py-3 px-4">
+                <ValidityStats />
+            </div>
+            <div>
+                <div className="bg-gray-100 py-3 px-4">
+                    <h3 className="text-md mb-4 font-semibold">
+                        Open corridor report by year
+                    </h3>
+                    <CorridorDropdown />
+                </div>
+            </div>
+
+            <div className="bg-gray-100 px-4 py-4">
+                <h3 className="text-md font-semibold">Download Data</h3>
+                <p className="mb-4 text-sm italic">
+                    Click one of the options below to download the current map
+                    data.
+                </p>
+                <div className="flex items-center justify-between ">
+                    <DownloadShapefileButton />
+                    <DownloadGeoJSONButton />
+                    <DownloadESRIJSONButton />
+                </div>
+            </div>
+        </div>
+    );
+}

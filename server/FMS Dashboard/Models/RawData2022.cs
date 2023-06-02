@@ -24,8 +24,6 @@ namespace FMS_Dashboard.Models
         public Nullable<short> occupancy { get; set; }
         public Nullable<short> volume { get; set; }
         public Nullable<short> vph { get; set; }
-        public Nullable<bool> GP { get; set; }
-        public Nullable<bool> HOV { get; set; }
-        public Nullable<short> time_of_day { get; set; }
+        public Nullable<bool> isGP { get; set; }
     }
 }

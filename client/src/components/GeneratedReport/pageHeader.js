@@ -16,7 +16,7 @@ export default function PageHeader({ data }) {
     const iconStyle = "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400";
 
     return (
-        <div className="fixed z-10 w-full border bg-white py-4 text-center">
+        <div className="fixed z-10 w-full border bg-white py-2 text-center">
             <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                 Detector Report
             </h2>

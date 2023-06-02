@@ -18,9 +18,9 @@ function TimePeriodSelection({ timePeriod }) {
 
     function datePickerChange(isStart, val) {
         if (isStart) {
-            store.queryBuilder.setStartDate(timePeriod, val);
+            store.queryBuilder.setStartDate(val);
         } else {
-            store.queryBuilder.setEndDate(timePeriod, val);
+            store.queryBuilder.setEndDate(val);
         }
     }
     console.log(store.queryBuilder);
@@ -33,7 +33,7 @@ function TimePeriodSelection({ timePeriod }) {
     sortedYears.sort((a, b) => b - a);
 
     return (
-        <div className="flex w-1/2 flex-col gap-0.5">
+        <div className="flex w-full flex-col gap-0.5">
             <div
                 className={`border border-gray-300 p-2 text-sm  ${
                     showErrors ? "border-red-500" : ""
@@ -56,8 +56,8 @@ function TimePeriodSelection({ timePeriod }) {
                         </button>
                     )}
                 </p>
-                <div className="flex items-center">
-                    <FormControl sx={{ minWidth: 85 }} size="small">
+                <div className="block w-full">
+                    {/* <FormControl sx={{ minWidth: 85 }} size="small">
                         <InputLabel>Year</InputLabel>
                         <Select
                             size="small"
@@ -75,43 +75,41 @@ function TimePeriodSelection({ timePeriod }) {
                                 </MenuItem>
                             ))}
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
 
-                    <span className="mx-2 font-medium">OR</span>
-                    <div className="flex flex-col">
-                        <TextField
-                            onChange={(e) => {
-                                datePickerChange(true, e.target.value);
-                            }}
-                            value={store.queryBuilder["startDate" + timePeriod]}
-                            size="small"
-                            label="Start Date"
-                            type="date"
-                            sx={{ my: 1 }}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        <TextField
-                            onChange={(e) => {
-                                datePickerChange(false, e.target.value);
-                            }}
-                            value={store.queryBuilder["endDate" + timePeriod]}
-                            size="small"
-                            label="End Date"
-                            type="date"
-                            sx={{ my: 1 }}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </div>
+                    {/* <span className="mx-2 font-medium">OR</span> */}
+
+                    <TextField
+                        onChange={(e) => {
+                            datePickerChange(true, e.target.value);
+                        }}
+                        value={store.startDate}
+                        size="small"
+                        label="Start Date"
+                        type="date"
+                        sx={{ my: 1, mr: 2 }}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        onChange={(e) => {
+                            datePickerChange(false, e.target.value);
+                        }}
+                        value={store.endDate}
+                        size="small"
+                        label="End Date"
+                        type="date"
+                        sx={{ my: 1 }}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
                 </div>
 
                 {showErrors && (
                     <div className=" mx-2 mt-3 flex-1 rounded-lg bg-red-100 py-1 px-2 text-base text-red-700">
-                        <ErrorOutlineIcon /> Please select a year or choose a
-                        start and end date.
+                        <ErrorOutlineIcon /> Please choose a start and end date.
                     </div>
                 )}
             </div>

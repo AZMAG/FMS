@@ -11,7 +11,7 @@ import { apiUrl } from "../../../DocConfig";
 
 axios.defaults.withCredentials = true;
 
-export default function MiscDetectorData({ det_num, reportId, period1 }) {
+export default function MiscDetectorData({ det_num, reportId, year }) {
     const [series, setSeries] = useState([]);
     const [dateLabels, setDateLabels] = useState([]);
 
@@ -24,11 +24,20 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
                     {
                         params: {
                             reportId,
-                            isPeriod1: period1,
                         },
                     }
                 );
                 // res.data = res.data.filter((d) => d.isPeriod1 === period1);
+            } else {
+                res = await axios.get(
+                    apiUrl + "Detector/SpeedVsDensityByDetNum",
+                    {
+                        params: {
+                            det_num,
+                            year,
+                        },
+                    }
+                );
             }
 
             const _data = res.data.map((row) => {
@@ -47,7 +56,7 @@ export default function MiscDetectorData({ det_num, reportId, period1 }) {
 
             setSeries(_data);
         })();
-    }, [det_num, setSeries, setDateLabels, period1, reportId]);
+    }, [det_num, setSeries, setDateLabels, year, reportId]);
     return (
         <>
             {series.length ? (

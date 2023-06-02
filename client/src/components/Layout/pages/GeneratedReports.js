@@ -39,24 +39,12 @@ export default function GeneratedReport() {
     const newData = [];
     reports.forEach((x) => {
         const date = new Date(parseInt(x.date_submitted.substr(6)));
-        const SubmittedDate = new Date(parseInt(x.date_submitted.substr(6)));
-        const CompletedDate = new Date(parseInt(x.date_completed?.substr(6)));
-        let timePeriod1Str;
-        let timePeriod2Str;
+        const submittedDate = new Date(parseInt(x.date_submitted.substr(6)));
+        const completedDate = new Date(parseInt(x.date_completed?.substr(6)));
+        const processingTimeString = completedDate - submittedDate;
 
-        if (x.startDate1 === null) {
-            timePeriod1Str = x.timePeriodYear1;
-        } else {
-            timePeriod1Str = `${x.startDate1} - ${x.endDate1}`;
-        }
-
-        if (x.startDate2 === null) {
-            if (x.timePeriodYear2 === null) {
-                timePeriod2Str = "N/A";
-            }
-        }
-
-        const processingTimeString = CompletedDate - SubmittedDate;
+        const startDate = new Date(parseInt(x.startDate.substr(6)));
+        const endDate = new Date(parseInt(x.endDate.substr(6)));
 
         newData.push({
             det_num: x.det_num,
@@ -64,8 +52,9 @@ export default function GeneratedReport() {
             dateSubmitted: date.toLocaleDateString(),
             timeSubmitted: date.toLocaleTimeString(),
             readableTime: getReadableTime(processingTimeString),
-            timePeriod1Str,
-            timePeriod2Str,
+            startDate: startDate.toLocaleDateString(),
+            endDate: endDate.toLocaleDateString(),
+            numDays: Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)),
             id: x.id,
         });
     });
@@ -157,15 +146,21 @@ export default function GeneratedReport() {
                         />
                         <GridColumn
                             className="kui-grid-col"
-                            field="timePeriod1Str"
-                            title="Time Period 1"
+                            field="startDate"
+                            title="Start Date"
                             width="180px"
                         />
                         <GridColumn
                             className="kui-grid-col"
-                            field="timePeriod2Str"
-                            title="Time Period 2"
+                            field="endDate"
+                            title="End Date"
                             // width="180px"
+                        />
+                        <GridColumn
+                            className="kui-grid-col"
+                            field="numDays"
+                            title="Days"
+                            width="100px"
                         />
 
                         <GridColumn

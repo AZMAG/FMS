@@ -18,15 +18,29 @@ const queryBuilderData = {
     setEmailError(val) {
         this.emailError = val;
     },
+    reportType: "detector",
+    setReportType(val) {
+        this.reportType = val;
+    },
+    selectedCorridor: null,
+    setSelectedCorridor(newSelected) {
+        this.selectedCorridor = newSelected;
+        // this.zoomToSelectedDetector();
+        // this.highlightSelectedDetector();
+        // this.resetTimePeriodData();
+
+        // if (this.selectedDetector) {
+        //     this.detectorsLayer.definitionExpression = `det_num = ${this.selectedDetector.detector.det_num}`;
+        // } else {
+        //     this.detectorsLayer.definitionExpression = "1=1";
+        // }
+    },
     selectedDetector: null,
     setSelectedDetector(newSelected) {
         this.selectedDetector = newSelected;
         this.zoomToSelectedDetector();
         this.highlightSelectedDetector();
-        this.resetTimePeriodData(1);
-        this.resetTimePeriodData(2);
-        this.setIsTwoTimePeriods(false);
-        this.toggleAllAnalysisOptions(false);
+        this.resetTimePeriodData();
 
         if (this.selectedDetector) {
             this.detectorsLayer.definitionExpression = `det_num = ${this.selectedDetector.detector.det_num}`;
@@ -34,6 +48,7 @@ const queryBuilderData = {
             this.detectorsLayer.definitionExpression = "1=1";
         }
     },
+
     highlightSelectedDetector() {
         if (this.selectedDetector) {
             function getAngle(dir) {
@@ -113,55 +128,17 @@ const queryBuilderData = {
     setGraphicsLayer(gfxLayer) {
         this.graphicsLayer = gfxLayer;
     },
-    analysisOptions: {
-        AHAS: false,
-        AHATPL: false,
-        AHAOP: false,
-        AAL: false,
-        DDPQCCD: false,
-        DDPQCCW: false,
-        AQCFHD: false,
-        FVD: false,
-        SVD: false,
-        SVF: false,
-    },
-    toggleAllAnalysisOptions(val) {
-        const analysisKeys = Object.keys(this.analysisOptions);
-        return analysisKeys.forEach((key) => {
-            this.analysisOptions[key] = val;
-        });
-    },
-    anyAnalysisOptionSelected() {
-        if (this.analysisOptions) {
-            const analysisKeys = Object.keys(this.analysisOptions);
-            return analysisKeys.some((key) => {
-                return this.analysisOptions[key];
-            });
-        }
-        return false;
-    },
-    setAnalysisOption(key, val) {
-        this.analysisOptions[key] = val;
-    },
     resetTimePeriodData(timePeriod) {
-        this.setTimePeriodYear(timePeriod, "");
         this.setStartDate(timePeriod, "");
         this.setEndDate(timePeriod, "");
     },
-    timePeriodYear1: "",
-    setTimePeriodYear(timePeriod, year) {
-        this["timePeriodYear" + timePeriod] = year;
+    startDate: "",
+    setStartDate(date) {
+        this.startDate = date;
     },
-    timePeriodYear2: "",
-    startDate1: "",
-    startDate2: "",
-    setStartDate(timePeriod, date) {
-        this["startDate" + timePeriod] = date;
-    },
-    endDate1: "",
-    endDate2: "",
-    setEndDate(timePeriod, date) {
-        this["endDate" + timePeriod] = date;
+    endDate: "",
+    setEndDate(date) {
+        this.endDate = date;
     },
     validated: false,
     setValidated(val) {
@@ -169,48 +146,25 @@ const queryBuilderData = {
     },
     checkValidity() {
         this.setValidated(true);
-        if (
-            this.anyAnalysisOptionSelected() &&
-            this.selectedDetector &&
-            this.isTimePeriodValid(1) &&
-            this.isTimePeriodValid(2)
-        ) {
+        if (this.selectedDetector && this.isTimePeriodValid()) {
             return true;
         }
         return false;
     },
     resetQueryBuilder() {
         this.setSelectedDetector(null);
-        this.resetTimePeriodData(1);
-        this.resetTimePeriodData(2);
-        this.toggleAllAnalysisOptions(false);
+        this.resetTimePeriodData();
         this.setValidated(false);
     },
     anyChanges() {
-        if (this.anyAnalysisOptionSelected()) {
-            return true;
-        }
-
         if (this.selectedDetector) {
             return true;
         }
 
-        if (this.timePeriodYear1 !== "") {
+        if (this.startDate !== "") {
             return true;
         }
-        if (this.timePeriodYear2 !== "") {
-            return true;
-        }
-        if (this.startDate1 !== "") {
-            return true;
-        }
-        if (this.startDate2 !== "") {
-            return true;
-        }
-        if (this.endDate1 !== "") {
-            return true;
-        }
-        if (this.endDate2 !== "") {
+        if (this.endDate !== "") {
             return true;
         }
         if (this.validated) {
@@ -218,13 +172,6 @@ const queryBuilderData = {
         }
 
         return false;
-    },
-    isTwoTimePeriods: false,
-    setIsTwoTimePeriods(val) {
-        if (val) {
-            this.resetTimePeriodData(2);
-        }
-        this.isTwoTimePeriods = val;
     },
     isTimePeriodValid(timePeriod) {
         if (!this.isTwoTimePeriods && timePeriod === 2) {
@@ -263,20 +210,19 @@ const queryBuilderData = {
         // const url = "http://localhost:56118/Reports/AddGeneratedReport";
 
         const url = apiUrl + "/Reports/AddGeneratedReport";
+        console.log(this.startDate, this.endDate);
+
         const data = {
             id: uuid(),
             ...this.analysisOptions,
             det_num: this.selectedDetector.detector.det_num,
-            timePeriodYear1: this.timePeriodYear1,
-            timePeriodYear2: this.timePeriodYear2,
-            startDate1: formatDate(this.startDate1),
-            startDate2: formatDate(this.startDate2),
-            endDate1: formatDate(this.endDate1),
-            endDate2: formatDate(this.endDate2),
+            startDate: this.startDate,
+            endDate: this.endDate,
             completed: false,
             email: this.email,
             date_submitted: new Date(),
         };
+        console.log(data);
 
         const res = await axios.post(url, JSON.stringify(data), {
             headers: {

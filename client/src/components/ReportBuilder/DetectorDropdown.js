@@ -32,28 +32,30 @@ function DetectorDropdown() {
 
     return (
         <>
-            <div className="flex items-center">
-                <p className="w-1/2">Select Detector:</p>
-                <Autocomplete
-                    isOptionEqualToValue={(option, val) => {
-                        return option.id === val.id;
-                    }}
-                    size="small"
-                    className="w-1/2"
-                    options={options}
-                    value={store.queryBuilder.selectedDetector}
-                    onChange={(event, newValue) => {
-                        store.queryBuilder.setSelectedDetector(newValue);
-                    }}
-                    renderInput={(params) => (
-                        <TextField
-                            error={showErrors}
-                            label="Select Detector"
-                            {...params}
-                        />
-                    )}
-                />
-            </div>
+            {store.queryBuilder.reportType === "detector" && (
+                <div className="flex items-center">
+                    <p className="w-1/2">Select Detector:</p>
+                    <Autocomplete
+                        isOptionEqualToValue={(option, val) => {
+                            return option.id === val.id;
+                        }}
+                        size="small"
+                        className="w-1/2"
+                        options={options}
+                        value={store.queryBuilder.selectedDetector}
+                        onChange={(event, newValue) => {
+                            store.queryBuilder.setSelectedDetector(newValue);
+                        }}
+                        renderInput={(params) => (
+                            <TextField
+                                error={showErrors}
+                                label="Select Detector"
+                                {...params}
+                            />
+                        )}
+                    />
+                </div>
+            )}
             {/* {store.queryBuilder.selectedDetector && (
                 <SmallDetectorInfoBox
                     detector={store.queryBuilder.selectedDetector.detector}

@@ -7,11 +7,10 @@ export default function Detectors() {
     return (
         <main
             tag="mainPage"
-            className="container mx-auto flex h-screen grid-cols-2 flex-row justify-items-center gap-x-4 px-2"
-
+            className="mx-10 mt-4 flex flex-row justify-items-center px-2 py-1"
         >
-            <DetectorMap className="w-3/4" />
-            <DetectorMapControls className="w-1/4" />
+            <DetectorMap />
+            <DetectorMapControls />
         </main>
     );
 }

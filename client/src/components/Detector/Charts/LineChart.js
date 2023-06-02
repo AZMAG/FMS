@@ -39,7 +39,6 @@ export default function LineChart({
     valueTitle,
     labels,
 }) {
-    // console.log(series);
     return (
         <>
             {series.length > 0 ? (
@@ -63,29 +62,41 @@ export default function LineChart({
                                     text: catTitle,
                                     font: fontAxisTitle,
                                 }}
+                                // majorGridLines={{
+                                //     visible: false,
+                                // }}
+                                minorGridLines={{
+                                    visible: false,
+                                }}
                             />
                         </ChartValueAxis>
                         <ChartCategoryAxis>
                             <ChartCategoryAxisItem
                                 labels={{
                                     format: "d",
-                                    rotation: "auto",
+                                    rotation: "45",
                                     font: fontAxis,
                                 }}
                                 categories={labels}
                                 maxDivisions={8}
-                                plotBands={[
-                                    {
-                                        from: 6,
-                                        to: 9,
-                                        color: "rgba(192,192,192, .3)",
-                                    },
-                                    {
-                                        from: 15,
-                                        to: 19,
-                                        color: "rgba(192,192,192, .3)",
-                                    },
-                                ]}
+                                majorGridLines={{
+                                    visible: false,
+                                }}
+                                minorGridLines={{
+                                    visible: false,
+                                }}
+                                // plotBands={[
+                                //     {
+                                //         from: 6,
+                                //         to: 9,
+                                //         color: "rgba(192,192,192, .3)",
+                                //     },
+                                //     {
+                                //         from: 15,
+                                //         to: 19,
+                                //         color: "rgba(192,192,192, .3)",
+                                //     },
+                                // ]}
                             />
                         </ChartCategoryAxis>
                         <ChartSeries>
@@ -104,6 +115,7 @@ export default function LineChart({
                                         visible: true,
                                         format: "{0}",
                                     }}
+                                    smooth={true}
                                 />
                             ))}
                         </ChartSeries>
