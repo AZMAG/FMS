@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import getGeneratedReports from "../../GeneratedReport/getGeneratedReports";
-import deleteGeneratedReport from "./../../GeneratedReport/deleteGeneratedReport";
+import deleteGeneratedReport from "../../GeneratedReport/deleteGeneratedReport";
 
 import GeneratedReportLink from "../../GeneratedReport/GeneratedReportLink";
 import DeleteReportButton from "../../GeneratedReport/DeleteReportButton";
@@ -9,7 +9,7 @@ import { orderBy } from "@progress/kendo-data-query";
 import LoadingSpin from "../../Loaders/loadingSpin";
 
 import "./pages.css";
-import getReadableTime from "./../../GeneratedReport/getReadableTime";
+import getReadableTime from "../../GeneratedReport/getReadableTime";
 
 export default function GeneratedReport() {
     const [loading, setLoading] = useState(true);

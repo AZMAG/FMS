@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useDataStore } from "../../../stores/DataContext";
-import getDetectors from "./../getDetectors";
+import getDetectors from "../getDetectors";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate } from "react-router-dom";

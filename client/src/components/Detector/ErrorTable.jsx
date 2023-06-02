@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import LoadingList from "../Loaders/loadingList";
-import DetectorDefinition from "../Detector/DetectorDefinition";
+import DetectorDefinition from "./DetectorDefinition";
 import { apiUrl } from "../../DocConfig";
 import QualityTable from "./QualityTable";
 

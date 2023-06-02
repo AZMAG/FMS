@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import getGeneratedReports from "./../../GeneratedReport/getGeneratedReports";
-import NoReportFound from "./../../GeneratedReport/NoReportFound";
-import NotComplete from "./../../GeneratedReport/NotComplete";
-import MainGeneratedReport from "./../../GeneratedReport/MainGeneratedReport";
+import getGeneratedReports from "../../GeneratedReport/getGeneratedReports";
+import NoReportFound from "../../GeneratedReport/NoReportFound";
+import NotComplete from "../../GeneratedReport/NotComplete";
+import MainGeneratedReport from "../../GeneratedReport/MainGeneratedReport";
 import LoadingSpin from "../../Loaders/loadingSpin";
 
 export default function GeneratedReport() {

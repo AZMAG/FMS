@@ -4,16 +4,14 @@ import "@arcgis/core/assets/esri/themes/light/main.css";
 import "@progress/kendo-theme-default/dist/all.css";
 import "hammerjs";
 
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Layout/header/header";
-import Footer from "./components/Layout/footer/Footer";
 import DetectorsPage from "./components/Layout/pages/Detectors";
 import DetectorPage from "./components/Layout/pages/Detector";
 import GeneratedReportPage from "./components/Layout/pages/GeneratedReport";
 import CorridorsPage from "./components/Layout/pages/Corridors";
 import ReportBuilderPage from "./components/Layout/pages/ReportBuilder";
-import AdminPage from "./components/Layout/pages/Admin";
 import GeneratedReportsPage from "./components/Layout/pages/GeneratedReports";
 
 import { DataProvider } from "./stores/DataContext";
@@ -26,10 +24,12 @@ function App() {
     //       gaOptions: {},
     //     });
     //   ReactGA.pageview(window.location.pathname + window.location.search)
+    const isProduction = import.meta.env.PROD;
+    const basename = isProduction ? "/maps/projections-review" : "";
     return (
         <div className="h-screen">
             <DataProvider>
-                <Router>
+                <Router basename={basename}>
                     <Header />
                     <div className="h-20"></div>
                     <Routes>
@@ -51,9 +51,7 @@ function App() {
                             path="report-builder"
                             element={<ReportBuilderPage />}
                         />
-                        <Route path="admin" element={<AdminPage />} />
                     </Routes>
-                    {/* <Footer /> */}
                 </Router>
             </DataProvider>
         </div>
