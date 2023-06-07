@@ -1,7 +1,6 @@
 import React from "react";
-import LoadingText from "../../Loaders/loadingText";
-import CorridorsMap from "../../Map/CorridorsMap";
-import CorridorMapControls from "../../Map/CorridorMapControls/CorridorMapControls";
+import CorridorsMap from "../components/Map/CorridorsMap";
+import CorridorMapControls from "../components/Map/CorridorMapControls/CorridorMapControls";
 
 export default function Corridors() {
     return (

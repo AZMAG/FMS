@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import getGeneratedReports from "../../GeneratedReport/getGeneratedReports";
-import NoReportFound from "../../GeneratedReport/NoReportFound";
-import NotComplete from "../../GeneratedReport/NotComplete";
-import MainGeneratedReport from "../../GeneratedReport/MainGeneratedReport";
-import LoadingSpin from "../../Loaders/loadingSpin";
+import getGeneratedReports from "../components/GeneratedReport/getGeneratedReports";
+import NoReportFound from "../components/GeneratedReport/NoReportFound";
+import NotComplete from "../components/GeneratedReport/NotComplete";
+import MainGeneratedReport from "../components/GeneratedReport/MainGeneratedReport";
+import LoadingSpin from "../components/Loaders/loadingSpin";
 
 export default function GeneratedReport() {
     const [loading, setLoading] = useState(true);

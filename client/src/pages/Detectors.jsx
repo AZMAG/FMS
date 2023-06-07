@@ -1,7 +1,7 @@
 import React from "react";
 
-import DetectorMap from "../../Map/DetectorMap";
-import DetectorMapControls from "../../Map/DetectorMapControls/DetectorMapControls";
+import DetectorMap from "../components/Map/DetectorMap";
+import DetectorMapControls from "../components/Map/DetectorMapControls/DetectorMapControls";
 
 export default function Detectors() {
     return (

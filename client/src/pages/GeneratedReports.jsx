@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import getGeneratedReports from "../../GeneratedReport/getGeneratedReports";
-import deleteGeneratedReport from "../../GeneratedReport/deleteGeneratedReport";
+import getGeneratedReports from "../components/GeneratedReport/getGeneratedReports";
+import deleteGeneratedReport from "../components/GeneratedReport/deleteGeneratedReport";
 
-import GeneratedReportLink from "../../GeneratedReport/GeneratedReportLink";
-import DeleteReportButton from "../../GeneratedReport/DeleteReportButton";
+import GeneratedReportLink from "../components/GeneratedReport/GeneratedReportLink";
+import DeleteReportButton from "../components/GeneratedReport/DeleteReportButton";
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { orderBy } from "@progress/kendo-data-query";
-import LoadingSpin from "../../Loaders/loadingSpin";
+import LoadingSpin from "../components/Loaders/loadingSpin";
 
-import "./pages.css";
-import getReadableTime from "../../GeneratedReport/getReadableTime";
+import getReadableTime from "../components/GeneratedReport/getReadableTime";
 
 export default function GeneratedReport() {
     const [loading, setLoading] = useState(true);

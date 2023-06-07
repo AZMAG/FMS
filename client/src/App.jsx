@@ -6,13 +6,13 @@ import "hammerjs";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./components/Layout/header/header";
-import DetectorsPage from "./components/Layout/pages/Detectors";
-import DetectorPage from "./components/Layout/pages/Detector";
-import GeneratedReportPage from "./components/Layout/pages/GeneratedReport";
-import CorridorsPage from "./components/Layout/pages/Corridors";
-import ReportBuilderPage from "./components/Layout/pages/ReportBuilder";
-import GeneratedReportsPage from "./components/Layout/pages/GeneratedReports";
+import Header from "./header";
+import DetectorsPage from "./pages/Detectors";
+import DetectorPage from "./pages/Detector";
+import GeneratedReportPage from "./pages/GeneratedReport";
+import CorridorsPage from "./pages/Corridors";
+import ReportBuilderPage from "./pages/ReportBuilder";
+import GeneratedReportsPage from "./pages/GeneratedReports";
 
 import { DataProvider } from "./stores/DataContext";
 

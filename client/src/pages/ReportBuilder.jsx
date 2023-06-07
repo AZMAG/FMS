@@ -1,15 +1,15 @@
 import React from "react";
-import DetectorDropdown from "./../../ReportBuilder/DetectorDropdown";
-import CorridorDropdown from "./../../ReportBuilder/CorridorDropdown";
-// import AnalysisCheckboxGrid from "./../../ReportBuilder/AnalysisCheckboxGrid";
-import TimePeriodSelection from "./../../ReportBuilder/TimePeriodSelection";
-import ReportBuilderMap from "./../../ReportBuilder/ReportBuilderMap";
-import ResetButton from "./../../ReportBuilder/ResetButton";
-import SubmitButton from "./../../ReportBuilder/SubmitButton";
-import ReportBuilderSubmitModal from "./../../ReportBuilder/ReportBuilderSubmitModal";
+import DetectorDropdown from "../components/ReportBuilder/DetectorDropdown";
+import CorridorDropdown from "../components/ReportBuilder/CorridorDropdown";
+// import AnalysisCheckboxGrid from "../components/ReportBuilder/AnalysisCheckboxGrid";
+import TimePeriodSelection from "../components/ReportBuilder/TimePeriodSelection";
+import ReportBuilderMap from "../components/ReportBuilder/ReportBuilderMap";
+import ResetButton from "../components/ReportBuilder/ResetButton";
+import SubmitButton from "../components/ReportBuilder/SubmitButton";
+import ReportBuilderSubmitModal from "../components/ReportBuilder/ReportBuilderSubmitModal";
 import { observer } from "mobx-react-lite";
-import { useDataStore } from "../../../stores/DataContext";
-import ReportTypeToggle from "../../ReportBuilder/ReportTypeToggle";
+import { useDataStore } from "../stores/DataContext";
+import ReportTypeToggle from "../components/ReportBuilder/ReportTypeToggle";
 
 function ReportBuilder() {
     const store = useDataStore();
