@@ -6,6 +6,7 @@ import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 
 import { useDataStore } from "../../stores/DataContext";
 import getDetectorsLayer from "../Map/getDetectorsLayer";
+import getCorridorsLayer from "../Map/getCorridorsLayer";
 
 import ZoomWidget from "../MapWidgets/zoomWidget";
 import HomeWidget from "../MapWidgets/homeWidget";
@@ -46,7 +47,7 @@ function QueryBuilderMap() {
             });
             (async () => {
                 const graphicsLayer = new GraphicsLayer();
-                _map.add(graphicsLayer);
+                
                 store.queryBuilder.setGraphicsLayer(graphicsLayer);
 
                 const detectorsLayer = await getDetectorsLayer();
@@ -65,9 +66,14 @@ function QueryBuilderMap() {
                     },
                     visualVariables,
                 };
+                const corridorsLayer = await getCorridorsLayer();
+                corridorsLayer.visible = false;
 
+                _map.add(corridorsLayer);
                 _map.add(detectorsLayer);
+                _map.add(graphicsLayer);
 
+                store.queryBuilder.setCorridorsLayer(corridorsLayer);
                 store.queryBuilder.setDetectorsLayer(detectorsLayer);
 
                 store.queryBuilder.setMap(_map);

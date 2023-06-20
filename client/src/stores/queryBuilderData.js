@@ -1,4 +1,5 @@
 import Graphic from "@arcgis/core/Graphic";
+import PolyLine from "@arcgis/core/geometry/Polyline";
 import axios from "axios";
 import { apiUrl } from "../DocConfig";
 import { v4 as uuid } from "uuid";
@@ -20,12 +21,46 @@ const queryBuilderData = {
     },
     reportType: "detector",
     setReportType(val) {
+        if (val === "corridor") {
+            this.corridorsLayer.visible = true;
+            this.detectorsLayer.visible = false;
+        }
+        if (val === "detector") {
+            this.corridorsLayer.visible = false;
+            this.detectorsLayer.visible = true;
+        }
         this.reportType = val;
+    },
+    corridorsLayer: null,
+    setCorridorsLayer(corridorsLayer) {
+        this.corridorsLayer = corridorsLayer;
     },
     selectedCorridor: null,
     setSelectedCorridor(newSelected) {
         this.selectedCorridor = newSelected;
-        // this.zoomToSelectedDetector();
+        let corridorGraphic = null;
+
+        if(newSelected){
+            const combinedCorridor = new PolyLine();
+            newSelected.corridor.Detectors.forEach((detector) => {
+                combinedCorridor.addPath(JSON.parse(detector.Segment));
+            });
+    
+            corridorGraphic = new Graphic({
+                geometry: {
+                    type: "polyline",
+                    paths: combinedCorridor.paths,
+                },
+                attributes: {
+                    ...newSelected.corridor,
+                },
+            });
+        }
+        
+
+        
+        this.zoomToSelectedCorridor(corridorGraphic);
+        this.addCorridorDetectorGraphics(newSelected);
         // this.highlightSelectedDetector();
         // this.resetTimePeriodData();
 
@@ -34,6 +69,26 @@ const queryBuilderData = {
         // } else {
         //     this.detectorsLayer.definitionExpression = "1=1";
         // }
+    },
+    addCorridorDetectorGraphics(newSelected){
+        if(newSelected){
+            const detectorNums = newSelected.corridor.Detectors.map((detector) => {
+                return detector.det_num;
+            });
+            this.detectorsLayer.definitionExpression = `det_num in (${detectorNums.join( ",")})`;
+            this.detectorsLayer.visible = true;
+            // this.graphicsLayer.removeAll();
+        }else{
+            this.detectorsLayer.definitionExpression = "1=1"
+            // this.graphicsLayer.removeAll();
+        }
+    },
+    zoomToSelectedCorridor(corridorGraphic) {
+        if (corridorGraphic) {
+            this.view.goTo(corridorGraphic);
+        } else {
+            this.view.goTo({ center: [-112.024, 33.541], zoom: 9 });
+        }
     },
     selectedDetector: null,
     setSelectedDetector(newSelected) {
@@ -48,6 +103,7 @@ const queryBuilderData = {
             this.detectorsLayer.definitionExpression = "1=1";
         }
     },
+
 
     highlightSelectedDetector() {
         if (this.selectedDetector) {

@@ -32,8 +32,8 @@ function CorridorDropdown() {
     return (
         <>
             {store.queryBuilder.reportType === "corridor" && (
-                <div className="flex items-center">
-                    <p className="w-1/2">Select Corridor:</p>
+                <div className="mb-4">
+                    <p className="w-1/2 font-semibold text-md italic mb-2">Select Corridor:</p>
                     <Autocomplete
                         isOptionEqualToValue={(option, val) => {
                             return option.id === val.id;

@@ -81,7 +81,6 @@ async function getCorridorsLayer(store) {
 
     async function addValidityAttr(data) {
         let validityData = await getCorridorValidityData();
-        console.log(validityData);
 
         return data.map((row) => {
             let currValidData = validityData.filter((valid) => {

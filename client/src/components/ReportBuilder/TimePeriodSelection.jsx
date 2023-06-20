@@ -35,13 +35,13 @@ function TimePeriodSelection({ timePeriod }) {
     return (
         <div className="flex w-full flex-col gap-0.5">
             <div
-                className={`border border-gray-300 p-2 text-sm  ${
+                className={`text-sm  ${
                     showErrors ? "border-red-500" : ""
                 }`}
             >
-                <p className="flex h-8 items-center font-medium">
-                    <span className="flex-1">
-                        Time Period{" "}
+                <p className="flex  items-center font-semibold text-md italic mb-2">
+                    <span className="flex-1 ">
+                        Time Period:{" "}
                         {store.queryBuilder.isTwoTimePeriods ? timePeriod : ""}
                     </span>
                     {store.queryBuilder.isTwoTimePeriods && timePeriod === 2 && (

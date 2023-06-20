@@ -4,6 +4,7 @@ import CorridorDropdown from "../components/ReportBuilder/CorridorDropdown";
 // import AnalysisCheckboxGrid from "../components/ReportBuilder/AnalysisCheckboxGrid";
 import TimePeriodSelection from "../components/ReportBuilder/TimePeriodSelection";
 import ReportBuilderMap from "../components/ReportBuilder/ReportBuilderMap";
+import CorridorsMap from "../components/Map/CorridorsMap";
 import ResetButton from "../components/ReportBuilder/ResetButton";
 import SubmitButton from "../components/ReportBuilder/SubmitButton";
 import ReportBuilderSubmitModal from "../components/ReportBuilder/ReportBuilderSubmitModal";
@@ -36,7 +37,7 @@ function ReportBuilder() {
                 </>
             </div>
             <div className="flex h-[700px] w-1/2 items-center pt-2">
-                <ReportBuilderMap />
+                <ReportBuilderMap /> 
             </div>
             <ReportBuilderSubmitModal />
         </main>

@@ -8,7 +8,9 @@ export default function Corridors() {
             tag="mainPage"
             className="mx-10 mt-4 flex flex-row justify-items-center px-2 py-1"
         >
+            <div className="m-auto mx-6 h-[700px] w-4/5">
             <CorridorsMap />
+            </div>
             <CorridorMapControls />
         </main>
     );
