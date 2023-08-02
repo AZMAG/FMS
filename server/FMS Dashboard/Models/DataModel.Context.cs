@@ -64,6 +64,7 @@ namespace FMS_Dashboard.Models
         public virtual DbSet<RawData2021> RawData2021 { get; set; }
         public virtual DbSet<RawData2022> RawData2022 { get; set; }
         public virtual DbSet<Detector> Detectors { get; set; }
+        public virtual DbSet<newCorridor> newCorridors { get; set; }
         public virtual DbSet<RawData2018> RawData2018 { get; set; }
         public virtual DbSet<vw_detector_AvgAnnualVolumeByLane> vw_detector_AvgAnnualVolumeByLane { get; set; }
         public virtual DbSet<vw_detector_AvgByLane> vw_detector_AvgByLane { get; set; }

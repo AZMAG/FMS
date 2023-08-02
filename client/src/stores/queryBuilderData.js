@@ -40,12 +40,12 @@ const queryBuilderData = {
         this.selectedCorridor = newSelected;
         let corridorGraphic = null;
 
-        if(newSelected){
+        if (newSelected) {
             const combinedCorridor = new PolyLine();
             newSelected.corridor.Detectors.forEach((detector) => {
                 combinedCorridor.addPath(JSON.parse(detector.Segment));
             });
-    
+
             corridorGraphic = new Graphic({
                 geometry: {
                     type: "polyline",
@@ -56,9 +56,7 @@ const queryBuilderData = {
                 },
             });
         }
-        
 
-        
         this.zoomToSelectedCorridor(corridorGraphic);
         this.addCorridorDetectorGraphics(newSelected);
         // this.highlightSelectedDetector();
@@ -70,16 +68,20 @@ const queryBuilderData = {
         //     this.detectorsLayer.definitionExpression = "1=1";
         // }
     },
-    addCorridorDetectorGraphics(newSelected){
-        if(newSelected){
-            const detectorNums = newSelected.corridor.Detectors.map((detector) => {
-                return detector.det_num;
-            });
-            this.detectorsLayer.definitionExpression = `det_num in (${detectorNums.join( ",")})`;
+    addCorridorDetectorGraphics(newSelected) {
+        if (newSelected) {
+            const detectorNums = newSelected.corridor.Detectors.map(
+                (detector) => {
+                    return detector.det_num;
+                }
+            );
+            this.detectorsLayer.definitionExpression = `det_num in (${detectorNums.join(
+                ","
+            )})`;
             this.detectorsLayer.visible = true;
             // this.graphicsLayer.removeAll();
-        }else{
-            this.detectorsLayer.definitionExpression = "1=1"
+        } else {
+            this.detectorsLayer.definitionExpression = "1=1";
             // this.graphicsLayer.removeAll();
         }
     },
@@ -103,7 +105,6 @@ const queryBuilderData = {
             this.detectorsLayer.definitionExpression = "1=1";
         }
     },
-
 
     highlightSelectedDetector() {
         if (this.selectedDetector) {
@@ -202,7 +203,10 @@ const queryBuilderData = {
     },
     checkValidity() {
         this.setValidated(true);
-        if (this.selectedDetector && this.isTimePeriodValid()) {
+        if (
+            (this.selectedDetector || this.selectedCorridor) &&
+            this.isTimePeriodValid()
+        ) {
             return true;
         }
         return false;
@@ -214,6 +218,9 @@ const queryBuilderData = {
     },
     anyChanges() {
         if (this.selectedDetector) {
+            return true;
+        }
+        if (this.selectedCorridor) {
             return true;
         }
 
@@ -249,7 +256,7 @@ const queryBuilderData = {
     setSubmitModalShown(val) {
         this.submitModalShown = val;
     },
-    async addGenereatedReport() {
+    async addGeneratedReport() {
         function formatDate(val) {
             if (val === "") {
                 return "";
@@ -266,12 +273,12 @@ const queryBuilderData = {
         // const url = "http://localhost:56118/Reports/AddGeneratedReport";
 
         const url = apiUrl + "/Reports/AddGeneratedReport";
-        console.log(this.startDate, this.endDate);
 
         const data = {
             id: uuid(),
             ...this.analysisOptions,
-            det_num: this.selectedDetector.detector.det_num,
+            det_num: this.selectedDetector?.detector?.det_num,
+            corridor_id: this.selectedCorridor?.corridor?.id,
             startDate: this.startDate,
             endDate: this.endDate,
             completed: false,

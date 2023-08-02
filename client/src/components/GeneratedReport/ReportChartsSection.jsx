@@ -11,36 +11,32 @@ import WeekdaySpeedvsDensity from "../Detector/Charts/WeekdaySpeedvsDensity";
 import AnnualControlFlagsByHourOfDays from "../Detector/Charts/AnnualControlFlagsByHourOfDays";
 
 export default function ReportChartsSection({ id, det_num, year }) {
-    return (
-        <>
-            {det_num}
-            <AnnualHourlyAverageSpeeds
-                reportId={id}
-                det_num={det_num}
-                year={year}
-            />
-            <AnnualHourlyAverageThroughput
-                reportId={id}
-                det_num={det_num}
-                year={year}
-            />
-            <AnnualHourlyAverageOccupancyPercent
-                reportId={id}
-                det_num={det_num}
-                year={year}
-            />
-            <AnnualAverageByLane reportId={id} det_num={det_num} year={year} />
-            <DistributionOfDataPassingQCByDate
-                reportId={id}
-                det_num={det_num}
-                year={year}
-            />
-            <DistributionOfDataPassingQCByWeekday
-                reportId={id}
-                det_num={det_num}
-                year={year}
-            />
-            <WeekdayFlowvsDensity reportId={id} det_num={det_num} year={year} />
+  return (
+    <>
+      {det_num}
+      <AnnualHourlyAverageSpeeds reportId={id} det_num={det_num} year={year} />
+      <AnnualHourlyAverageThroughput
+        reportId={id}
+        det_num={det_num}
+        year={year}
+      />
+      <AnnualHourlyAverageOccupancyPercent
+        reportId={id}
+        det_num={det_num}
+        year={year}
+      />
+      <AnnualAverageByLane reportId={id} det_num={det_num} year={year} />
+      <DistributionOfDataPassingQCByDate
+        reportId={id}
+        det_num={det_num}
+        year={year}
+      />
+      <DistributionOfDataPassingQCByWeekday
+        reportId={id}
+        det_num={det_num}
+        year={year}
+      />
+      {/* <WeekdayFlowvsDensity reportId={id} det_num={det_num} year={year} />
             <WeekdaySpeedvsDensity
                 reportId={id}
                 det_num={det_num}
@@ -50,7 +46,7 @@ export default function ReportChartsSection({ id, det_num, year }) {
                 reportId={id}
                 det_num={det_num}
                 year={year}
-            />
-        </>
-    );
+            /> */}
+    </>
+  );
 }

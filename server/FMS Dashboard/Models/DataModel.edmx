@@ -428,7 +428,8 @@ warning 6013: The table/view 'FreewayMS.dbo.existingLanes2022' does not have a p
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="det_num" Type="int" Nullable="false" />
+          <Property Name="det_num" Type="int" />
+          <Property Name="corridor_id" Type="int" />
           <Property Name="startDate" Type="date" Nullable="false" />
           <Property Name="endDate" Type="date" Nullable="false" />
           <Property Name="completed" Type="bit" Nullable="false" />
@@ -614,6 +615,16 @@ warning 6013: The table/view 'FreewayMS.dbo.LaneErrorTranslation' does not have 
           <Property Name="zeros_error" Type="bit" />
           <Property Name="encoded" Type="smallint" />
         </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FreewayMS.dbo.newCorridors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="newCorridors">
+          <Key>
+            <PropertyRef Name="det_num" />
+            <PropertyRef Name="line_string" />
+          </Key>
+          <Property Name="det_num" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="line_string" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'FreewayMS.dbo.occupancyErrors_final' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="occupancyErrors_final">
@@ -1105,6 +1116,12 @@ warning 6002: The table/view 'FreewayMS.dbo.vw_RawData' does not have a primary 
     [Detectors].[Segment] AS [Segment]
     FROM [dbo].[Detectors] AS [Detectors]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="newCorridors" EntityType="Self.newCorridors" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [newCorridors].[det_num] AS [det_num], 
+    [newCorridors].[line_string] AS [line_string]
+    FROM [dbo].[newCorridors] AS [newCorridors]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="RawData2018" EntityType="Self.RawData2018" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [RawData2018].[id] AS [id], 
@@ -1507,7 +1524,8 @@ warning 6002: The table/view 'FreewayMS.dbo.vw_RawData' does not have a primary 
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="det_num" Type="Int32" Nullable="false" />
+          <Property Name="det_num" Type="Int32" />
+          <Property Name="corridor_id" Type="Int32" />
           <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="completed" Type="Boolean" Nullable="false" />
@@ -1813,6 +1831,14 @@ warning 6002: The table/view 'FreewayMS.dbo.vw_RawData' does not have a primary 
           <Property Name="x" Type="Double" />
           <Property Name="Segment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="newCorridor">
+          <Key>
+            <PropertyRef Name="det_num" />
+            <PropertyRef Name="line_string" />
+          </Key>
+          <Property Name="det_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="line_string" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="RawData2018">
           <Key>
             <PropertyRef Name="id" />
@@ -2019,6 +2045,7 @@ warning 6002: The table/view 'FreewayMS.dbo.vw_RawData' does not have a primary 
           <EntitySet Name="RawData2021" EntityType="Self.RawData2021" />
           <EntitySet Name="RawData2022" EntityType="Self.RawData2022" />
           <EntitySet Name="Detectors" EntityType="Self.Detector" />
+          <EntitySet Name="newCorridors" EntityType="Self.newCorridor" />
           <EntitySet Name="RawData2018" EntityType="Self.RawData2018" />
           <EntitySet Name="vw_detector_AvgAnnualVolumeByLane" EntityType="Self.vw_detector_AvgAnnualVolumeByLane" />
           <EntitySet Name="vw_detector_AvgByLane" EntityType="Self.vw_detector_AvgByLane" />
@@ -2340,6 +2367,7 @@ warning 6002: The table/view 'FreewayMS.dbo.vw_RawData' does not have a primary 
               <MappingFragment StoreEntitySet="GeneratedReports">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="det_num" ColumnName="det_num" />
+                <ScalarProperty Name="corridor_id" ColumnName="corridor_id" />
                 <ScalarProperty Name="startDate" ColumnName="startDate" />
                 <ScalarProperty Name="endDate" ColumnName="endDate" />
                 <ScalarProperty Name="completed" ColumnName="completed" />
@@ -2659,6 +2687,14 @@ warning 6002: The table/view 'FreewayMS.dbo.vw_RawData' does not have a primary 
                 <ScalarProperty Name="y" ColumnName="y" />
                 <ScalarProperty Name="x" ColumnName="x" />
                 <ScalarProperty Name="Segment" ColumnName="Segment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="newCorridors">
+            <EntityTypeMapping TypeName="FreewayMSModel.newCorridor">
+              <MappingFragment StoreEntitySet="newCorridors">
+                <ScalarProperty Name="det_num" ColumnName="det_num" />
+                <ScalarProperty Name="line_string" ColumnName="line_string" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,6 +16,8 @@ kendo-ui-license.txt
 # production
 build
 /build
+dist
+/dist
 
 # misc
 .DS_Store

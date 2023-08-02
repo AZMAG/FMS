@@ -366,6 +366,9 @@
     <Compile Include="Models\LaneErrors2022.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\newCorridor.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RawData2015.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

@@ -12,16 +12,9 @@ namespace FMS_Dashboard.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GeneratedReport
+    public partial class newCorridor
     {
-        public System.Guid id { get; set; }
-        public Nullable<int> det_num { get; set; }
-        public Nullable<int> corridor_id { get; set; }
-        public System.DateTime startDate { get; set; }
-        public System.DateTime endDate { get; set; }
-        public bool completed { get; set; }
-        public System.DateTime date_submitted { get; set; }
-        public Nullable<System.DateTime> date_completed { get; set; }
-        public string email { get; set; }
+        public string det_num { get; set; }
+        public string line_string { get; set; }
     }
 }
