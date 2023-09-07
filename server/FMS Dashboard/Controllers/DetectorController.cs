@@ -1,18 +1,10 @@
+using FMS_Dashboard.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using FMS_Dashboard.Models;
-using System.Web.Mvc;
-using System.Linq.Dynamic.Core;
-using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.SqlServer;
-using System.Data.SqlTypes;
-using Microsoft.Ajax.Utilities;
-using Kendo.Mvc.UI;
-using System.Drawing;
-using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
-using System.Reflection;
-using System.Collections;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Web.Mvc;
 
 namespace FMS_Dashboard.Controllers
 {
@@ -175,18 +167,37 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-
-        public JsonResult DistributionDataPassingQualityControlCriteriaByDateByReportId(Guid reportId)
+        public JsonResult DistributionDataPassingQualityControlCriteriaByDate(Guid? reportId, int? det_num, int? year)
         {
             using (var context = new FreewayMSEntities())
             {
-                var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+                int detector_number = 0;
 
-                DateTime startDate = report.startDate;
-                DateTime endDate = report.endDate;
+                DateTime startDate;
+                DateTime endDate;
+
+                if (det_num != null)
+                {
+                    detector_number = (int)det_num;
+                }
+
+                if (reportId != null)
+                {
+                    var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+                    detector_number = (int)report.det_num;
+
+                    startDate = report.startDate;
+                    endDate = report.endDate;
+                }
+                else
+                {
+                    startDate = new DateTime((int)year, 1, 1);
+                    endDate = new DateTime((int)year, 12, 31);
+                }
 
                 var data = context.vw_Errors
-                    .Where(x => x.detector_number == report.det_num && x.collected > startDate && x.collected < endDate)
+                    .Where(x => x.detector_number == detector_number && x.collected > startDate && x.collected < endDate)
                     .GroupBy(x => x.collected)
                     .Select(g => new { num_errors = g.Count(), collected = g.Key })
                     .ToList();
@@ -237,21 +248,40 @@ namespace FMS_Dashboard.Controllers
             return date.Value.DayOfWeek <= DayOfWeek.Friday; // weekday is Monday-Friday (0-4)
         }
 
-
-        public JsonResult DistributionDataPassingQualityControlCriteriaByWeekdayByReportId(Guid reportId)
+        public JsonResult DistributionDataPassingQualityControlCriteriaByWeekday(Guid? reportId, int? year, int? det_num)
         {
             using (var context = new FreewayMSEntities())
             {
-                var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+                int detector_number = 0;
 
-                DateTime startDate = report.startDate;
-                DateTime endDate = report.endDate;
+                DateTime startDate;
+                DateTime endDate;
+
+                if (det_num != null)
+                {
+                    detector_number = (int)det_num;
+                }
+
+                if (reportId != null)
+                {
+                    var report = context.GeneratedReports.Where(x => x.id == reportId).FirstOrDefault();
+
+                    detector_number = (int)report.det_num;
+
+                    startDate = report.startDate;
+                    endDate = report.endDate;
+                }
+                else
+                {
+                    startDate = new DateTime((int)year, 1, 1);
+                    endDate = new DateTime((int)year, 12, 31);
+                }
 
                 TimeSpan span = endDate - startDate;
                 int numDays = span.Days + 1;
 
                 var data = context.vw_Errors
-                    .Where(x => x.detector_number == report.det_num && x.collected > startDate && x.collected < endDate)
+                    .Where(x => x.detector_number == det_num && x.collected > startDate && x.collected < endDate)
                     .Select(x => new { x.collected, x.min_since })
                     .ToList()
                     .Select(x => new { Weekday = x.collected.HasValue ? x.collected.Value.DayOfWeek : DayOfWeek.Sunday, MinSince = x.min_since })

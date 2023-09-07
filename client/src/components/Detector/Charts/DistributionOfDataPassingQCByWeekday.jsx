@@ -10,15 +10,15 @@ import exportToCsv from "./exportToCsv";
 // import LineChart from "./LineChart";
 
 import {
-    Chart,
-    ChartArea,
-    ChartTitle,
-    ChartSeries,
-    ChartSeriesItem,
-    ChartValueAxis,
-    ChartValueAxisItem,
-    ChartCategoryAxis,
-    ChartCategoryAxisItem,
+  Chart,
+  ChartArea,
+  ChartTitle,
+  ChartSeries,
+  ChartSeriesItem,
+  ChartValueAxis,
+  ChartValueAxisItem,
+  ChartCategoryAxis,
+  ChartCategoryAxisItem,
 } from "@progress/kendo-react-charts";
 import LoadingChart from "../../Loaders/loadingChart";
 import { apiUrl } from "../../../DocConfig";
@@ -39,140 +39,140 @@ const fontAxis = `bold 8pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
 
 export default function DistributionOfDataPassingQCByWeekday({
-    det_num,
-    reportId,
-    period1,
+  det_num,
+  reportId,
+  year,
 }) {
-    // const [data, setData] = useState(null);
-    const [series, setSeries] = useState([]);
-    const [Labels, setLabels] = useState([]);
-    const [numDays, setNumDays] = useState(0);
+  // const [data, setData] = useState(null);
+  const [series, setSeries] = useState([]);
+  const [Labels, setLabels] = useState([]);
+  const [numDays, setNumDays] = useState(0);
 
-    useEffect(() => {
-        (async () => {
-            let res = null;
+  useEffect(() => {
+    (async () => {
+      let res = null;
 
-            if (reportId) {
-                res = await axios.get(
-                    apiUrl +
-                        "/Detector/DistributionDataPassingQualityControlCriteriaByWeekdayByReportId",
-                    {
-                        params: {
-                            reportId,
-                        },
-                    }
-                );
-            } else {
-                res = await axios.get(
-                    apiUrl +
-                        "/Detector/DistributionDataPassingQualityControlCriteriaByWeekdayByReportId",
-                    {
-                        params: {
-                            det_num,
-                            year: "2021",
-                        },
-                    }
-                );
-            }
+      if (reportId) {
+        res = await axios.get(
+          apiUrl +
+            "/Detector/DistributionDataPassingQualityControlCriteriaByWeekday",
+          {
+            params: {
+              reportId,
+            },
+          }
+        );
+      } else {
+        res = await axios.get(
+          apiUrl +
+            "/Detector/DistributionDataPassingQualityControlCriteriaByWeekday",
+          {
+            params: {
+              det_num,
+              year,
+            },
+          }
+        );
+      }
 
-            setNumDays(res.data.numDays);
+      setNumDays(res.data.numDays);
 
-            const _labels = [];
+      const _labels = [];
 
-            let _data = res.data["data"]
-                .map((item) => {
-                    item.passing = 1 - item.NumErrors / res.data.numDays;
-                    return item;
-                })
-                .sort((a, b) => {
-                    const weekdays = [
-                        "Monday",
-                        "Tuesday",
-                        "Wednesday",
-                        "Thursday",
-                        "Friday",
-                        "Saturday",
-                        "Sunday",
-                    ];
-                    const weekdayIndexA = weekdays.indexOf(a.Weekday);
-                    const weekdayIndexB = weekdays.indexOf(b.Weekday);
-                    if (weekdayIndexA !== weekdayIndexB) {
-                        return weekdayIndexA - weekdayIndexB;
-                    } else {
-                        return a.MinSince - b.MinSince;
-                    }
-                });
+      let _data = res.data["data"]
+        .map((item) => {
+          item.passing = 1 - item.NumErrors / res.data.numDays;
+          return item;
+        })
+        .sort((a, b) => {
+          const weekdays = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ];
+          const weekdayIndexA = weekdays.indexOf(a.Weekday);
+          const weekdayIndexB = weekdays.indexOf(b.Weekday);
+          if (weekdayIndexA !== weekdayIndexB) {
+            return weekdayIndexA - weekdayIndexB;
+          } else {
+            return a.MinSince - b.MinSince;
+          }
+        });
 
-            _data.forEach((item) => {
-                _labels.push(item.Weekday);
-            });
+      _data.forEach((item) => {
+        _labels.push(item.Weekday);
+      });
 
-            setLabels(_labels);
-            setSeries(_data);
-        })();
-    }, [det_num, setSeries, setLabels, setNumDays, period1, reportId]);
+      setLabels(_labels);
+      setSeries(_data);
+    })();
+  }, [det_num, setSeries, setLabels, setNumDays, reportId]);
 
-    return (
-        <>
-            {series.length > 0 ? (
-                <div
-                    id="distribution-of-data-passing-quality-control-criteria-by-weekday"
-                    className="bg-[#eeeeee] p-3"
-                >
-                    <button
-                        onClick={() => exportToCsv(series)}
-                        className="mb-2 rounded bg-gray-500 py-1 px-2 font-bold text-white hover:bg-gray-700"
-                    >
-                        Export to CSV
-                    </button>
-                    <Chart>
-                        <ChartArea background="#fff" />
-                        <ChartTitle
-                            text="Distribution of Data Passing Quality Control Criteria by Weekday"
-                            font={fontTitle}
-                        />
-                        <ChartValueAxis>
-                            <ChartValueAxisItem
-                                title={{
-                                    text: "Percent of Data Rows Valid",
-                                    font: fontAxisTitle,
-                                }}
-                                labels={{ format: "{0:p}" }}
-                            />
-                        </ChartValueAxis>
-                        <ChartCategoryAxis>
-                            <ChartCategoryAxisItem
-                                labels={{
-                                    font: fontAxis,
-                                    step: Math.floor(series.length / 7),
-                                    skip: Math.floor(series.length / 15),
-                                    rotation: "auto",
-                                    padding: [0, 0, 0, 120],
-                                    visible: true,
-                                }}
-                                categories={Labels}
-                                majorGridLines={{ visible: false }}
-                            />
-                        </ChartCategoryAxis>
-                        <ChartSeries>
-                            <ChartSeriesItem
-                                field="passing"
-                                type="area"
-                                color={"blue"}
-                                data={series}
-                                markers={{ visible: false }}
-                                tooltip={{
-                                    background: "blue",
-                                    visible: true,
-                                    format: "{0}",
-                                }}
-                            />
-                        </ChartSeries>
-                    </Chart>
-                </div>
-            ) : (
-                <LoadingChart />
-            )}
-        </>
-    );
+  return (
+    <>
+      {series.length > 0 ? (
+        <div
+          id="distribution-of-data-passing-quality-control-criteria-by-weekday"
+          className="bg-[#eeeeee] p-3"
+        >
+          <button
+            onClick={() => exportToCsv(series)}
+            className="mb-2 rounded bg-gray-500 px-2 py-1 font-bold text-white hover:bg-gray-700"
+          >
+            Export to CSV
+          </button>
+          <Chart>
+            <ChartArea background="#fff" />
+            <ChartTitle
+              text="Distribution of Data Passing Quality Control Criteria by Weekday"
+              font={fontTitle}
+            />
+            <ChartValueAxis>
+              <ChartValueAxisItem
+                title={{
+                  text: "Percent of Data Rows Valid",
+                  font: fontAxisTitle,
+                }}
+                labels={{ format: "{0:p}" }}
+              />
+            </ChartValueAxis>
+            <ChartCategoryAxis>
+              <ChartCategoryAxisItem
+                labels={{
+                  font: fontAxis,
+                  step: Math.floor(series.length / 7),
+                  skip: Math.floor(series.length / 15),
+                  rotation: "auto",
+                  padding: [0, 0, 0, 120],
+                  visible: true,
+                }}
+                categories={Labels}
+                majorGridLines={{ visible: false }}
+              />
+            </ChartCategoryAxis>
+            <ChartSeries>
+              <ChartSeriesItem
+                field="passing"
+                type="area"
+                color={"blue"}
+                data={series}
+                markers={{ visible: false }}
+                tooltip={{
+                  background: "blue",
+                  visible: true,
+                  format: "{0}",
+                }}
+              />
+            </ChartSeries>
+          </Chart>
+        </div>
+      ) : (
+        <LoadingChart />
+      )}
+    </>
+  );
 }

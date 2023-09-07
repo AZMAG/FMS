@@ -10,8 +10,14 @@ import getReadableTime from "./getReadableTime";
 
 export default function PageHeader({ data }) {
   const isDetector = data.det_num !== null;
-  const SubmittedDate = new Date(parseInt(data.date_submitted.substr(6)));
-  const CompletedDate = new Date(parseInt(data.date_completed.substr(6)));
+  const rawSubmittedDate = data.date_submitted?.substr(6);
+  const rawCompletedDate = data.date_completed?.substr(6);
+  const SubmittedDate = new Date(
+    rawSubmittedDate && parseInt(rawSubmittedDate)
+  );
+  const CompletedDate = new Date(
+    rawCompletedDate && parseInt(rawCompletedDate)
+  );
   const processingTimeString = CompletedDate - SubmittedDate;
   const divStyle = "mt-2 flex items-center text-sm text-gray-500";
   const iconStyle = "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400";
@@ -55,27 +61,42 @@ export default function PageHeader({ data }) {
           </div>
         )}
 
-        <div className={divStyle}>
-          <FontAwesomeIcon
-            icon={faCalendarDays}
-            className={iconStyle}
-            aria-hidden="true"
-          />
-          Date Submitted:
-          <span className="ml-2 font-bold">
-            {SubmittedDate.toLocaleDateString()}
-          </span>
-        </div>
+        <>
+          {data.date_submitted && (
+            <div className={divStyle}>
+              <FontAwesomeIcon
+                icon={faCalendarDays}
+                className={iconStyle}
+                aria-hidden="true"
+              />
+              Date Submitted:
+              <span className="ml-2 font-bold">
+                {SubmittedDate.toLocaleDateString()}
+              </span>
+            </div>
+          )}
+        </>
+
         <div className={divStyle}>
           <FontAwesomeIcon
             icon={faClock}
             className={iconStyle}
             aria-hidden="true"
           />
-          Processing Time:
-          <span className="ml-2 font-bold">
-            {getReadableTime(processingTimeString)}
-          </span>
+
+          {data.date_submitted ? (
+            <>
+              Processing Time:
+              <span className="ml-2 font-bold">
+                {getReadableTime(processingTimeString)}
+              </span>
+            </>
+          ) : (
+            <>
+              Year:
+              <span className="ml-2 font-bold">{data.year}</span>
+            </>
+          )}
         </div>
       </div>
     </div>

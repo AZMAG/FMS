@@ -13,7 +13,6 @@ import CorridorMap from "../Corridor/CorridorMap";
 
 export default function GeneratedReport({ data, det_num, year }) {
   const containerRef = useRef();
-  console.log({ data, det_num, year });
 
   return (
     <div className="bg-white">
