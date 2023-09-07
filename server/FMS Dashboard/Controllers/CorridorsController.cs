@@ -11,7 +11,7 @@ namespace FMS_Dashboard.Controllers
     {
         public ActionResult AddNew(AddCorridorVM vm)
         {
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
                 var corridor = new Corridor();
                 corridor.Description = vm.corridorDescription;
@@ -41,23 +41,26 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-        public ActionResult GetCorridorValidity(string detectorList)
+        public ActionResult GetCorridorValidity()
         {
-            short[] detectorListParsed = detectorList.Split(',').Select(short.Parse).ToArray();
 
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
                 var data = context.detector_Validity
-                    .Where(x => detectorListParsed.Contains((short)x.detector_number))
-                    .GroupBy(x => x.year)
-                    .Select(row => new CorridorValidityResult
-                    {
-                        year = row.FirstOrDefault().year,
-                        valid = row.Sum(c => c.valid),
-                        errors = row.Sum(c => c.error),
-                        total = row.Sum(c => c.total),
-                    }).ToList();
-
+                    .Join(context.CorridorDetectors,
+                    validity => (int)validity.detector_number,
+                   other => other.detectorId,
+                   (validity, other) => new { Validity = validity, Other = other })
+               .GroupBy(x => new { x.Validity.year, x.Other.corridorId })
+               .Select(row => new CorridorValidityResult
+               {
+                   year = row.Key.year,
+                   corridor = row.Key.corridorId,
+                   valid = row.Sum(c => c.Validity.valid),
+                   errors = row.Sum(c => c.Validity.error),
+                   total = row.Sum(c => c.Validity.total),
+               })
+               .ToList();
 
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
@@ -65,7 +68,7 @@ namespace FMS_Dashboard.Controllers
 
         public ActionResult GetCorridors()
         {
-            using (var context = new Jacobs_PlayPenEntities())
+            using (var context = new FreewayMSEntities())
             {
                 var corridors = context.Corridors.ToList();
 
@@ -113,5 +116,6 @@ namespace FMS_Dashboard.Controllers
         public int? errors { get; set; }
         public int? valid { get; set; }
         public decimal? total { get; set; }
+        public int corridor { get; set; }
     }
 }

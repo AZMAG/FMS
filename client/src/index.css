@@ -7,6 +7,7 @@ body {
         "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -17,3 +18,86 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+/* css for home and zoom buttons8 */
+.esri-widget--button {
+    background-color: #2baab1;
+    color: #ffffff;
+    border: 1px solid #26999f;
+}
+.esri-widget--button:hover {
+    background-color: #1c6f73;
+    color: #ffffff;
+    border: 1px solid #1e767b;
+}
+.esri-widget--button:focus {
+    outline: 0.5px solid #2baab1;
+}
+.esri-widget--button.esri-disabled {
+    background-color: #95d4d8;
+}
+.esri-widget--button.esri-disabled [class*=" esri-icon-"] {
+    color: #ffffff;
+}
+
+/* css for Basemap Toggle Button */
+.esri-basemap-toggle:focus {
+    outline: 0.5px solid #2baab1;
+}
+.esri-basemap-toggle__title {
+    background-color: rgba(43, 170, 177, 0.8);
+    color: #ffffff;
+    font-weight: 900;
+}
+.esri-basemap-toggle__title:hover {
+    background-color: rgba(43, 170, 177, 0.5);
+}
+
+/* css for Popup styling */
+.esri-popup__main-container,
+.esri-feature-content,
+.esri-popup__pointer,
+.esri-popup__pointer-direction {
+    background-color: #ffffff;
+    color: #2baab1;
+}
+
+.esri-popup__header {
+    background-color: #2baab1;
+    color: #ffffff;
+}
+.esri-popup__header-title {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.esri-popup__button {
+    background-color: #6ac3c8;
+    color: #ffffff;
+    outline: 1px solid #6ac3c8;
+}
+
+.esri-popup__button:hover {
+    background-color: #2baab1;
+}
+.btn {
+    @apply font-bold py-1 px-2 rounded;
+  }
+.btn-blue {
+    @apply bg-blue-500 text-white;
+}
+.btn-red{
+    @apply bg-red-500 text-white;
+}
+.btn-green{
+    @apply bg-green-500 text-white;
+}
+.btn-blue:hover {
+    @apply bg-blue-700;
+}
+.btn-red:hover{
+    @apply bg-red-700;
+}
+.btn-green:hover{
+    @apply bg-green-700;
+}
+
