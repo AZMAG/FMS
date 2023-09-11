@@ -91,6 +91,19 @@ The client application should now be running locally at [http://localhost:3000](
 
 The server should now be up and running. You can access it through the client application.
 
+## Publishing the project
+
+1.  Update the doc config api url.
+    apiUrl: "http://localhost:56118/",
+    // apiUrl: "http://magdevarcgis/fms/",
+
+2.  Run the following command to build the project.
+    npm run build
+
+3.  Copy the build folder to the server folder "\\magdevarcgis\arcgisvirtualroot\fms"
+
+4.  In visual studio, publish the server project to the server by right clicking the project and selecting publish.
+
 ## Disclaimer
 
 -   [DISCLAIMER](DISCLAIMER.md)
