@@ -1,0 +1,97 @@
+ 
+
+I-10:
+
+Estrella Pkwy to Loop 101 – Agua Fria
+Loop 101 – Agua Fria to Loop 202 – South Mountain
+Loop 202 – South Mountain to I-17 Stack
+I-17 Stack to Loop 202 – Red Mountain/SR 51
+Loop 202 – Red Mountain/SR 51 to I-17 Split
+I-17 Split to SR 143
+SR 143 to US 60
+US 60 to Loop 202 South Mountain/Santan
+ 
+
+I-17:
+
+I-10 Split to I-10 Stack
+I-10 Stack to Northern Ave
+Northern Ave to Thunderbird Rd
+Thunderbird Rd to Loop 101 – Agua Fria
+Loop 101 – Agua Fria to Loop 303
+Loop 303 to Anthem Way
+ 
+
+US 60 (Superstition):
+
+I-10 to Loop 101 – Price
+Loop 101 – Price to Country Club Rd
+Country Club Rd to Lindsay Rd
+Lindsay Rd to Loop 202
+ 
+
+SR 51:
+
+I-10 to Northern Ave
+Northern Ave to Cactus Rd
+Cactus Rd to Loop 101 – Pima
+ 
+
+SR 143:
+
+I-10 to McDowell Rd
+ 
+
+Loop 101 – Agua Fria:
+
+I-10 to Northern Ave
+Northern Ave to Union Hills Dr
+Union Hills Dr to I-17
+ 
+
+Loop 101 – Pima:
+
+I-17 to SR 51
+SR 51 to Pima Rd/Princess Dr
+Pima Rd/Princess Dr to Pima Rd/90th St
+Pima Rd/90th St to Loop 202 – Red Mountain
+Loop 202 – Red Mountain to US 60
+ 
+
+Loop 101 – Price:
+
+Loop 202 – Red Mountain to US 60
+US 60 to Loop 202 – Santan
+ 
+
+Loop 202 – Red Mountain:
+
+I-10/SR 51 to SR 143
+SR 143 to Loop 101
+Loop 101 to McDowell Rd
+McDowell Rd to Power Rd
+Power Rd to US 60
+ 
+
+Loop 202 – Santan:
+
+US 60 to SR 24
+SR 24 to Williams Field Rd
+Williams Field Rd to Arizona Ave
+Arizona Ave to Loop 101 – Price
+Loop 101 – Price to I-10
+ 
+
+Loop 202 – South Mountain:
+
+I-10 to Desert Foothills Pkwy
+Desert Foothills Pkwy to 51st Ave
+51st Ave to Buckeye Rd
+Buckeye Rd to I-10
+ 
+
+Loop 303:
+
+I-10 to Northern Pkwy
+Northern Pkwy to US 60 (Grand)
+US 60 (Grand) to I-17
