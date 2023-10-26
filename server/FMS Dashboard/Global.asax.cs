@@ -54,7 +54,7 @@ namespace FMS_Dashboard
 
         private string GetRoleByDomainName(string name)
         {
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
                 //var currentUser = context.ApplicationUsers.Where(x => x.domainName == name.Replace("AZMAG\\", "")).FirstOrDefault();
                 //if (currentUser == null)
