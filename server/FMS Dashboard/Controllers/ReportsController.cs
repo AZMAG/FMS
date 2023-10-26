@@ -21,7 +21,7 @@ namespace FMS_Dashboard.Controllers
 
         public JsonResult GetGeneratedReports()
         {
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
                 var query = context.GeneratedReports.GroupJoin(
                     context.Detectors,
@@ -89,7 +89,7 @@ namespace FMS_Dashboard.Controllers
 
         public JsonResult AddGeneratedReport(GeneratedReport newReport)
         {
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
                 try
                 {
@@ -117,7 +117,7 @@ namespace FMS_Dashboard.Controllers
 
         public bool UpdateStatusToComplete(GeneratedReport report)
         {
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
 
                 context.Database.CommandTimeout = 180;
@@ -132,6 +132,7 @@ namespace FMS_Dashboard.Controllers
             }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message, "Update Status to Complete Processing failed.");
                     return false;
                 }
             }
@@ -145,7 +146,7 @@ namespace FMS_Dashboard.Controllers
 
         public JsonResult DeleteGeneratedReport(Guid id)
         {
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
                 context.Database.CommandTimeout = 180;
                 try
@@ -164,6 +165,7 @@ namespace FMS_Dashboard.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message, "Delete Report Processing failed.");
                     return Json(new { id = "Error!" }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -172,7 +174,7 @@ namespace FMS_Dashboard.Controllers
         public bool GenerateReportData(GeneratedReport newReport)
         {
 
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
 
                 context.Database.CommandTimeout = 180;
@@ -186,6 +188,7 @@ namespace FMS_Dashboard.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message, "New Report Processing failed.");
                     return false;
                 }
             }

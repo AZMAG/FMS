@@ -10,18 +10,11 @@
 namespace FMS_Dashboard.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Errors2018
+    public partial class ReturnAvgVolumeByLane_Result
     {
-        public int id { get; set; }
         public Nullable<int> detector_number { get; set; }
-        public Nullable<System.DateTime> collected { get; set; }
-        public Nullable<short> min_since { get; set; }
-        public Nullable<bool> speed_error { get; set; }
-        public Nullable<bool> volume_error { get; set; }
-        public Nullable<bool> occupancy_error { get; set; }
-        public Nullable<bool> difference_error { get; set; }
-        public Nullable<bool> zeros_error { get; set; }
+        public string lane { get; set; }
+        public Nullable<int> avg_daily_traffic { get; set; }
     }
 }

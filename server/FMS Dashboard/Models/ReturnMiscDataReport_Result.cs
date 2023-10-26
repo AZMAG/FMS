@@ -10,11 +10,12 @@
 namespace FMS_Dashboard.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class newCorridor
+    public partial class ReturnMiscDataReport_Result
     {
-        public string det_num { get; set; }
-        public string line_string { get; set; }
+        public Nullable<short> detector_number { get; set; }
+        public int num_days { get; set; }
+        public Nullable<int> gp_lane_cnt { get; set; }
+        public Nullable<int> hov_lane_cnt { get; set; }
     }
 }
