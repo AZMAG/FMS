@@ -1,5 +1,9 @@
 /*
-Main application component
+Main application component.
+
+Updates:
+
+11/3/2020 - Chapman Munn - added dynamic-reports route.
 */
 
 import React from "react";
@@ -19,6 +23,7 @@ import GeneratedReportsPage from "./pages/GeneratedReports";
 import NewCorridorPage from "./pages/NewCorridor";
 
 import { DataProvider } from "./stores/DataContext";
+import DynamicReport from "./pages/DynamicReport";
 
 function App() {
   //     const TRACKING_ID = "UA-29422512-1";
@@ -44,6 +49,7 @@ function App() {
             <Route path="corridors" element={<CorridorsPage />} />
             <Route path="report-builder" element={<ReportBuilderPage />} />
             <Route path="add-corridor" element={<NewCorridorPage />} />
+            <Route path='dynamic-report' element={<DynamicReport />}></Route>
           </Routes>
         </Router>
       </DataProvider>

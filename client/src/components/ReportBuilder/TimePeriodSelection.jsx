@@ -23,8 +23,7 @@ function TimePeriodSelection({ timePeriod }) {
             store.queryBuilder.setEndDate(val);
         }
     }
-    console.log(store.queryBuilder);
-
+    
     const showErrors =
         store.queryBuilder.validated &&
         !store.queryBuilder.isTimePeriodValid(timePeriod);

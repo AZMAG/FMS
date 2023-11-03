@@ -15,7 +15,7 @@ export default function Header() {
         { text: "Corridors", toLink: "/corridors" },
         { text: "Report Builder", toLink: "/report-builder" },
         { text: "Reports History", toLink: "/reports" },
-        // { text: "Admin", toLink: "/admin" },
+        { text: "Admin", toLink: "/admin" },
     ];
     return (
         <header className="fixed inset-x-0 top-0 z-50 flex h-20 w-full flex-wrap border-b border-gray-200 bg-white">
