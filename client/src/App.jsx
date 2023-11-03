@@ -1,5 +1,8 @@
+/*
+Main application component
+*/
+
 import React from "react";
-// import ReactGA from "react-ga";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import "@progress/kendo-theme-default/dist/all.css";
 import "hammerjs";

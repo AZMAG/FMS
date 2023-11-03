@@ -5,11 +5,15 @@ import { useDataStore } from "../../stores/DataContext";
 function SubmitButton() {
     const store = useDataStore();
 
+    console.log(store.queryBuilder)
+
     function submitClicked() {
         const isValid = store.queryBuilder.checkValidity();
-        if (isValid) {
-            store.queryBuilder.setSubmitModalShown(true);
-        }
+        console.log(isValid)
+        // if (isValid) {
+        //     store.queryBuilder.setSubmitModalShown(true);
+        // }
+        store.queryBuilder.set
     }
 
     return (

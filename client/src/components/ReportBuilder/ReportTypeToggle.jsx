@@ -4,6 +4,7 @@ import { useDataStore } from "../../stores/DataContext";
 
 function ReportTypeToggle() {
   const store = useDataStore();
+  console.log(store)
   const sharedButtonStyle = "rounded py-1 px-2 font-bold ";
   const activeButtonStyle = "bg-blue-500 text-white";
   const inactiveButtonStyle = "bg-gray-200 text-gray-800 hover:underline";

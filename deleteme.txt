@@ -1,0 +1,8 @@
+1. Starting the application from VS
+2. Double click on FMS Dashboard solution
+3. C:\Workspace\FMS
+4. Install Node
+
+Create a dynamic report page where users can select a Detector and a start and stop date then populate charts on the fly.
+
+This needs to be able to work for individual detectors and cooridors which are made up of multiple detectors.

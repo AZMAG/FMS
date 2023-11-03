@@ -1,8 +1,11 @@
+/*
+Application header component
+*/
+
 import React from "react";
 import logo from "./images/fmsLogo.png";
 import magLogo from "./images/mag-logo-black.png";
 import { useNavigate, useLocation } from "react-router-dom";
-
 
 export default function Header() {
     const navigate = useNavigate();
