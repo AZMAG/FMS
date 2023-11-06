@@ -225,6 +225,20 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
+        public JsonResult DistributionDataPassingQualityControlCriteriaByDateByParams(int det_num, DateTime startDate, DateTime endDate)
+        {
+            using (var context = new FreewayMSEntities2())
+            {
+                var data = context.vw_Errors
+                    .Where(x => x.detector_number == det_num && x.collected > startDate && x.collected < endDate)
+                    .GroupBy(x => x.collected)
+                    .Select(g => new { num_errors = g.Count(), collected = g.Key })
+                    .ToList();
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult AnnualQualityControlFlagsByHourOfDay(Guid reportId)
         {
             using (var context = new FreewayMSEntities2())
@@ -239,6 +253,37 @@ namespace FMS_Dashboard.Controllers
                               where SqlFunctions.DatePart("dw", e.collected) >= 2 &&
                                     SqlFunctions.DatePart("dw", e.collected) <= 6
                                     && e.detector_number == report.det_num
+                                    && e.collected > startDate && e.collected < endDate
+                              group e by new
+                              {
+                                  min_since = e.min_since
+                              } into g
+                              select new
+                              {
+                                  min_since = g.Key.min_since,
+                                  all_rows = g.Count(),
+                                  occupancy_error = g.Count(x => x.occupancy_error == true),
+                                  speed_error = g.Count(x => x.speed_error == true),
+                                  volume_error = g.Count(x => x.volume_error == true),
+                                  zeros_error = g.Count(x => x.zeros_error == true),
+                                  difference_error = g.Count(x => x.difference_error == true)
+                              };
+                var data = results.ToList();
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult AnnualQualityControlFlagsByHourOfDayByParams(int det_num, DateTime startDate, DateTime endDate)
+        {
+            using (var context = new FreewayMSEntities2())
+            {
+                endDate = endDate.AddDays(1);
+
+                var results = from e in context.vw_Errors
+                              where SqlFunctions.DatePart("dw", e.collected) >= 2 &&
+                                    SqlFunctions.DatePart("dw", e.collected) <= 6
+                                    && e.detector_number == det_num
                                     && e.collected > startDate && e.collected < endDate
                               group e by new
                               {
@@ -310,6 +355,32 @@ namespace FMS_Dashboard.Controllers
                     .ThenBy(x => x.MinSince)
                     .ToList();
 
+
+                return Json(new
+                {
+                    data = data,
+                    numDays = numDays
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult DistributionDataPassingQualityControlCriteriaByWeekdayByParams(int det_num, DateTime startDate, DateTime endDate)
+        {
+            using (var context = new FreewayMSEntities2())
+            {
+                TimeSpan span = endDate - startDate;
+                int numDays = span.Days + 1;
+
+                var data = context.vw_Errors
+                    .Where(x => x.detector_number == det_num && x.collected > startDate && x.collected < endDate)
+                    .Select(x => new { x.collected, x.min_since })
+                    .ToList()
+                    .Select(x => new { Weekday = x.collected.HasValue ? x.collected.Value.DayOfWeek : DayOfWeek.Sunday, MinSince = x.min_since })
+                    .GroupBy(x => new { x.Weekday, x.MinSince })
+                    .Select(g => new { NumErrors = g.Count(), Weekday = g.Key.Weekday.ToString(), MinSince = g.Key.MinSince })
+                    .OrderBy(x => x.Weekday)
+                    .ThenBy(x => x.MinSince)
+                    .ToList();
 
                 return Json(new
                 {
