@@ -9,7 +9,7 @@ import DetectorQualityTable from "../Detector/QualityTable";
 import DetectorDefinition from "../Detector/DetectorDefinition";
 import PageHeader from "./PageHeader";
 import PageSideMenu from "./PageSideMenu";
-import CorridorMap from "../Corridor/CorridorMap";
+
 
 export default function GeneratedReport({ data, det_num, year }) {
   const containerRef = useRef();

@@ -89,8 +89,8 @@ namespace FMS_Dashboard.Controllers
         {
             using (var context = new FreewayMSEntities2())
             {
-                var detector = context.Corridors.Where(x => x.id == corridor_id).FirstOrDefault();
-                return Json(detector, JsonRequestBehavior.AllowGet);
+                var corridor = context.Corridors.Where(x => x.id == corridor_id).FirstOrDefault();
+                return Json(corridor, JsonRequestBehavior.AllowGet);
             }
         }
 

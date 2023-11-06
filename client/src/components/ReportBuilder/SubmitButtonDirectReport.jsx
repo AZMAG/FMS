@@ -69,7 +69,8 @@ function SubmitButton() {
                 detIDs: null,
                 description: null,
                 route: null,
-                detectorCorridor : null
+                detectorCorridor : null,
+                corridorID : null
             };
 
             if (reportType === 'detector') {
@@ -110,9 +111,7 @@ function SubmitButton() {
                     var queryParams = encodeURIComponent(JSON.stringify(reportData))
                     window.open(`/dynamic-report?reportParams=${queryParams}`, '_blank')
 
-                })
-
-
+                });
 
             }
 
@@ -160,12 +159,27 @@ function SubmitButton() {
                 reportData.detNumbers = store.queryBuilder.selectedCorridor.corridor['Detectors'].map(item => item.det_num).join(', ');
                 reportData.detIDs = store.queryBuilder.selectedCorridor.corridor['Detectors'].map(item => item.ID).join(', ');
                 reportData.description = store.queryBuilder.selectedCorridor.corridor.description;
-                reportData.route = store.queryBuilder.selectedCorridor.corridor.name;
+                reportData.route = store.queryBuilder.selectedCorridor.corridor.Name;
+                reportData.corridorID = store.queryBuilder.selectedCorridor.corridor['id']
+
+                // http://localhost:56118/Detector/GetCorridorJSON?corridor_id=29
+                axios.get(
+                    `${apiUrl}/Detector/GetCorridorJSON`,
+                    {
+                        params: {
+                            corridor_id: reportData['corridorID']
+                        }
+                    }
+                ).then((data) => {
+
+                    reportData.detectorCorridor = data.data;
+
+                    var queryParams = encodeURIComponent(JSON.stringify(reportData))
+                    window.open(`/dynamic-report?reportParams=${queryParams}`, '_blank')
+
+                })
 
             }
-
-
-
 
         }
     }

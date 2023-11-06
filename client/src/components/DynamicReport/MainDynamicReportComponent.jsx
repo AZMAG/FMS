@@ -1,6 +1,4 @@
 import React, { useRef } from "react";
-import PageHeader from "../GeneratedReport/PageHeader";
-import PageSideMenu from "../GeneratedReport/PageSideMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCalendarDays,
@@ -8,6 +6,15 @@ import {
     faShield,
     faClock,
 } from "@fortawesome/free-solid-svg-icons";
+
+// Maps
+import GeneratedReportMap from "../GeneratedReport/GeneratedReportMap";
+import CorridorMap from "../Corridor/CorridorMap";
+
+// Charts
+import AnnualHourlyAverageSpeeds from "./Charts/AnnualHourlyAverageSpeeds";
+import AnnualHourlyAverageThroughput from "./Charts/AnnualHourlyAverageThroughput";
+import AnnualHourlyAverageOccupancyPercent from "./Charts/AnnualHourlyAverageOccupancyPercent"
 
 function MainDynamicReportComponent({ data }) {
     /*
@@ -42,7 +49,20 @@ function MainDynamicReportComponent({ data }) {
     }
 
     Corridor Data --
-
+    {
+        "startDate": "2023-11-01",
+        "endDate": "2023-11-30",
+        "reportType": "corridor",
+        "detNumbers": "10, 761, 762, 763, 764, 765, 766, 767",
+        "detIDs": "357, 429, 430, 431, 432, 433, 434, 435",
+        "detectorCorridor": {
+            "id": 29,
+            "Name": "Estrella Pkwy to Loop 101 – Agua Fria (EB)",
+            "Description": "The I-10 detectors eastbound from Estrella Pkwy to the Loop 101 - Agua Fria",
+            "Year": null
+        },
+        "corridorID": 29
+    }
     */
 
     console.log(data)
@@ -111,36 +131,55 @@ function MainDynamicReportComponent({ data }) {
             <div className="overflow-y-auto mx-40 text-black">
 
                 {
-                    
-                    data.reportType === 'detector' && (
-                        <p>dsadsada</p>
+
+                    data.reportType === 'detector' ? (
+                        <GeneratedReportMap
+                            x={data.detectorCorridor.x}
+                            y={data.detectorCorridor.y}
+                            segment={data.detectorCorridor.Segment}
+                            direction={data.detectorCorridor.Direction}
+                        />
                     )
-                        // data.reportType === 'detector' && {
 
-                        //     var detector;
-                    
+                        : (
 
-                        
-                        
-                    
-                    
-                        // }
-                    
-                        // else {
-                    
-                        //     <p>Corridor</p>
-                        // }
+                            <p>Corridors...TBD</p>
+
+                        )
                 }
 
-                {/* Map
-                <div id="section-map">
-                    {
-                        data.reportType === 'detector' ? (<p>Detector</p>) : (<p></p>)
-                    }
-                </div> */}
+                <div className="mt-6">
+
+                    <AnnualHourlyAverageSpeeds
+                        det_num={data.detectorCorridor.det_num}
+                        startDate={data.startDate}
+                        endDate={data.endDate}
+                    />
+
+                </div>
+
+                <div className="mt-6">
+
+                    <AnnualHourlyAverageThroughput
+                        det_num={data.detectorCorridor.det_num}
+                        startDate={data.startDate}
+                        endDate={data.endDate}
+                    />
+
+                </div>
+
+                
+                <div className="mt-6">
+
+                    <AnnualHourlyAverageOccupancyPercent
+                        det_num={data.detectorCorridor.det_num}
+                        startDate={data.startDate}
+                        endDate={data.endDate}
+                    />
+
+                </div>
 
             </div>
-
 
         </div>
     )

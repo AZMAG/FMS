@@ -4,8 +4,6 @@ Dynamically created reports page.
 
 import React from "react";
 import MainDynamicReportComponent from "../components/DynamicReport/MainDynamicReportComponent";
-import axios from "axios";
-import { apiUrl } from "../DocConfig";
 
 function DynamicReport () {
 
