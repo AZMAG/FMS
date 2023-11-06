@@ -15,6 +15,8 @@ import CorridorMap from "../Corridor/CorridorMap";
 import AnnualHourlyAverageSpeeds from "./Charts/AnnualHourlyAverageSpeeds";
 import AnnualHourlyAverageThroughput from "./Charts/AnnualHourlyAverageThroughput";
 import AnnualHourlyAverageOccupancyPercent from "./Charts/AnnualHourlyAverageOccupancyPercent"
+import AnnualAverageByLane from "./Charts/AnnualAverageByLane";
+import DistributionOfDataPassingQCByDate from "./Charts/DistributionOfDataPassingQCByDate";
 
 function MainDynamicReportComponent({ data }) {
     /*
@@ -172,6 +174,16 @@ function MainDynamicReportComponent({ data }) {
                 <div className="mt-6">
 
                     <AnnualHourlyAverageOccupancyPercent
+                        det_num={data.detectorCorridor.det_num}
+                        startDate={data.startDate}
+                        endDate={data.endDate}
+                    />
+
+                </div>
+
+                <div mt-6>
+
+                    <AnnualAverageByLane 
                         det_num={data.detectorCorridor.det_num}
                         startDate={data.startDate}
                         endDate={data.endDate}
