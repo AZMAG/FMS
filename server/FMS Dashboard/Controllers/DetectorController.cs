@@ -85,12 +85,31 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
+        public JsonResult GetCorridorJSON(int corridor_id)
+        {
+            using (var context = new FreewayMSEntities2())
+            {
+                var detector = context.Corridors.Where(x => x.id == corridor_id).FirstOrDefault();
+                return Json(detector, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public static Detector GetDetector(int det_num)
         {
             using (var context = new FreewayMSEntities2())
             {
                 var detector = context.Detectors.Where(x => x.det_num == det_num).FirstOrDefault();
                 return detector;
+            }
+        }
+
+
+        public JsonResult GetDetectorJSON(int det_num)
+        {
+            using (var context = new FreewayMSEntities2())
+            {
+                var detector = context.Detectors.Where(x => x.det_num == det_num).FirstOrDefault();
+                return Json(detector, JsonRequestBehavior.AllowGet);
             }
         }
 

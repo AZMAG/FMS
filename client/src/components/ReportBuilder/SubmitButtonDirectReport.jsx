@@ -10,13 +10,12 @@ Updates:
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useDataStore } from "../../stores/DataContext";
+import { apiUrl } from "../../DocConfig";
+import axios from "axios";
 
 function SubmitButton() {
-    
+
     const store = useDataStore();
-
-    console.log(store.queryBuilder)
-
 
     function submitClicked() {
 
@@ -25,8 +24,8 @@ function SubmitButton() {
             Make sure the user has selected a detector or a corridor
             */
 
-            if (store.queryBuilder.reportType === 'detector'){
-                if (store.queryBuilder.selectedDetector === null){
+            if (store.queryBuilder.reportType === 'detector') {
+                if (store.queryBuilder.selectedDetector === null) {
                     alert('Please select a Detector.')
                     return false
                 }
@@ -35,21 +34,21 @@ function SubmitButton() {
                 }
             }
             else {
-                if (store.queryBuilder.selectedCorridor === null){
+                if (store.queryBuilder.selectedCorridor === null) {
                     alert('Please select a Corridor.')
                     return false;
                 }
                 else {
                     return true
                 }
-    
+
             }
-    
+
         }
 
         const checkDateRange = () => {
 
-            if (store.queryBuilder.startDate === undefined || store.queryBuilder.endDate === undefined){
+            if (store.queryBuilder.startDate === undefined || store.queryBuilder.endDate === undefined) {
                 alert("Please select a valid Start Date and End Date.")
                 return false
             }
@@ -61,19 +60,16 @@ function SubmitButton() {
 
         if (detectorCorridorSelected() && checkDateRange()) {
 
-            // window.open('/dynamic-report', '_blank');
-
             var reportType = store.queryBuilder.reportType;
             var reportData = {
-                startDate : store.queryBuilder.startDate,
-                endDate : store.queryBuilder.endDate,
-                reportType : store.queryBuilder.reportType,
-                detNumbers : null,
-                detIDs : null,
-                description : null,
-                route : null
-
-                
+                startDate: store.queryBuilder.startDate,
+                endDate: store.queryBuilder.endDate,
+                reportType: store.queryBuilder.reportType,
+                detNumbers: null,
+                detIDs: null,
+                description: null,
+                route: null,
+                detectorCorridor : null
             };
 
             if (reportType === 'detector') {
@@ -100,7 +96,23 @@ function SubmitButton() {
                 reportData.description = detectorData['Location']
                 reportData.route = detectorData['Route']
 
-                
+                axios.get(
+                    `${apiUrl}/Detector/GetDetectorJSON`,
+                    {
+                        params: {
+                            det_num: reportData['detNumbers']
+                        }
+                    }
+                ).then((data) => {
+
+                    reportData.detectorCorridor = data.data;
+
+                    var queryParams = encodeURIComponent(JSON.stringify(reportData))
+                    window.open(`/dynamic-report?reportParams=${queryParams}`, '_blank')
+
+                })
+
+
 
             }
 
@@ -152,9 +164,7 @@ function SubmitButton() {
 
             }
 
-            var queryParams = encodeURIComponent(JSON.stringify(reportData))
 
-            window.open(`/dynamic-report?reportParams=${queryParams}`, '_blank')
 
 
         }
