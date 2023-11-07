@@ -17,6 +17,7 @@ import AnnualHourlyAverageThroughput from "./Charts/AnnualHourlyAverageThroughpu
 import AnnualHourlyAverageOccupancyPercent from "./Charts/AnnualHourlyAverageOccupancyPercent"
 import AnnualAverageByLane from "./Charts/AnnualAverageByLane";
 import DistributionOfDataPassingQCByDate from "./Charts/DistributionOfDataPassingQCByDate";
+import DistributionOfDataPassingQCByWeekday from "./Charts/DistributionOfDataPassingQCByWeekday";
 
 function MainDynamicReportComponent({ data }) {
     /*
@@ -181,9 +182,29 @@ function MainDynamicReportComponent({ data }) {
 
                 </div>
 
-                <div mt-6>
+                <div className="mt-6">
 
                     <AnnualAverageByLane 
+                        det_num={data.detectorCorridor.det_num}
+                        startDate={data.startDate}
+                        endDate={data.endDate}
+                    />
+
+                </div>
+
+                <div className="mt-6">
+
+                    <DistributionOfDataPassingQCByDate 
+                        det_num={data.detectorCorridor.det_num}
+                        startDate={data.startDate}
+                        endDate={data.endDate}
+                    />
+
+                </div>
+
+                <div className="mt-6">
+
+                    <DistributionOfDataPassingQCByWeekday 
                         det_num={data.detectorCorridor.det_num}
                         startDate={data.startDate}
                         endDate={data.endDate}

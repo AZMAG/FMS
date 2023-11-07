@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import exportToCsv from "./exportToCsv";
 // import {
 //     getTimeLabels,
@@ -39,59 +38,74 @@ const fontAxis = `bold 8pt -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto
         "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
 
-export default function DistributionOfDataPassingQCByDate({
+export default function DistributionOfDataPassingQCByWeekday({
   det_num,
   startDate,
   endDate,
-  }) {
+}) {
   // const [data, setData] = useState(null);
   const [series, setSeries] = useState([]);
-  const [dateLabels, setDateLabels] = useState([]);
+  const [Labels, setLabels] = useState([]);
+  const [numDays, setNumDays] = useState(0);
 
   useEffect(() => {
     (async () => {
       let res = null;
 
-      res = await axios.get (
-        `${apiUrl}/Detector/DistributionDataPassingQualityControlCriteriaByDateByParams`,
+      res = await axios.get(
+        apiUrl +
+          "/Detector/DistributionDataPassingQualityControlCriteriaByWeekdayByParams",
         {
-            params : {
-                det_num : det_num,
-                startDate : startDate,
-                endDate : endDate
-
-            }
+          params: {
+            det_num : det_num,
+            startDate : startDate,
+            endDate : endDate
+          },
         }
       );
+      
+      setNumDays(res.data.numDays);
 
-      const _dateLabels = [];
+      const _labels = [];
 
-      let _data = res.data
+      let _data = res.data["data"]
         .map((item) => {
-          item.date = new Date(
-            parseInt(item.collected.replace(/[^0-9 +]/g, ""))
-          );
-          item.passing = 1 - item.num_errors / 288;
+          item.passing = 1 - item.NumErrors / res.data.numDays;
           return item;
         })
-        .sort((a, b) => a.date - b.date);
+        .sort((a, b) => {
+          const weekdays = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ];
+          const weekdayIndexA = weekdays.indexOf(a.Weekday);
+          const weekdayIndexB = weekdays.indexOf(b.Weekday);
+          if (weekdayIndexA !== weekdayIndexB) {
+            return weekdayIndexA - weekdayIndexB;
+          } else {
+            return a.MinSince - b.MinSince;
+          }
+        });
 
       _data.forEach((item) => {
-        const strMonth = item.date.toLocaleString("default", {
-          month: "long",
-        });
-        _dateLabels.push(strMonth + " " + (item.date.getDate() + 1));
+        _labels.push(item.Weekday);
       });
 
-      setDateLabels(_dateLabels);
+      setLabels(_labels);
       setSeries(_data);
     })();
-  }, [det_num, setSeries, setDateLabels]);
+  }, [det_num, setSeries, setLabels, setNumDays]);
+
   return (
     <>
       {series.length > 0 ? (
         <div
-          id="distribution-of-data-passing-quality-control-criteria-by-date"
+          id="distribution-of-data-passing-quality-control-criteria-by-weekday"
           className="bg-[#eeeeee] p-3"
         >
           <button
@@ -103,7 +117,7 @@ export default function DistributionOfDataPassingQCByDate({
           <Chart>
             <ChartArea background="#fff" />
             <ChartTitle
-              text="Distribution of Data Passing Quality Control Criteria by Date"
+              text="Distribution of Data Passing Quality Control Criteria by Weekday"
               font={fontTitle}
             />
             <ChartValueAxis>
@@ -119,13 +133,13 @@ export default function DistributionOfDataPassingQCByDate({
               <ChartCategoryAxisItem
                 labels={{
                   font: fontAxis,
-                  step: Math.floor(series.length / 10),
-                  skip: 0,
+                  step: Math.floor(series.length / 7),
+                  skip: Math.floor(series.length / 15),
                   rotation: "auto",
                   padding: [0, 0, 0, 120],
                   visible: true,
                 }}
-                categories={dateLabels}
+                categories={Labels}
                 majorGridLines={{ visible: false }}
               />
             </ChartCategoryAxis>

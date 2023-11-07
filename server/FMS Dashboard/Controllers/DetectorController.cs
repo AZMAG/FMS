@@ -113,69 +113,6 @@ namespace FMS_Dashboard.Controllers
             }
         }
 
-        //public JsonResult GetErrorData(int det_num, int year)
-        //{
-        //    using (var context = new FreewayMSEntities2())
-        //    {
-        //        var data = context.vw_Errors.Where(x => x.detector_number == det_num && x.year == year)
-        //            .GroupBy(x => x.detector_number)
-        //            .Select(y => new 
-        //            {
-        //                speed_error = y.Sum(x => x.speed_error == true ? 1 : 0),
-        //                volume_error = y.Sum(x => x.volume_error == true ? 1 : 0),
-        //                occupancy_error = y.Sum(x => x.occupancy_error == true ? 1 : 0),
-        //                zeros_error = y.Sum(x => x.zeros_error == true ? 1 : 0),
-        //                difference_error = y.Sum(x => x.difference_error == true ? 1 : 0)
-        //            }).FirstOrDefault();
-
-        //        var totalRows = context.vw_RawData.Where(x => x.detector_number == det_num && x.year == year).Count();
-
-        //        var list = new List<dynamic>();
-        //        var speed = new {
-        //            value = data.speed_error,
-        //            pct = (float)data.speed_error / (float)totalRows,
-        //            label = "Speed"
-        //        };
-
-        //        var volume = new
-        //        {
-        //            value = data.volume_error,
-        //            pct = (float)data.volume_error / (float)totalRows,
-        //            label = "Volume"
-        //        };
-
-        //        var occupancy = new
-        //        {
-        //            value = data.occupancy_error,
-        //            pct = (float)data.occupancy_error / (float)totalRows,
-        //            label = "Occupancy"
-        //        };
-
-        //        var zeros = new
-        //        {
-        //            value = data.zeros_error,
-        //            pct = (float)data.zeros_error / (float)totalRows,
-        //            label = "Zeros"
-        //        };
-
-        //        var difference = new
-        //        {
-        //            value = data.difference_error,
-        //            pct = (float)data.difference_error / (float)totalRows,
-        //            label = "Difference"
-        //        };
-
-        //        list.Add(speed);
-        //        list.Add(volume);
-        //        list.Add(occupancy);
-        //        list.Add(zeros);
-        //        list.Add(difference);
-
-        //        return Json(list, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
-
-
 
         public JsonResult AvgHourlySpeed(int det_num, int year)
         {
