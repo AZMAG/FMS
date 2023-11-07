@@ -13,7 +13,7 @@ export default function Header() {
     const links = [
         { text: "Detectors", toLink: "/" },
         { text: "Corridors", toLink: "/corridors" },
-        { text: "Report Builder", toLink: "/report-builder" },
+        { text: "Report Builder", toLink: "/report-builder-dynamic" },
         { text: "Reports History", toLink: "/reports" },
         { text: "Admin", toLink: "/admin" },
     ];

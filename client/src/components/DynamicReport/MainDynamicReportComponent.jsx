@@ -68,7 +68,7 @@ function MainDynamicReportComponent({ data }) {
     }
     */
 
-    console.log(data)
+
 
     // Header Styling
     const divStyle = "mt-2 flex items-center text-sm text-gray-500";

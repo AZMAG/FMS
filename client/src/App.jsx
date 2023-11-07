@@ -23,6 +23,7 @@ import GeneratedReportsPage from "./pages/GeneratedReports";
 import NewCorridorPage from "./pages/NewCorridor";
 
 import { DataProvider } from "./stores/DataContext";
+import ReportBuilderDynamic from "./pages/ReportBuilderDynamic";
 import DynamicReport from "./pages/DynamicReport";
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
             <Route path="report/:id" element={<GeneratedReportPage />} />
             <Route path="reports" element={<GeneratedReportsPage />} />
             <Route path="corridors" element={<CorridorsPage />} />
-            <Route path="report-builder" element={<ReportBuilderPage />} />
+            <Route path="report-builder-dynamic" element={<ReportBuilderDynamic />} />
             <Route path="add-corridor" element={<NewCorridorPage />} />
             <Route path='dynamic-report' element={<DynamicReport />}></Route>
           </Routes>
