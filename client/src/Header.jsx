@@ -18,7 +18,7 @@ export default function Header() {
         { text: "Admin", toLink: "/admin" },
     ];
     return (
-        <header className="fixed inset-x-0 top-0 z-50 flex h-20 w-full flex-wrap border-b border-gray-200 bg-white">
+        <header className="inset-x-0 top-0 z-50 flex w-full flex-wrap border-b border-gray-200 bg-white">
             <div className="container mx-auto my-2.5 flex px-6">
             <div className="flex flex-row items-center">
             <a href="https://azmag.gov/">

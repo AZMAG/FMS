@@ -78,7 +78,7 @@ function MainDynamicReportComponent({ data }) {
         <div className="h-full w-full">
 
             {/* Header */}
-            <div className="border py-2 text-center">
+            <div className="border text-center">
 
                 <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                     {(data.reportType === 'detector') ? "Detector" : "Corridor"} Report
@@ -131,25 +131,7 @@ function MainDynamicReportComponent({ data }) {
             {/* End Header */}
 
             {/* Report Content */}
-            <div className="overflow-y-auto mx-40 text-black">
-
-                {
-
-                    data.reportType === 'detector' ? (
-                        <GeneratedReportMap
-                            x={data.detectorCorridor.x}
-                            y={data.detectorCorridor.y}
-                            segment={data.detectorCorridor.Segment}
-                            direction={data.detectorCorridor.Direction}
-                        />
-                    )
-
-                        : (
-
-                            <p>Corridors...TBD</p>
-
-                        )
-                }
+            <div className="overflow-y-auto text-black">
 
                 <div className="mt-6">
 

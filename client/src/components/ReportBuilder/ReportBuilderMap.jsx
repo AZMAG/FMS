@@ -87,7 +87,7 @@ function QueryBuilderMap() {
         }
     }, [mapDiv, store]);
 
-    return <div className="m-auto h-3/4 w-full" ref={mapDiv}></div>;
+    return <div className="m-auto h-full w-full" ref={mapDiv}></div>;
 }
 
 export default QueryBuilderMap;

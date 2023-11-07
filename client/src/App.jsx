@@ -13,7 +13,7 @@ import "hammerjs";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./header";
+import Header from "./Header";
 import DetectorsPage from "./pages/Detectors";
 import DetectorPage from "./pages/Detector";
 import GeneratedReportPage from "./pages/GeneratedReport";
@@ -37,11 +37,11 @@ function App() {
   const isProduction = import.meta.env.PROD;
   const basename = isProduction ? "/fms/test" : "";
   return (
-    <div className="h-screen">
+    <div className="h-full w-full">
       <DataProvider>
         <Router basename={basename}>
           <Header />
-          <div className="h-20"></div>
+          {/* <div className="h-20"></div> */}
           <Routes>
             <Route exact path="/" element={<DetectorsPage />} />
             <Route path="detector/:year/:id" element={<DetectorPage />} />

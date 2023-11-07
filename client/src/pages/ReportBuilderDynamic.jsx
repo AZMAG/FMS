@@ -26,7 +26,8 @@ function ReportBuilder() {
     ////////////////////////////
     // Set Component State
     ////////////////////////////
-    const [dynamicReportData, setReportData] = useState(0)
+    const [dynamicReportData, setReportData] = useState(undefined)
+    const [mapClassHeight, setMapClassHeight] = useState('h-full')
 
     ////////////////////////////
     // Submit Report
@@ -190,8 +191,6 @@ function ReportBuilder() {
 
                     setReportData(reportData)
 
-                    console.log(dynamicReportData)
-
                     // var queryParams = encodeURIComponent(JSON.stringify(reportData))
                     // window.open(`/dynamic-report?reportParams=${queryParams}`, '_blank')
 
@@ -202,6 +201,9 @@ function ReportBuilder() {
         }
     }
 
+    ////////////////////////////
+    // Render
+    ////////////////////////////
     return (
 
         <main
@@ -222,17 +224,23 @@ function ReportBuilder() {
                     onClick={submitClicked}
                     className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded"
                 >
-                    Submit
+                    Generate
                 </button>
 
             </div>
 
-            <div className='mt-3 w-full h-[700px]'>
-                <ReportBuilderMap />
+            <div className='mt-3 w-full h-[500px]'>
+                <ReportBuilderMap/>
             </div>
 
-            <div className="mt-3 w-full h-full">
-                <MainDynamicReportComponent data={dynamicReportData}/>
+            <div className="mt-3">
+                {
+                    dynamicReportData != undefined && <MainDynamicReportComponent data={dynamicReportData}/>
+                }
+                {
+                    dynamicReportData === undefined && <p>Generate a report</p>
+                }
+                
             </div>
 
         </main>
