@@ -1,22 +1,37 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import { useDataStore } from "../stores/DataContext";
 
-import ReportTypeToggle from "../components/ReportBuilder/ReportTypeToggle";
-import DetectorDropdown from "../components/ReportBuilder/DetectorDropdown";
+import ReportTypeToggle from "../components/DynamicReport/Components/ReportTypeToggle"
+import TimePeriodSelection from "../components/DynamicReport/Components/TimePeriodSelection";
+import DetectorDropdown from "../components/DynamicReport/Components/DetectorDropdown";
+
+import ReportBuilderMap from "../components/DynamicReport/Components/ReportBuilderMap";
+
 import CorridorDropdown from "../components/ReportBuilder/CorridorDropdown";
-import TimePeriodSelection from "../components/ReportBuilder/TimePeriodSelection";
 
-import ReportBuilderMap from "../components/ReportBuilder/ReportBuilderMap";
-
-import ResetButton from "../components/ReportBuilder/ResetButton";
+import getDetectorsLayer from "../components/Map/getDetectorsLayer";
+import getCorridorsLayer from "../components/Map/getCorridorsLayer";
 
 import MainDynamicReportComponent from "../components/DynamicReport/MainDynamicReportComponent";
 
-import { useDataStore } from "../stores/DataContext";
 import { apiUrl } from "../DocConfig";
 import axios from "axios";
 
+function assembleDates() {
+    let dateObj = new Date();
+    let month = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0');
+    let day = dateObj.getUTCDate().toString().padStart(2, '0');
+    let year = dateObj.getUTCFullYear();
+    let result = {
+        today: `${year}-${month}-${day}`,
+        past: `${year - 2}-${month}-${day}`
+    }
+    return result
+}
 
 function ReportBuilder() {
+
+    console.log('Main Componenet')
 
     ////////////////////////////
     // Data Store
@@ -26,16 +41,25 @@ function ReportBuilder() {
     ////////////////////////////
     // Set Component State
     ////////////////////////////
-    const [dynamicReportData, setReportData] = useState(undefined)
-    const [mapClassHeight, setMapClassHeight] = useState('h-full')
+    const [dynamicReportData, setReportData] = useState(undefined);
+    const [detector, setDetector] = useState(undefined);
+    const [corridor, setCorridor] = useState(undefined);
+    const [reportType, setReportType] = useState('detector');
+
+    let dates = assembleDates();
+    const [startDate, setStartDate] = useState(dates['past']);
+    const [endDate, setEndDate] = useState(dates['today']);
+
+    var [detectorsLayer, setDetectorsLayer] = useState(undefined)
+    var [corridorsLayer, setCorridorsLayer] = useState(undefined)
 
     ////////////////////////////
     // Submit Report
     ////////////////////////////
     const detectorCorridorSelected = () => {
 
-        if (store.queryBuilder.reportType === 'detector') {
-            if (store.queryBuilder.selectedDetector === null) {
+        if (reportType === 'detector') {
+            if (detector === undefined) {
                 alert('Please select a Detector.')
                 return false
             }
@@ -44,7 +68,7 @@ function ReportBuilder() {
             }
         }
         else {
-            if (store.queryBuilder.selectedCorridor === null) {
+            if (corridor === undefined) {
                 alert('Please select a Corridor.')
                 return false;
             }
@@ -54,39 +78,38 @@ function ReportBuilder() {
 
         }
 
-    }
+    };
 
     const checkDateRange = () => {
 
-        if (store.queryBuilder.startDate === undefined || store.queryBuilder.endDate === undefined) {
+        if (startDate === undefined || endDate === undefined) {
             alert("Please select a valid Start Date and End Date.")
             return false
         }
         else {
             return true
         }
-    }
+    };
 
     const submitClicked = () => {
 
         if (detectorCorridorSelected() && checkDateRange()) {
 
-            var reportType = store.queryBuilder.reportType;
             var reportData = {
-                startDate: store.queryBuilder.startDate,
-                endDate: store.queryBuilder.endDate,
-                reportType: store.queryBuilder.reportType,
+                startDate: startDate,
+                endDate: endDate,
+                reportType: reportType,
                 detNumbers: null,
                 detIDs: null,
                 description: null,
                 route: null,
-                detectorCorridor : null,
-                corridorID : null
+                detectorCorridor: null,
+                corridorID: null
             };
 
             if (reportType === 'detector') {
 
-                var detectorData = store.queryBuilder.selectedDetector.detector
+                var detectorData = detector.detector
                 /*
                 {
                     "ID": 21,
@@ -108,26 +131,8 @@ function ReportBuilder() {
                 reportData.description = detectorData['Location']
                 reportData.route = detectorData['Route']
 
-                axios.get(
-                    `${apiUrl}/Detector/GetDetectorJSON`,
-                    {
-                        params: {
-                            det_num: reportData['detNumbers']
-                        }
-                    }
-                ).then((data) => {
-
-                    reportData.detectorCorridor = data.data;
-
-                    setReportData(reportData)
-
-                    console.log(dynamicReportData)
-
-                    // var queryParams = encodeURIComponent(JSON.stringify(reportData))
-                    // window.open(`/dynamic-report?reportParams=${queryParams}`, '_blank')
-
-                });
-
+                reportData.detectorCorridor = detectorData;
+                setReportData(reportData)
             }
 
             else {
@@ -191,14 +196,33 @@ function ReportBuilder() {
 
                     setReportData(reportData)
 
-                    // var queryParams = encodeURIComponent(JSON.stringify(reportData))
-                    // window.open(`/dynamic-report?reportParams=${queryParams}`, '_blank')
-
                 })
 
             }
 
         }
+    };
+
+    const resetClicked = () => {
+
+    };
+
+    ////////////////////////////
+    // Map Items
+    ////////////////////////////
+
+    // var MapClass = new Map({ container: 'x' });
+
+    // (async () => {
+    if (corridorsLayer === undefined || detectorsLayer === undefined) {
+        getDetectorsLayer()
+        .then((result) => {
+            setDetectorsLayer(result);
+        });
+        getCorridorsLayer()
+        .then((result) => {
+            setCorridorsLayer(result);
+        });
     }
 
     ////////////////////////////
@@ -208,17 +232,26 @@ function ReportBuilder() {
 
         <main
             id="ReportBuilder"
-            className="container w-full h-full mx-40"
+            className="container w-full h-full mx-auto"
         >
+
+            {/* Report Selections */}
             <div className="mt-3 grid grid-cols-3 gap-4 content-evenly">
-                <ReportTypeToggle />
-                <DetectorDropdown />
-                <CorridorDropdown />
-                <TimePeriodSelection />
+                <ReportTypeToggle reportType={reportType} setReportType={setReportType} />
+                {reportType === 'detector' && <DetectorDropdown detector={detector} reportType={reportType} setDetector={setDetector} />}
+                {reportType === 'corridor' && <CorridorDropdown />}
+                <TimePeriodSelection setStartDate={setStartDate} setEndDate={setEndDate} startDate={startDate} endDate={endDate} />
             </div>
 
+            {/* Reset and Generate Buttons */}
             <div className="mt-3 grid grid-cols-2 gap-4 content-evenly">
-                <ResetButton />
+
+                <button
+                    onClick={resetClicked}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded"
+                >
+                    Reset
+                </button>
 
                 <button
                     onClick={submitClicked}
@@ -229,18 +262,31 @@ function ReportBuilder() {
 
             </div>
 
-            <div className='mt-3 w-full h-[500px]'>
-                <ReportBuilderMap/>
+            <div className={dynamicReportData === undefined && `mt-3 w-full h-[800px]` || dynamicReportData != undefined && `mt-3 w-full h-[400px]`}>
+
+                {
+                    detectorsLayer != undefined &&
+                    corridorsLayer != undefined &&
+                    <ReportBuilderMap
+                        reportType={reportType}
+                        detectorsLayer={detectorsLayer}
+                        corridorsLayer={corridorsLayer}
+                        detector={detector}
+                        corridor={corridor}
+                    />
+                }
+
+
             </div>
 
             <div className="mt-3">
                 {
-                    dynamicReportData != undefined && <MainDynamicReportComponent data={dynamicReportData}/>
+                    dynamicReportData != undefined && <MainDynamicReportComponent data={dynamicReportData} />
                 }
                 {
-                    dynamicReportData === undefined && <p>Generate a report</p>
+                    dynamicReportData === undefined && <p>Select a Detector/Corridor, Time Period, and press the Generate button.</p>
                 }
-                
+
             </div>
 
         </main>

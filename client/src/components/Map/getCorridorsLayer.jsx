@@ -128,8 +128,6 @@ async function getCorridorsLayer(store) {
         srcFeatures.push(graphic);
     });
 
-    console.log(data, renderer);
-
     const fl = new FeatureLayer({
         id: "corridors",
         source: srcFeatures,

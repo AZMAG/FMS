@@ -78,7 +78,7 @@ function MainDynamicReportComponent({ data }) {
         <div className="h-full w-full">
 
             {/* Header */}
-            <div className="border text-center">
+            <div className="border text-center pt-4 pb-4">
 
                 <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                     {(data.reportType === 'detector') ? "Detector" : "Corridor"} Report

@@ -40,8 +40,6 @@ export default function LineChart({
     labels,
 }) {
 
-    console.log(field, series, title, catTitle, labels)
-
     return (
         <>
             {series.length > 0 ? (
