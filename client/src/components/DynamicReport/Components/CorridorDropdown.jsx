@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { useDataStore } from "../../stores/DataContext";
+
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import getCorridors from "../Map/getCorridors";
-function CorridorDropdown() {
-    const store = useDataStore();
-    const [options, setOptions] = useState([]);
+import getCorridors from "../../Map/getCorridors";
 
-    const showErrors =
-        store.queryBuilder.validated && !store.queryBuilder.selectedCorridor;
-    const [selectedCorridor, setSelectedCorridor] = useState(null);
+function CorridorDropdown({corridor, setCorridor}) {
+    
+    const [options, setOptions] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -27,39 +24,33 @@ function CorridorDropdown() {
                     })
             );
         })();
-    }, [store]);
+    }, []);
 
     return (
         <>
-            {store.queryBuilder.reportType === "corridor" && (
-                <div className="mb-4">
-                    <p className="w-1/2 font-semibold text-md italic mb-2">Select Corridor:</p>
-                    <Autocomplete
-                        isOptionEqualToValue={(option, val) => {
-                            return option.id === val.id;
-                        }}
-                        size="small"
-                        className="w-1/2"
-                        options={options}
-                        value={store.queryBuilder.selectedCorridor}
-                        onChange={(event, newValue) => {
-                            store.queryBuilder.setSelectedCorridor(newValue);
-                        }}
-                        renderInput={(params) => (
-                            <TextField
-                                error={showErrors}
-                                label="Select Corridor"
-                                {...params}
-                            />
-                        )}
-                    />
-                </div>
-            )}
-            {/* {store.queryBuilder.selectedCorridor && (
-                <SmallCorridorInfoBox
-                    Corridor={store.queryBuilder.selectedCorridor.Corridor}
+
+            <div className="mb-4">
+                <p className="w-1/2 font-semibold text-md italic mb-2">Select Corridor:</p>
+                <Autocomplete
+                    isOptionEqualToValue={(option, val) => {
+                        return option.id === val.id;
+                    }}
+                    size="small"
+                    className="w-1/2"
+                    options={options}
+                    value={corridor}
+                    onChange={(event, newValue) => {setCorridor(newValue)}}
+                    renderInput={(params) => (
+                        <TextField
+                            // error={showErrors}
+                            label="Select Corridor"
+                            {...params}
+                        />
+                    )}
                 />
-            )} */}
+            </div>
+
+
         </>
     );
 }

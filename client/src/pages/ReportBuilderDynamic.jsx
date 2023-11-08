@@ -4,13 +4,9 @@ import { useDataStore } from "../stores/DataContext";
 import ReportTypeToggle from "../components/DynamicReport/Components/ReportTypeToggle"
 import TimePeriodSelection from "../components/DynamicReport/Components/TimePeriodSelection";
 import DetectorDropdown from "../components/DynamicReport/Components/DetectorDropdown";
-
-import ReportBuilderMap from "../components/DynamicReport/Components/ReportBuilderMap";
-
-import CorridorDropdown from "../components/ReportBuilder/CorridorDropdown";
+import CorridorDropdown from "../components/DynamicReport/Components/CorridorDropdown";
 
 import getDetectorsLayer from "../components/Map/getDetectorsLayer";
-import getCorridorsLayer from "../components/Map/getCorridorsLayer";
 
 import MainDynamicReportComponent from "../components/DynamicReport/MainDynamicReportComponent";
 
@@ -30,8 +26,6 @@ function assembleDates() {
 }
 
 function ReportBuilder() {
-
-    console.log('Main Componenet')
 
     ////////////////////////////
     // Data Store
@@ -75,9 +69,7 @@ function ReportBuilder() {
             else {
                 return true
             }
-
         }
-
     };
 
     const checkDateRange = () => {
@@ -89,6 +81,7 @@ function ReportBuilder() {
         else {
             return true
         }
+
     };
 
     const submitClicked = () => {
@@ -204,7 +197,8 @@ function ReportBuilder() {
     };
 
     const resetClicked = () => {
-
+        setDetector(undefined);
+        setReportData(undefined);
     };
 
     ////////////////////////////
@@ -214,14 +208,12 @@ function ReportBuilder() {
     // var MapClass = new Map({ container: 'x' });
 
     // (async () => {
-    if (corridorsLayer === undefined || detectorsLayer === undefined) {
+    if (detectorsLayer === undefined) {
         getDetectorsLayer()
         .then((result) => {
+            
             setDetectorsLayer(result);
-        });
-        getCorridorsLayer()
-        .then((result) => {
-            setCorridorsLayer(result);
+
         });
     }
 
@@ -238,8 +230,8 @@ function ReportBuilder() {
             {/* Report Selections */}
             <div className="mt-3 grid grid-cols-3 gap-4 content-evenly">
                 <ReportTypeToggle reportType={reportType} setReportType={setReportType} />
-                {reportType === 'detector' && <DetectorDropdown detector={detector} reportType={reportType} setDetector={setDetector} />}
-                {reportType === 'corridor' && <CorridorDropdown />}
+                {reportType === 'detector' && <DetectorDropdown detector={detector} setReportData={setReportData} setDetector={setDetector} />}
+                {reportType === 'corridor' && <CorridorDropdown corridor={corridor} setCorridor={setCorridor}/>}
                 <TimePeriodSelection setStartDate={setStartDate} setEndDate={setEndDate} startDate={startDate} endDate={endDate} />
             </div>
 
@@ -262,26 +254,9 @@ function ReportBuilder() {
 
             </div>
 
-            <div className={dynamicReportData === undefined && `mt-3 w-full h-[800px]` || dynamicReportData != undefined && `mt-3 w-full h-[400px]`}>
-
-                {
-                    detectorsLayer != undefined &&
-                    corridorsLayer != undefined &&
-                    <ReportBuilderMap
-                        reportType={reportType}
-                        detectorsLayer={detectorsLayer}
-                        corridorsLayer={corridorsLayer}
-                        detector={detector}
-                        corridor={corridor}
-                    />
-                }
-
-
-            </div>
-
             <div className="mt-3">
                 {
-                    dynamicReportData != undefined && <MainDynamicReportComponent data={dynamicReportData} />
+                    dynamicReportData != undefined && <MainDynamicReportComponent data={dynamicReportData} detectorsLayer={detectorsLayer} />
                 }
                 {
                     dynamicReportData === undefined && <p>Select a Detector/Corridor, Time Period, and press the Generate button.</p>

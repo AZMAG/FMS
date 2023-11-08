@@ -6,8 +6,8 @@ import TimePeriodSelection from "../components/ReportBuilder/TimePeriodSelection
 import ReportBuilderMap from "../components/ReportBuilder/ReportBuilderMap";
 // import CorridorsMap from "../components/Map/CorridorsMap";
 import ResetButton from "../components/ReportBuilder/ResetButton";
-// import SubmitButton from "../components/ReportBuilder/SubmitButton";
-import SubmitButtonDirectReport from "../components/ReportBuilder/SubmitButtonDirectReport";
+import SubmitButton from "../components/ReportBuilder/SubmitButton";
+// import SubmitButtonDirectReport from "../components/ReportBuilder/SubmitButtonDirectReport";
 import ReportBuilderSubmitModal from "../components/ReportBuilder/ReportBuilderSubmitModal";
 import { observer } from "mobx-react-lite";
 import { useDataStore } from "../stores/DataContext";
@@ -33,7 +33,7 @@ function ReportBuilder() {
                     </div>
                     <div className="mt-3 flex space-x-4">
                         <ResetButton />
-                        <SubmitButtonDirectReport />
+                        <SubmitButton />
                     </div>
                 </>
             </div>

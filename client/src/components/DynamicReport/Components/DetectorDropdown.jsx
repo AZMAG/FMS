@@ -6,7 +6,7 @@ import getDetectors from "../../Map/getDetectors";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-function DetectorDropdown({detector, reportType, setDetector}) {
+function DetectorDropdown({detector, setReportData, setDetector}) {
     /*
     {
         "label": "2 (I-10 EB 83RD AVE)",
@@ -29,7 +29,6 @@ function DetectorDropdown({detector, reportType, setDetector}) {
     */
 
     const [detectors, setDetectors] = useState([]);
-    // const [selected, setSelected] = useState(undefined)
 
     useEffect(() => {
         (async () => {
@@ -48,6 +47,13 @@ function DetectorDropdown({detector, reportType, setDetector}) {
         })();
     }, []);
 
+    const updateParentState = (newValue) => {
+
+        setDetector(newValue);
+        setReportData(undefined);
+
+    }
+
     return (
 
         <div className="mb-4">
@@ -60,7 +66,7 @@ function DetectorDropdown({detector, reportType, setDetector}) {
                 className="w-1/2"
                 options={detectors}
                 value={detector}
-                onChange={(event, newValue) => {setDetector(newValue)}}
+                onChange={(event, newValue) => {updateParentState(newValue)}}
                 renderInput={(params) => (
                     <TextField
                         label="Select Detector"

@@ -13,9 +13,7 @@ import HomeWidget from "../../MapWidgets/homeWidget";
 import BasemapToggleWidget from "../../MapWidgets/basemapToggleWidget";
 import { report } from "process";
 
-function QueryBuilderMap(params) {
-
-    console.log(params)
+function QueryBuilderMap({detectorsLayer, definitionExpression}) {
 
     const mapDiv = useRef(null);
     
@@ -34,8 +32,8 @@ function QueryBuilderMap(params) {
                 zoom: 9,
                 constraints: {
                     rotationEnabled: false,
-                    minZoom: 20,
-                    maxZoom: 9,
+                    minZoom: 2,
+                    maxZoom: 20,
                     snapToZoom: true,
                 },
                 popup: {
@@ -55,40 +53,25 @@ function QueryBuilderMap(params) {
             HomeWidget(_view);
             BasemapToggleWidget(_view);
 
-                        // Add Layers to Map
-                        _map.addMany([params.detectorsLayer, params.corridorsLayer])
+            // // Add Layers to Map
+            _map.addMany([detectorsLayer])
 
-            // Layer Visibility and Extent
-            if (params.reportType === 'detector'){
-                
-                params.detectorsLayer.visible = true;
-                params.corridorsLayer.visible = !params.detectorsLayer.visible;
+            // Apply Definition Expression to Layers
+            detectorsLayer.definitionExpression=definitionExpression;
+            detectorsLayer.queryExtent({
+                where : definitionExpression
+            })
+            .then((result) => {
+                _view.goTo({
+                    target: result.extent,
+                    zoom: 15
+                })
 
-                if (params.detector != undefined){
-
-                    var queryParam = {'where' : `det_num=${params.detector.detector.det_num}`}
-                    params.detectorsLayer.queryExtent(queryParam)
-                    .then((result) => {
-                        console.log(result.extent)
-                        _view.goTo({target : result.extent, zoom : 20})
-                    });
-                    params.detectorsLayer.definitionExpression=`det_num=${params.detector.detector.det_num}`
-
-                    
-                }
-            
-            }
-            else {
-                params.detectorsLayer.visible = false;
-                params.corridorsLayer.visible = !params.detectorsLayer.visible;   
-            }
-
-
-
-
+                console.log(_view.zoom)
+            })
 
         }
-    }, [mapDiv, params]);
+    }, [mapDiv, detectorsLayer, definitionExpression]);
 
     return <div className="m-auto h-full w-full" ref={mapDiv}></div>;
 }

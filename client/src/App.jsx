@@ -24,7 +24,7 @@ import NewCorridorPage from "./pages/NewCorridor";
 
 import { DataProvider } from "./stores/DataContext";
 import ReportBuilderDynamic from "./pages/ReportBuilderDynamic";
-import DynamicReport from "./pages/DynamicReport";
+import ReportBuilder from "./pages/ReportBuilder";
 
 function App() {
   //     const TRACKING_ID = "UA-29422512-1";
@@ -48,9 +48,9 @@ function App() {
             <Route path="report/:id" element={<GeneratedReportPage />} />
             <Route path="reports" element={<GeneratedReportsPage />} />
             <Route path="corridors" element={<CorridorsPage />} />
+            <Route path="report-builder" element={<ReportBuilder />} />
             <Route path="report-builder-dynamic" element={<ReportBuilderDynamic />} />
             <Route path="add-corridor" element={<NewCorridorPage />} />
-            <Route path='dynamic-report' element={<DynamicReport />}></Route>
           </Routes>
         </Router>
       </DataProvider>

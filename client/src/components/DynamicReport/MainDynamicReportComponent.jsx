@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCalendarDays,
@@ -8,8 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // Maps
-import GeneratedReportMap from "../GeneratedReport/GeneratedReportMap";
-import CorridorMap from "../Corridor/CorridorMap";
+import ReportBuilderMap from "../DynamicReport/Components/ReportBuilderMap";
 
 // Charts
 import AnnualHourlyAverageSpeeds from "./Charts/AnnualHourlyAverageSpeeds";
@@ -19,7 +18,8 @@ import AnnualAverageByLane from "./Charts/AnnualAverageByLane";
 import DistributionOfDataPassingQCByDate from "./Charts/DistributionOfDataPassingQCByDate";
 import DistributionOfDataPassingQCByWeekday from "./Charts/DistributionOfDataPassingQCByWeekday";
 
-function MainDynamicReportComponent({ data }) {
+
+function MainDynamicReportComponent({ data, detectorsLayer }) {
     /*
     Main report creation component.
 
@@ -51,24 +51,11 @@ function MainDynamicReportComponent({ data }) {
         }
     }
 
-    Corridor Data --
-    {
-        "startDate": "2023-11-01",
-        "endDate": "2023-11-30",
-        "reportType": "corridor",
-        "detNumbers": "10, 761, 762, 763, 764, 765, 766, 767",
-        "detIDs": "357, 429, 430, 431, 432, 433, 434, 435",
-        "detectorCorridor": {
-            "id": 29,
-            "Name": "Estrella Pkwy to Loop 101 – Agua Fria (EB)",
-            "Description": "The I-10 detectors eastbound from Estrella Pkwy to the Loop 101 - Agua Fria",
-            "Year": null
-        },
-        "corridorID": 29
-    }
     */
 
-
+    // Report Detector Number
+    const detNum = data.detectorCorridor.det_num;
+    const definitionExpression = `det_num=${detNum}`;
 
     // Header Styling
     const divStyle = "mt-2 flex items-center text-sm text-gray-500";
@@ -135,6 +122,23 @@ function MainDynamicReportComponent({ data }) {
 
                 <div className="mt-6">
 
+
+                    <div className={`mt-3 w-full h-[400px]`}>
+
+                        {
+                            detectorsLayer != undefined &&
+                            <ReportBuilderMap
+                                detectorsLayer={detectorsLayer}
+                                definitionExpression={definitionExpression}
+                            />
+                        }
+
+
+                    </div>
+                </div>
+
+                <div className="mt-6">
+
                     <AnnualHourlyAverageSpeeds
                         det_num={data.detectorCorridor.det_num}
                         startDate={data.startDate}
@@ -153,7 +157,7 @@ function MainDynamicReportComponent({ data }) {
 
                 </div>
 
-                
+
                 <div className="mt-6">
 
                     <AnnualHourlyAverageOccupancyPercent
@@ -166,7 +170,7 @@ function MainDynamicReportComponent({ data }) {
 
                 <div className="mt-6">
 
-                    <AnnualAverageByLane 
+                    <AnnualAverageByLane
                         det_num={data.detectorCorridor.det_num}
                         startDate={data.startDate}
                         endDate={data.endDate}
@@ -176,7 +180,7 @@ function MainDynamicReportComponent({ data }) {
 
                 <div className="mt-6">
 
-                    <DistributionOfDataPassingQCByDate 
+                    <DistributionOfDataPassingQCByDate
                         det_num={data.detectorCorridor.det_num}
                         startDate={data.startDate}
                         endDate={data.endDate}
@@ -186,7 +190,7 @@ function MainDynamicReportComponent({ data }) {
 
                 <div className="mt-6">
 
-                    <DistributionOfDataPassingQCByWeekday 
+                    <DistributionOfDataPassingQCByWeekday
                         det_num={data.detectorCorridor.det_num}
                         startDate={data.startDate}
                         endDate={data.endDate}
