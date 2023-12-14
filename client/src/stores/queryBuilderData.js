@@ -285,8 +285,7 @@ const queryBuilderData = {
             email: this.email,
             date_submitted: new Date(),
         };
-        console.log(data);
-
+        
         const res = await axios.post(url, JSON.stringify(data), {
             headers: {
                 "Content-Type": "application/json",

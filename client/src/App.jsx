@@ -1,12 +1,19 @@
+/*
+Main application component.
+
+Updates:
+
+11/3/2020 - Chapman Munn - added dynamic-reports route.
+*/
+
 import React from "react";
-// import ReactGA from "react-ga";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import "@progress/kendo-theme-default/dist/all.css";
 import "hammerjs";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./header";
+import Header from "./Header";
 import DetectorsPage from "./pages/Detectors";
 import DetectorPage from "./pages/Detector";
 import GeneratedReportPage from "./pages/GeneratedReport";
@@ -16,6 +23,8 @@ import GeneratedReportsPage from "./pages/GeneratedReports";
 import NewCorridorPage from "./pages/NewCorridor";
 
 import { DataProvider } from "./stores/DataContext";
+import ReportBuilderDynamic from "./pages/ReportBuilderDynamic";
+import ReportBuilder from "./pages/ReportBuilder";
 
 function App() {
   //     const TRACKING_ID = "UA-29422512-1";
@@ -28,18 +37,19 @@ function App() {
   const isProduction = import.meta.env.PROD;
   const basename = isProduction ? "/fms/test" : "";
   return (
-    <div className="h-screen">
+    <div className="h-full w-full">
       <DataProvider>
         <Router basename={basename}>
           <Header />
-          <div className="h-20"></div>
+          {/* <div className="h-20"></div> */}
           <Routes>
             <Route exact path="/" element={<DetectorsPage />} />
             <Route path="detector/:year/:id" element={<DetectorPage />} />
             <Route path="report/:id" element={<GeneratedReportPage />} />
             <Route path="reports" element={<GeneratedReportsPage />} />
             <Route path="corridors" element={<CorridorsPage />} />
-            <Route path="report-builder" element={<ReportBuilderPage />} />
+            <Route path="report-builder" element={<ReportBuilder />} />
+            <Route path="report-builder-dynamic" element={<ReportBuilderDynamic />} />
             <Route path="add-corridor" element={<NewCorridorPage />} />
           </Routes>
         </Router>

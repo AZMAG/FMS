@@ -17,7 +17,7 @@ function SubmitButton() {
             onClick={submitClicked}
             className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded"
         >
-            Calculate
+            Submit
         </button>
     );
 }

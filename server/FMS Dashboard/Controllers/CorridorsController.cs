@@ -11,7 +11,7 @@ namespace FMS_Dashboard.Controllers
     {
         public ActionResult AddNew(AddCorridorVM vm)
         {
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
                 var corridor = new Corridor();
                 corridor.Description = vm.corridorDescription;
@@ -32,6 +32,7 @@ namespace FMS_Dashboard.Controllers
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine(ex.Message, "New Corridor Processing failed.");
                         throw;
                     }
                 }
@@ -44,7 +45,7 @@ namespace FMS_Dashboard.Controllers
         public ActionResult GetCorridorValidity()
         {
 
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
                 var data = context.detector_Validity
                     .Join(context.CorridorDetectors,
@@ -68,7 +69,7 @@ namespace FMS_Dashboard.Controllers
 
         public ActionResult GetCorridors()
         {
-            using (var context = new FreewayMSEntities())
+            using (var context = new FreewayMSEntities2())
             {
                 var corridors = context.Corridors.ToList();
 

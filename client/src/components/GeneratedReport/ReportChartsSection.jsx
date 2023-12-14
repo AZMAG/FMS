@@ -14,7 +14,11 @@ export default function ReportChartsSection({ id, det_num, year }) {
   return (
     <>
       {det_num}
-      <AnnualHourlyAverageSpeeds reportId={id} det_num={det_num} year={year} />
+      <AnnualHourlyAverageSpeeds 
+        reportId={id} 
+        det_num={det_num} 
+        year={year} 
+      />
       <AnnualHourlyAverageThroughput
         reportId={id}
         det_num={det_num}
@@ -25,7 +29,11 @@ export default function ReportChartsSection({ id, det_num, year }) {
         det_num={det_num}
         year={year}
       />
-      <AnnualAverageByLane reportId={id} det_num={det_num} year={year} />
+      <AnnualAverageByLane 
+        reportId={id} 
+        det_num={det_num} 
+        year={year} 
+      />
       <DistributionOfDataPassingQCByDate
         reportId={id}
         det_num={det_num}
