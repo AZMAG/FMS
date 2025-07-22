@@ -151,6 +151,7 @@ export default function GeneratedReport() {
             sort={sort}
             onSortChange={(e) => {
               setSort(e.sort);
+              console.log("Sort changed", e.sort);
             }}
             resizable={true}
             className="kui-grid-header mt-2"

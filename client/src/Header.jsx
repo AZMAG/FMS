@@ -12,11 +12,11 @@ export default function Header() {
     const { pathname } = useLocation();
     const links = [
         { text: "Detectors", toLink: "/" },
-        { text: "Corridors", toLink: "/corridors" },
+        //{ text: "Corridors", toLink: "/corridors" },
         { text: "Report Builder", toLink: "/report-builder" },
         { text: "Dynamic Report", toLink: "/report-builder-dynamic" },
         { text: "Reports History", toLink: "/reports" },
-        { text: "Admin", toLink: "/admin" },
+        //{ text: "Admin", toLink: "/admin" },
     ];
     return (
         <header className="inset-x-0 top-0 z-50 flex w-full flex-wrap border-b border-gray-200 bg-white">

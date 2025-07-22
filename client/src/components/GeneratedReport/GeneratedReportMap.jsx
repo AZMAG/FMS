@@ -68,21 +68,26 @@ function GeneratedReportMap({ x, y, segment, direction }) {
                     latitude: y,
                 },
             });
-            const segmentGraphic = new Graphic({
-                symbol: {
-                    type: "simple-line",
-                    color: [226, 119, 40],
-                    width: "6px",
-                },
-                geometry: {
-                    type: "polyline",
-                    paths: JSON.parse(segment),
-                },
-            });
 
-            view.graphics.add(segmentGraphic);
+            // Adjusted to account for the segment data missing but still generated reports
+            if(segment != null){
+                const segmentGraphic = new Graphic({
+                    symbol: {
+                        type: "simple-line",
+                        color: [226, 119, 40],
+                        width: "6px",
+                    },
+                    geometry: {
+                        type: "polyline",
+                        paths: JSON.parse(segment),
+                    },
+                });
+    
+                view.graphics.add(segmentGraphic);
+                view.extent = segmentGraphic.geometry.extent.expand(6);
+            }
+            
             view.graphics.add(pointGraphic);
-            view.extent = segmentGraphic.geometry.extent.expand(6);
             view.on("mouse-wheel", (e) => e.stopPropagation());
         }
     }, [mapDiv]);

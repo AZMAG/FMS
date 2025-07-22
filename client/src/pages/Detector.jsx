@@ -25,6 +25,8 @@ export default function GeneratedReport() {
     })();
   }, [id, year]);
 
+  //console.log("useEffect for GeneratedReport", id, year, data);
+
   return (
     <>{data && <MainGeneratedReport data={data} det_num={id} year={year} />}</>
   );
