@@ -26,6 +26,7 @@ function ReportTypeToggle() {
       >
         Detector
       </button>
+      {/* current functionality is to only show detector reports 
       <button
         className={`${sharedButtonStyle} ${
           isCorridorActive ? activeButtonStyle : inactiveButtonStyle
@@ -33,7 +34,7 @@ function ReportTypeToggle() {
         onClick={() => handleButtonClick("corridor")}
       >
         Corridor
-      </button>
+      </button> */}
       
     </div>
   );
