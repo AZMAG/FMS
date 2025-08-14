@@ -13,7 +13,6 @@ import AnnualControlFlagsByHourOfDays from "../Detector/Charts/AnnualControlFlag
 export default function ReportChartsSection({ id, det_num, year }) {
   return (
     <>
-      {det_num}
       <AnnualHourlyAverageSpeeds 
         reportId={id} 
         det_num={det_num} 

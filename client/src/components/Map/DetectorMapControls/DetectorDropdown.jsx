@@ -48,7 +48,24 @@ function DetectorDropdown() {
                     }}
                     size="small"
                     className="w-3/4"
-                    options={options}
+                    options={options.filter((options) => {
+                        if(store.detectorMap.selectedRoute === "All") {
+                            if(store.detectorMap.selectedDirection === "All") {
+                                return true;
+                            } else {
+                                return options.detector.Direction === store.detectorMap.selectedDirection;
+                            }
+                        } else {
+                            if(store.detectorMap.selectedDirection === "All") {
+                                return options.detector.Route === store.detectorMap.selectedRoute;
+                            } else{
+                                // Filter by both route and direction
+                                if(options.detector.Direction === store.detectorMap.selectedDirection) {
+                                    return options.detector.Route === store.detectorMap.selectedRoute;
+                                }
+                            }
+                        }
+                    })}
                     value={selectedDetector}
                     onChange={(event, newValue) => {
                         setSelectedDetector(newValue);
